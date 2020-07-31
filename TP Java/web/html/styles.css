@@ -69,3 +69,29 @@ body{
 .btn-secondary.btn-group-btn:hover{
     background-color: var(--primary-light);
 }
+.navbar-custom {
+    background-color: var(--primary-color);
+}
+.navbar-custom .navbar-brand{ 
+    color: white; 
+    font-weight: bold;
+	font-size: 15;
+	font-family: 'Nunito', sans-serif;
+	color: white; 
+} 
+#sidebar {
+	position: fixed;
+	left: 250px;
+	width: 300px;
+	height: 100%;
+	margin-left: -250px;
+	overflow-y: auto;
+	background: #E1E1E1;
+}
+#sidebar .nav a{
+  background: none;
+  border-bottom: 1px solid #455A64;
+  color: #CFD8DC;
+  font-size: 14px;
+  padding: 16px 24px;
+}
