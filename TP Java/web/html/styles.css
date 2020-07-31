@@ -8,6 +8,8 @@ h2{
 
 h1{
     font-weight: bold;
+    color: whitesmoke;
+    text-shadow: .2rem .2rem 1rem rgba(0,0,0,0.43);
 }
 
 body{
@@ -31,6 +33,7 @@ body{
     --secondary-color: #69f0ae;
     --secondary-light: #9fffe0;
     --secondary-dark: #2bbd7e;
+    background-color: var(--primary-color);
 }
 
 .login{
@@ -53,7 +56,7 @@ body{
 }
 
 .btn-primary.btn-group-btn{
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     border: none;
 }
 
@@ -94,4 +97,8 @@ body{
   color: #CFD8DC;
   font-size: 14px;
   padding: 16px 24px;
+}
+
+.card{
+    box-shadow: .2rem .2rem 1rem rgba(0,0,0,0.23);;
 }
