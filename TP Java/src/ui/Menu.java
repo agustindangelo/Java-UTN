@@ -84,7 +84,7 @@ public class Menu {
 	}
 
 	private String getCommand() {
-		System.out.println("Ingrese número correspondiente al comando que desea ejecutar.");
+		System.out.println("Ingrese nï¿½mero correspondiente al comando que desea ejecutar.");
 		System.out.println("NUTRICIONISTA:");
 		System.out.println("1 getAll");
 		System.out.println("2 getByDni"); 
@@ -92,7 +92,7 @@ public class Menu {
 		System.out.println("4 add");
 		System.out.println("5 update");
 		System.out.println("6 remove");
-		System.out.println("DIRECCIÓN:");
+		System.out.println("DIRECCIï¿½N:");
 		System.out.println("7 update");
 		System.out.println("LOCALIDAD:");
 		System.out.println("8 add");
@@ -210,7 +210,7 @@ public class Menu {
 	
 	public void removeNutricionista() {
 		Nutricionista n = new Nutricionista();
-		System.out.print("dni: ");
+		System.out.print("dni: ");  // arreglar esto, para eliminar un nutricionista hay que eliminar en cascada todo lo que lo referencia 
 		n.setDni(s.nextLine());
 		abmcNutricionista.remove(n);
 	}
