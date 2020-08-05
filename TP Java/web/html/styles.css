@@ -2,14 +2,24 @@ body,html{
     height:100%;
 }
 
+a:hover{
+    text-decoration: none;
+}
+
 h2{
     font-weight: bold;
 }
 
-h1{
+.paciente h1{
+    font-weight: bold;
+    color: black;
+    /*text-shadow: .2rem .2rem 1rem rgba(0,0,0,0.43);*/
+}
+
+.nutricionista h1{
     font-weight: bold;
     color: whitesmoke;
-    text-shadow: .2rem .2rem 1rem rgba(0,0,0,0.43);
+    /*text-shadow: .2rem .2rem 1rem rgba(0,0,0,0.43);*/
 }
 
 body{
@@ -23,6 +33,7 @@ body{
     --secondary-color: #ff5252;
     --secondary-light: #ff867f;
     --secondary-dark: #c50e29;
+    --navbar-txt-color: black;
     background-color: var(--primary-color);
 }
 
@@ -33,11 +44,21 @@ body{
     --secondary-color: #69f0ae;
     --secondary-light: #9fffe0;
     --secondary-dark: #2bbd7e;
+    --navbar-txt-color: whitesmoke;
     background-color: var(--primary-color);
+}
+
+a.navbar-text{
+    color: var(--navbar-txt-color);
 }
 
 .login{
     background-color: grey;
+    --primary-color: black;
+    --primary-dark: black;
+    --secondary-color: black;
+    --secondary-light: black;
+    --secondary-dark: black;
 }
 
 .container-fluid{
