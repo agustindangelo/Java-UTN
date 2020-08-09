@@ -172,3 +172,14 @@ a:hover{
 .card{
     box-shadow: .2rem .2rem 1rem rgba(0,0,0,0.23);
 }
+.card-title{
+    font-size: 19px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+.card-header{
+    height: 3.2rem;
+}
+.progress .progress-bar{
+    background-color: var(--primary-dark);
+}
