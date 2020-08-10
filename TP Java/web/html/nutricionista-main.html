@@ -14,31 +14,34 @@
 	<nav class="navbar navbar-custom navbar-expand-md">
 		<div class="navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav ml-auto">
-			<li class="nav-item dropdown">
-				<a class="navbar-text dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-					<i class="fas fa-user-circle"></i> Mi Perfil
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="nutricionista-config.html">Configuración</a>
-				<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">Cerrar sesión</a>
-				</div>
-			</li>
+				<li class="nav-item dropdown">
+					<a class="navbar-text dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+						<i class="fas fa-user-circle"></i> Mi Perfil
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="nutricionista-config.html">Configuración</a>
+					<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">Cerrar sesión</a>
+					</div>
+				</li>
 			</ul>
 		</div>
 	</nav>
 	
-	<nav class="" id="sidebar">
-		<div class="container">
-			<p class="navbar-text navbar-header"><i class="fas fa-address-book"></i> Mis Pacientes</p>
+	<nav class="sidebar">
+		<div class="card">
+
+			<label class="text-center" style="font-size: 20px; font-weight: bold; color:var(--primary-dark)"><i class="fas fa-address-book"></i> Mis Pacientes</label>
 			<input type="text" id="pacienteSearch" onkeyup="filtrarPacientes()" placeholder="Buscar..." title="Mis pacientes">
-			<ul id="pacienteMenu">
-				<li><a href="#">John Doe</a></li>
-				<li><a href="#">Carlos Perez</a></li>
-				<li><a href="#">Martin René</a></li>
+			<ul class="list-group list-group-flush" id="pacienteMenu">
+				<li class="list-group-item"><a href="#">Carlos Juarez</a></li>
+				<li class="list-group-item"><a href="#">Marcelo Perez</a></li>
+				<li class="list-group-item"><a href="#">Juan Mercurio</a></li>
+				<li class="list-group-item"><a href="#">Estela Rodriguez</a></li>
 			</ul>
 		</div>
 	</nav>
+	
 	
 	<script src="scripts.js"></script>
 </body>

@@ -118,6 +118,7 @@ a:hover{
 
 .navbar-custom { 
     background-color: var(--primary-color);
+    width: 100%;
 } 
 .navbar-text {
     color: white; 
@@ -127,7 +128,6 @@ a:hover{
     background-color: var(--primary-color);
 }
 
-/* Style the search box */
 #pacienteSearch {
     width: 100%;
     font-size: 17px;
@@ -135,35 +135,31 @@ a:hover{
     border: 1px solid #ddd;
 }
   
-/* Style the navigation menu */
 #pacienteMenu {
     list-style-type: none;
     padding: 0;
     margin: 0;
-}
+} 
 
-/* Style the navigation links */
 #pacienteMenu li a {
-    padding: 12px;
+    padding: 0px;
     text-decoration: none;
     font-weight: bold;
-    color: white; 
+    color: var(--primary-dark); 
 	font-size: 17;
 	font-family: 'Nunito', sans-serif;
     display: block
-}
+} 
 
 #pacienteMenu li a:hover {
     background-color: var(--primary-dark);
 }
 
-#sidebar {
+.sidebar {
     width: 250px;
     position: fixed;
-    top: 0;
+    top: 10%;
     left: 0;
-    height: 100vh;
-    z-index: 999;
     background: var(--primary-color);
     color: var(--primary-color);
     transition: all 0.3s;
@@ -182,4 +178,7 @@ a:hover{
 }
 .progress .progress-bar{
     background-color: var(--primary-dark);
+}
+.list-group-item:hover{
+    background-color: var(--primary-light);
 }
