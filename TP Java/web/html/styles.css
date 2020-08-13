@@ -128,43 +128,44 @@ a:hover{
     background-color: var(--primary-color);
 }
 
-#pacienteSearch {
+.main {
+    margin-left: 360px; /* Same as the width of the sidebar */
+    padding-left: 10px;
+    padding-right: 20px;
+}
+
+.sidenav {
+    width: 350px; /* Set the width of the sidebar */
+    height: 100%;
+    left: 0;
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 30; /* Stay at the top */
+    background-color: white;
+    overflow-x: hidden; /* Disable horizontal scroll */
+}
+
+.sidenav-search {
     width: 100%;
     font-size: 17px;
     padding: 9px;
     border: 1px solid #ddd;
 }
   
-#pacienteMenu {
+.sidenav-menu {
     list-style-type: none;
     padding: 0;
     margin: 0;
 } 
 
-#pacienteMenu li a {
+.sidenav-menu li a {
     padding: 0px;
     text-decoration: none;
     font-weight: bold;
     color: var(--primary-dark); 
 	font-size: 17;
 	font-family: 'Nunito', sans-serif;
-    display: block
-} 
-
-#pacienteMenu li a:hover {
-    background-color: var(--primary-dark);
-}
-
-.sidebar {
-    width: 250px;
-    position: fixed;
-    top: 10%;
-    left: 0;
-    background: var(--primary-color);
-    color: var(--primary-color);
-    transition: all 0.3s;
-}
-
+}   
 .card{
     box-shadow: .2rem .2rem 1rem rgba(0,0,0,0.23);
 }
@@ -181,4 +182,16 @@ a:hover{
 }
 .list-group-item:hover{
     background-color: var(--primary-light);
+}
+.card-body p{
+   margin:0;
+   padding:0; 
+}
+
+.card-detail{
+    padding: 15px;
+}
+.main ul{
+    margin: 0px;
+    padding: 0px;
 }

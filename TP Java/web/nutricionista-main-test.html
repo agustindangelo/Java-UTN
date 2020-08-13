@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Trabajo practico de Java</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/d00e7b9ed2.js" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body class="nutricionista">
+
+	<nav class="navbar navbar-custom navbar-expand-md">
+		<div class="navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item dropdown">
+					<a class="navbar-text dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+						<i class="fas fa-user-circle"></i> Mi Perfil
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="nutricionista-config.html">Configuración</a>
+					<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">Cerrar sesión</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	
+
+	<div class="sidenav sidenav-left">
+		<div id="accordion">
+			<div class="card">
+			  <div class="card-header" id="headingOne">
+				<h5 class="mb-0">
+				  <button class="sidenav-header" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+					Pacientes
+				  </button>
+				</h5>
+			  </div>
+		  
+			  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+				<div class="card-body">
+					<label class="text-center sidenav-header" style="font-size: 20px; font-weight: bold; color:var(--primary-dark)"><i class="fas fa-address-book"></i> Mis Pacientes</label>
+					<input type="text" id="pacienteSearch" onkeyup="filtrarPacientes()" placeholder="Buscar..." title="Mis pacientes">
+					<ul class="list-group list-group-flush" id="pacienteMenu">
+						<li class="list-group-item"><a href="#">Carlos Juarez</a></li>
+						<li class="list-group-item"><a href="#">Marcelo Perez</a></li>
+						<li class="list-group-item"><a href="#">Juan Mercurio</a></li>
+						<li class="list-group-item"><a href="#">Estela Rodriguez</a></li>
+					</ul>				
+			    </div>
+			</div>
+			<div class="card">
+			  <div class="card-header" id="headingTwo">
+				<h5 class="mb-0">
+				  <button class="sidenav-header collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+					Solicitudes
+				  </button>
+				</h5>
+			  </div>
+			  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+				<div class="card-body">
+				  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+				</div>
+			  </div>
+			</div>
+
+		  </div>
+		
+	</div>	  
+	  
+
+	
+	<!-- contenido de la pagina aca -->
+	<div class="main">
+
+	</div>
+
+	<!-- barra lateral izquierda -->
+	<div class="sidenav sidenav-right">
+		<label class="text-center sidenav-header"><i class="fas fa-address-book"></i> Mis Solicitudes</label>
+		<input type="text" id="pacienteSearch" onkeyup="filtrarSolicitudes()" placeholder="Buscar..." title="Mis solicitudes">
+		<ul class="list-group list-group-flush" id="pacienteMenu">
+			<li class="list-group-item">
+				Carlos Juarez
+				<a href="#"><i class="fas fa-check"></i></a>
+				<a href="#"><i class="fas fa-times"></i></a>
+			</li>
+			<li class="list-group-item">
+				Carlos Juarez
+				<a href="#"><i class="fas fa-check"></i></a>
+				<a href="#"><i class="fas fa-times"></i></a>
+			</li>
+			<li class="list-group-item">
+				Carlos Juarez
+				<a class="li-icon float-right" href="#"><i class="fas fa-times fa-2x"></i></a>
+				<a class="li-icon float-right" href="#"><i class="fas fa-check fa-2x"></i></a>
+			</li>
+			<li class="list-group-item">
+				Carlos Juarez
+				<a href="#"><i class="fas fa-check"></i></a>
+				<a href="#"><i class="fas fa-times"></i></a>
+			</li>
+		</ul>
+	</div>	  
+
+	
+
+
+	<script src="scripts.js"></script>
+</body>
+</html>

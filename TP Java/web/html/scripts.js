@@ -8,12 +8,28 @@ function filtrarPacientes() {
 	for (i = 0; i < li.length; i++) {
 		a = li[i].getElementsByTagName("a")[0];
 		if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-		li[i].style.display = "";
+			li[i].style.display = "";
 		} else {
-		li[i].style.display = "none";
+			li[i].style.display = "none";
 		}
 	}
 }
+function filtrarSolicitudes() {
+	var input, filter, ul, li, a, i;
+	input = document.getElementById("solicitudesSearch");
+	filter = input.value.toUpperCase();
+	ul = document.getElementById("solicitudesMenu");
+	li = ul.getElementsByTagName("li");
+  
+	  for (i = 0; i < li.length; i++) {
+		a = li[i].getElementsByTagName("a")[0];
+		if (a.innerText.toUpperCase().indexOf(filter) > -1) {
+			li[i].style.display = "";
+		} else {
+			li[i].style.display = "none";
+		}
+	  }
+  }
 
 function filtrarEjercicios() {
 	var input, filter, ul, li, i;
