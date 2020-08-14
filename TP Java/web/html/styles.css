@@ -78,7 +78,7 @@ a:hover{
     color: var(--primary-color);
     font-weight: bold;
 }
-.sidenav-title{
+.colored-title{
     color: var(--primary-dark);
     font-weight: bold;
     font-size: 20px;
@@ -86,7 +86,6 @@ a:hover{
 .nav-item{
     padding: 10px;
 }
-
 
 .btn.btn-primary{
     background-color: var(--secondary-color);
@@ -108,7 +107,12 @@ a:hover{
 .btn-group-btn{
     margin-bottom: 1rem;
 }
-
+.tick-aceptar {
+    color: green;
+}
+.cruz-rechazar{
+    color: red;
+}
 .btn-secondary.btn-group-btn{
     color: black;
     background-color: lightgray;
@@ -123,7 +127,8 @@ a:hover{
 } 
 .navbar-text {
     font-weight: bold;
-	font-size: 25;
+    font-size: 25;
+    color: var(--primary-dark);
 }
 
 .main {

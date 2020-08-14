@@ -10,72 +10,32 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 <body class="nutricionista">
-
-	<!-- <nav class="navbar navbar-custom navbar-expand-md">
-		<div class="navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item dropdown">
-					<a class="navbar-text dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-						<i class="fas fa-user-circle"></i> Mi Perfil
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="nutricionista-config.html">Configuración</a>
-					<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Cerrar sesión</a>
-					</div>
-				</li>
-			</ul>
-		</div>
-	</nav> -->
-	<nav class="navbar navbar-expand navbar-light bg-light sticky-top"> 
-		<a href="#menu-toggle" id="menu-toggle" class="">
-			<span class="navbar-toggler-icon"></span>
-		</a> 
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation"> 
-			<span class="navbar-toggler-icon"></span> 
-		</button>
-		<div class="collapse navbar-collapse" id="">
-			<ul class="navbar-nav ml-auto">
-				<li class="nav-item dropdown">
-					<a class="navbar-text dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-						<i class="fas fa-user-circle"></i> Mi Perfil
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="nutricionista-config.html">Configuración</a>
-					<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Cerrar sesión</a>
-					</div>
-				</li>			
-			</ul>
-		</div>
-	</nav>
-
 	<div id="wrapper" class="toggled">
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav">
-				<div class="sidenav-title text-center">
-					<i class="fas fa-address-book"></i>   Solicitudes
+				<div class="colored-title text-center">
+					<i class="fas fa-user-plus"></i>   Solicitudes
 				</div>
 			
 				<input class="sidenav-search"  type="text" id="solicitudesSearch" onkeyup="filtrarSolicitudes()" placeholder="Buscar..." title="Mis solicitudes">
 				<ul class="list-group list-group-flush sidenav-menu" id="solicitudesMenu">
 					<li class="list-group-item">
 						<a href="#">Martin Perez</a>
-						<a class="li-icon float-right" href="#"><i class="fas fa-times" style="margin: 5px"></i></a>
-						<a class="li-icon float-right" href="#"><i class="fas fa-check" style="margin: 5px"></i></a>
+						<a class="li-icon float-right" href="#"><i class="fas fa-times cruz-rechazar" style="margin: 5px"></i></a>
+						<a class="li-icon float-right" href="#"><i class="fas fa-check tick-aceptar" style="margin: 5px"></i></a>
 					</li>
 					<li class="list-group-item">
 						<a href="#">Juan Alberto Echeguerria</a>
-						<a class="li-icon float-right" href="#"><i class="fas fa-times" style="margin: 5px"></i></a>
-						<a class="li-icon float-right" href="#"><i class="fas fa-check" style="margin: 5px"></i></a>
+						<a class="li-icon float-right" href="#"><i class="fas fa-times cruz-rechazar" style="margin: 5px"></i></a>
+						<a class="li-icon float-right" href="#"><i class="fas fa-check tick-aceptar" style="margin: 5px"></i></a>
 					</li>
 					<li class="list-group-item">
 						<a href="#">Luis Moreno</a>
-						<a class="li-icon float-right" href="#"><i class="fas fa-times" style="margin: 5px"></i></a>
-						<a class="li-icon float-right" href="#"><i class="fas fa-check" style="margin: 5px"></i></a>
+						<a class="li-icon float-right" href="#"><i class="fas fa-times cruz-rechazar" style="margin: 5px"></i></a>
+						<a class="li-icon float-right" href="#"><i class="fas fa-check tick-aceptar" style="margin: 5px"></i></a>
 					</li>
 				</ul>
-				<div class="sidenav-title text-center">
+				<div class="colored-title text-center">
 					<i class="fas fa-address-book"></i>	    Pacientes
 				</div>
 				<input class="sidenav-search" type="text" id="pacienteSearch" onkeyup="filtrarPacientes()" placeholder="Buscar..." title="Mis pacientes">
@@ -91,30 +51,50 @@
 				</ul>				
 			</ul>
 		</div> 
-		<!-- Page Content -->
+
 		<div id="page-content-wrapper">
+			<!-- barra de navegacion -->
+			<nav class="navbar sticky-top navbar-expand navbar-light bg-light"> 
+				<a href="#menu-toggle" id="menu-toggle">
+					<span class="navbar-toggler-icon"></span>
+				</a> 
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation"> 
+					<span class="navbar-toggler-icon"></span> 
+				</button>
+				<div class="collapse navbar-collapse">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item dropdown">
+							<a class="dropdown-toggle colored-title " href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+								<i class="fas fa-user-circle"></i> Mi Perfil
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="nutricionista-config.html">Configuración</a>
+							<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">Cerrar sesión</a>
+							</div>
+						</li>			
+					</ul>
+				</div>
+			</nav>
+
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-md-6">
 						<div class="card">
-							<div class="card-header">
-								<div class="row">
-									<h3 class="card-title">Estela Rodriguez</h3>
-								</div>
-							</div>
 							<div class="card-body">
+								<h3 class="colored-title text-center">Estela Rodriguez</h3>
 								<ul class="list-group list-group-flush">
 									<li class="list-group-item">
-										<b>Correo electrónico: </b> estela@gmail.com
+										<span class="text-muted">Correo electrónico: </span>estela@gmail.com
 									</li>
 									<li class="list-group-item">
-										<b>Numero de teléfono: </b> 341-6535325
+										<span class="text-muted">Teléfono: </span>341-6535325
 									</li>
 									<li class="list-group-item">
-										<b>Índice de masa corporal: </b> 23.6
+										<span class="text-muted">Índice de masa corporal: </span>23.6
 									</li>
 									<li class="list-group-item">
-										<b>Metabolismo basal: </b> 1860 kcal.
+										<span class="text-muted">Metabolismo basal: </span>1860 kcal.
 									</li>
 								</ul>
 								<div class="pull-right">
@@ -161,6 +141,7 @@
 							<div class="pull-right">
 								<button class="btn btn-link float-right" style="font-size:17px" href="#modificarRequerimientos" data-toggle="modal">Modificar</button>
 							</div>
+							<br>
 						</div>
 					</div>
 				</div>
@@ -168,15 +149,11 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="card">
-							<div class="card-header">
-								<div class="row">
-									<h3 class="card-title">Peso</h3>
-								</div>
-							</div>
 							<div class="card-body">
+								<h3 class="colored-title text-center">Peso</h3>
 								<div class="row">
 									<div class="col">
-										<p class="card-text text-center text-muted">Promedio de esta semana</p>
+										<p class="card-text text-center text-muted">Promedio semanal</p>
 										<h3 class="card-text text-center">67 kg.</h3>
 									</div>
 									<div class="col">
