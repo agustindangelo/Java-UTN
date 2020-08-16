@@ -10,20 +10,20 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 <body class="paciente">
-	<nav class="navbar navbar-custom navbar-expand">
-	  <div class="navbar-collapse" id="navbarSupportedContent">
+	<nav class="navbar navbar-expand navbar-custom">
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	  	<ul class="navbar-nav mr-auto">
 			<li class="nav-item">
-				<a class="navbar-text" href="#">Hoy</a> 
+				<a class="colored-title" href="#">Hoy</a> 
 			</li>
 			<li class="nav-item">
-				<a class="navbar-text" href="paciente-semana.html">Semana</a> 
+				<a class="colored-title" href="paciente-semana.html">Semana</a> 
 			</li>
 	  	</ul>
 	  
 	    <ul class="navbar-nav ml-auto">
 			<li class="nav-item dropdown">
-				<a class="navbar-text dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+				<a class="colored-title dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
 					<i class="fas fa-user-circle"></i> Mi Perfil
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -37,8 +37,9 @@
 	</nav>
 	
 	<div class="container-fluid">
-		<div class="row">
+		<div class="row justify-content-between">
 			<h2>Mis resultados de hoy</h2>
+			<h3>Martes, 17 de Agosto</h3>
 		</div>
 		<div class="row">
 			<div class="col-md-3">
@@ -127,9 +128,9 @@
 			</div>
 
 		</div>
-
+		<br>
 		<div class="row">
-			<h2>Mi dieta de hoy</h2>
+			<h2>Mis consumos de hoy</h2>
 		</div>
 		<div class="row">
 			<div class="col-md-3">
@@ -229,30 +230,30 @@
 							<input type="text" class="form-control" id="desayunoSearch" onkeyup="filtrarDesayuno()" placeholder="Buscar..." title="Alimentos">
 							<ul id="desayunoMenu" class="list-group list-group-flush">
 								<li class="list-group-item">
-									<a class="btn btn-link">Nutella</a>
+									<a class="colored-title">Nutella</a>
 									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Cucharadas</label>
 								</li>
 								<li class="list-group-item">
-									<a class="btn btn-link">Chocolatada</a>
+									<a class="colored-title">Chocolatada</a>
 									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Vasos</label>
 								</li>
 								<li class="list-group-item">
-									<a class="btn btn-link">Milanesas</a>
+									<a class="colored-title">Milanesas</a>
 									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Unidades</label>
 								</li>
 								<li class="list-group-item">
-									<a class="btn btn-link">Arroz</a>
+									<a class="colored-title">Arroz</a>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Gramos</label>
 								</li>
 								<li class="list-group-item">
-									<a class="btn btn-link">Lechuga</a>
+									<a class="colored-title">Lechuga</a>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Gramos</label>
 								</li>
@@ -283,30 +284,30 @@
 							<input type="text" class="form-control" id="almuerzoSearch" onkeyup="filtrarAlmuerzo()" placeholder="Buscar..." title="Alimentos">
 							<ul id="almuerzoMenu" class="list-group list-group-flush">
 								<li class="list-group-item">
-									<a class="btn btn-link">Nutella</a>
+									<a class="btn colored-title">Nutella</a>
 									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Cucharadas</label>
 								</li>
 								<li class="list-group-item">
-									<a class="btn btn-link">Chocolatada</a>
+									<a class="colored-title">Chocolatada</a>
 									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Vasos</label>
 								</li>
 								<li class="list-group-item">
-									<a class="btn btn-link">Milanesas</a>
+									<a class="colored-title">Milanesas</a>
 									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Unidades</label>
 								</li>
 								<li class="list-group-item">
-									<a class="btn btn-link">Arroz</a>
+									<a class="colored-title">Arroz</a>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Gramos</label>
 								</li>
 								<li class="list-group-item">
-									<a class="btn btn-link">Lechuga</a>
+									<a class="colored-title">Lechuga</a>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Gramos</label>
 								</li>
@@ -337,30 +338,30 @@
 							<input type="text" class="form-control" id="cenaSearch" onkeyup="filtrarCena()" placeholder="Buscar..." title="Alimentos">
 							<ul id="cenaMenu" class="list-group list-group-flush">
 								<li class="list-group-item">
-									<a class="btn btn-link">Nutella</a>
+									<a class="colored-title">Nutella</a>
 									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Cucharadas</label>
 								</li>
 								<li class="list-group-item">
-									<a class="btn btn-link">Chocolatada</a>
+									<a class="colored-title">Chocolatada</a>
 									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Vasos</label>
 								</li>
 								<li class="list-group-item">
-									<a class="btn btn-link">Milanesas</a>
+									<a class="colored-title">Milanesas</a>
 									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Unidades</label>
 								</li>
 								<li class="list-group-item">
-									<a class="btn btn-link">Arroz</a>
+									<a class="colored-title">Arroz</a>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Gramos</label>
 								</li>
 								<li class="list-group-item">
-									<a class="btn btn-link">Lechuga</a>
+									<a class="colored-title">Lechuga</a>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Gramos</label>
 								</li>
@@ -391,30 +392,30 @@
 							<input type="text" class="form-control" id="otrosSearch" onkeyup="filtrarOtros()" placeholder="Buscar..." title="Alimentos">
 							<ul id="otrosMenu" class="list-group list-group-flush">
 								<li class="list-group-item">
-									<a class="btn btn-link">Nutella</a>
+									<a class="colored-title">Nutella</a>
 									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Cucharadas</label>
 								</li>
 								<li class="list-group-item">
-									<a class="btn btn-link">Chocolatada</a>
+									<a class="colored-title">Chocolatada</a>
 									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Vasos</label>
 								</li>
 								<li class="list-group-item">
-									<a class="btn btn-link">Milanesas</a>
+									<a class="colored-title">Milanesas</a>
 									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Unidades</label>
 								</li>
 								<li class="list-group-item">
-									<a class="btn btn-link">Arroz</a>
+									<a class="colored-title">Arroz</a>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Gramos</label>
 								</li>
 								<li class="list-group-item">
-									<a class="btn btn-link">Lechuga</a>
+									<a class="colored-title">Lechuga</a>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Gramos</label>
 								</li>
@@ -444,27 +445,27 @@
 							<input type="text" class="form-control" id="ejerciciosSearch" onkeyup="filtrarEjercicios()" placeholder="Buscar..." title="Ejercicios">
 							<ul id="ejerciciosMenu" class="list-group list-group-flush">
 								<li class="list-group-item">
-									<a class="btn btn-link">Caminata</a>
+									<a class="colored-title">Caminata</a>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>
 									<label class="float-right text-muted">Minutos</label>						
 								</li> 
 								<li class="list-group-item">
-									<a class="btn btn-link">Natacion</a>
+									<a class="colored-title">Natacion</a>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>	
 									<label class="float-right text-muted">Minutos</label>											
 								</li>
 								<li class="list-group-item">
-									<a class="btn btn-link">Pesas</a>
+									<a class="colored-title">Pesas</a>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>	
 									<label class="float-right text-muted">Minutos</label>											
 								</li>
 								<li class="list-group-item">
-									<a class="btn btn-link">Running</a>
+									<a class="colored-title">Running</a>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>
 									<label class="float-right text-muted">Minutos</label>											
 								</li>
 								<li class="list-group-item">
-									<a class="btn btn-link">Tennis</a>
+									<a class="colored-title">Tennis</a>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>
 									<label class="float-right text-muted">Minutos</label>												
 								</li>
@@ -485,14 +486,14 @@
 			<div class="modal-content">
 				<form>
 					<div class="modal-header">						
-						<h4 class="modal-title">Su peso al día de hoy 9/8/2020</h4>
+						<h4 class="modal-title">Actualizar peso</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					
 					<div class="modal-body">
 						<div class="container">
-							<input class="button" type="number" value="70" min="0" max="200"/>
-							<label> kg.</label>					
+							<label for="pesoHoy">Peso hoy (kg.)</label>
+							<input class="form-control" id="pesoHoy" type="number" value="65" min="0" max="500"/>						
 						</div>					
 					</div>
 					<div class="modal-footer">

@@ -10,18 +10,18 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 <body class="paciente">
-	<nav class="navbar navbar-custom navbar-expand-md">
+	<nav class="navbar navbar-expand navbar-custom">
 		<div class="navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 			  <li class="nav-item">
-				  <a class="navbar-text" href="#">Hoy</a> 
+				  <a class="colored-title" href="paciente-hoy.html">Hoy</a> 
 			  <li class="nav-item">
-				  <a class="navbar-text" href="paciente-hoy.html">Semana</a> 	  		
+				  <a class="colored-title" href="#">Semana</a> 	  		
 			</ul>
 		
 		  <ul class="navbar-nav ml-auto">
 			<li class="nav-item dropdown">
-			  <a class="navbar-text dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
+			  <a class="colored-title dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
 				<i class="fas fa-user-circle"></i> Mi Perfil
 			  </a>
 			  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -32,7 +32,35 @@
 			</li>
 		  </ul>
 		</div>
-	  </nav>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row">
+			<h2>Mis resultados de esta semana</h2>
+		</div>
+		<div class="row justify-content-between">
+			<div class="col-md-4">
+				<h3>Peso</h3>
+				<img src="../line-graph.png" class="img-fluid">
+			</div>
+			<div class="col-md-4">
+				<h3>Calorías Ingeridas</h3>
+				<img src="../line-graph.png" class="img-fluid">
+
+			</div>
+			<div class="col-md-4">
+				<h3>Calorías Quemadas</h3>
+				<img src="../line-graph.png" class="img-fluid">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<h3>Humor</h3>
+				<img src="../line-graph.png" class="img-fluid">
+
+			</div>
+		</div>
+	</div>
 	
 </body>
 </html>

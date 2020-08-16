@@ -34,6 +34,7 @@ body{
     --secondary-light: #ff867f;
     --secondary-dark: #c50e29;
     --navbar-txt-color: black;
+    --navbar-bg-color: var(--primary-light);
     background-color: var(--primary-color);
 }
 
@@ -45,11 +46,8 @@ body{
     --secondary-light: #9fffe0;
     --secondary-dark: #2bbd7e;
     --navbar-txt-color: var(--primary-dark);
+    --navbar-bg-color: white;
     background-color: var(--primary-color);
-}
-
-a.navbar-text{
-    color: var(--navbar-txt-color);
 }
 
 .login{
@@ -63,6 +61,16 @@ a.navbar-text{
 
 .container-fluid{
     padding: 2rem;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 8px var(--primary-color);
+    margin-bottom: 2px;
+}
+hr {
+    border-color: var(--primary-dark);
+    margin: 5px;
 }
 
 a:hover{
@@ -79,7 +87,7 @@ a:hover{
     font-weight: bold;
 }
 .colored-title{
-    color: var(--primary-dark);
+    color: var(--navbar-txt-color);
     font-weight: bold;
     font-size: 20px;
 }
@@ -123,7 +131,7 @@ a:hover{
 }
 
 .navbar-custom { 
-    background-color: var(--primary-color);
+    background-color: var(--navbar-bg-color);
 } 
 .navbar-text {
     font-weight: bold;
@@ -146,12 +154,6 @@ a:hover{
     top: 30; /* Stay at the top */
     background-color: white;
     overflow-x: hidden; /* Disable horizontal scroll */
-}
-.sidenav-search {
-    width: 100%;
-    font-size: 17px;
-    padding: 9px;
-    border: 2px solid var(--primary-dark);
 }
 .sidenav-menu {
     list-style-type: none;
