@@ -4,6 +4,8 @@ insert into categoria (nombre) values ('legumbre');
 insert into categoria (nombre) values ('lacteo');
 insert into categoria (nombre) values ('fruta');
 insert into categoria (nombre) values ('fruto seco');
+insert into categoria (nombre) values ('cereal');
+insert into categoria (nombre) values ('azucarado');
 select * from categoria;
 
 insert into unidad_medida (nombre) values ('gramos');
@@ -134,3 +136,9 @@ insert into consumo_paciente (id_paciente, id_alimento, fecha, tipo, cantidad) v
 insert into consumo_paciente (id_paciente, id_alimento, fecha, tipo, cantidad) values ('11111113', 1, curdate(), 'otro', 5);
 insert into consumo_paciente (id_paciente, id_alimento, fecha, tipo, cantidad) values ('11111113', 1, curdate(), 'almuerzo', 5);
 select * from consumo_paciente;
+
+select * from unidad_medida;
+select * from categoria;
+insert into categoria (nombre) values ('');
+select * from consumo_paciente;
+update categoria set nombre='azucarado' where id_categoria=14;
