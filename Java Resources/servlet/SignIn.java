@@ -39,7 +39,7 @@ public class SignIn extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Nutricionista per = new Nutricionista();
+		Nutricionista nut = new Nutricionista();
 		Login ctrl = new Login();
 		
 		String email = request.getParameter("email");
@@ -47,15 +47,15 @@ public class SignIn extends HttpServlet {
 		
 		//validar email y password
 		
-		per.setEmail(email);
-		per.setPassword(password);
+		nut.setEmail(email);
+		nut.setPassword(password);
 		
-		per=ctrl.validate(per);
-		LinkedList<Nutricionista> personas = ctrl.getAll();
+		nut=ctrl.validate(nut);
+		LinkedList<Nutricionista> nutricionistas = ctrl.getAll();
 		
 		
-		request.getSession().setAttribute("usuario", per);
-		request.setAttribute("listaPersonas", personas);
+		request.getSession().setAttribute("usuario", nut);
+		request.setAttribute("listaPersonas", nutricionistas);
 		
 		request.getRequestDispatcher("WEB-INF/UserManagement.jsp").forward(request, response);
 		
