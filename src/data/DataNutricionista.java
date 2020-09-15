@@ -80,6 +80,38 @@ public class DataNutricionista {
 		}
 		return nut;
 	}
+	public Nutricionista getByEmailPass(Nutricionista nut) {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"select dni,nombre,apellido,email,telefono from nutricionista where email = ? and password = ?;"
+					);
+			stmt.setString(1, nut.getEmail());
+			stmt.setString(2, nut.getPassword());
+			rs = stmt.executeQuery();
+			if(rs != null && rs.next()) {
+				nut.setDni(rs.getString("dni"));
+				nut.setApellido(rs.getString("apellido"));
+				nut.setNombre(rs.getString("nombre"));
+				nut.setEmail(rs.getString("email"));
+				nut.setTelefono(rs.getString("telefono"));
+//				nut = dd.setDireccion(nut);
+//				nut = dh.setHorarios(nut);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return nut;
+	}
 	
 	public LinkedList<Nutricionista> getByLocalidad(Localidad loc){
 		

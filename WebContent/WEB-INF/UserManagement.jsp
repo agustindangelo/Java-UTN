@@ -22,53 +22,16 @@
     <link href="style/start.css" rel="stylesheet">
 	
 	<%
-		Nutricionista p = (Nutricionista)session.getAttribute("usuario");
-    	LinkedList<Nutricionista> lp = (LinkedList<Nutricionista>)request.getAttribute("listaPersonas");
+		Nutricionista nut = (Nutricionista)session.getAttribute("usuario");
 	%>
 	
 </head>
 <body>
 	<div class="container">
 		<div class="row">
-        	<h4>Personas</h4>
-            	<div class="col-12 col-sm-12 col-lg-12">
-                	<div class="table-responsive">
-                    	<%-- <table class="table">
-                    		<thead>
-                    			<tr>
-                    				<th>id</th>
-                    		    	<th>nombre</th>
-                        			<th>apellido</th>
-                        			<th>email</th>
-                        			<th>tel</th>
-                        			<th>habilitado</th>
-                        			<th></th>
-                        			<th></th>
-                      			</tr>
-                      		</thead>
-                    		<tbody>
-                    		<% for (Persona per : lp) { %>
-                    			<tr>
-                    				<td><%=per.getId()%></td>
-                    				<td><%=per.getNombre()%></td>
-                    				<td><%=per.getApellido()%></td>
-                    				<td><%=per.getEmail()%></td>
-                    				<td><%=per.getTel()%></td>
-                    				<td>
-                    				    <div class="custom-control custom-checkbox">
-                                        	<input type="checkbox" class="custom-control-input" id="defaultDisabled" <%=per.isHabilitado()?"checked":""%> disabled>
-                                        <label class="custom-control-label" for="defaultDisabled"><%=per.isHabilitado()?"Si":"No"%></label>
-                                		</div>
-                    				</td>
-                    				<td></td><!-- editar -->
-                    				<td></td><!-- borrar -->
-                    			</tr>
-                    		<% } %>
-                    		</tbody>	
-						</table>
-					 	--%>
-					</div>
-				</div>
+        	<div class="col">
+       			<p>Buen día <%= nut.getNombre()%>  <%= nut.getApellido()%></p>
+        	</div>
 		</div>		
 	</div> <!-- /container -->
 </body>
