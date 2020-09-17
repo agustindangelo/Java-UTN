@@ -12,7 +12,7 @@ public class Login {
 		dn=new DataNutricionista();
 	}
 	
-	public Nutricionista validate(Nutricionista nut) {
+	public Nutricionista validate(Nutricionista nut){
 		/* para hacer m�s seguro el manejo de passwords este ser�a un lugar 
 		 * adecuado para generar un hash de la password utilizando un cifrado
 		 * asim�trico como sha256 y utilizar el hash en lugar de la password en plano 

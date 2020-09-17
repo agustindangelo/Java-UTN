@@ -11,7 +11,7 @@ public class DbConnector {
 	private String port="3306";
 	private String user="java";
 	private String password="himitsu";
-	private String db="java";
+	private String db="nutricionista";
 	private int conectados=0;
 	private Connection conn=null;
 	
@@ -30,14 +30,10 @@ public class DbConnector {
 		return instancia;
 	}
 	
-	public Connection getConn() {
-		try {
-			if(conn==null || conn.isClosed()) {
-				conn=DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db, user, password);
-				conectados=0;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+	public Connection getConn() throws SQLException{
+		if(conn==null || conn.isClosed()) {
+			conn=DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db, user, password);
+			conectados=0;
 		}
 		conectados++;
 		return conn;

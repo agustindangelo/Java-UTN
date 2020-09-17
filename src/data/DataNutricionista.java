@@ -5,7 +5,7 @@ import java.sql.*;
 import java.util.LinkedList;
 
 public class DataNutricionista {
-
+	
 	DataHorario dh = new DataHorario();
 	DataDireccion dd = new DataDireccion();
 	
@@ -83,6 +83,7 @@ public class DataNutricionista {
 	public Nutricionista getByEmailPass(Nutricionista nut) {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
+		Nutricionista n = new Nutricionista();
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
 					"select dni,nombre,apellido,email,telefono from nutricionista where email = ? and password = ?;"
@@ -91,13 +92,14 @@ public class DataNutricionista {
 			stmt.setString(2, nut.getPassword());
 			rs = stmt.executeQuery();
 			if(rs != null && rs.next()) {
-				nut.setDni(rs.getString("dni"));
-				nut.setApellido(rs.getString("apellido"));
-				nut.setNombre(rs.getString("nombre"));
-				nut.setEmail(rs.getString("email"));
-				nut.setTelefono(rs.getString("telefono"));
-//				nut = dd.setDireccion(nut);
-//				nut = dh.setHorarios(nut);
+				n = new Nutricionista();
+				n.setDni(rs.getString("dni"));
+				n.setApellido(rs.getString("apellido"));
+				n.setNombre(rs.getString("nombre"));
+				n.setEmail(rs.getString("email"));
+				n.setTelefono(rs.getString("telefono"));
+//				n = dd.setDireccion(nut);
+//				n = dh.setHorarios(nut);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -110,7 +112,7 @@ public class DataNutricionista {
 				e.printStackTrace();
 			}
 		}
-		return nut;
+		return n;
 	}
 	
 	public LinkedList<Nutricionista> getByLocalidad(Localidad loc){

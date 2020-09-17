@@ -1,6 +1,8 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.LinkedList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,13 +50,19 @@ public class SignIn extends HttpServlet {
 		
 		nut.setEmail(email);
 		nut.setPassword(password);
-		
-		nut=ctrl.validate(nut);
-		
-		response.getWriter().append("Bienvenido ").append(nut.getNombre());
+
+		nut = ctrl.validate(nut);
+		LinkedList<Nutricionista> nuts = ctrl.getAll();
+		for(Nutricionista n : nuts) {
+			response.getWriter().append(n.getNombre()).append("---").append(n.getApellido());
+		}
+		if(nuts.isEmpty()) {
+			response.getWriter().append("vacia");
+		}
+		response.getWriter().append(nut.getApellido());
 //		
 //		request.getSession().setAttribute("usuario", nut);
 //		
-//		request.getRequestDispatcher("WEB-INF/UserManagement.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/UserManagement.jsp").forward(request, response);
 	}
 }
