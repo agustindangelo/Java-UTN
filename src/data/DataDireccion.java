@@ -8,7 +8,7 @@ import entidades.*;
 
 public class DataDireccion {
 	
-	public Nutricionista setDireccion(Nutricionista nut) {
+	public Nutricionista setDireccion(Nutricionista nut) throws SQLException{
 		
 		// recibe por parametro un nutricionista y le asigna la dirección que le corresponde, almacenada en bd
 		
@@ -36,20 +36,20 @@ public class DataDireccion {
 				nut.setDireccion(dir);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs != null) {rs.close();}
 				if(stmt != null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		return nut;
 	}
 	
-	public void update(Nutricionista nut) {
+	public void update(Nutricionista nut) throws SQLException{
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
@@ -65,18 +65,18 @@ public class DataDireccion {
 			stmt.setString(6, nut.getDni());
 			stmt.execute();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(stmt!=null) stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 	}
 	
-	public void add(Nutricionista nut) {
+	public void add(Nutricionista nut) throws SQLException{
 		// recibe un nutricionista y almacena en la bd el objeto direccion que contiene
 		PreparedStatement stmt = null;
 		try {
@@ -91,13 +91,13 @@ public class DataDireccion {
 			stmt.setString(6, nut.getDireccion().getDepto());
 			stmt.execute();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(stmt!=null) stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 	}

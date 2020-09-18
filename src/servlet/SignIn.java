@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -51,18 +52,34 @@ public class SignIn extends HttpServlet {
 		nut.setEmail(email);
 		nut.setPassword(password);
 
-		nut = ctrl.validate(nut);
-		LinkedList<Nutricionista> nuts = ctrl.getAll();
-		for(Nutricionista n : nuts) {
-			response.getWriter().append(n.getNombre()).append("---").append(n.getApellido());
+		try {
+			nut = ctrl.validate(nut);
+		} catch (SQLException e) {
+			// redirigir a la pagina de error
+			// request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			
 		}
-		if(nuts.isEmpty()) {
-			response.getWriter().append("vacia");
+		
+//		para que prueben el acceso a datos:
+		try {
+			LinkedList<Nutricionista> nuts = ctrl.getAll();
+			for(Nutricionista n : nuts) {
+				response.getWriter().append(n.getNombre()).append("---").append(n.getApellido());
+			}
+			if(nuts.isEmpty()) {
+				response.getWriter().append("vacia");
+			}
+			response.getWriter().append(nut.getApellido());
+			
+		} catch (SQLException e){
+			// redirigir a la pagina de error
+			// request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
-		response.getWriter().append(nut.getApellido());
+		
+		
 //		
 //		request.getSession().setAttribute("usuario", nut);
 //		
-		request.getRequestDispatcher("WEB-INF/UserManagement.jsp").forward(request, response);
+//		request.getRequestDispatcher("WEB-INF/UserManagement.jsp").forward(request, response);
 	}
 }

@@ -1,4 +1,5 @@
 package logic;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 
@@ -12,7 +13,7 @@ public class UsuarioLogic {
 		dp = new DataPaciente();
 	}
 	
-	public LinkedList<Paciente> getAll(){
+	public LinkedList<Paciente> getAll() throws SQLException{
 		return dp.getAll();
 	}
 }

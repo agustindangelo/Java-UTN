@@ -8,7 +8,7 @@ import java.sql.Statement;
 import entidades.*;
 import java.util.LinkedList;
 public class DataLocalidad {
-	public void setLocalidad(Localidad loc) {
+	public void setLocalidad(Localidad loc) throws SQLException{
 		PreparedStatement stmt = null;
 		ResultSet rs = null;	
 		try {
@@ -21,18 +21,18 @@ public class DataLocalidad {
 				loc.setDenominacion(rs.getString("denominacion"));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 	}
-	public LinkedList<Localidad> getAll(){
+	public LinkedList<Localidad> getAll() throws SQLException{
 		Statement stmt = null;
 		ResultSet rs = null;
 		LinkedList<Localidad> localidades = new LinkedList<>();
@@ -49,7 +49,7 @@ public class DataLocalidad {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 			
 		} finally {
 			try {
@@ -57,13 +57,13 @@ public class DataLocalidad {
 				if(stmt != null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		return localidades;
 	}
 	
-	public Localidad getByCodPostal(Localidad loc){
+	public Localidad getByCodPostal(Localidad loc) throws SQLException{
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		try {
@@ -76,20 +76,20 @@ public class DataLocalidad {
 				loc.setDenominacion(rs.getString("denominacion"));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		return loc;
 	}
 	
-	public void add(Localidad loc) {
+	public void add(Localidad loc) throws SQLException{
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
@@ -99,18 +99,18 @@ public class DataLocalidad {
 			stmt.setString(2, loc.getDenominacion());
 			stmt.execute();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(stmt!=null) stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 	}
 	
-	public void update(Localidad loc) {
+	public void update(Localidad loc) throws SQLException{
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
@@ -122,18 +122,18 @@ public class DataLocalidad {
 			stmt.setInt(2, loc.getCodPostal());
 			stmt.execute();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(stmt!=null) stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 	}
 	
-	public void remove(Localidad loc) {
+	public void remove(Localidad loc) throws SQLException{
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
@@ -142,12 +142,12 @@ public class DataLocalidad {
 			stmt.setInt(1, loc.getCodPostal());
 			stmt.execute();
 		} catch(SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(stmt!=null) stmt.close();
 			} catch(SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 	}

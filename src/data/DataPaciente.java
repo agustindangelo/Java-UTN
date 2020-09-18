@@ -7,7 +7,7 @@ import entidades.Paciente.TipoGenero;
 
 public class DataPaciente {
 	
-	public LinkedList<Paciente> getAll(){
+	public LinkedList<Paciente> getAll() throws SQLException{
 		Statement stmt=null;
 		ResultSet rs=null;
 		LinkedList<Paciente> pacientes= new LinkedList<>();
@@ -42,7 +42,7 @@ public class DataPaciente {
 			}
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 		finally {
 			try {
@@ -50,7 +50,7 @@ public class DataPaciente {
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		

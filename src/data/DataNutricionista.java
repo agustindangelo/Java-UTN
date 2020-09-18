@@ -9,7 +9,7 @@ public class DataNutricionista {
 	DataHorario dh = new DataHorario();
 	DataDireccion dd = new DataDireccion();
 	
-	public LinkedList<Nutricionista> getAll(){
+	public LinkedList<Nutricionista> getAll() throws SQLException{
 		Statement stmt = null;
 		ResultSet rs = null;
 		LinkedList<Nutricionista> nuts = new LinkedList<>();
@@ -36,7 +36,7 @@ public class DataNutricionista {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 			
 		} finally {
 			try {
@@ -44,13 +44,13 @@ public class DataNutricionista {
 				if(stmt != null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		return nuts;
 	}
 	
-	public Nutricionista getByDni(Nutricionista nut) {
+	public Nutricionista getByDni(Nutricionista nut) throws SQLException{
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		try {
@@ -68,19 +68,19 @@ public class DataNutricionista {
 				nut = dh.setHorarios(nut);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		return nut;
 	}
-	public Nutricionista getByEmailPass(Nutricionista nut) {
+	public Nutricionista getByEmailPass(Nutricionista nut) throws SQLException{
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Nutricionista n = new Nutricionista();
@@ -102,20 +102,20 @@ public class DataNutricionista {
 //				n = dh.setHorarios(nut);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		return n;
 	}
 	
-	public LinkedList<Nutricionista> getByLocalidad(Localidad loc){
+	public LinkedList<Nutricionista> getByLocalidad(Localidad loc) throws SQLException{
 		
 		// recibe una localidad, devuelve todos los nutricionistas registrados en esa localidad.
 		
@@ -146,7 +146,7 @@ public class DataNutricionista {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 			
 		} finally {
 			try {
@@ -154,13 +154,13 @@ public class DataNutricionista {
 				if(stmt != null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		return nuts;
 	}
 	
-	public void add(Nutricionista nut) {
+	public void add(Nutricionista nut) throws SQLException{
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
@@ -176,18 +176,18 @@ public class DataNutricionista {
 			dd.add(nut);
 			dh.add(nut);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(stmt!=null) stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 	}
 	
-	public void update(Nutricionista nut) {
+	public void update(Nutricionista nut) throws SQLException{
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
@@ -203,18 +203,18 @@ public class DataNutricionista {
 			stmt.setString(6, nut.getDni());
 			stmt.execute();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(stmt!=null) stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 	}
 		
-	public void remove(Nutricionista nut) {
+	public void remove(Nutricionista nut) throws SQLException{
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
@@ -223,12 +223,12 @@ public class DataNutricionista {
 			stmt.setString(1, nut.getDni());
 			stmt.execute();
 		} catch(SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(stmt!=null) stmt.close();
 			} catch(SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 	}

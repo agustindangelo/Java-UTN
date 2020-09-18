@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class DataHorario {
 	
-	public Nutricionista setHorarios(Nutricionista nut) {
+	public Nutricionista setHorarios(Nutricionista nut) throws SQLException{
 		PreparedStatement stmt=null;
 		ResultSet rs=null;	
 		Horario h;
@@ -33,20 +33,20 @@ public class DataHorario {
 				nut.setHorarios(horarios);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		} finally {
 			try {
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		return nut;
 	}
 	
-	public void add(Nutricionista nut) {
+	public void add(Nutricionista nut) throws SQLException{
 		// recibe un nutricionista, almacena todos sus horarios en la bd
 		PreparedStatement stmt = null;
 		for (Horario h : nut.getHorarios()) {
@@ -61,19 +61,19 @@ public class DataHorario {
 				stmt.setTime(4, Time.valueOf(h.getHoraHasta()));
 				stmt.executeUpdate();
 			} catch (SQLException e) {
-	            e.printStackTrace();
+	            throw e;
 			} finally {
 	            try {
 	                if(stmt!=null)stmt.close();
 	                DbConnector.getInstancia().releaseConn();
 	            } catch (SQLException e) {
-	            	e.printStackTrace();
+	            	throw e;
 	            }
 			}
 		}
 	}
 	
-	public void update(Nutricionista nut, Horario updatedHor) {
+	public void update(Nutricionista nut, Horario updatedHor) throws SQLException{
 		PreparedStatement stmt= null;
 		Horario hor = nut.getHorarios().get(0);
 		try {
@@ -89,18 +89,18 @@ public class DataHorario {
 			stmt.setTime(5, Time.valueOf(hor.getHoraDesde()));
 			stmt.executeUpdate();
 		} catch (SQLException e) {
-            e.printStackTrace();
+            throw e;
 		} finally {
             try {
                 if(stmt!=null)stmt.close();
                 DbConnector.getInstancia().releaseConn();
             } catch (SQLException e) {
-            	e.printStackTrace();
+            	throw e;
             }
 		}
 	}
 	
-	public void remove(Nutricionista nut) {
+	public void remove(Nutricionista nut) throws SQLException{
 		PreparedStatement stmt = null;
 		for(Horario hor : nut.getHorarios()) {
 			try {
@@ -112,13 +112,13 @@ public class DataHorario {
 				stmt.setTime(3, Time.valueOf(hor.getHoraDesde()));
 				stmt.execute();
 			} catch(SQLException e) {
-				e.printStackTrace();
+				throw e;
 			} finally {
 				try {
 					if(stmt!=null) stmt.close();
 	                DbConnector.getInstancia().releaseConn();
 				} catch(SQLException e) {
-					e.printStackTrace();
+					throw e;
 				}
 			}
 		}

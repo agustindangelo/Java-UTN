@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.sql.*;
 
 public class DataAlimento {
-	public LinkedList<Alimento> GetAll(){
+	public LinkedList<Alimento> GetAll() throws SQLException{
 		Statement stmt = null;
 		ResultSet rs = null;
 		LinkedList<Alimento> alimentos = new LinkedList<Alimento>();
@@ -27,7 +27,7 @@ public class DataAlimento {
 			}
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 		finally {
 			try {
@@ -35,13 +35,13 @@ public class DataAlimento {
 				if (stmt != null) { stmt.close(); }
 			}
 			catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		return alimentos;
 	}
 	
-	public Alimento GetOne(int id) {
+	public Alimento GetOne(int id) throws SQLException{
 		Alimento a = new Alimento();
 		a.setId(id);
 		PreparedStatement stmt = null;
@@ -60,7 +60,7 @@ public class DataAlimento {
 			}
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 		finally {
 			try {
@@ -69,7 +69,7 @@ public class DataAlimento {
 				DbConnector.getInstancia().releaseConn();
 			}
 			catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		

@@ -15,7 +15,7 @@ public class DbConnector {
 	private int conectados=0;
 	private Connection conn=null;
 	
-	private DbConnector() {
+	private DbConnector(){
 		try {
 			Class.forName(driver);
 		} catch (ClassNotFoundException e) {
@@ -31,22 +31,26 @@ public class DbConnector {
 	}
 	
 	public Connection getConn() throws SQLException{
-		if(conn==null || conn.isClosed()) {
-			conn=DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db, user, password);
-			conectados=0;
+		try {
+			if(conn==null || conn.isClosed()) {
+				conn=DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db, user, password);
+				conectados=0;
+			}
+			conectados++;
+		} catch (SQLException e) {
+			throw e;
 		}
-		conectados++;
 		return conn;
 	}
 	
-	public void releaseConn() {
+	public void releaseConn() throws SQLException{
 		conectados--;
 		try {
 			if (conectados<=0) {
 				conn.close();
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 	}
 
