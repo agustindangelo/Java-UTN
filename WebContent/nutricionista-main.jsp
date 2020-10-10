@@ -1,9 +1,15 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import="entidades.Paciente"%>
+<%@ page import="java.util.LinkedList"%>
+<%@ page import="data.DataNutricionista"%>
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="ISO-8859-1">
 	<title>Trabajo practico de Java</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../style/styles.css">
+    <link rel="stylesheet" href="styles.css">
     <script src="https://kit.fontawesome.com/d00e7b9ed2.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -41,14 +47,15 @@
 				</div>
 				<input class="form-control" type="text" id="pacienteSearch" onkeyup="filtrarPacientes()" placeholder="Buscar..." title="Mis pacientes">
 				<ul class="list-group list-group-flush sidenav-menu" id="pacienteMenu">
-					<li class="list-group-item"><a href="#">Carlos Juarez</a></li>
-					<li class="list-group-item"><a href="#">Marcelo Perez</a></li>
-					<li class="list-group-item"><a href="#">Juan Mercurio</a></li>
-					<li class="list-group-item"><a href="#">Estela Rodriguez</a></li>
-					<li class="list-group-item"><a href="#">Carlos Juarez</a></li>
-					<li class="list-group-item"><a href="#">Marcelo Perez</a></li>
-					<li class="list-group-item"><a href="#">Juan Mercurio</a></li>
-					<li class="list-group-item"><a href="#">Estela Rodriguez</a></li>
+				<%
+					LinkedList<Paciente> pacientes = new LinkedList<Paciente>();
+					DataNutricionista dn = new DataNutricionista();
+					for (Paciente p : pacientes)
+					{
+						
+					}
+					// <li class="list-group-item"><a href="#">Carlos Juarez</a></li>
+				%>
 				</ul>				
 			</ul>
 		</div> 

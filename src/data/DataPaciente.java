@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import entidades.Paciente;
 import entidades.Paciente.TipoGenero;
+import entidades.Usuario;
 
 public class DataPaciente {
 	
@@ -36,6 +37,7 @@ public class DataPaciente {
 					p.setEmail(rs.getString("email"));
 					p.setTelefono(rs.getString("telefono"));
 					p.setPassword(rs.getString("password"));
+					p.setRol();
 					
 					pacientes.add(p);
 				}

@@ -29,6 +29,7 @@ public class DataNutricionista {
 					n.setApellido(rs.getString("apellido"));
 					n.setEmail(rs.getString("email"));
 					n.setTelefono(rs.getString("telefono"));
+					n.setRol();
 					n = dd.setDireccion(n);
 					n = dh.setHorarios(n);
 					nuts.add(n);
@@ -232,4 +233,45 @@ public class DataNutricionista {
 			}
 		}
 	}
+	
+	public LinkedList<Paciente> getPacientes(Nutricionista n) throws SQLException{  
+		  PreparedStatement stmt = null;
+		  ResultSet rs = null;
+		  LinkedList<Paciente> pacientes = new LinkedList<>();
+		  
+		  try {
+		   stmt = DbConnector.getInstancia().getConn().prepareStatement(
+		     "select pac.dni, pac.nombre, pac.apellido" + 
+		     "from nutricionista_paciente np" + 
+		     "inner join paciente pac" + 
+		     " on np.id_paciente = pac.dni" + 
+		     "where id_nutricionista = ?"
+		     );
+		   stmt.setString(1, (n.getDni()));
+		   rs = stmt.executeQuery();
+		   
+		   if(rs != null) {
+		    while(rs.next()) {
+		     Paciente p = new Paciente();
+		     p.setDni(rs.getString("pac.dni"));
+		     p.setNombre(rs.getString("pac.nombre"));
+		     p.setApellido(rs.getString("pac.apellido"));
+		     pacientes.add(p);
+		    }
+		   }
+		   
+		  } catch (SQLException e) {
+		   throw e;
+		   
+		  } finally {
+		   try {
+		    if(rs != null) {rs.close();}
+		    if(stmt != null) {stmt.close();}
+		    DbConnector.getInstancia().releaseConn();
+		   } catch (SQLException e) {
+		    throw e;
+		   }
+		  }
+		  return pacientes;
+	 }
 }

@@ -1,13 +1,14 @@
 package entidades;
 
-public abstract class Usuario {
+public class Usuario {
+	enum Rol {Nutricionista, Paciente}
 	String dni;
 	String nombre;
 	String apellido;
 	String email;
 	String password;
 	String telefono;
-	
+	Rol rol;
 	public String getDni() {
 		return dni;
 	}
@@ -16,6 +17,9 @@ public abstract class Usuario {
 	}
 	public String getNombre() {
 		return nombre;
+	}
+	public Rol getRol() {
+		return rol;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -43,6 +47,15 @@ public abstract class Usuario {
 	}
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
+	}
+	public void setRol(String r) {
+		if (r.contentEquals("Nutricionista")) {
+			this.rol = Rol.Nutricionista;
+		}
+		else if (r.contentEquals("Paciente")) {
+			this.rol = Rol.Paciente;
+		}
+		
 	}
 	
 	

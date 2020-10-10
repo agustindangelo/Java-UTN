@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entidades.Nutricionista;
+import entidades.Usuario;
 import logic.Login;
 
 /**
@@ -41,7 +42,7 @@ public class SignIn extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Nutricionista nut = new Nutricionista();
+		Usuario usuario = new Usuario();
 		Login ctrl = new Login();
 		
 		String email = request.getParameter("email");
@@ -49,32 +50,22 @@ public class SignIn extends HttpServlet {
 		
 		//validar email y password
 		
-		nut.setEmail(email);
-		nut.setPassword(password);
+		usuario.setEmail(email);
+		usuario.setPassword(password);
 
 		try {
-			nut = ctrl.validate(nut);
+			usuario = ctrl.validate(usuario);
+			request.getRequestDispatcher("nutricionista-main.jsp").forward(request, response);
+			// TODO NO ANDA
 		} catch (SQLException e) {
 			// redirigir a la pagina de error
+			request.getRequestDispatcher("login.html").forward(request, response);
+			//request.getRequestDispatcher("login.html").forward(request, response);;
 			// request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
-			
 		}
 		
 //		para que prueben el acceso a datos:
-		try {
-			LinkedList<Nutricionista> nuts = ctrl.getAll();
-			for(Nutricionista n : nuts) {
-				response.getWriter().append(n.getNombre()).append("---").append(n.getApellido());
-			}
-			if(nuts.isEmpty()) {
-				response.getWriter().append("vacia");
-			}
-			response.getWriter().append(nut.getApellido());
-			
-		} catch (SQLException e){
-			// redirigir a la pagina de error
-			// request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
-		}
+		
 		
 		
 //		

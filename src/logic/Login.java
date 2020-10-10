@@ -7,25 +7,26 @@ import data.*;
 import entidades.*;
 
 public class Login {
-	private DataNutricionista dn;
+	private DataUsuario du;
 	
 	public Login() {
-		dn=new DataNutricionista();
+		du=new DataUsuario();
 	}
 	
-	public Nutricionista validate(Nutricionista nut) throws SQLException{
+	public Usuario validate(Usuario u) throws SQLException{
 		/* para hacer m�s seguro el manejo de passwords este ser�a un lugar 
 		 * adecuado para generar un hash de la password utilizando un cifrado
 		 * asim�trico como sha256 y utilizar el hash en lugar de la password en plano 
 		 */
-		return dn.getByEmailPass(nut);
+		return du.getByEmailPass(u);
 	}
 
-	public LinkedList<Nutricionista> getAll() throws SQLException{ 
-		return dn.getAll();
-	}
-
-	public Nutricionista getByDni(Nutricionista nut) throws SQLException{
-		return dn.getByDni(nut);
-	}
+	/*
+	 * public LinkedList<Usuario> getAll() throws SQLException{ return du.getAll();
+	 * }
+	 */
+//
+//	public Nutricionista getByDni(Nutricionista nut) throws SQLException{
+//		return dn.getByDni(nut);
+//	}
 }

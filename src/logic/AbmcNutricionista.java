@@ -7,6 +7,7 @@ import java.util.LinkedList;
 
 import entidades.Localidad;
 import entidades.Nutricionista;
+import entidades.Paciente;
 public class AbmcNutricionista {
 	private DataNutricionista dn;
 	public AbmcNutricionista() {
@@ -35,5 +36,9 @@ public class AbmcNutricionista {
 	
 	public void remove(Nutricionista nut) throws SQLException{
 		dn.remove(nut);
+	}
+	
+	public LinkedList<Paciente> getPacientes(Nutricionista n) throws SQLException {
+		return dn.getPacientes(n);
 	}
 }

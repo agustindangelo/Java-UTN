@@ -27,4 +27,8 @@ public class Nutricionista extends Usuario {
 		s = s + "\n ----Horarios= " + horarios;
 		return s;
 	}
+	public void setRol()
+	{
+		this.rol = Rol.Nutricionista;
+	}
 }

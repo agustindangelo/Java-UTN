@@ -63,6 +63,10 @@ public class Paciente extends Usuario{
 	public void setObjetivo(String objetivo) {
 		this.objetivo = objetivo;
 	}
+	public void setRol()
+	{
+		this.rol = Rol.Paciente;
+	}
 	
 	@Override
 	public String toString() {
