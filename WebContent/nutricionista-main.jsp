@@ -11,12 +11,12 @@
 	<meta charset="ISO-8859-1">
 	<title>Trabajo practico de Java</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style/styles.css">
     <script src="https://kit.fontawesome.com/d00e7b9ed2.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<script src="script/script.js"></script>
+	<script src="script/scripts.js"></script>
 </head>
 <body class="nutricionista">
 	<div id="wrapper" class="toggled">
@@ -94,6 +94,7 @@
 			</nav>
 
 			<div class="container">
+				<h4>Seleccione un paciente.</h4>
 				<br>
 				<div class="row">
 					<div class="col-md-6">
