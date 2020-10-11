@@ -82,15 +82,15 @@ DROP TABLE IF EXISTS `consumo_paciente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `consumo_paciente` (
-  `id_paciente` varchar(45) NOT NULL,
+  `dni` varchar(45) NOT NULL,
   `id_alimento` int unsigned NOT NULL,
   `fecha` date NOT NULL,
   `tipo` varchar(45) NOT NULL,
   `cantidad` int unsigned NOT NULL,
-  PRIMARY KEY (`id_paciente`,`id_alimento`,`fecha`,`tipo`),
+  PRIMARY KEY (`dni`,`id_alimento`,`fecha`,`tipo`),
   KEY `fk_consumo_alimento_idx` (`id_alimento`),
   CONSTRAINT `fk_consumo_alimento` FOREIGN KEY (`id_alimento`) REFERENCES `alimento` (`id_alimento`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_consumo_paciente` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `fk_consumo_paciente` FOREIGN KEY (`dni`) REFERENCES `paciente` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -112,16 +112,16 @@ DROP TABLE IF EXISTS `direccion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `direccion` (
-  `id_nutricionista` varchar(45) NOT NULL,
+  `dni` varchar(45) NOT NULL,
   `cod_postal` int unsigned NOT NULL,
   `calle` varchar(45) NOT NULL,
   `altura` int unsigned NOT NULL,
   `piso` varchar(45) DEFAULT NULL,
   `depto` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id_nutricionista`,`cod_postal`),
+  PRIMARY KEY (`dni`,`cod_postal`),
   KEY `fk_direccion_localidad_idx` (`cod_postal`),
   CONSTRAINT `fk_direccion_localidad` FOREIGN KEY (`cod_postal`) REFERENCES `localidad` (`cod_postal`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_direccion_nutricionista` FOREIGN KEY (`id_nutricionista`) REFERENCES `nutricionista` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
+  CONSTRAINT `fk_direccion_nutricionista` FOREIGN KEY (`dni`) REFERENCES `nutricionista` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -194,12 +194,12 @@ DROP TABLE IF EXISTS `horario`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `horario` (
-  `id_nutricionista` varchar(45) NOT NULL,
+  `dni` varchar(45) NOT NULL,
   `dia` varchar(45) NOT NULL,
   `hora_desde` time NOT NULL,
   `hora_hasta` time DEFAULT NULL,
-  PRIMARY KEY (`id_nutricionista`,`dia`,`hora_desde`),
-  CONSTRAINT `fk_horario_nutricionista` FOREIGN KEY (`id_nutricionista`) REFERENCES `nutricionista` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
+  PRIMARY KEY (`dni`,`dia`,`hora_desde`),
+  CONSTRAINT `fk_horario_nutricionista` FOREIGN KEY (`dni`) REFERENCES `nutricionista` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -263,7 +263,7 @@ CREATE TABLE `nutricionista` (
 
 LOCK TABLES `nutricionista` WRITE;
 /*!40000 ALTER TABLE `nutricionista` DISABLE KEYS */;
-INSERT INTO `nutricionista` VALUES ('22222221','laura','merlo','laura','341 22313222','laura@gmail.com'),('22222222','martina','moron','martina','341 4134243','martina@gmail.com'),('22222223','juan','mendez','juan','341 5543445','juan@gmail.com');
+INSERT INTO `nutricionista` VALUES ('22222221','Laura','Merlo','laura','341 22313222','laura@gmail.com'),('22222222','Martina','Moron','martina','341 4134243','martina@gmail.com'),('22222223','Juan','Mendez','juan','341 5543445','juan@gmail.com'),('22222224','Paola','Martinez','paola','341 5543445','paola@gmail.com');
 /*!40000 ALTER TABLE `nutricionista` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -275,14 +275,14 @@ DROP TABLE IF EXISTS `nutricionista_paciente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `nutricionista_paciente` (
-  `id_nutricionista` varchar(45) NOT NULL,
-  `id_paciente` varchar(45) NOT NULL,
+  `dni_nutricionista` varchar(45) NOT NULL,
+  `dni_paciente` varchar(45) NOT NULL,
   `fecha` date NOT NULL,
-  PRIMARY KEY (`fecha`,`id_paciente`,`id_nutricionista`),
-  KEY `fk_nutricionista_paciente_2_idx` (`id_paciente`),
-  KEY `fk_nutricionista_paciente_1_idx` (`id_nutricionista`),
-  CONSTRAINT `fk_nutricionista_paciente_1` FOREIGN KEY (`id_nutricionista`) REFERENCES `nutricionista` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_nutricionista_paciente_2` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
+  PRIMARY KEY (`fecha`,`dni_paciente`,`dni_nutricionista`),
+  KEY `fk_nutricionista_paciente_2_idx` (`dni_paciente`),
+  KEY `fk_nutricionista_paciente_1_idx` (`dni_nutricionista`),
+  CONSTRAINT `fk_nutricionista_paciente_1` FOREIGN KEY (`dni_nutricionista`) REFERENCES `nutricionista` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_nutricionista_paciente_2` FOREIGN KEY (`dni_paciente`) REFERENCES `paciente` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -329,7 +329,7 @@ CREATE TABLE `paciente` (
 
 LOCK TABLES `paciente` WRITE;
 /*!40000 ALTER TABLE `paciente` DISABLE KEYS */;
-INSERT INTO `paciente` VALUES ('11111111','agustin','dangelo','agustin@gmail.com','agustin','12313123','masculino','2000-02-24',177,77,20,2000,90,'subir peso'),('11111112','rodrigo','perez','rodrigo@gmail.com','rodrigo','7657567567','masculino','2005-02-24',150,60,15,1800,55,'bajar peso'),('11111113','martin','moreno','martin@gmail.com','martin','556456','masculino','2005-01-30',165,57,12,2150,70,'aumentar masa muscular');
+INSERT INTO `paciente` VALUES ('11111111','Agustin','Dangelo','agustin@gmail.com','agustin','12313123','Masculino','2000-02-24',177,77,20,2000,90,'subir peso'),('11111112','Rodrigo','Perez','rodrigo@gmail.com','rodrigo','7657567567','Masculino','2005-02-24',150,60,15,1800,55,'bajar peso'),('11111113','Martin','Moreno','martin@gmail.com','martin','556456','Masculino','2005-01-30',165,57,12,2150,70,'aumentar masa muscular'),('11111114','Lucas','Laganar','llaganar@gmail.com','llaganar','7657567567','Masculino','1990-05-15',175,100,20,1850,75,'bajar peso'),('11111115','Carlos','Pinera','cpinera@gmail.com','carlos','7123567567','Masculino','1994-10-10',180,95,14,1700,85,'bajar peso'),('11111116','Ignacio','Perra','iperra@gmail.com','ignacio','7657561478','Masculino','1996-01-20',198,85,16,1700,80,'aumentar masa muscular'),('11111117','Daniela','Meyano','dmeyano@gmail.com','daniela','9657567567','Femenino','1998-07-21',152,55,15,1600,60,'subir peso'),('11111118','Maite','Aguilar','maguilar@gmail.com','maite','7657545647','Femenino','1997-08-07',151,72,14,1680,55,'bajar peso'),('11111119','Franco','Sillo','fsillo@gmail.com','franco','7534567567','Masculino','1993-05-11',182,89,15,1800,80,'bajar colesterol'),('11111120','Gimena','Morro','gmorro@gmail.com','gimena','7159867567','Femenino','1995-10-08',149,55,18,1900,57,'tonificar figura'),('11111121','Sergio','Oliveti','soliveti@gmail.com','sergio','3654567567','Masculino','1993-04-23',179,85,20,1950,75,'prevenir diabetes'),('11111122','Leandrina','Gonzalez','lgonzalez@gmail.com','leandrina','1937567567','Femenino','1990-03-04',172,105,20,1700,80,'prevenir enfermedades cardiovasculares'),('11111123','Giuliana','Pelaez','gpelaez@gmail.com','giuliana','1894567567','Femenino','1980-02-15',145,65,15,1800,60,'prevenir cancer'),('11111124','Gabriela','Campanu','gcampanu@gmail.com','gabriela','7685557567','Femenino','1985-05-29',173,80,20,1600,70,'bajar colesterol'),('11111125','Agustina','Bogado','abogado@gmail.com','agustina','1237567567','Femenino','2000-01-24',150,45,10,1850,60,'subir peso'),('11111126','Facundo','Toretto','ftoretto@gmail.com','facundo','7616547567','Masculino','2003-09-23',140,50,20,1900,60,'subir peso'),('11111127','Ramiro','Sarmiento','rsarmiento@gmail.com','ramiro','6565567567','Masculino','2010-05-09',140,90,10,1600,60,'bajar peso'),('11111128','Lautaro','Dibaggio','ldibaggio@gmail.com','lautaro','6588567567','Masculino','2001-12-31',180,90,20,1900,85,'prevenir enfermedades cardiovasculares'),('11111129','Soledad','Iucula','siucula@gmail.com','soledad','6565596367','Femenino','2000-05-20',150,80,15,1900,60,'bajar peso'),('11111130','Joaquin','Draculini','jdraculini@gmail.com','joaquin','6565596367','Masculino','2015-03-06',100,60,20,1800,50,'prevenir diabetes'),('11111131','Soledad','Iucula','siucula@gmail.com','soledad','6565596367','Femenino','2000-05-20',150,80,15,1900,60,'bajar peso');
 /*!40000 ALTER TABLE `paciente` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -341,14 +341,14 @@ DROP TABLE IF EXISTS `paciente_ejercicio`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `paciente_ejercicio` (
-  `id_paciente` varchar(45) NOT NULL,
+  `dni_paciente` varchar(45) NOT NULL,
   `id_ejercicio` int unsigned NOT NULL,
   `fecha` date NOT NULL,
   `duracion` int NOT NULL,
   `intensidad` varchar(45) NOT NULL,
-  PRIMARY KEY (`id_paciente`,`id_ejercicio`,`fecha`),
+  PRIMARY KEY (`dni_paciente`,`id_ejercicio`,`fecha`),
   KEY `fk_paciente_ejercicio_2_idx` (`id_ejercicio`),
-  CONSTRAINT `fk_paciente_ejercicio_1` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_paciente_ejercicio_1` FOREIGN KEY (`dni_paciente`) REFERENCES `paciente` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_paciente_ejercicio_2` FOREIGN KEY (`id_ejercicio`) REFERENCES `ejercicio` (`id_ejercicio`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -371,12 +371,12 @@ DROP TABLE IF EXISTS `paciente_estado_animo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `paciente_estado_animo` (
-  `id_paciente` varchar(45) NOT NULL,
+  `dni` varchar(45) NOT NULL,
   `id_estado_animo` int unsigned NOT NULL,
   `fecha` date NOT NULL,
-  PRIMARY KEY (`id_paciente`,`id_estado_animo`,`fecha`),
+  PRIMARY KEY (`dni`,`id_estado_animo`,`fecha`),
   KEY `fk_paciente_estado_animo_2_idx` (`id_estado_animo`),
-  CONSTRAINT `fk_paciente_estado_animo_1` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_paciente_estado_animo_1` FOREIGN KEY (`dni`) REFERENCES `paciente` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `fk_paciente_estado_animo_2` FOREIGN KEY (`id_estado_animo`) REFERENCES `estado_animo` (`id_estado_animo`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -401,14 +401,14 @@ DROP TABLE IF EXISTS `plan`;
 CREATE TABLE `plan` (
   `id_plan` int unsigned NOT NULL AUTO_INCREMENT,
   `fecha_desde` date NOT NULL,
-  `id_paciente` varchar(45) NOT NULL,
-  `id_nutricionista` varchar(45) NOT NULL,
+  `dni_paciente` varchar(45) NOT NULL,
+  `dni_nutricionista` varchar(45) NOT NULL,
   PRIMARY KEY (`id_plan`),
   UNIQUE KEY `id_plan_UNIQUE` (`id_plan`),
-  KEY `fk_plan_paciente_idx` (`id_paciente`),
-  KEY `fk_plan_nutricionista_idx` (`id_nutricionista`),
-  CONSTRAINT `fk_plan_nutricionista` FOREIGN KEY (`id_nutricionista`) REFERENCES `nutricionista` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_plan_paciente` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
+  KEY `fk_plan_paciente_idx` (`dni_paciente`),
+  KEY `fk_plan_nutricionista_idx` (`dni_nutricionista`),
+  CONSTRAINT `fk_plan_nutricionista` FOREIGN KEY (`dni_nutricionista`) REFERENCES `nutricionista` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_plan_paciente` FOREIGN KEY (`dni_paciente`) REFERENCES `paciente` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -458,13 +458,13 @@ DROP TABLE IF EXISTS `solicitud`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `solicitud` (
-  `id_paciente` varchar(45) NOT NULL,
-  `id_nutricionista` varchar(45) NOT NULL,
+  `dni_paciente` varchar(45) NOT NULL,
+  `dni_nutricionista` varchar(45) NOT NULL,
   `estado` varchar(45) DEFAULT 'Pendiente',
-  PRIMARY KEY (`id_paciente`,`id_nutricionista`),
-  KEY `fk_solicitud_nutricionista_idx` (`id_nutricionista`),
-  CONSTRAINT `fk_solicitud_nutricionista` FOREIGN KEY (`id_nutricionista`) REFERENCES `nutricionista` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_solicitud_paciente` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
+  PRIMARY KEY (`dni_paciente`,`dni_nutricionista`),
+  KEY `fk_solicitud_nutricionista_idx` (`dni_nutricionista`),
+  CONSTRAINT `fk_solicitud_nutricionista` FOREIGN KEY (`dni_nutricionista`) REFERENCES `nutricionista` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `fk_solicitud_paciente` FOREIGN KEY (`dni_paciente`) REFERENCES `paciente` (`dni`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
