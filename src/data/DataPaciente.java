@@ -58,4 +58,36 @@ public class DataPaciente {
 		
 		return pacientes;
 	}
+	
+	public Usuario getByEmailPass(Usuario u) throws SQLException{
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Usuario p = new Usuario();
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"select dni,nombre,apellido,email from paciente where email = ? and password = ?;"
+					);
+			stmt.setString(1, u.getEmail());
+			stmt.setString(2, u.getPassword());
+			rs = stmt.executeQuery();
+			if(rs != null && rs.next()) {
+				p.setDni(rs.getString("dni"));
+				p.setApellido(rs.getString("apellido"));
+				p.setNombre(rs.getString("nombre"));
+				p.setEmail(rs.getString("email"));
+				p.setRol("Paciente");
+			}
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+		return p;
+	}
 }

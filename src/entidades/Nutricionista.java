@@ -4,6 +4,19 @@ import java.util.ArrayList;
 public class Nutricionista extends Usuario {
 	ArrayList<Horario> horarios;
 	Direccion direccion;
+	
+	public Nutricionista() {
+		
+	}
+	
+	public Nutricionista(Usuario u) {
+		this.dni = u.getDni();
+		this.apellido = u.getApellido();
+		this.nombre = u.getNombre();
+		this.email = u.getEmail();
+		this.telefono = u.getTelefono();
+		this.password = u.getPassword();
+	}
 
 	public Direccion getDireccion() {
 		return direccion;

@@ -1,5 +1,5 @@
 <%@page import="java.util.LinkedList"%>
-<%@page import="entidades.Nutricionista"%>
+<%@page import="entidades.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -22,7 +22,7 @@
     <link href="style/start.css" rel="stylesheet">
 	
 	<%
-		Nutricionista nut = (Nutricionista)session.getAttribute("usuario");
+		Usuario u = (Usuario)session.getAttribute("usuario");
 	%>
 	
 </head>
@@ -30,7 +30,7 @@
 	<div class="container">
 		<div class="row">
         	<div class="col">
-       			<p>Buen día <%= nut.getNombre()%>  <%= nut.getApellido()%></p>
+       			<p>Buen día <%= u.getRol() %> <%= u.getNombre()%>  <%= u.getApellido()%></p>
         	</div>
 		</div>		
 	</div> <!-- /container -->

@@ -1,7 +1,7 @@
 package entidades;
 
 public class Usuario {
-	enum Rol {Nutricionista, Paciente}
+	public enum Rol {Nutricionista, Paciente}
 	String dni;
 	String nombre;
 	String apellido;
@@ -55,8 +55,6 @@ public class Usuario {
 		else if (r.contentEquals("Paciente")) {
 			this.rol = Rol.Paciente;
 		}
-		
 	}
-	
 	
 }

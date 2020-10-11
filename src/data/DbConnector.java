@@ -2,6 +2,8 @@ package data;
 
 import java.sql.*;
 
+import exceptions.ClosedDBException;
+
 public class DbConnector {
 
 	private static DbConnector instancia;
@@ -43,15 +45,16 @@ public class DbConnector {
 		return conn;
 	}
 	
-	public void releaseConn() throws SQLException{
+	public void releaseConn() throws SQLException, ClosedDBException{
 		conectados--;
 		try {
 			if (conectados<=0) {
 				conn.close();
 			}
+		} catch (NullPointerException e) {
+			throw new ClosedDBException("La base de datos está cerrada");
 		} catch (SQLException e) {
 			throw e;
 		}
 	}
-
 }

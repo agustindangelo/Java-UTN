@@ -3,6 +3,7 @@ package logic;
 import data.DataNutricionista;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import entidades.Localidad;
@@ -12,8 +13,7 @@ public class AbmcNutricionista {
 	private DataNutricionista dn;
 	public AbmcNutricionista() {
 		dn = new DataNutricionista();
-	}
-	
+	}	
 	public LinkedList<Nutricionista> getAll() throws SQLException{
 		return dn.getAll();
 	}
@@ -38,7 +38,11 @@ public class AbmcNutricionista {
 		dn.remove(nut);
 	}
 	
-	public LinkedList<Paciente> getPacientes(Nutricionista n) throws SQLException {
+	public ArrayList<Paciente> getPacientes(Nutricionista n) throws SQLException {
 		return dn.getPacientes(n);
+	}
+
+	public ArrayList<Paciente> getSolicitudes(Nutricionista n) throws SQLException {
+		return dn.getSolicitudes(n);
 	}
 }

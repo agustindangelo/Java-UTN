@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=utf8"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="entidades.Paciente"%>
 <%@ page import="java.util.LinkedList"%>

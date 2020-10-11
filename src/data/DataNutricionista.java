@@ -2,6 +2,7 @@ package data;
 import entidades.*;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class DataNutricionista {
@@ -81,26 +82,23 @@ public class DataNutricionista {
 		}
 		return nut;
 	}
-	public Nutricionista getByEmailPass(Nutricionista nut) throws SQLException{
+	public Usuario getByEmailPass(Usuario u) throws SQLException{
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		Nutricionista n = new Nutricionista();
+		Usuario n = new Usuario();
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select dni,nombre,apellido,email,telefono from nutricionista where email = ? and password = ?;"
+					"select dni,nombre,apellido,email from nutricionista where email = ? and password = ?;"
 					);
-			stmt.setString(1, nut.getEmail());
-			stmt.setString(2, nut.getPassword());
+			stmt.setString(1, u.getEmail());
+			stmt.setString(2, u.getPassword());
 			rs = stmt.executeQuery();
 			if(rs != null && rs.next()) {
-				n = new Nutricionista();
 				n.setDni(rs.getString("dni"));
 				n.setApellido(rs.getString("apellido"));
 				n.setNombre(rs.getString("nombre"));
 				n.setEmail(rs.getString("email"));
-				n.setTelefono(rs.getString("telefono"));
-//				n = dd.setDireccion(nut);
-//				n = dh.setHorarios(nut);
+				n.setRol("Nutricionista");
 			}
 		} catch (SQLException e) {
 			throw e;
@@ -234,44 +232,81 @@ public class DataNutricionista {
 		}
 	}
 	
-	public LinkedList<Paciente> getPacientes(Nutricionista n) throws SQLException{  
-		  PreparedStatement stmt = null;
-		  ResultSet rs = null;
-		  LinkedList<Paciente> pacientes = new LinkedList<>();
+	public ArrayList<Paciente> getPacientes(Nutricionista n) throws SQLException{  
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		ArrayList<Paciente> pacientes = new ArrayList<>();
 		  
-		  try {
-		   stmt = DbConnector.getInstancia().getConn().prepareStatement(
-		     "select pac.dni, pac.nombre, pac.apellido" + 
-		     "from nutricionista_paciente np" + 
-		     "inner join paciente pac" + 
-		     " on np.id_paciente = pac.dni" + 
-		     "where id_nutricionista = ?"
+	    try {
+	    	stmt = DbConnector.getInstancia().getConn().prepareStatement(
+			     "select p.dni, p.nombre, p.apellido\n" + 
+			     "from nutricionista_paciente np\n" + 
+			     "inner join paciente p\n" + 
+			     " on np.id_paciente = p.dni\n" + 
+			     "where id_nutricionista = ?"
 		     );
-		   stmt.setString(1, (n.getDni()));
-		   rs = stmt.executeQuery();
-		   
-		   if(rs != null) {
-		    while(rs.next()) {
-		     Paciente p = new Paciente();
-		     p.setDni(rs.getString("pac.dni"));
-		     p.setNombre(rs.getString("pac.nombre"));
-		     p.setApellido(rs.getString("pac.apellido"));
-		     pacientes.add(p);
-		    }
-		   }
-		   
-		  } catch (SQLException e) {
-		   throw e;
-		   
-		  } finally {
-		   try {
-		    if(rs != null) {rs.close();}
-		    if(stmt != null) {stmt.close();}
-		    DbConnector.getInstancia().releaseConn();
-		   } catch (SQLException e) {
-		    throw e;
-		   }
-		  }
-		  return pacientes;
-	 }
+	    	stmt.setString(1, (n.getDni()));
+		    rs = stmt.executeQuery();
+		 
+		    if(rs != null) {
+		       while(rs.next()) {
+		    	   	 Paciente p = new Paciente();
+				     p.setDni(rs.getString("pac.dni"));
+				     p.setNombre(rs.getString("pac.nombre"));
+				     p.setApellido(rs.getString("pac.apellido"));
+				     pacientes.add(p);
+			   }
+		    }  
+		} catch (SQLException e) {
+			throw e;	   
+		} finally {
+		    try {
+				if(rs != null) {rs.close();}
+				if(stmt != null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+		return pacientes;
+	}
+	
+	public ArrayList<Paciente> getSolicitudes(Nutricionista n) throws SQLException{  
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		ArrayList<Paciente> pacientes = new ArrayList<>();
+		  
+	    try {
+	    	stmt = DbConnector.getInstancia().getConn().prepareStatement(
+	    		"select p.dni, p.nombre, p.apellido\n" + 
+	    		"from solicitud s\n" + 
+	    		"inner join paciente p\n" + 
+	    		"	on p.dni = s.id_paciente\n" + 
+	    		"where s.id_nutricionista = ?"
+		     );
+	    	stmt.setString(1, (n.getDni()));
+		    rs = stmt.executeQuery();
+		 
+		    if(rs != null) {
+		       while(rs.next()) {
+		    	   	 Paciente p = new Paciente();
+				     p.setDni(rs.getString("p.dni"));
+				     p.setNombre(rs.getString("p.nombre"));
+				     p.setApellido(rs.getString("p.apellido"));
+				     pacientes.add(p);
+			   }
+		    }  
+		} catch (SQLException e) {
+			throw e;	   
+		} finally {
+		    try {
+				if(rs != null) {rs.close();}
+				if(stmt != null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+		return pacientes;
+	}
 }

@@ -15,6 +15,19 @@ public class Paciente extends Usuario{
 	int metabolismoBasal;
 	float pesoObjetivo;
 	String objetivo;
+	
+	public Paciente() {
+	}
+	
+	public Paciente(Usuario u) {
+		this.dni = u.getDni();
+		this.apellido = u.getApellido();
+		this.nombre = u.getNombre();
+		this.email = u.getEmail();
+		this.telefono = u.getTelefono();
+		this.password = u.getPassword();
+	}
+	
 	public TipoGenero getGenero() {
 		return genero;
 	}

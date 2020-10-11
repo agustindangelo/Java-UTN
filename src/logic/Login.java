@@ -1,16 +1,17 @@
 package logic;
 
 import java.sql.SQLException;
-import java.util.LinkedList;
 
 import data.*;
 import entidades.*;
 
 public class Login {
-	private DataUsuario du;
+	private DataNutricionista dn;
+	private DataPaciente dp;
 	
 	public Login() {
-		du=new DataUsuario();
+		dn = new DataNutricionista();
+		dp = new DataPaciente();
 	}
 	
 	public Usuario validate(Usuario u) throws SQLException{
@@ -18,15 +19,12 @@ public class Login {
 		 * adecuado para generar un hash de la password utilizando un cifrado
 		 * asim�trico como sha256 y utilizar el hash en lugar de la password en plano 
 		 */
-		return du.getByEmailPass(u);
+		Usuario usuario;
+		usuario = dn.getByEmailPass(u);
+		if (usuario.getDni() == null) {
+			usuario = dp.getByEmailPass(u);
+		}
+		return usuario;
 	}
 
-	/*
-	 * public LinkedList<Usuario> getAll() throws SQLException{ return du.getAll();
-	 * }
-	 */
-//
-//	public Nutricionista getByDni(Nutricionista nut) throws SQLException{
-//		return dn.getByDni(nut);
-//	}
 }
