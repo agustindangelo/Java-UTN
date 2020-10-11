@@ -239,7 +239,7 @@ public class DataNutricionista {
 		  
 	    try {
 	    	stmt = DbConnector.getInstancia().getConn().prepareStatement(
-			     "select p.dni, p.nombre, p.apellido\n" + 
+			     "select distinct p.dni, p.nombre, p.apellido\n" + 
 			     "from nutricionista_paciente np\n" + 
 			     "inner join paciente p\n" + 
 			     " on np.id_paciente = p.dni\n" + 
@@ -251,9 +251,9 @@ public class DataNutricionista {
 		    if(rs != null) {
 		       while(rs.next()) {
 		    	   	 Paciente p = new Paciente();
-				     p.setDni(rs.getString("pac.dni"));
-				     p.setNombre(rs.getString("pac.nombre"));
-				     p.setApellido(rs.getString("pac.apellido"));
+				     p.setDni(rs.getString("p.dni"));
+				     p.setNombre(rs.getString("p.nombre"));
+				     p.setApellido(rs.getString("p.apellido"));
 				     pacientes.add(p);
 			   }
 		    }  

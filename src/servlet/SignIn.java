@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entidades.Nutricionista;
 import entidades.Usuario;
 import entidades.Usuario.Rol;
 import exceptions.ClosedDBException;
@@ -42,10 +43,15 @@ public class SignIn extends HttpServlet {
 		try {
 			u = ctrl.validate(usuario);
 			if (u != null) {
-				session.setAttribute("usuario", u);
+				
 //				request.getRequestDispatcher("WEB-INF/UserManagement.jsp").forward(request, response);
 				if (u.getRol() == Rol.Nutricionista) {
-					
+					Nutricionista n = new Nutricionista();
+					n.setDni(u.getDni());
+					n.setApellido(u.getApellido());
+					n.setNombre(u.getNombre());
+					session.setAttribute("usuario", n);
+					request.getRequestDispatcher("nutricionista-main.jsp").forward(request, response);
 				} else {
 					
 				}

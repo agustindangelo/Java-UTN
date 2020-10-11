@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf8"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="entidades.Paciente"%>
-<%@ page import="java.util.LinkedList"%>
+<%@ page import="entidades.Nutricionista"%>
+<%@ page import="entidades.Usuario"%>
+<%@ page import="java.util.ArrayList"%>
 <%@ page import="data.DataNutricionista"%>
 <!DOCTYPE html>
 <html>
@@ -14,6 +16,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="script/script.js"></script>
 </head>
 <body class="nutricionista">
 	<div id="wrapper" class="toggled">
@@ -47,15 +50,22 @@
 				</div>
 				<input class="form-control" type="text" id="pacienteSearch" onkeyup="filtrarPacientes()" placeholder="Buscar..." title="Mis pacientes">
 				<ul class="list-group list-group-flush sidenav-menu" id="pacienteMenu">
-				<%
-					LinkedList<Paciente> pacientes = new LinkedList<Paciente>();
-					DataNutricionista dn = new DataNutricionista();
-					for (Paciente p : pacientes)
-					{
-						
-					}
-					// <li class="list-group-item"><a href="#">Carlos Juarez</a></li>
-				%>
+					<%
+						ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
+						DataNutricionista dn = new DataNutricionista();
+						Nutricionista n = (Nutricionista)session.getAttribute("usuario");
+						pacientes = dn.getPacientes(n);
+						// <li class="list-group-item"><a href="#">Carlos Juarez</a></li>
+					%>
+					<li class="list-group-item">
+						<a href="#">
+							<% for (Paciente p : pacientes)
+							{
+								out.println(p.getNombre() + " " + p.getApellido());
+							}
+			          		%>
+		          		</a>
+			         </li>
 				</ul>				
 			</ul>
 		</div> 
