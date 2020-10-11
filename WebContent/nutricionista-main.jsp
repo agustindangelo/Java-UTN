@@ -57,15 +57,13 @@
 						pacientes = dn.getPacientes(n);
 						// <li class="list-group-item"><a href="#">Carlos Juarez</a></li>
 					%>
-					<li class="list-group-item">
-						<a href="#">
-							<% for (Paciente p : pacientes)
-							{
-								out.println(p.getNombre() + " " + p.getApellido());
-							}
-			          		%>
-		          		</a>
-			         </li>
+					<% for (Paciente p : pacientes) { %>
+						<li class="list-group-item">
+							<a href="#">
+								<%= p.getApellido() + " " + p.getNombre() %>
+			          		</a>
+				        </li>
+			        <%}%>
 				</ul>				
 			</ul>
 		</div> 
