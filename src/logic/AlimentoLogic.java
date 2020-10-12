@@ -12,11 +12,11 @@ public class AlimentoLogic {
 		da = new DataAlimento();
 	}
 	
-	public LinkedList<Alimento> GetAll() throws SQLException{
-		return da.GetAll();
+	public LinkedList<Alimento> getAll() throws SQLException{
+		return da.getAll();
 	}
 	
-	public Alimento GetOne(int id) throws SQLException{
-		return da.GetOne(id);
+	public Alimento getOne(int id) throws SQLException{
+		return da.getOne(id);
 	}
 }

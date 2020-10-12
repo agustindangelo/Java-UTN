@@ -242,8 +242,8 @@ public class DataNutricionista {
 			     "select distinct p.dni, p.nombre, p.apellido\n" + 
 			     "from nutricionista_paciente np\n" + 
 			     "inner join paciente p\n" + 
-			     " on np.id_paciente = p.dni\n" + 
-			     "where id_nutricionista = ?"
+			     " on np.dni_paciente = p.dni\n" + 
+			     "where dni_nutricionista = ?"
 		     );
 	    	stmt.setString(1, (n.getDni()));
 		    rs = stmt.executeQuery();
