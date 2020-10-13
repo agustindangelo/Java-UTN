@@ -11,8 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import entidades.Paciente;
 import entidades.Usuario;
-import logic.Logic;
+import logic.AbmcPaciente;
 
 /**
  * Servlet implementation class PacienteInfo
@@ -33,8 +34,8 @@ public class PacienteInfo extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    Logic ctrl = new Logic();
-        Usuario u = null;
+		AbmcPaciente ctrl = new AbmcPaciente();
+        Usuario u = new Usuario();
 //    	LinkedList<Paciente> pacientes = new LinkedList<>();
 //		try {
 //			pacientes = ctrl.getAll();
@@ -43,18 +44,26 @@ public class PacienteInfo extends HttpServlet {
 //			e.printStackTrace();
 //		}
         
-        String dni = request.getParameter("dni");
+        u.setDni(request.getParameter("dni"));
+        Paciente p = new Paciente();
         try {
-        	u = ctrl.getByDni(dni);
+        	p = ctrl.getByDni(u);
         } catch (SQLException e) {
         	e.printStackTrace();
         }
         
-        String json = new Gson().toJson(u);
-
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
+        if (p != null) {
+            try {
+                String json = new Gson().toJson(p);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+    			response.getWriter().write(json);
+            } catch (Exception e){
+            	e.printStackTrace();
+            }
+         
+        }
+        
 	}
 
 	/**
@@ -64,5 +73,4 @@ public class PacienteInfo extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

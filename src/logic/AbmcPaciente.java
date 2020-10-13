@@ -2,8 +2,10 @@ package logic;
 
 import data.DataPaciente;
 import entidades.Alimento;
+import entidades.Ejercicio;
 import entidades.Ingesta;
 import entidades.Paciente;
+import entidades.Usuario;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -71,7 +73,14 @@ public class AbmcPaciente {
 		return (float) (calorias / 7);
 	}
 	
-	public Paciente getPaciente(Usuario u) throws SQLException{
-		return dp.getPaciente(u);
+	public Float calcularKcalEjercicioSemana(Paciente p) throws SQLException{
+		LinkedList<Ejercicio> ejercicios = dp.getEjercicioSemana(p);
+		int acum = 0;
+		for (Ejercicio e : ejercicios) {
+			
+		}
+	}
+	public Paciente getByDni(Usuario u) throws SQLException{
+		return dp.getByDni(u);
 	}
 }

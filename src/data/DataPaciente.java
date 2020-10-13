@@ -11,19 +11,24 @@ import entidades.Usuario;
 public class DataPaciente {
 	DataAlimento da = new DataAlimento();
 	
-	public Paciente getPaciente(Usuario u) throws SQLException {
+	public Paciente getByDni(Usuario u) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Paciente p = new Paciente(u);
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select genero, fecha_nacimiento, altura, peso, imc, metabolismo_basal, peso_objetivo, objetivo\n" + 
+					"select nombre, apellido, email, telefono, " +
+					"genero, fecha_nacimiento, altura, peso, imc, metabolismo_basal, peso_objetivo, objetivo\n" + 
 					"from paciente\n" + 
 					"where dni = ?"
 					);
 			stmt.setString(1, u.getDni());
 			rs = stmt.executeQuery();
 			if(rs != null && rs.next()) {
+				p.setNombre(rs.getString("nombre"));
+				p.setApellido(rs.getString("apellido"));
+				p.setEmail(rs.getString("email"));
+				p.setTelefono(rs.getString("telefono"));
 				p.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
 				p.setAltura(rs.getInt("altura"));
 				p.setPeso(rs.getInt("peso"));

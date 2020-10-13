@@ -50,8 +50,8 @@ public class SignIn extends HttpServlet {
 					n.setDni(u.getDni());
 					n.setApellido(u.getApellido());
 					n.setNombre(u.getNombre());
-					session.setAttribute("usuario", n);
-					request.getRequestDispatcher("nutricionista-main.jsp").forward(request, response);
+					session.setAttribute("nutricionista", n);
+					request.getRequestDispatcher("nutricionista-main2.jsp").forward(request, response);
 				} else {
 					
 				}

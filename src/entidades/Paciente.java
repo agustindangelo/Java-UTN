@@ -15,7 +15,25 @@ public class Paciente extends Usuario{
 	int metabolismoBasal;
 	float pesoObjetivo;
 	String objetivo;
+	int kcalEjercicioSemana; // kcal quemadas con ejercicios hechos en los ultimos 7 dias
+	int kcalEjercicioObjetivo; // kcal quemadas por semana, sugeridas por el nutricionista
 	
+	public int getKcalEjercicioSemana() {
+		return kcalEjercicioSemana;
+	}
+
+	public void setKcalEjercicioSemana(int kcalEjercicioSemana) {
+		this.kcalEjercicioSemana = kcalEjercicioSemana;
+	}
+
+	public int getKcalEjercicioObjetivo() {
+		return kcalEjercicioObjetivo;
+	}
+
+	public void setKcalEjercicioObjetivo(int kcalEjercicioObjetivo) {
+		this.kcalEjercicioObjetivo = kcalEjercicioObjetivo;
+	}
+
 	public Paciente() {
 	}
 	
