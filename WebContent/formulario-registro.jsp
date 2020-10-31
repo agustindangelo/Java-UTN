@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body class="paciente">
     <div class="container-fluid">
@@ -17,7 +18,7 @@
                 <h1>Registrarse</h1>
                 <div class="card form-sheet col">
                     <div class="card-body">
-                        <form>
+                        <form action="Registrar" method="post">
                             <div class="btn-group w-100" role="group">
                             	<%
                             	boolean esNutricionista = false;

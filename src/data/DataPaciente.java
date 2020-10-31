@@ -11,6 +11,31 @@ import entidades.Usuario;
 public class DataPaciente {
 	DataAlimento da = new DataAlimento();
 	
+	public void registrarPaciente(Paciente p) throws SQLException {
+		PreparedStatement stmt = null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"insert into paciente (dni, nombre, apellido, email, `password`, telefono) values (?,?,?,?,?,?)"
+					);
+			stmt.setString(1, p.getDni());
+			stmt.setString(2, p.getNombre());
+			stmt.setString(3, p.getApellido());
+			stmt.setString(4, p.getEmail());
+			stmt.setString(5, p.getPassword());
+			stmt.setString(6, p.getTelefono());
+			stmt.execute();
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+	}
+	
 	public Paciente getByDni(Usuario u) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;

@@ -17,6 +17,10 @@ public class AbmcPaciente {
 		dp = new DataPaciente();
 	}
 	
+	public void registrarPaciente(Paciente p) throws SQLException {
+		dp.registrarPaciente(p);
+	}
+	
 	public Map<String, Integer>  calcularIngestasHoy(Paciente p) throws SQLException{
 		Map<String, Integer> valores = new HashMap<>();
 		LinkedList<Ingesta> ingestas = dp.getIngestasHoy(p);
