@@ -10,6 +10,31 @@ public class DataNutricionista {
 	DataHorario dh = new DataHorario();
 	DataDireccion dd = new DataDireccion();
 	
+	public void registrarNutricionista(Nutricionista n) throws SQLException {
+		PreparedStatement stmt = null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"insert into nutricionista (dni, nombre, apellido, email, `password`, telefono) values (?,?,?,?,?,?)"
+					);
+			stmt.setString(1, n.getDni());
+			stmt.setString(2, n.getNombre());
+			stmt.setString(3, n.getApellido());
+			stmt.setString(4, n.getEmail());
+			stmt.setString(5, n.getPassword());
+			stmt.setString(6, n.getTelefono());
+			stmt.execute();
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+	}
+	
 	public LinkedList<Nutricionista> getAll() throws SQLException{
 		Statement stmt = null;
 		ResultSet rs = null;

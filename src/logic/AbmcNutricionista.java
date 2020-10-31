@@ -14,6 +14,11 @@ public class AbmcNutricionista {
 	public AbmcNutricionista() {
 		dn = new DataNutricionista();
 	}	
+	
+	public void registrarNutricionista(Nutricionista n) throws SQLException {
+		dn.registrarNutricionista(n);
+	}
+	
 	public LinkedList<Nutricionista> getAll() throws SQLException{
 		return dn.getAll();
 	}
