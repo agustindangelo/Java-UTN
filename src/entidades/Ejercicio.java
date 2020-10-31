@@ -4,7 +4,7 @@ public class Ejercicio {
 	int codigo;
 	String nombre;
 	int duracion; // duración en minutos del ejercicio realizado
-	float gastoEnergético; // es el gasto en kcal de una hora de realizar el ejercicio a intensidad moderada. (gasto_energetico en la bd)
+	float gastoEnergetico; // es el gasto en kcal de una hora de realizar el ejercicio a intensidad moderada. (gasto_energetico en la bd)
 	float gastoEfectivo; // atributo calculado a partir de la duracion y el gastoEnergético del ejercicio.
 	public enum Intensidad{				
 		Alta,
@@ -29,11 +29,11 @@ public class Ejercicio {
 	public void setDuracion(int duracion) {
 		this.duracion = duracion;
 	}
-	public float getGastoEnergético() {
-		return gastoEnergético;
+	public float getGastoEnergetico() {
+		return gastoEnergetico;
 	}
-	public void setGastoEnergético(float gastoEnergético) {
-		this.gastoEnergético = gastoEnergético;
+	public void setGastoEnergetico(float gastoEnergetico) {
+		this.gastoEnergetico = gastoEnergetico;
 	}
 	public float getGastoEfectivo() {
 		return gastoEfectivo;
@@ -41,4 +41,13 @@ public class Ejercicio {
 	public void setGastoEfectivo(float gastoEfectivo) {
 		this.gastoEfectivo = gastoEfectivo;
 	}
+	
+	@Override
+	public String toString() {
+		String s = "\nEjercicio [codigo= " + codigo + ", nombre= " + nombre + ", Gasto energetico= " + gastoEnergetico +"] ";
+		return s;
+	}
+	
 }
+
+
