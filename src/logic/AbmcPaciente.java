@@ -20,6 +20,9 @@ public class AbmcPaciente {
 	public void registrarPaciente(Paciente p) throws SQLException {
 		dp.registrarPaciente(p);
 	}
+	public void modificarDatosPaciente(Paciente p) throws SQLException{
+		dp.modificarDatosPaciente(Paciente p);
+	}
 	
 	public Map<String, Integer>  calcularIngestasHoy(Paciente p) throws SQLException{
 		Map<String, Integer> valores = new HashMap<>();

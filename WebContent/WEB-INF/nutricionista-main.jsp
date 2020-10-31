@@ -17,6 +17,45 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="script/scripts.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script>
+	        $(function() {	       
+	        	   $("#pacienteMenu li").not('.emptyMessage').click(function() {
+	        		   document.getElementById("seleccionePacienteMsj").style.display = "none";
+        	           var dni = this.id;
+        	           callServlet(dni);
+	        	   });
+	        	});
+	        
+	        function callServlet(dni){
+	            $.ajax({
+	                type: "GET",
+	                url: "pacienteinfo",                
+	                dataType: "json",
+	                data: {"dni" : dni},
+	                success: function(paciente){
+	                    if(paciente){
+	                    	document.getElementById("panel").style.display = "block";
+	                    	
+	                        $('#nombreApellido').append(paciente.nombre + ' ' + paciente.apellido);
+	                        $('#email').append(paciente.email);
+	                        $('#telefono').append(paciente.telefono);
+	                        $('#imc').append(paciente.imc);
+	                        $('#metabolismoBasal').append(paciente.metabolismoBasal + '   kcal/dia');
+	                        
+	                        $('#pesoActual').append(paciente.peso + ' kg.');
+	                        $('#pesoObjetivo').append(paciente.pesoObjetivo + ' kg.');
+	                        $('#ejercicioSemana').append(paciente.kcalEjercicioSemana + ' kcal.');
+	                        $('#ejercicioObjetivo').append(paciente.kcalEjercicioObjetivo + ' kcal.');
+	                    }
+	                },
+	                error:function(){
+	                    alert('not worked.');
+	                } 
+
+	            })       
+	        };
+        </script>
 </head>
 <body class="nutricionista">
 	<div id="wrapper" class="toggled">
@@ -53,12 +92,12 @@
 					<%
 						ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
 						DataNutricionista dn = new DataNutricionista();
-						Nutricionista n = (Nutricionista)session.getAttribute("usuario");
+						Nutricionista n = (Nutricionista)session.getAttribute("nutricionista");
 						pacientes = dn.getPacientes(n);
 						// <li class="list-group-item"><a href="#">Carlos Juarez</a></li>
 					%>
 					<% for (Paciente p : pacientes) { %>
-						<li class="list-group-item">
+						<li class="list-group-item" id=<%=p.getDni()%>>
 							<a href="#">
 								<%= p.getApellido() + " " + p.getNombre() %>
 			          		</a>
@@ -84,35 +123,37 @@
 								<i class="fas fa-user-circle"></i> Mi Perfil
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="nutricionista-config.html">ConfiguraciÃ³n</a>
+								<a class="dropdown-item" href="nutricionista-config.html">Configuraci�n</a>
 							<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Cerrar sesiÃ³n</a>
+								<a class="dropdown-item" href="#">Cerrar sesi�n</a>
 							</div>
 						</li>			
 					</ul>
 				</div>
 			</nav>
 
-			<div class="container">
-				<h4>Seleccione un paciente.</h4>
-				<br>
+			<div id="seleccionePacienteMsj">
+				<h1>Seleccione un paciente.</h1>
+			</div>
+			<br>
+			<div class="container" id="panel" style="display: none">
 				<div class="row">
 					<div class="col-md-6">
 						<div class="card">
 							<div class="card-body">
-								<h3 class="colored-title text-center">Estela Rodriguez</h3>
+								<h3 class="colored-title text-center" id="nombreApellido"></h3>
 								<ul class="list-group list-group-flush">
 									<li class="list-group-item">
-										<span class="text-muted">Correo electrÃ³nico: </span>estela@gmail.com
+										<span class="text-muted">Correo electr�nico: </span><p id="email"></p>
 									</li>
 									<li class="list-group-item">
-										<span class="text-muted">TelÃ©fono: </span>341-6535325
+										<span class="text-muted">Tel�fono: </span><p id="telefono"></p>
 									</li>
 									<li class="list-group-item">
-										<span class="text-muted">Ã�ndice de masa corporal: </span>23.6
+										<span class="text-muted">�ndice de masa corporal: </span><p id="imc"></p>
 									</li>
 									<li class="list-group-item">
-										<span class="text-muted">Metabolismo basal: </span>1860 kcal.
+										<span class="text-muted">Metabolismo basal: </span><p id="metabolismoBasal"></p>
 									</li>
 								</ul>
 								<div class="pull-right">
@@ -126,7 +167,7 @@
 							<div class="card-body">
 								<h3 class="colored-title text-center">Hoy</h3>
 								<div class="row">
-									<div class="col">CalorÃ­as</div>
+									<div class="col">Calor��as</div>
 									<p>800 / 1879 kcal.</p>
 								</div>
 								<div class="progress">
@@ -140,7 +181,7 @@
 									<div class="progress-bar w-25" role="progressbar" stylearia-valuenow="400" aria-valuemin="0" aria-valuemax="650"></div>
 								</div>
 								<div class="row">
-									<div class="col">ProteÃ­nas</div>
+									<div class="col">Prote��nas</div>
 									<p>20 / 120 g.</p>
 								</div>
 								<div class="progress" style="height: 0.5rem;">
@@ -169,12 +210,12 @@
 								<h3 class="colored-title text-center">Peso</h3>
 								<div class="row">
 									<div class="col">
-										<p class="card-text text-center text-muted">Promedio semanal</p>
-										<h3 class="card-text text-center">67 kg.</h3>
+										<p class="card-text text-center text-muted">�ltimo Ingresado</p>
+										<h3 class="card-text text-center" id="peso" id="pesoActual"></h3>
 									</div>
 									<div class="col">
 										<p class="card-text text-center text-muted">Objetivo</p>
-										<h3 class="card-text text-center">80 kg.</h3>
+										<h3 class="card-text text-center" id="pesoObjetivo"></h3>
 									</div>
 								</div>
 								<div class="pull-right">
@@ -189,12 +230,12 @@
 								<h3 class="colored-title text-center">Ejercicio</h3>
 								<div class="row">
 									<div class="col">
-										<p class="card-text text-center text-muted">Promedio semanal</p>
-										<h3 class="card-text text-center">449,5 kcal/dia</h3>
+										<p class="card-text text-center text-muted">Total en 7 d�as</p>
+										<h3 class="card-text text-center" id="ejercicioSemana"></h3>
 									</div>
 									<div class="col">
 										<p class="card-text text-center text-muted">Objetivo</p>
-										<h3 class="card-text text-center">500 kcal/dia</h3>
+										<h3 class="card-text text-center" id="ejercicioObjetivo"></h3>
 									</div>
 								</div>
 								<div class="pull-right">
@@ -209,30 +250,70 @@
 	</div> 
 
 	<!-- modal modificar parametros  paciente -->
-	<div id="modificarParametrosPaciente" class="modal fade">
+	<div id="ModificarDatosPaciente" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form>
-					<div class="modal-header">						
-						<h4 class="modal-title">Modificar parÃ¡metros del paciente</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<div class="d-flex bd-highlight mb-3">							
+					  <div class="mr-auto p-2 bd-highlight">Soy</div>
+
+					  <div class="p-2 bd-highlight">
+						  <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+				          <label class="form-check-label" for="gridRadios2" style="margin-right: 2rem">Hombre </label>
+ 						  </div>	
+							  <div class="p-2 bd-highlight">
+							     <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
+				          <label class="form-check-label" for="gridRadios2">Mujer</label>          
+					   </div>
 					</div>
-					<div class="modal-body">
-						<div class="form-row">
-							<div class="col-6">
-							  <label for="imc">Ã�ndice de Masa Corporal (IMC)</label>
-							  <input type="number" class="form-control" id="imc" required>
-							</div>
-							<div class="col-6">
-							  <label for="metabolismoBasal">Metabolismo Basal (kcal)</label>
-							  <input type="number" class="form-control" id="metabolismoBasal" required>
-							</div>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-						<input type="submit" class="btn btn-primary" value="Actualizar">
-					</div>
+					
+					<div class="input-group mb-2">
+				        <div class="input-group-prepend">
+				          <div class="input-group-text">Fecha de Nacimiento</div>
+				        </div>
+				        <input type="date" class="form-control" id="fecha-nacimiento" placeholder="">
+				    </div>
+					<div class="input-group mb-2">
+				        <div class="input-group-prepend">
+				          <div class="input-group-text">Altura</div>
+				        </div>
+				        <input type="text" class="form-control" id="altura" placeholder="cm.">
+				    </div>
+				    <div class="input-group mb-2">
+				        <div class="input-group-prepend">
+				          <div class="input-group-text">Peso Actual</div>
+				        </div>
+				        <input type="text" class="form-control" id="peso-actual" placeholder="kg.">
+				    </div>
+				    <div class="input-group mb-2">
+				        <div class="input-group-prepend">
+				          <div class="input-group-text">Peso Objetivo</div>
+				        </div>
+				        <input type="text" class="form-control" id="peso-objetivo" placeholder="kg.">
+				    </div>
+				     <div class="input-group mb-2">
+				        <div class="input-group-prepend">
+				          <div class="input-group-text">Metabolismo Basal</div>
+				        </div>
+				        <input type="text" class="form-control" id="metabolismo-basal" placeholder="kcal.">
+				    </div>
+				    
+				    <div class="input-group mb-2">
+				        <div class="input-group-prepend">
+				          <div class="input-group-text">�ndice de Masa Corporal</div>
+				        </div>
+				        <input type="text" class="form-control" id="imc" placeholder="bmi">
+				    </div>
+				   
+				    <div class="input-group mb-2">
+				        <div class="input-group-prepend">
+				          <div class="input-group-text">Objetivo</div>
+				        </div>
+				        <input type="text" class="form-control" id="objetivo" placeholder="Perder peso, ganar peso ...">
+				    </div>
+                        
+                      
+                     <input type="submit" class="btn btn-primary float-right" value="Continuar">
 				</form>
 			</div>
 		</div>
@@ -266,7 +347,7 @@
 			<div class="modal-content">
 				<form>
 					<div class="modal-header">						
-						<h4 class="modal-title">Requerimientos alimentÃ­cios</h4>
+						<h4 class="modal-title">Requerimientos aliment��cios</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
@@ -283,7 +364,7 @@
 						<br>
 						<div class="form-row">
 							<div class="col-6">
-								<label for="proteinas">ProteÃ­nas (g)</label>
+								<label for="proteinas">Prote��nas (g)</label>
 								<input type="number" class="form-control" id="proteinas" required>
 							  </div>
 							<div class="col-6">
@@ -310,7 +391,7 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
-						<label for="objEjercicio">Gasto energÃ©tico (kcal/dÃ­a)</label>
+						<label for="objEjercicio">Gasto energ�tico (kcal/d��a)</label>
 						<input class="form-control" id="objEjercicio" type="number" value="500" min="0" max="1500"/>
 					</div>
 					<div class="modal-footer">

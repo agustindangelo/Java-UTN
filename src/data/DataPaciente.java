@@ -36,6 +36,36 @@ public class DataPaciente {
 		}
 	}
 	
+	public void modificarDatosPaciente(Paciente p) throws SQLException {
+		PreparedStatement stmt = null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"update paciente \n"
+					+ "set genero=?, fecha_nacimiento=?, altura=?, peso=?, imc=?, metabolismo_basal=?, objetivo=?, peso_objetivo=?\n1"
+					+ "where dni=?;"
+					);
+			stmt.setString(1, p.getGeneroStr());
+			stmt.setDate(2, (Date) p.getFechaNacimiento());
+			stmt.setInt(3, p.getAltura());
+			stmt.setFloat(4, p.getPeso());
+			stmt.setFloat(5, p.getImc());
+			stmt.setFloat(6, p.getMetabolismoBasal());
+			stmt.setString(7, p.getObjetivo());
+			stmt.setFloat(8, p.getPesoObjetivo());
+			stmt.setString(9, p.getDni());
+			stmt.execute();
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+	}
+	
 	public Paciente getByDni(Usuario u) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;

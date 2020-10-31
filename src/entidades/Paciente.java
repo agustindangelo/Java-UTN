@@ -49,6 +49,14 @@ public class Paciente extends Usuario{
 	public TipoGenero getGenero() {
 		return genero;
 	}
+	public String getGeneroStr() {
+		if (this.genero == TipoGenero.Masculino) {
+			return "Masculino";
+		} else {
+			return "Femenino";
+		}
+	}
+	
 	public void setGenero(TipoGenero genero) {
 		this.genero = genero;
 	}
