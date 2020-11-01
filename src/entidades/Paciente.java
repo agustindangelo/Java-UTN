@@ -60,6 +60,16 @@ public class Paciente extends Usuario{
 	public void setGenero(TipoGenero genero) {
 		this.genero = genero;
 	}
+	
+	public void setGenero(String g)
+	{
+		if (g == "Masculino")
+		{
+			this.genero = TipoGenero.Masculino;
+		} else {
+			this.genero = TipoGenero.Femenino;
+		}
+	}
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}

@@ -2,12 +2,15 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entidades.Paciente;
 import logic.AbmcPaciente;
@@ -42,14 +45,15 @@ public class ModificarDatosPaciente extends HttpServlet {
 		AbmcPaciente ctrl = new AbmcPaciente();
 	    HttpSession session = request.getSession();
 
-		Paciente p = session.getAttribute("paciente"); 
+		Paciente p = (Paciente) session.getAttribute("paciente"); 
 		p.setGenero(request.getParameter("genero"));
-		p.setFechaNacimiento(request.getParameter("fecha-nacimiento"));
-		p.setPeso(request.getParameter("peso-actual"));
-		p.setAltura(request.getParameter("altura"));
-		p.setMetabolismoBasal(request.getParameter("metabolismo-basal"));
-		p.setImc(request.getParameter("imc"));
-		p.setPesoObjetivo(request.getParameter("peso-objetivo"));
+		String fecha = request.getParameter("fecha-nacimiento");
+		// p.setFechaNacimiento(new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("fecha-nacimiento")));
+		p.setPeso(Float.parseFloat(request.getParameter("peso-actual")));
+		p.setAltura(Integer.parseInt(request.getParameter("altura")));
+		p.setMetabolismoBasal(Integer.parseInt((request.getParameter("metabolismo-basal"))));
+		p.setImc(Float.parseFloat(request.getParameter("imc")));
+		p.setPesoObjetivo(Float.parseFloat(request.getParameter("peso-objetivo")));
 		p.setObjetivo(request.getParameter("objetivo"));
 		
 		try {

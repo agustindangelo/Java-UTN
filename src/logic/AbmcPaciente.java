@@ -21,7 +21,7 @@ public class AbmcPaciente {
 		dp.registrarPaciente(p);
 	}
 	public void modificarDatosPaciente(Paciente p) throws SQLException{
-		dp.modificarDatosPaciente(Paciente p);
+		dp.modificarDatosPaciente(p);
 	}
 	
 	public Map<String, Integer>  calcularIngestasHoy(Paciente p) throws SQLException{
