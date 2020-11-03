@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import entidades.Nutricionista;
 import entidades.Usuario;
 import entidades.Usuario.Rol;
-import exceptions.ClosedDBException;
 import logic.Login;
 
 @WebServlet({ "/SignIn", "/signin", "/Signin", "/signIn" })
@@ -44,7 +43,6 @@ public class SignIn extends HttpServlet {
 			u = ctrl.validate(usuario);
 			if (u != null) {
 				
-//				request.getRequestDispatcher("WEB-INF/UserManagement.jsp").forward(request, response);
 				if (u.getRol() == Rol.Nutricionista) {
 					Nutricionista n = new Nutricionista();
 					n.setDni(u.getDni());
@@ -58,9 +56,6 @@ public class SignIn extends HttpServlet {
 			} else {
 				request.getRequestDispatcher("index.html").forward(request, response);
 			}
-		} catch (ClosedDBException e) {
-			request.getSession().setAttribute("error", e.getMessage());
-			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		} catch (SQLException e){
 			request.setAttribute("error", e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
