@@ -92,7 +92,7 @@
 					<%
 						ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
 						DataNutricionista dn = new DataNutricionista();
-						Nutricionista n = (Nutricionista)session.getAttribute("nutricionista");
+						Nutricionista n = (Nutricionista)session.getAttribute("usuario");
 						pacientes = dn.getPacientes(n);
 						// <li class="list-group-item"><a href="#">Carlos Juarez</a></li>
 					%>
@@ -125,7 +125,7 @@
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item" href="nutricionista-config.html">Configuraci�n</a>
 							<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Cerrar sesi�n</a>
+								<a class="dropdown-item" href="LogOut">Cerrar sesi�n</a>
 							</div>
 						</li>			
 					</ul>

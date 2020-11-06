@@ -15,11 +15,11 @@ import entidades.Usuario;
 import entidades.Usuario.Rol;
 import logic.Login;
 
-@WebServlet({ "/SignIn", "/signin", "/Signin", "/signIn" })
-public class SignIn extends HttpServlet {
+@WebServlet({ "/LogIn", "/login", "/Login", "/logIn" })
+public class LogIn extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public SignIn() {
+    public LogIn() {
         super();
     }
 
@@ -28,27 +28,26 @@ public class SignIn extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Usuario usuario = new Usuario();
+        Usuario usuario = new Usuario();
 		Usuario u;
 		Login ctrl = new Login();
 		
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-	    HttpSession session = request.getSession();
-		
+	    HttpSession session = request.getSession(); 
 		usuario.setEmail(email);
 		usuario.setPassword(password);
 
 		try {
 			u = ctrl.validate(usuario);
 			if (u != null) {
-				
 				if (u.getRol() == Rol.Nutricionista) {
 					Nutricionista n = new Nutricionista();
 					n.setDni(u.getDni());
 					n.setApellido(u.getApellido());
 					n.setNombre(u.getNombre());
-					session.setAttribute("nutricionista", n);
+					n.setRol();
+					session.setAttribute("usuario", n);
 					request.getRequestDispatcher("WEB-INF/nutricionista-main.jsp").forward(request, response);
 				} else {
 					
