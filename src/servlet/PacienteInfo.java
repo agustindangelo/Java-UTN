@@ -36,14 +36,7 @@ public class PacienteInfo extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AbmcPaciente ctrl = new AbmcPaciente();
         Usuario u = new Usuario();
-//    	LinkedList<Paciente> pacientes = new LinkedList<>();
-//		try {
-//			pacientes = ctrl.getAll();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-        
+       
         u.setDni(request.getParameter("dni"));
         Paciente p = new Paciente();
         try {

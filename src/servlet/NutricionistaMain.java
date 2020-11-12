@@ -43,7 +43,6 @@ public class NutricionistaMain extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AbmcNutricionista ctrl = new AbmcNutricionista();
-		
 		Usuario u = (Usuario) request.getSession().getAttribute("usuario");
 		Nutricionista n = new Nutricionista(u);
 		

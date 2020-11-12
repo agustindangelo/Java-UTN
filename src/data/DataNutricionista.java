@@ -268,7 +268,7 @@ public class DataNutricionista {
 			     "from nutricionista_paciente np\n" + 
 			     "inner join paciente p\n" + 
 			     " on np.dni_paciente = p.dni\n" + 
-			     "where dni = ?"
+			     "where dni_nutricionista = ?"
 		     );
 	    	stmt.setString(1, (n.getDni()));
 		    rs = stmt.executeQuery();
@@ -306,8 +306,9 @@ public class DataNutricionista {
 	    		"select p.dni, p.nombre, p.apellido\n" + 
 	    		"from solicitud s\n" + 
 	    		"inner join paciente p\n" + 
-	    		"	on p.dni = s.id_paciente\n" + 
-	    		"where s.id_nutricionista = ?"
+	    		"	on p.dni = s.dni_paciente\n" + 
+	    		"where s.dni_nutricionista = ?\n"
+	    		+ "and s.estado = 'pendiente'"
 		     );
 	    	stmt.setString(1, (n.getDni()));
 		    rs = stmt.executeQuery();
@@ -333,5 +334,54 @@ public class DataNutricionista {
 			}
 		}
 		return pacientes;
+	}
+	
+	public void aceptarSolicitud(Nutricionista n, Paciente p) throws SQLException{
+		PreparedStatement stmt = null;
+	    try {
+	    	stmt = DbConnector.getInstancia().getConn().prepareStatement(
+	    			"update solicitud \n"
+	    			+ "set estado='confirmada'\n"
+	    			+ "where dni_nutricionista = ?\n"
+	    			+ "and dni_paciente = ?;"
+	    			+ "insert into nutricionista_paciente (dni_nutricionista, dni_paciente, fecha)\n"
+	    			+ "values (?, ?, current_date);"
+		    );
+	    	stmt.setString(1, (n.getDni()));
+	    	stmt.setString(2, (n.getDni()));
+	    	stmt.setString(3, (p.getDni()));
+	    	stmt.execute();
+		} catch (SQLException e) {
+			throw e;	   
+		} finally {
+		    try {
+				if(stmt != null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+	}
+	public void rechazarSolicitud(Nutricionista n, Paciente p) throws SQLException{
+		PreparedStatement stmt = null;
+	    try {
+	    	stmt = DbConnector.getInstancia().getConn().prepareStatement(
+	    			"update solicitud \n"
+	    			+ "set estado='rechazada'\n"
+	    			+ "where dni_nutricionista = ?\n"
+	    			+ "and dni_paciente = ?"
+		    );
+	    	stmt.setString(1, (n.getDni()));
+	    	stmt.execute();
+		} catch (SQLException e) {
+			throw e;	   
+		} finally {
+		    try {
+				if(stmt != null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
 	}
 }
