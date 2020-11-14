@@ -81,11 +81,13 @@ public class AbmcPaciente {
 	}
 	
 	public Float calcularKcalEjercicioSemana(Paciente p) throws SQLException{
-		LinkedList<Ejercicio> ejercicios = dp.getEjercicioSemana(p);
+		// <TODO: Terminar
+		/*LinkedList<Ejercicio> ejercicios = dp.getEjercicioSemana(p);
 		int acum = 0;
 		for (Ejercicio e : ejercicios) {
 			
-		}
+		}*/
+		return (float)0;
 	}
 	public Paciente getByDni(Usuario u) throws SQLException{
 		return dp.getByDni(u);

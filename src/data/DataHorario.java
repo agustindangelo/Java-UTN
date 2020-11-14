@@ -18,7 +18,7 @@ public class DataHorario {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
 					  "select dia, hora_desde, hora_hasta "
 					+ "from horario "
-					+ "where id_nutricionista = ?"
+					+ "where dni = ?"
 					);
 			stmt.setString(1, nut.getDni());
 			rs= stmt.executeQuery();

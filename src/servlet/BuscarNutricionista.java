@@ -1,30 +1,23 @@
 package servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import entidades.Paciente;
-import logic.AbmcPaciente;
-
 
 /**
- * Servlet implementation class RegistrarPaciente
+ * Servlet implementation class BuscarNutricionista
  */
-@WebServlet("/RegistrarPaciente")
-public class RegistrarPaciente extends HttpServlet {
+@WebServlet("/BuscarNutricionista")
+public class BuscarNutricionista extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegistrarPaciente() {
+    public BuscarNutricionista() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,23 +35,7 @@ public class RegistrarPaciente extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		HttpSession session = request.getSession(); 
-		AbmcPaciente ctrl = new AbmcPaciente();
-		Paciente p = new Paciente();
-		p.setApellido(request.getParameter("apellido"));
-		p.setNombre(request.getParameter("nombre"));
-		p.setDni(request.getParameter("dni"));
-		p.setEmail(request.getParameter("email"));
-		p.setTelefono(request.getParameter("telefono"));
-		p.setPassword(request.getParameter("password"));
-		session.setAttribute("paciente", p);
-		request.getRequestDispatcher("WEB-INF/buscar-nutricionista.jsp").forward(request, response);
-		
-		try {
-			ctrl.registrarPaciente(p);
-		} catch(SQLException e) {
-			request.setAttribute("error", e.getMessage());
-			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
-		} 
+		doGet(request, response);
 	}
+
 }
