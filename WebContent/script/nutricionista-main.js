@@ -1,7 +1,7 @@
 $(function() {	       
    $("#pacienteMenu li").not('.emptyMessage').click(function() {
 	   document.getElementById("seleccionePacienteMsj").style.display = "none";
-	   var dni = this.id.slice(1);
+	   var dni = this.id;
 	   getPacienteInfo(dni);
    });
 });
@@ -33,15 +33,6 @@ function getPacienteInfo(dni){
 	} 
 	})       
 };
-/*
-$(function() {	       
-   $(".rechazar").not('.emptyMessage').click(function() {
-	   var dni = this.id.slice(1);
-	   rechazarSolicitud(dni);
-   });
-});
-*/
-
 $(function() {	       
    $("#solicitudesMenu a .li-icon").not('.emptyMessage').click(function() {
 	   var dni = this.id.slice(1);

@@ -17,7 +17,7 @@ import logic.AbmcPaciente;
 /**
  * Servlet implementation class registrarSolicitud
  */
-@WebServlet("/registrarSolicitud")
+@WebServlet("/RegistrarSolicitud")
 public class RegistrarSolicitud extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -48,6 +48,7 @@ public class RegistrarSolicitud extends HttpServlet {
 		n.setDni(request.getParameter("nutricionista-seleccionado"));
 		try {
 			ctrl.guardarSolicitud(p, n);
+			request.getRequestDispatcher("WEB-INF/solicitud-enviada.html").forward(request, response);
 		} catch(SQLException e) {
 			request.setAttribute("error", e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);

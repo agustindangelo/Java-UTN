@@ -5,6 +5,7 @@ import entidades.Alimento;
 import entidades.Ingesta;
 import entidades.Nutricionista;
 import entidades.Paciente;
+import entidades.Solicitud;
 import entidades.Usuario;
 
 import java.sql.SQLException;
@@ -95,5 +96,11 @@ public class AbmcPaciente {
 	}
 	public void guardarSolicitud(Paciente p, Nutricionista n) throws SQLException {
 		dp.guardarSolicitud(p, n);
+	}
+	public Solicitud getSolicitud(Paciente p) throws SQLException {
+		return dp.getSolicitud(p);
+	}
+	public void actualizarDatosPersonales(Paciente p) throws SQLException {
+		dp.actualizarDatosPersonales(p);
 	}
 }

@@ -3,8 +3,8 @@
 
 ## PACIENTE
 ✔ Registro (A: paciente)
-* Buscar nutricionista (C: nutricionista, C: horario, C: direccion, C: localidad)
-  * Solicitar nutricionista (A: solicitud)
+✔ Buscar nutricionista (C: nutricionista, C: horario, C: direccion, C: localidad)
+  ✔ Solicitar nutricionista (A: solicitud)
 * Notificar solicitud aceptada (Email)
 * Main paciente:
   * Panel calorías (C: consumo_paciente)

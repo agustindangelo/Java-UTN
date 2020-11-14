@@ -7,6 +7,7 @@ import entidades.Ingesta;
 import entidades.Nutricionista;
 import entidades.Paciente;
 import entidades.Paciente.TipoGenero;
+import entidades.Solicitud;
 import entidades.Usuario;
 
 public class DataPaciente {
@@ -70,10 +71,10 @@ public class DataPaciente {
 	public Paciente getByDni(Usuario u) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		Paciente p = new Paciente(u);
+		Paciente p = new Paciente();
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select nombre, apellido, email, telefono, " +
+					"select nombre, apellido, email, telefono,\n" +
 					"genero, fecha_nacimiento, altura, peso, imc, metabolismo_basal, peso_objetivo, objetivo\n" + 
 					"from paciente\n" + 
 					"where dni = ?"
@@ -233,7 +234,6 @@ public class DataPaciente {
 		return ingestas;
 	}
 
-	
 	public void guardarSolicitud(Paciente p, Nutricionista n) throws SQLException{
 		PreparedStatement stmt = null;
 		try {
@@ -254,5 +254,61 @@ public class DataPaciente {
 				throw e;
 			}
 		}
+	}	
+	public Solicitud getSolicitud(Paciente p) throws SQLException {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		Solicitud s = new Solicitud();
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"select * from solicitud where dni_paciente = ?"
+					);
+			stmt.setString(1, p.getDni());
+			rs = stmt.executeQuery();
+			if(rs != null && rs.next()) {
+				s.setDniNutricionista(rs.getString("dni_nutricionista"));
+				s.setDniPaciente(rs.getString("dni_paciente"));
+				s.setEstado(rs.getString("estado"));
+			}
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+		return s;
 	}
+	
+	public void actualizarDatosPersonales(Paciente p) throws SQLException{
+		PreparedStatement stmt = null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"update paciente\n"
+					+ "set peso = ?, imc = ?, metabolismo_basal = ?, peso_objetivo = ?, objetivo = ?\n"
+					+ "where dni = ?"
+					);
+			stmt.setFloat(1, p.getPeso());
+			stmt.setFloat(2, p.getImc());
+			stmt.setFloat(3, p.getMetabolismoBasal());
+			stmt.setFloat(4, p.getPesoObjetivo());
+			stmt.setString(5, p.getObjetivo());
+			stmt.setString(6, p.getDni());
+			stmt.execute();
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+	}	
+
 }

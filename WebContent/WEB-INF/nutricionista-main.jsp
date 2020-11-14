@@ -285,15 +285,20 @@
 	<div id="modificarPesoObjetivo" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form>
+				<form action="ActualizarDatosPersonales" method="post">
 					<div class="modal-header">						
-						<h4 class="modal-title">Nuevo peso objetivo</h4>
+						<h4 class="modal-title">Nuevo peso</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
-						<label for="objPeso">Peso objetivo (kg.)</label>
-						<input class="form-control" id="objPeso" type="number" value="65" min="0" max="500"/>				
+						<label for="objPeso">Peso actual(kg.)</label>
+						<input class="form-control" id="peso" type="number" value="65" min="0" max="500"/>				
 					</div>
+					<div class="modal-body">
+						<label for="objPeso">Peso objetivo (kg.)</label>
+						<input class="form-control" id="peso-objetivo" type="number" value="65" min="0" max="500"/>				
+					</div>
+
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
 						<input type="submit" class="btn btn-primary" value="Actualizar">

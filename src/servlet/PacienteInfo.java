@@ -8,11 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
 import entidades.Paciente;
-import entidades.Usuario;
 import logic.AbmcPaciente;
 
 /**
@@ -35,12 +35,11 @@ public class PacienteInfo extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AbmcPaciente ctrl = new AbmcPaciente();
-        Usuario u = new Usuario();
-       
-        u.setDni(request.getParameter("dni"));
         Paciente p = new Paciente();
+        HttpSession session = request.getSession();
+        p.setDni(request.getParameter("dni"));
         try {
-        	p = ctrl.getByDni(u);
+        	p = ctrl.getByDni(p);
         } catch (SQLException e) {
         	e.printStackTrace();
         }
@@ -50,13 +49,12 @@ public class PacienteInfo extends HttpServlet {
                 String json = new Gson().toJson(p);
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
+                session.setAttribute("paciente", p);
     			response.getWriter().write(json);
             } catch (Exception e){
             	e.printStackTrace();
             }
-         
         }
-        
 	}
 
 	/**
