@@ -2,30 +2,29 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entidades.Nutricionista;
 import entidades.Paciente;
-import entidades.Usuario;
-import logic.AbmcNutricionista;
+import logic.AbmcPaciente;
+
 /**
- * Servlet implementation class NutricionistaMain
+ * Servlet implementation class registrarSolicitud
  */
-@WebServlet({ "/NutricionistaMain", "/nutricionistamain", "/Nutricionistamain", "/nutricionistaMain" })
-public class NutricionistaMain extends HttpServlet {
+@WebServlet("/registrarSolicitud")
+public class RegistrarSolicitud extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NutricionistaMain() {
+    public RegistrarSolicitud() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -42,14 +41,14 @@ public class NutricionistaMain extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AbmcNutricionista ctrl = new AbmcNutricionista();
-		Usuario u = (Usuario) request.getSession().getAttribute("usuario");
-		Nutricionista n = new Nutricionista(u);
-		
+		Nutricionista n = new Nutricionista();
+		HttpSession session = request.getSession();
+		Paciente p = (Paciente) session.getAttribute("paciente");
+		AbmcPaciente ctrl = new AbmcPaciente();
+		n.setDni(request.getParameter("nutricionista-seleccionado"));
 		try {
-			ArrayList<Paciente> pacientes = ctrl.getPacientes(n);
-			ArrayList<Paciente> solicitudes = ctrl.getSolicitudes(n);
-		} catch (SQLException e){
+			ctrl.guardarSolicitud(p, n);
+		} catch(SQLException e) {
 			request.setAttribute("error", e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}

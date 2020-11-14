@@ -3,6 +3,7 @@ package logic;
 import data.DataPaciente;
 import entidades.Alimento;
 import entidades.Ingesta;
+import entidades.Nutricionista;
 import entidades.Paciente;
 import entidades.Usuario;
 
@@ -91,5 +92,8 @@ public class AbmcPaciente {
 
 	public Paciente getByDni(Usuario u) throws SQLException{
 		return dp.getByDni(u);
+	}
+	public void guardarSolicitud(Paciente p, Nutricionista n) throws SQLException {
+		dp.guardarSolicitud(p, n);
 	}
 }

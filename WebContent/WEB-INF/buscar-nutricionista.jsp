@@ -21,26 +21,31 @@
           <div class="card form-sheet col-6">
             <div class="card-body">
             	<h2>Buscar nutricionista</h2>
-				<table class="table">
-					<%
-					AbmcNutricionista nl = new AbmcNutricionista();
-					LinkedList<Nutricionista> nutricionistas = nl.getAll();
-					%>
-					<tr>
-						<th>Nombre</th>
-						<th>Teléfono</th>
-						<th>Dirección</th>
-						<th>Ciudad<th>
-					</tr>
-					<% for (Nutricionista n : nutricionistas) { %>
+				<form action="RegistrarSolicitud" method="post">
+					<table class="table">
+						<%
+						AbmcNutricionista nl = new AbmcNutricionista();
+						LinkedList<Nutricionista> nutricionistas = nl.getAll();
+						%>
 						<tr>
-							<td><%= n.getApellido() + ", " + n.getNombre() %></td>
-							<td><%= n.getTelefono() %></td>
-							<td><%= n.getDireccion().getCalle() + ", " + n.getDireccion().getAltura() %></td>
-							<td><%= n.getDireccion().getLocalidad().getDenominacion() + ", " +  n.getDireccion().getLocalidad().getCodPostal()%></td>
+							<th>Nombre</th>
+							<th>Teléfono</th>
+							<th>Dirección</th>
+							<th>Ciudad<th>
 						</tr>
-					<% } %>
-				</table>
+							<% for (Nutricionista n : nutricionistas) { %>
+								<tr>
+									<td><%= n.getApellido() + ", " + n.getNombre() %></td>
+									<td><%= n.getTelefono() %></td>
+									<td><%= n.getDireccion().getCalle() + ", " + n.getDireccion().getAltura() %></td>
+									<td><%= n.getDireccion().getLocalidad().getDenominacion() + ", " +  n.getDireccion().getLocalidad().getCodPostal()%></td>
+									<td><input type="radio" name="nutricionista-seleccionado" value="<%=n.getDni()%>"></td>
+						
+								</tr>
+							<% } %>
+						</table>
+					<input type="submit" class="btn btn-primary float-right" value="Guardar Solicitud">
+				</form>
             </div>
           </div>
           <div class="col"></div>

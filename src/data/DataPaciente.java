@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import entidades.Alimento;
 import entidades.Ingesta;
+import entidades.Nutricionista;
 import entidades.Paciente;
 import entidades.Paciente.TipoGenero;
 import entidades.Usuario;
@@ -230,5 +231,28 @@ public class DataPaciente {
 			}
 		}
 		return ingestas;
+	}
+
+	
+	public void guardarSolicitud(Paciente p, Nutricionista n) throws SQLException{
+		PreparedStatement stmt = null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"insert into solicitud (dni_paciente, dni_nutricionista, estado)\n"
+					+ "values (?,?,'pendiente')"
+					);
+			stmt.setString(1, p.getDni());
+			stmt.setString(2, n.getDni());
+			stmt.execute();
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
 	}
 }
