@@ -50,4 +50,11 @@ public class AbmcNutricionista {
 	public ArrayList<Paciente> getSolicitudes(Nutricionista n) throws SQLException {
 		return dn.getSolicitudes(n);
 	}
+	public void aceptarSolicitud(Nutricionista n, Paciente p) throws SQLException{
+		dn.aceptarSolicitud(n, p);
+	}
+
+	public void rechazarSolicitud(Nutricionista n, Paciente p) throws SQLException{
+		dn.rechazarSolicitud(n, p);
+	}
 }

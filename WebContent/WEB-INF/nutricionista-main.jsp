@@ -17,45 +17,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 	<script src="script/scripts.js"></script>
+	<script src="script/nutricionista-main.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-        <script>
-	        $(function() {	       
-	        	   $("#pacienteMenu li").not('.emptyMessage').click(function() {
-	        		   document.getElementById("seleccionePacienteMsj").style.display = "none";
-        	           var dni = this.id;
-        	           callServlet(dni);
-	        	   });
-	        	});
-	        
-	        function callServlet(dni){
-	            $.ajax({
-	                type: "GET",
-	                url: "pacienteinfo",                
-	                dataType: "json",
-	                data: {"dni" : dni},
-	                success: function(paciente){
-	                    if(paciente){
-	                    	document.getElementById("panel").style.display = "block";
-	                    	
-	                        $('#nombreApellido').append(paciente.nombre + ' ' + paciente.apellido);
-	                        $('#email').append(paciente.email);
-	                        $('#telefono').append(paciente.telefono);
-	                        $('#imc').append(paciente.imc);
-	                        $('#metabolismoBasal').append(paciente.metabolismoBasal + '   kcal/dia');
-	                        
-	                        $('#pesoActual').append(paciente.peso + ' kg.');
-	                        $('#pesoObjetivo').append(paciente.pesoObjetivo + ' kg.');
-	                        $('#ejercicioSemana').append(paciente.kcalEjercicioSemana + ' kcal.');
-	                        $('#ejercicioObjetivo').append(paciente.kcalEjercicioObjetivo + ' kcal.');
-	                    }
-	                },
-	                error:function(){
-	                    alert('not worked.');
-	                } 
-
-	            })       
-	        };
-        </script>
 </head>
 <body class="nutricionista">
 	<div id="wrapper" class="toggled">
@@ -67,21 +30,22 @@
 			
 				<input class="form-control"  type="text" id="solicitudesSearch" onkeyup="filtrarSolicitudes()" placeholder="Buscar..." title="Mis solicitudes">
 				<ul class="list-group list-group-flush sidenav-menu" id="solicitudesMenu">
-					<li class="list-group-item">
-						<a href="#">Martin Perez</a>
-						<a class="li-icon float-right" href="#"><i class="fas fa-times cruz-rechazar" style="margin: 5px"></i></a>
-						<a class="li-icon float-right" href="#"><i class="fas fa-check tick-aceptar" style="margin: 5px"></i></a>
-					</li>
-					<li class="list-group-item">
-						<a href="#">Juan Alberto Echeguerria</a>
-						<a class="li-icon float-right" href="#"><i class="fas fa-times cruz-rechazar" style="margin: 5px"></i></a>
-						<a class="li-icon float-right" href="#"><i class="fas fa-check tick-aceptar" style="margin: 5px"></i></a>
-					</li>
-					<li class="list-group-item">
-						<a href="#">Luis Moreno</a>
-						<a class="li-icon float-right" href="#"><i class="fas fa-times cruz-rechazar" style="margin: 5px"></i></a>
-						<a class="li-icon float-right" href="#"><i class="fas fa-check tick-aceptar" style="margin: 5px"></i></a>
-					</li>
+					<%
+						ArrayList<Paciente> solicitudes = new ArrayList<Paciente>();
+						DataNutricionista dn = new DataNutricionista();
+						Nutricionista n = (Nutricionista)session.getAttribute("usuario");
+						solicitudes = dn.getSolicitudes(n);
+					%>
+					<% for (Paciente p : solicitudes) { %>
+						<li class="list-group-item" id=<%="s"+p.getDni()%>>
+							<a href="#">
+								<%= p.getApellido() + " " + p.getNombre() %>
+			          		</a>
+						    <a class="li-icon float-right" href="" id=<%="r" + p.getDni()%>><i class="fas fa-times cruz-rechazar" style="margin: 5px"></i></a>
+							<a class="li-icon float-right" href="" id=<%="a" + p.getDni()%>><i class="fas fa-check tick-aceptar" style="margin: 5px"></i></a>
+				        </li>
+			        <%}%>
+	
 				</ul>
 				<hr>
 				<div class="colored-title text-center">
@@ -91,8 +55,6 @@
 				<ul class="list-group list-group-flush sidenav-menu" id="pacienteMenu">
 					<%
 						ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
-						DataNutricionista dn = new DataNutricionista();
-						Nutricionista n = (Nutricionista)session.getAttribute("nutricionista");
 						pacientes = dn.getPacientes(n);
 						// <li class="list-group-item"><a href="#">Carlos Juarez</a></li>
 					%>
@@ -125,7 +87,7 @@
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 								<a class="dropdown-item" href="nutricionista-config.html">Configuraci�n</a>
 							<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#">Cerrar sesi�n</a>
+								<a class="dropdown-item" href="LogOut">Cerrar sesi�n</a>
 							</div>
 						</li>			
 					</ul>
@@ -347,7 +309,7 @@
 			<div class="modal-content">
 				<form>
 					<div class="modal-header">						
-						<h4 class="modal-title">Requerimientos aliment��cios</h4>
+						<h4 class="modal-title">Requerimientos alimenticios</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">

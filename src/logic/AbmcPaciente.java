@@ -2,7 +2,6 @@ package logic;
 
 import data.DataPaciente;
 import entidades.Alimento;
-import entidades.Ejercicio;
 import entidades.Ingesta;
 import entidades.Paciente;
 import entidades.Usuario;
@@ -89,6 +88,7 @@ public class AbmcPaciente {
 		}*/
 		return (float)0;
 	}
+
 	public Paciente getByDni(Usuario u) throws SQLException{
 		return dp.getByDni(u);
 	}
