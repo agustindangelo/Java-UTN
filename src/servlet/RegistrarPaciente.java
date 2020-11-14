@@ -52,7 +52,7 @@ public class RegistrarPaciente extends HttpServlet {
 		p.setTelefono(request.getParameter("telefono"));
 		p.setPassword(request.getParameter("password"));
 		session.setAttribute("paciente", p);
-		request.getRequestDispatcher("WEB-INF/buscar-nutricionista.jsp").forward(request, response);
+			
 		
 		try {
 			ctrl.registrarPaciente(p);
@@ -60,5 +60,6 @@ public class RegistrarPaciente extends HttpServlet {
 			request.setAttribute("error", e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		} 
+		request.getRequestDispatcher("WEB-INF/buscar-nutricionista.jsp").forward(request, response);
 	}
 }

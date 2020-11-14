@@ -16,8 +16,8 @@ public class DataDireccion {
 		ResultSet rs=null;	
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					  "select cod_postal, calle, altura, piso, depto "
-					+ "from direccion "
+					  "select cod_postal, calle, altura, piso, depto\n"
+					+ "from direccion\n"
 					+ "where dni = ?"
 					);
 			stmt.setString(1, nut.getDni());

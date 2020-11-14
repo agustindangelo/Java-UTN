@@ -85,9 +85,9 @@
 								<i class="fas fa-user-circle"></i> Mi Perfil
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="nutricionista-config.html">Configuraci�n</a>
+								<a class="dropdown-item" href="nutricionista-config.html">Configuracion</a>
 							<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="LogOut">Cerrar sesi�n</a>
+								<a class="dropdown-item" href="LogOut">Cerrar sesion</a>
 							</div>
 						</li>			
 					</ul>
@@ -106,13 +106,13 @@
 								<h3 class="colored-title text-center" id="nombreApellido"></h3>
 								<ul class="list-group list-group-flush">
 									<li class="list-group-item">
-										<span class="text-muted">Correo electr�nico: </span><p id="email"></p>
+										<span class="text-muted">Correo electronico: </span><p id="email"></p>
 									</li>
 									<li class="list-group-item">
-										<span class="text-muted">Tel�fono: </span><p id="telefono"></p>
+										<span class="text-muted">Telefono: </span><p id="telefono"></p>
 									</li>
 									<li class="list-group-item">
-										<span class="text-muted">�ndice de masa corporal: </span><p id="imc"></p>
+										<span class="text-muted">Indice de masa corporal: </span><p id="imc"></p>
 									</li>
 									<li class="list-group-item">
 										<span class="text-muted">Metabolismo basal: </span><p id="metabolismoBasal"></p>
@@ -129,7 +129,7 @@
 							<div class="card-body">
 								<h3 class="colored-title text-center">Hoy</h3>
 								<div class="row">
-									<div class="col">Calor��as</div>
+									<div class="col">Calorias</div>
 									<p>800 / 1879 kcal.</p>
 								</div>
 								<div class="progress">
@@ -143,7 +143,7 @@
 									<div class="progress-bar w-25" role="progressbar" stylearia-valuenow="400" aria-valuemin="0" aria-valuemax="650"></div>
 								</div>
 								<div class="row">
-									<div class="col">Prote��nas</div>
+									<div class="col">Proteinas</div>
 									<p>20 / 120 g.</p>
 								</div>
 								<div class="progress" style="height: 0.5rem;">
@@ -172,7 +172,7 @@
 								<h3 class="colored-title text-center">Peso</h3>
 								<div class="row">
 									<div class="col">
-										<p class="card-text text-center text-muted">�ltimo Ingresado</p>
+										<p class="card-text text-center text-muted">Ultimo Ingresado</p>
 										<h3 class="card-text text-center" id="peso" id="pesoActual"></h3>
 									</div>
 									<div class="col">
@@ -192,7 +192,7 @@
 								<h3 class="colored-title text-center">Ejercicio</h3>
 								<div class="row">
 									<div class="col">
-										<p class="card-text text-center text-muted">Total en 7 d�as</p>
+										<p class="card-text text-center text-muted">Total en 7 dias</p>
 										<h3 class="card-text text-center" id="ejercicioSemana"></h3>
 									</div>
 									<div class="col">
@@ -262,7 +262,7 @@
 				    
 				    <div class="input-group mb-2">
 				        <div class="input-group-prepend">
-				          <div class="input-group-text">�ndice de Masa Corporal</div>
+				          <div class="input-group-text">Indice de Masa Corporal</div>
 				        </div>
 				        <input type="text" class="form-control" id="imc" placeholder="bmi">
 				    </div>
@@ -326,7 +326,7 @@
 						<br>
 						<div class="form-row">
 							<div class="col-6">
-								<label for="proteinas">Prote��nas (g)</label>
+								<label for="proteinas">Proteinas (g)</label>
 								<input type="number" class="form-control" id="proteinas" required>
 							  </div>
 							<div class="col-6">
@@ -353,7 +353,7 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
-						<label for="objEjercicio">Gasto energ�tico (kcal/d��a)</label>
+						<label for="objEjercicio">Gasto energetico (kcal/dia)</label>
 						<input class="form-control" id="objEjercicio" type="number" value="500" min="0" max="1500"/>
 					</div>
 					<div class="modal-footer">

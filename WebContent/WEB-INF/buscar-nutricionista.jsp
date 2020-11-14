@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    <%@ page import="entidades.Paciente"%>
+<%@ page import="entidades.Paciente"%>
 <%@ page import="entidades.Nutricionista"%>
 <%@ page import="entidades.Usuario"%>
 <%@ page import="java.util.LinkedList"%>
