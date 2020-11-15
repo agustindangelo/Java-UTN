@@ -9,7 +9,7 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Trabajo practico de Java</title>
+	<title>Trabajo práctico de Java</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="style/styles.css">
     <script src="https://kit.fontawesome.com/d00e7b9ed2.js" crossorigin="anonymous"></script>

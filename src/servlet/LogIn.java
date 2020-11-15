@@ -60,7 +60,7 @@ public class LogIn extends HttpServlet {
 					if (s.getEstado().equalsIgnoreCase("pendiente")) {
 						request.getRequestDispatcher("WEB-INF/solicitud-enviada.html").forward(request, response);
 					} else {
-						request.getRequestDispatcher("WEB-INF/paciente-hoy.html").forward(request, response);
+						request.getRequestDispatcher("WEB-INF/paciente-main.jsp").forward(request, response);
 					}
 					
 				}

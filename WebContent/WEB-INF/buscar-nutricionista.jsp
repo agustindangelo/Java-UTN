@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Trabajo Práctico de Java</title>
+	<title>Trabajo PrÃ¡ctico de Java</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="style/styles.css">
@@ -29,8 +29,8 @@
 						%>
 						<tr>
 							<th>Nombre</th>
-							<th>Teléfono</th>
-							<th>Dirección</th>
+							<th>TelÃ©fono</th>
+							<th>Direcciï¿½n</th>
 							<th>Ciudad<th>
 						</tr>
 							<% for (Nutricionista n : nutricionistas) { %>
