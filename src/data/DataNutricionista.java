@@ -339,17 +339,28 @@ public class DataNutricionista {
 	public void aceptarSolicitud(Nutricionista n, Paciente p) throws SQLException{
 		PreparedStatement stmt = null;
 	    try {
+	    	stmt = DbConnector.getInstancia().getConn().prepareStatement("start transaction");
+	    	stmt.execute();
+	    	stmt.close();
 	    	stmt = DbConnector.getInstancia().getConn().prepareStatement(
-	    			"update solicitud \n"
-	    			+ "set estado='confirmada'\n"
+	    			"update solicitud\n"
+	    			+ "set estado = 'confirmada'\n"
 	    			+ "where dni_nutricionista = ?\n"
-	    			+ "and dni_paciente = ?;"
-	    			+ "insert into nutricionista_paciente (dni_nutricionista, dni_paciente, fecha)\n"
-	    			+ "values (?, ?, current_date);"
-		    );
-	    	stmt.setString(1, (n.getDni()));
-	    	stmt.setString(2, (n.getDni()));
-	    	stmt.setString(3, (p.getDni()));
+	    			+ "	and dni_paciente = ?\n"
+    			);
+	    	stmt.setString(1, n.getDni());
+	    	stmt.setString(2, p.getDni());
+	    	stmt.execute();
+	    	stmt.close();
+	    	
+	    	stmt = DbConnector.getInstancia().getConn().prepareStatement(
+	    			"insert into nutricionista_paciente (dni_nutricionista, dni_paciente, fecha)\n"
+	    			+ "values (?, ?, curdate())"
+				);
+			stmt.setString(1, n.getDni());
+			stmt.setString(2, p.getDni());
+	    	stmt.execute();
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("commit");
 	    	stmt.execute();
 		} catch (SQLException e) {
 			throw e;	   
@@ -366,13 +377,11 @@ public class DataNutricionista {
 		PreparedStatement stmt = null;
 	    try {
 	    	stmt = DbConnector.getInstancia().getConn().prepareStatement(
-	    			"update solicitud \n"
-	    			+ "set estado='rechazada'\n"
-	    			+ "where dni_nutricionista = ?\n"
-	    			+ "and dni_paciente = ?"
+	    		"update solicitud set estado='rechazada' where dni_nutricionista=? and dni_paciente=?"	
 		    );
-	    	stmt.setString(1, (n.getDni()));
-	    	stmt.execute();
+	    	stmt.setString(1, n.getDni());
+	    	stmt.setString(2, p.getDni());
+	    	stmt.executeUpdate();
 		} catch (SQLException e) {
 			throw e;	   
 		} finally {

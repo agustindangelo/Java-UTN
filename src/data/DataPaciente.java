@@ -82,6 +82,7 @@ public class DataPaciente {
 			stmt.setString(1, u.getDni());
 			rs = stmt.executeQuery();
 			if(rs != null && rs.next()) {
+				p.setDni(u.getDni());
 				p.setNombre(rs.getString("nombre"));
 				p.setApellido(rs.getString("apellido"));
 				p.setEmail(rs.getString("email"));

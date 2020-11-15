@@ -41,7 +41,8 @@ public class PacienteInfo extends HttpServlet {
         try {
         	p = ctrl.getByDni(p);
         } catch (SQLException e) {
-        	e.printStackTrace();
+			request.setAttribute("error", e.getMessage());
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
         }
         
         if (p != null) {
@@ -52,7 +53,8 @@ public class PacienteInfo extends HttpServlet {
                 session.setAttribute("paciente", p);
     			response.getWriter().write(json);
             } catch (Exception e){
-            	e.printStackTrace();
+				request.setAttribute("error", "Error al parsear los datos del paciente");
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
             }
         }
 	}

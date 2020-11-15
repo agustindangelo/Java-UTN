@@ -43,20 +43,17 @@ public class ActualizarDatosPersonales extends HttpServlet {
 		HttpSession session = request.getSession();
 		Paciente p = (Paciente) session.getAttribute("paciente");
 		try {
-			p.setPeso((float) request.getAttribute("peso"));
-		} catch (NullPointerException e) {}
+			p.setPeso(Float.parseFloat(request.getParameter("peso")));
+		} catch (Exception e) {}
 		try {
-			p.setImc((float) request.getAttribute("imc"));
-		} catch (NullPointerException e) {}
+			p.setImc(Float.parseFloat(request.getParameter("imc")));
+		} catch (Exception e) {}
 		try {
-			p.setMetabolismoBasal((int) request.getAttribute("metabolismo-basal"));
-		} catch (NullPointerException e) {}
-
+			p.setMetabolismoBasal(Integer.parseInt((String) request.getAttribute("metabolismo-basal")));
+		} catch (Exception e) {}
 		try {
-			p.setPesoObjetivo((float) request.getAttribute("peso-objetivo"));
-		} catch (NullPointerException e) {}
-
-
+			p.setPesoObjetivo(Float.parseFloat(request.getParameter("nuevo-peso-objetivo")));
+		} catch (Exception e) {}
 		AbmcPaciente ctrl = new AbmcPaciente();
 		try {
 			ctrl.actualizarDatosPersonales(p);
@@ -64,6 +61,7 @@ public class ActualizarDatosPersonales extends HttpServlet {
 			request.setAttribute("error", e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
+		request.getRequestDispatcher("WEB-INF/nutricionista-main.jsp").forward(request, response);
 	}
 
 }

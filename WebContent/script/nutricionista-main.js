@@ -16,16 +16,16 @@ function getPacienteInfo(dni){
 			if(paciente){
 				document.getElementById("panel").style.display = "block";
 				
-				$('#nombreApellido').append(paciente.nombre + ' ' + paciente.apellido);
+				$('#nombre-apellido').append(paciente.nombre + ' ' + paciente.apellido);
 				$('#email').append(paciente.email);
 				$('#telefono').append(paciente.telefono);
 				$('#imc').append(paciente.imc);
-				$('#metabolismoBasal').append(paciente.metabolismoBasal + '   kcal/dia');
+				$('#metabolismo-basal').append(paciente.metabolismoBasal + '   kcal/dia');
 				
-				$('#pesoActual').append(paciente.peso + ' kg.');
-				$('#pesoObjetivo').append(paciente.pesoObjetivo + ' kg.');
-				$('#ejercicioSemana').append(paciente.kcalEjercicioSemana + ' kcal.');
-				$('#ejercicioObjetivo').append(paciente.kcalEjercicioObjetivo + ' kcal.');
+				$('#peso-actual').append(paciente.peso + ' kg.');
+				$('#peso-objetivo').append(paciente.pesoObjetivo + ' kg.');
+				$('#ejercicio-semana').append(paciente.kcalEjercicioSemana + ' kcal.');
+				$('#ejercicio-objetivo').append(paciente.kcalEjercicioObjetivo + ' kcal.');
 			}
 		},
 		error:function(){
@@ -34,12 +34,14 @@ function getPacienteInfo(dni){
 	})       
 };
 $(function() {	       
-   $("#solicitudesMenu a .li-icon").not('.emptyMessage').click(function() {
+   $("#solicitudesMenu li .li-icon").not('.emptyMessage').click(function() {
 	   var dni = this.id.slice(1);
 	   if (this.id[0] == 'a'){
-		   aceptarSolicitud(dni);
+		   	aceptarSolicitud(dni);
+			console.log(this.id)
 		} else {
 			rechazarSolicitud(dni);
+			console.log(this.id)
 		}
    });
 });
@@ -50,11 +52,8 @@ function aceptarSolicitud(dni){
 		dataType: "json",
 		data: {"dni" : dni},
 		success: function(){
-			$("#solicitudesMenu").find('#s' + dni).remove();
+			$("#solicitudesMenu").remove("#s"+dni);
 		},
-		error:function(){
-			alert('Error al aceptar solicitud.');
-		} 
 	})
 }
 function rechazarSolicitud(dni){
@@ -64,10 +63,7 @@ function rechazarSolicitud(dni){
 		dataType: "json",
 		data: {"dni" : dni},
 		success: function(){
-			$("#solicitudesMenu").find('#s' + dni).remove();
+			$("#solicitudesMenu").remove("#s"+dni);
 		},
-		error:function(){
-			alert('Error al rechazar solicitud.');
-		} 
 	}) 
 }

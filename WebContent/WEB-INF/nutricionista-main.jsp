@@ -41,8 +41,8 @@
 							<a href="#">
 								<%= p.getApellido() + " " + p.getNombre() %>
 			          		</a>
-						    <a class="li-icon float-right" href="" id=<%="r" + p.getDni()%>><i class="fas fa-times cruz-rechazar" style="margin: 5px"></i></a>
-							<a class="li-icon float-right" href="" id=<%="a" + p.getDni()%>><i class="fas fa-check tick-aceptar" style="margin: 5px"></i></a>
+						    <a class="li-icon float-right" href="#" id=<%="r" + p.getDni()%>><i class="fas fa-times cruz-rechazar" style="margin: 5px"></i></a>
+							<a class="li-icon float-right" href="#" id=<%="a" + p.getDni()%>><i class="fas fa-check tick-aceptar" style="margin: 5px"></i></a>
 				        </li>
 			        <%}%>
 	
@@ -103,7 +103,7 @@
 					<div class="col-md-6">
 						<div class="card">
 							<div class="card-body">
-								<h3 class="colored-title text-center" id="nombreApellido"></h3>
+								<h3 class="colored-title text-center" id="nombre-apellido"></h3>
 								<ul class="list-group list-group-flush">
 									<li class="list-group-item">
 										<span class="text-muted">Correo electronico: </span><p id="email"></p>
@@ -220,12 +220,13 @@
 					  <div class="mr-auto p-2 bd-highlight">Soy</div>
 
 					  <div class="p-2 bd-highlight">
-						  <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-				          <label class="form-check-label" for="gridRadios2" style="margin-right: 2rem">Hombre </label>
+						  <input class="form-check-input" type="radio" name="sexo-hombre" id="sexo-hombre" value="sexo-hombre">
+				          <label class="form-check-label" for="sexo-hombre" style="margin-right: 2rem">Hombre</label>
  						  </div>	
 							  <div class="p-2 bd-highlight">
-							     <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-				          <label class="form-check-label" for="gridRadios2">Mujer</label>          
+							     <input class="form-check-input" type="radio" name="sexo-mujer" id="sexo-mujer" value="sexo-mujer">
+							 </div>
+				          <label class="form-check-label" for="sexo-mujer">Mujer</label>          
 					   </div>
 					</div>
 					
@@ -291,12 +292,12 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
-						<label for="objPeso">Peso actual(kg.)</label>
-						<input class="form-control" id="peso" type="number" value="65" min="0" max="500"/>				
+						<label for="peso">Peso actual(kg.)</label>
+						<input class="form-control" id="peso" name="peso" type="number" min="5" max="150"/>				
 					</div>
 					<div class="modal-body">
-						<label for="objPeso">Peso objetivo (kg.)</label>
-						<input class="form-control" id="peso-objetivo" type="number" value="65" min="0" max="500"/>				
+						<label for="peso-objetivo">Peso objetivo (kg.)</label>
+						<input class="form-control" id="nuevo-peso-objetivo" name="nuevo-peso-objetivo" type="number" min="5" max="150"/>				
 					</div>
 
 					<div class="modal-footer">
@@ -370,9 +371,5 @@
 		</div>
 	</div>
 
-		<!-- Bootstrap core JavaScript -->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap.bundle.min.js"></script> <!-- Menu Toggle Script -->
-	<script src="scripts.js"></script>
 </body>
 </html>
