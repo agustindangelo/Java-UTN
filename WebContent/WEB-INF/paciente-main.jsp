@@ -1,9 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="ISO-8859-1">
 	<title>Trabajo practico de Java</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style/styles.css">
     <script src="https://kit.fontawesome.com/d00e7b9ed2.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -27,9 +30,9 @@
 					<i class="fas fa-user-circle"></i> Mi Perfil
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="paciente-config.html">ConfiguraciÃ³n</a>
+					<a class="dropdown-item" href="paciente-config.html">Configuración</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="login.html">Cerrar sesiÃ³n</a>
+					<a class="dropdown-item" href="login.html">Cerrar sesión</a>
 				</div>
 			</li>
 	    </ul>
@@ -46,7 +49,7 @@
 				<div class="card">	
 					<div class="card-body">
 						<div class="row">
-							<div class="col">CalorÃ­as</div>
+							<div class="col">Calorías</div>
 							<p>800 / 1879 kcal.</p>
 						</div>
 						<div class="progress">
@@ -60,7 +63,7 @@
 							<div class="progress-bar w-25" role="progressbar" stylearia-valuenow="400" aria-valuemin="0" aria-valuemax="650"></div>
 						</div>
 						<div class="row">
-							<div class="col">ProteÃ­nas</div>
+							<div class="col">Proteínas</div>
 							<p>20 / 120 g.</p>
 						</div>
 						<div class="progress" style="height: 0.5rem;">
@@ -120,7 +123,7 @@
 						<h3 class="card-text text-center">532 <small><span style="font-weight: normal;">cal. quemadas</span></small></h3>		
 					</div>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item">NataciÃ³n</li>
+						<li class="list-group-item">Natación</li>
 						<li class="list-group-item">Bicicleta</li>
 						<li class="list-group-item">Pesas</li>
 					</ul>
@@ -144,7 +147,7 @@
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item">Pan</li>
 						<li class="list-group-item">Salamin</li>
-						<li class="list-group-item">SalmÃ³n</li>
+						<li class="list-group-item">Salmón</li>
 						<li class="list-group-item">Nueces</li>
 						<li class="list-group-item">Lentejas</li>
 					</ul>
@@ -163,7 +166,7 @@
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item">Pan</li>
 						<li class="list-group-item">Salamin</li>
-						<li class="list-group-item">SalmÃ³n</li>
+						<li class="list-group-item">Salmón</li>
 						<li class="list-group-item">Nueces</li>
 						<li class="list-group-item">Lentejas</li>
 					</ul>
@@ -180,12 +183,12 @@
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item">Pan</li>
 						<li class="list-group-item">Salamin</li>
-						<li class="list-group-item">SalmÃ³n</li>
+						<li class="list-group-item">Salmón</li>
 						<li class="list-group-item">Nueces</li>
 						<li class="list-group-item">Lentejas</li>
 						<li class="list-group-item">Pan</li>
 						<li class="list-group-item">Salamin</li>
-						<li class="list-group-item">SalmÃ³n</li>
+						<li class="list-group-item">Salmón</li>
 						<li class="list-group-item">Nueces</li>
 						<li class="list-group-item">Lentejas</li>
 					</ul>
@@ -202,7 +205,7 @@
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item">Pan</li>
 						<li class="list-group-item">Salamin</li>
-						<li class="list-group-item">SalmÃ³n</li>
+						<li class="list-group-item">Salmón</li>
 						<li class="list-group-item">Nueces</li>
 						<li class="list-group-item">Lentejas</li>
 					</ul>
@@ -231,19 +234,19 @@
 							<ul id="desayunoMenu" class="list-group list-group-flush">
 								<li class="list-group-item">
 									<a class="colored-title">Nutella</a>
-									<small class="text-danger">No estÃ¡ en tu plan  </small>
+									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Cucharadas</label>
 								</li>
 								<li class="list-group-item">
 									<a class="colored-title">Chocolatada</a>
-									<small class="text-danger">No estÃ¡ en tu plan  </small>
+									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Vasos</label>
 								</li>
 								<li class="list-group-item">
 									<a class="colored-title">Milanesas</a>
-									<small class="text-danger">No estÃ¡ en tu plan  </small>
+									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Unidades</label>
 								</li>
@@ -285,19 +288,19 @@
 							<ul id="almuerzoMenu" class="list-group list-group-flush">
 								<li class="list-group-item">
 									<a class="btn colored-title">Nutella</a>
-									<small class="text-danger">No estÃ¡ en tu plan  </small>
+									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Cucharadas</label>
 								</li>
 								<li class="list-group-item">
 									<a class="colored-title">Chocolatada</a>
-									<small class="text-danger">No estÃ¡ en tu plan  </small>
+									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Vasos</label>
 								</li>
 								<li class="list-group-item">
 									<a class="colored-title">Milanesas</a>
-									<small class="text-danger">No estÃ¡ en tu plan  </small>
+									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Unidades</label>
 								</li>
@@ -339,19 +342,19 @@
 							<ul id="cenaMenu" class="list-group list-group-flush">
 								<li class="list-group-item">
 									<a class="colored-title">Nutella</a>
-									<small class="text-danger">No estÃ¡ en tu plan  </small>
+									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Cucharadas</label>
 								</li>
 								<li class="list-group-item">
 									<a class="colored-title">Chocolatada</a>
-									<small class="text-danger">No estÃ¡ en tu plan  </small>
+									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Vasos</label>
 								</li>
 								<li class="list-group-item">
 									<a class="colored-title">Milanesas</a>
-									<small class="text-danger">No estÃ¡ en tu plan  </small>
+									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Unidades</label>
 								</li>
@@ -393,19 +396,19 @@
 							<ul id="otrosMenu" class="list-group list-group-flush">
 								<li class="list-group-item">
 									<a class="colored-title">Nutella</a>
-									<small class="text-danger">No estÃ¡ en tu plan  </small>
+									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Cucharadas</label>
 								</li>
 								<li class="list-group-item">
 									<a class="colored-title">Chocolatada</a>
-									<small class="text-danger">No estÃ¡ en tu plan  </small>
+									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Vasos</label>
 								</li>
 								<li class="list-group-item">
 									<a class="colored-title">Milanesas</a>
-									<small class="text-danger">No estÃ¡ en tu plan  </small>
+									<small class="text-danger">No está en tu plan  </small>
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Unidades</label>
 								</li>

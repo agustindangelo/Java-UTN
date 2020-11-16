@@ -54,8 +54,7 @@ public class LogIn extends HttpServlet {
 					request.getRequestDispatcher("WEB-INF/nutricionista-main.jsp").forward(request, response);
 				} else {
 					AbmcPaciente ctrlPaciente = new AbmcPaciente();
-					Paciente p = new Paciente();
-					p.setDni(u.getDni());
+					Paciente p = ctrlPaciente.getByDni(u.getDni());
 					Solicitud s = ctrlPaciente.getSolicitud(p);
 					if (s.getEstado().equalsIgnoreCase("pendiente")) {
 						request.getRequestDispatcher("WEB-INF/solicitud-enviada.html").forward(request, response);
