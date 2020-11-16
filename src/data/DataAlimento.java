@@ -1,14 +1,15 @@
 package data;
 
 import entidades.Alimento;
-import java.util.LinkedList;
+
+import java.util.ArrayList;
 import java.sql.*;
 
 public class DataAlimento {
-	public LinkedList<Alimento> getAll() throws SQLException{
+	public ArrayList<Alimento> getAll() throws SQLException{
 		Statement stmt = null;
 		ResultSet rs = null;
-		LinkedList<Alimento> alimentos = new LinkedList<Alimento>();
+		ArrayList<Alimento> alimentos = new ArrayList<Alimento>();
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
 			rs = stmt.executeQuery("SELECT * FROM alimento");
@@ -21,7 +22,6 @@ public class DataAlimento {
 					a.setGrasas(rs.getFloat("grasas"));
 					a.setProteinas(rs.getFloat("proteinas"));
 					a.setCarbohidratos(rs.getFloat("carbohidratos"));
-					
 					alimentos.add(a);
 				}
 			}

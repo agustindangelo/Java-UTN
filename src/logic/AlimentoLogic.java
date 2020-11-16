@@ -1,7 +1,7 @@
 package logic;
 
 import java.sql.SQLException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import data.DataAlimento;
 import entidades.Alimento;
 
@@ -12,7 +12,7 @@ public class AlimentoLogic {
 		da = new DataAlimento();
 	}
 	
-	public LinkedList<Alimento> getAll() throws SQLException{
+	public ArrayList<Alimento> getAll() throws SQLException{
 		return da.getAll();
 	}
 	

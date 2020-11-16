@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="entidades.Paciente"%>  
+<%@ page import="logic.AbmcPaciente"%>  
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="entidades.Ingesta"%>
+<%@ page import="entidades.Alimento"%>
+<%@ page import="logic.AlimentoLogic"%>
+<%@ page import="java.sql.SQLException"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,6 +54,20 @@
 	    </ul>
 	  </div>
 	</nav>
+	
+	<% 
+	Paciente p = (Paciente) session.getAttribute("paciente");
+	AbmcPaciente ctrl = new AbmcPaciente();
+	AlimentoLogic aLogic = new AlimentoLogic();
+	ArrayList<Alimento> alimentos = aLogic.getAll();
+	ArrayList<Ingesta> ingestas = new ArrayList<>();
+	try {
+		ingestas = ctrl.getIngestasHoy(p);
+	} catch(SQLException e){
+		request.setAttribute("error", "Error al recuperar las ingestas del día.");
+		request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+	}
+	%>
 	
 	<div class="container-fluid">
 		<div class="row justify-content-between">
@@ -154,14 +175,13 @@
 						</div>
 					</div>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Pan</li>
-						<li class="list-group-item">Salamin</li>
-						<li class="list-group-item">Salmón</li>
-						<li class="list-group-item">Nueces</li>
-						<li class="list-group-item">Lentejas</li>
+						<% for (Ingesta i : ingestas){
+								if (i.getTipo().equalsIgnoreCase("desayuno")){
+						%>
+								<li class="list-group-item"><%=i.getAlimento().getNombre()%></li>
+						<%	}
+						}%>
 					</ul>
-
-					
 				</div>
 			</div>
 			<div class="col-md-3">
@@ -173,11 +193,12 @@
 						</div>
 					</div>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Pan</li>
-						<li class="list-group-item">Salamin</li>
-						<li class="list-group-item">Salmón</li>
-						<li class="list-group-item">Nueces</li>
-						<li class="list-group-item">Lentejas</li>
+						<% for (Ingesta i : ingestas){
+								if (i.getTipo().equalsIgnoreCase("almuerzo")){
+						%>
+								<li class="list-group-item"><%=i.getAlimento().getNombre()%></li>
+						<%	}
+						}%>
 					</ul>
 				</div>	
 			</div>
@@ -190,16 +211,12 @@
 						</div>
 					</div>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Pan</li>
-						<li class="list-group-item">Salamin</li>
-						<li class="list-group-item">Salmón</li>
-						<li class="list-group-item">Nueces</li>
-						<li class="list-group-item">Lentejas</li>
-						<li class="list-group-item">Pan</li>
-						<li class="list-group-item">Salamin</li>
-						<li class="list-group-item">Salmón</li>
-						<li class="list-group-item">Nueces</li>
-						<li class="list-group-item">Lentejas</li>
+						<% for (Ingesta i : ingestas){
+								if (i.getTipo().equalsIgnoreCase("cena")){
+						%>
+								<li class="list-group-item"><%=i.getAlimento().getNombre()%></li>
+						<%	}
+						}%>
 					</ul>
 				</div>	
 			</div>			
@@ -212,11 +229,12 @@
 						</div>
 					</div>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Pan</li>
-						<li class="list-group-item">Salamin</li>
-						<li class="list-group-item">Salmón</li>
-						<li class="list-group-item">Nueces</li>
-						<li class="list-group-item">Lentejas</li>
+						<% for (Ingesta i : ingestas){
+								if (i.getTipo().equalsIgnoreCase("otro")){
+						%>
+								<li class="list-group-item"><%=i.getAlimento().getNombre()%></li>
+						<%	}
+						}%>
 					</ul>
 				</div>
 			</div>
@@ -241,34 +259,14 @@
 						<div class="container">
 							<input type="text" class="form-control" id="desayunoSearch" onkeyup="filtrarDesayuno()" placeholder="Buscar..." title="Alimentos">
 							<ul id="desayunoMenu" class="list-group list-group-flush">
-								<li class="list-group-item">
-									<a class="colored-title">Nutella</a>
-									<small class="text-danger">No está en tu plan  </small>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>						
-									<label class="float-right text-muted">Cucharadas</label>
-								</li>
-								<li class="list-group-item">
-									<a class="colored-title">Chocolatada</a>
-									<small class="text-danger">No está en tu plan  </small>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>						
-									<label class="float-right text-muted">Vasos</label>
-								</li>
-								<li class="list-group-item">
-									<a class="colored-title">Milanesas</a>
-									<small class="text-danger">No está en tu plan  </small>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>						
-									<label class="float-right text-muted">Unidades</label>
-								</li>
-								<li class="list-group-item">
-									<a class="colored-title">Arroz</a>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>						
-									<label class="float-right text-muted">Gramos</label>
-								</li>
-								<li class="list-group-item">
-									<a class="colored-title">Lechuga</a>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>						
-									<label class="float-right text-muted">Gramos</label>
-								</li>
+								<% for (Alimento a : alimentos) { %>
+									<li class="list-group-item">
+										<a class="colored-title"><%= a.getNombre() %></a>
+											<!-- <small class="text-danger">No está en tu plan  </small> -->
+										<input class="float-right" type="number" value="0" min="0" max="100"/>						
+										<label class="float-right text-muted">Gr.</label>
+									</li>
+								<% } %>
 							</ul>
 						</div>					
 					</div>
@@ -350,8 +348,8 @@
 							<input type="text" class="form-control" id="cenaSearch" onkeyup="filtrarCena()" placeholder="Buscar..." title="Alimentos">
 							<ul id="cenaMenu" class="list-group list-group-flush">
 								<li class="list-group-item">
-									<a class="colored-title">Nutella</a>
-									<small class="text-danger">No está en tu plan  </small>
+									<a class="colored-title">Nutella</a>		
+<!-- 									<small class="text-danger">No está en tu plan  </small> -->
 									<input class="float-right" type="number" value="0" min="0" max="100"/>						
 									<label class="float-right text-muted">Cucharadas</label>
 								</li>

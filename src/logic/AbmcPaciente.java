@@ -9,6 +9,7 @@ import entidades.Solicitud;
 import entidades.Usuario;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class AbmcPaciente {
 	
 	public Map<String, Integer>  calcularIngestasHoy(Paciente p) throws SQLException{
 		Map<String, Integer> valores = new HashMap<>();
-		LinkedList<Ingesta> ingestas = dp.getIngestasHoy(p);
+		ArrayList<Ingesta> ingestas = dp.getIngestasHoy(p);
 		int calorias = 0;
 		int carbohidratos = 0;
 		int grasas = 0;
@@ -65,7 +66,7 @@ public class AbmcPaciente {
 	
 	
 	public Float calcularPromedioCalSemanal(Paciente p) throws SQLException{
-		LinkedList<Ingesta> ingestas = dp.getIngestasHoy(p);
+		ArrayList<Ingesta> ingestas = dp.getIngestasHoy(p);
 		int calorias = 0;
 		int caloriasAlimento;
 		int gramosConsumidos;
@@ -102,5 +103,8 @@ public class AbmcPaciente {
 	}
 	public void actualizarDatosPersonales(Paciente p) throws SQLException {
 		dp.actualizarDatosPersonales(p);
+	}
+	public ArrayList<Ingesta> getIngestasHoy(Paciente p) throws SQLException {
+		return dp.getIngestasHoy(p);
 	}
 }

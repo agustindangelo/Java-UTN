@@ -1,6 +1,7 @@
 package data;
 import java.sql.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import entidades.Alimento;
@@ -200,13 +201,13 @@ public class DataPaciente {
 		}
 		return p;
 	}
-	public LinkedList<Ingesta> getIngestasHoy(Paciente p) throws SQLException{
-		LinkedList<Ingesta> ingestas = new LinkedList<>();
+	public ArrayList<Ingesta> getIngestasHoy(Paciente p) throws SQLException{
+		ArrayList<Ingesta> ingestas = new ArrayList<>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Ingesta i;
 		Alimento alimento;
-		int id_alimento = 0;
+		int id_alimento;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
 					"select id_alimento, fecha, tipo, cantidad\n" + 
@@ -215,16 +216,19 @@ public class DataPaciente {
 					);
 			stmt.setString(1, p.getDni());
 			rs = stmt.executeQuery();
-			if(rs != null && rs.next()) {
-				i = new Ingesta();
-			    id_alimento = rs.getInt(id_alimento);
-				alimento = da.getOne(id_alimento);
-				i.setAlimento(alimento);
-				i.setFecha(rs.getDate("fecha"));
-				i.setTipo(rs.getString("tipo"));		
-				i.setCantidad(rs.getInt("cantidad"));
-				ingestas.add(i);
+			if(rs!=null) {
+				while(rs.next()) {
+					i = new Ingesta();
+					id_alimento = rs.getInt("id_alimento");
+					alimento = da.getOne(id_alimento);
+					i.setAlimento(alimento);
+					i.setFecha(rs.getDate("fecha"));
+					i.setTipo(rs.getString("tipo"));		
+					i.setCantidad(rs.getInt("cantidad"));
+					ingestas.add(i);
+				}
 			}
+			
 		} catch (SQLException e) {
 			throw e;
 		} finally {

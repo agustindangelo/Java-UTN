@@ -73,9 +73,6 @@ public class Paciente extends Usuario{
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
-	public String getFechaNacimientoStr() {
-		return fechaNacimiento.toString();
-	}
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
