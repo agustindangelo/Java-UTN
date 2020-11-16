@@ -1,5 +1,6 @@
 package data;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 
 import entidades.Alimento;
@@ -17,7 +18,7 @@ public class DataPaciente {
 		PreparedStatement stmt = null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"insert into paciente (dni, nombre, apellido, email, `password`, telefono) values (?,?,?,?,?,?)"
+					"insert into paciente (dni, nombre, apellido, email, `password`, telefono, genero, fecha_nacimiento) values (?,?,?,?,?,?,?,?)"
 					);
 			stmt.setString(1, p.getDni());
 			stmt.setString(2, p.getNombre());
@@ -25,6 +26,9 @@ public class DataPaciente {
 			stmt.setString(4, p.getEmail());
 			stmt.setString(5, p.getPassword());
 			stmt.setString(6, p.getTelefono());
+			stmt.setString(7, p.getGeneroStr());
+			SimpleDateFormat fecha = new SimpleDateFormat("yyyy-MM-dd");
+			stmt.setDate(8,  java.sql.Date.valueOf(fecha.format(p.getFechaNacimiento())));
 			stmt.execute();
 		} catch (SQLException e) {
 			throw e;
