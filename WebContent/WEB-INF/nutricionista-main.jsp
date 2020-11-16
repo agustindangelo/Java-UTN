@@ -216,26 +216,9 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form>
-					<div class="d-flex bd-highlight mb-3">							
-					  <div class="mr-auto p-2 bd-highlight">Soy</div>
 
-					  <div class="p-2 bd-highlight">
-						  <input class="form-check-input" type="radio" name="sexo-hombre" id="sexo-hombre" value="sexo-hombre">
-				          <label class="form-check-label" for="sexo-hombre" style="margin-right: 2rem">Hombre</label>
- 						  </div>	
-							  <div class="p-2 bd-highlight">
-							     <input class="form-check-input" type="radio" name="sexo-mujer" id="sexo-mujer" value="sexo-mujer">
-							 </div>
-				          <label class="form-check-label" for="sexo-mujer">Mujer</label>          
-					   </div>
-					</div>
 					
-					<div class="input-group mb-2">
-				        <div class="input-group-prepend">
-				          <div class="input-group-text">Fecha de Nacimiento</div>
-				        </div>
-				        <input type="date" class="form-control" id="fecha-nacimiento" placeholder="">
-				    </div>
+					
 					<div class="input-group mb-2">
 				        <div class="input-group-prepend">
 				          <div class="input-group-text">Altura</div>

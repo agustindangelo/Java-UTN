@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,12 +50,17 @@ public class RegistrarPaciente extends HttpServlet {
 		p.setApellido(request.getParameter("apellido"));
 		p.setNombre(request.getParameter("nombre"));
 		p.setDni(request.getParameter("dni"));
+		try {
+			p.setFechaNacimiento(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fecha")));
+		} catch (ParseException e1) {
+			request.setAttribute("error", "Error al registrar la fecha de nacimiento.");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		}
+		p.setGenero(request.getParameter("sexo"));
 		p.setEmail(request.getParameter("email"));
 		p.setTelefono(request.getParameter("telefono"));
 		p.setPassword(request.getParameter("password"));
 		session.setAttribute("paciente", p);
-			
-		
 		try {
 			ctrl.registrarPaciente(p);
 		} catch(SQLException e) {
