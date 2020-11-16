@@ -4,7 +4,16 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Trabajo practico de Java</title>
+	<link rel="apple-touch-icon" sizes="76x76" href="resources/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="resources/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="resources/favicon/favicon-16x16.png">
+	<link rel="manifest" href="resources/favicon/site.webmanifest">
+	<link rel="mask-icon" href="resources/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="resources/favicon/favicon.ico">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="msapplication-config" content="resources/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+	<title>Trabajo Práctico de Java</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="style/styles.css">
     <script src="https://kit.fontawesome.com/d00e7b9ed2.js" crossorigin="anonymous"></script>
