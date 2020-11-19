@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="entidades.Paciente"%>  
+<%@ page import="entidades.Ejercicio"%>  
 <%@ page import="logic.AbmcPaciente"%>  
 <%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.LinkedList"%>
 <%@ page import="entidades.Ingesta"%>
 <%@ page import="entidades.Alimento"%>
 <%@ page import="logic.AlimentoLogic"%>
@@ -161,9 +163,15 @@
 						</h3>		
 					</div>
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Natación</li>
-						<li class="list-group-item">Bicicleta</li>
-						<li class="list-group-item">Pesas</li>
+						<%
+						LinkedList<Ejercicio> ejercicios = ctrl.getEjerciciosSemana(p);
+						for (Ejercicio e : ejercicios) {
+						%>
+							<li class="list-group-item">
+								<a><%= e.getNombre() %></a>
+								<div class="float-right text-muted"><%= e.getFecha() %></div>
+							</li>
+						<%}%>
 					</ul>
 				</div>
 			</div>

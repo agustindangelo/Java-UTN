@@ -90,7 +90,6 @@ public class AbmcPaciente {
 			acum += e.getGastoEfectivo();
 		}
 		return acum;
-		
 	}
 
 	public Paciente getByDni(String dni) throws SQLException{
@@ -107,5 +106,9 @@ public class AbmcPaciente {
 	}
 	public ArrayList<Ingesta> getIngestasHoy(Paciente p) throws SQLException {
 		return dp.getIngestasHoy(p);
+	}
+	
+	public LinkedList<Ejercicio> getEjerciciosSemana(Paciente p) throws SQLException {
+		return dp.getEjercicioSemana(p);
 	}
 }
