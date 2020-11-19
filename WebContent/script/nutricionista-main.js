@@ -67,3 +67,50 @@ function rechazarSolicitud(dni){
 		},
 	}) 
 }
+$(function(){
+	$("#menu-toggle").click(function(e) {
+		e.preventDefault();
+		$("#wrapper").toggleClass("toggled");
+	});
+
+	$(window).resize(function(e) {
+		if($(window).width()<=768){
+			$("#wrapper").removeClass("toggled");
+		}else{
+			$("#wrapper").addClass("toggled");
+		}
+	});
+});
+   
+function filtrarPacientes() {
+  var input, filter, ul, li, a, i;
+  input = document.getElementById("pacienteSearch");
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("pacienteMenu");
+  li = ul.getElementsByTagName("li");
+
+	for (i = 0; i < li.length; i++) {
+		a = li[i].getElementsByTagName("a")[0];
+		if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+			li[i].style.display = "";
+		} else {
+			li[i].style.display = "none";
+		}
+	}
+}
+function filtrarSolicitudes() {
+	var input, filter, ul, li, a, i;
+	input = document.getElementById("solicitudesSearch");
+	filter = input.value.toUpperCase();
+	ul = document.getElementById("solicitudesMenu");
+	li = ul.getElementsByTagName("li");
+  
+	  for (i = 0; i < li.length; i++) {
+		a = li[i].getElementsByTagName("a")[0];
+		if (a.innerText.toUpperCase().indexOf(filter) > -1) {
+			li[i].style.display = "";
+		} else {
+			li[i].style.display = "none";
+		}
+	  }
+  }
