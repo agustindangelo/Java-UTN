@@ -11,6 +11,7 @@ import entidades.Paciente;
 import entidades.Paciente.TipoGenero;
 import entidades.Solicitud;
 import entidades.Usuario;
+import entidades.Ejercicio;
 
 public class DataPaciente {
 	DataAlimento da = new DataAlimento();
@@ -318,6 +319,45 @@ public class DataPaciente {
 				throw e;
 			}
 		}
+	}
+
+	public LinkedList<Ejercicio> getEjercicioSemana(Paciente p) throws SQLException {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		LinkedList<Ejercicio> ejercicios = new LinkedList<>();
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					  "SELECT * "
+					+ "FROM paciente_ejercicio pe "
+					+ "INNER JOIN ejercicio e ON pe.id_ejercicio = e.id_ejercicio "
+					+ "WHERE pe.dni_paciente = ? AND pe.fecha >= subdate(current_date, interval 1 week);"
+					);
+			stmt.setString(1, p.getDni());
+			rs = stmt.executeQuery();
+			if (rs != null) {
+				while (rs.next()) {
+					Ejercicio e = new Ejercicio();
+					e.setCodigo(rs.getInt("id_ejercicio"));
+					e.setDuracion(rs.getInt("duracion"));
+					e.setIntensidad(rs.getString("intensidad"));
+					e.setFecha(rs.getDate("fecha"));
+					e.setNombre(rs.getString("nombre"));
+					e.setGastoEnergetico(rs.getInt("gasto_energetico"));
+					ejercicios.add(e);
+				}
+			}
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+		return ejercicios;
 	}	
 
 }

@@ -121,7 +121,10 @@
 							</div>
 						</div>
 						<div class="card-body">
-							<h3 class="card-text text-center">70 <small><span style="font-weight: normal;">kg.</span></small></h3>
+							<h3 class="card-text text-center">
+								<%= p.getPeso() %>
+								<small><span style="font-weight: normal;">kg.</span></small>
+							</h3>
 						</div>
 					</div>
 					<div class="card">
@@ -152,7 +155,10 @@
 						</div>
 					</div>
 					<div class="card-body">
-						<h3 class="card-text text-center">532 <small><span style="font-weight: normal;">cal. quemadas</span></small></h3>		
+						<h3 class="card-text text-center">
+							<%= (int) Math.round(ctrl.calcularKcalEjercicioSemana(p)) %>
+							<small><span style="font-weight: normal;">cal. quemadas</span></small>
+						</h3>		
 					</div>
 					<ul class="list-group list-group-flush">
 						<li class="list-group-item">Natación</li>
@@ -295,34 +301,14 @@
 						<div class="container">
 							<input type="text" class="form-control" id="almuerzoSearch" onkeyup="filtrarAlmuerzo()" placeholder="Buscar..." title="Alimentos">
 							<ul id="almuerzoMenu" class="list-group list-group-flush">
-								<li class="list-group-item">
-									<a class="btn colored-title">Nutella</a>
-									<small class="text-danger">No está en tu plan  </small>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>						
-									<label class="float-right text-muted">Cucharadas</label>
-								</li>
-								<li class="list-group-item">
-									<a class="colored-title">Chocolatada</a>
-									<small class="text-danger">No está en tu plan  </small>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>						
-									<label class="float-right text-muted">Vasos</label>
-								</li>
-								<li class="list-group-item">
-									<a class="colored-title">Milanesas</a>
-									<small class="text-danger">No está en tu plan  </small>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>						
-									<label class="float-right text-muted">Unidades</label>
-								</li>
-								<li class="list-group-item">
-									<a class="colored-title">Arroz</a>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>						
-									<label class="float-right text-muted">Gramos</label>
-								</li>
-								<li class="list-group-item">
-									<a class="colored-title">Lechuga</a>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>						
-									<label class="float-right text-muted">Gramos</label>
-								</li>
+								<% for (Alimento a : alimentos) { %>
+									<li class="list-group-item">
+										<a class="colored-title"><%= a.getNombre() %></a>
+											<!-- <small class="text-danger">No está en tu plan  </small> -->
+										<input class="float-right" type="number" value="0" min="0" max="100"/>						
+										<label class="float-right text-muted">Gr.</label>
+									</li>
+								<% } %>
 							</ul>
 						</div>					
 					</div>
@@ -349,34 +335,14 @@
 						<div class="container">
 							<input type="text" class="form-control" id="cenaSearch" onkeyup="filtrarCena()" placeholder="Buscar..." title="Alimentos">
 							<ul id="cenaMenu" class="list-group list-group-flush">
-								<li class="list-group-item">
-									<a class="colored-title">Nutella</a>		
-<!-- 									<small class="text-danger">No está en tu plan  </small> -->
-									<input class="float-right" type="number" value="0" min="0" max="100"/>						
-									<label class="float-right text-muted">Cucharadas</label>
-								</li>
-								<li class="list-group-item">
-									<a class="colored-title">Chocolatada</a>
-									<small class="text-danger">No está en tu plan  </small>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>						
-									<label class="float-right text-muted">Vasos</label>
-								</li>
-								<li class="list-group-item">
-									<a class="colored-title">Milanesas</a>
-									<small class="text-danger">No está en tu plan  </small>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>						
-									<label class="float-right text-muted">Unidades</label>
-								</li>
-								<li class="list-group-item">
-									<a class="colored-title">Arroz</a>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>						
-									<label class="float-right text-muted">Gramos</label>
-								</li>
-								<li class="list-group-item">
-									<a class="colored-title">Lechuga</a>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>						
-									<label class="float-right text-muted">Gramos</label>
-								</li>
+								<% for (Alimento a : alimentos) { %>
+									<li class="list-group-item">
+										<a class="colored-title"><%= a.getNombre() %></a>
+											<!-- <small class="text-danger">No está en tu plan  </small> -->
+										<input class="float-right" type="number" value="0" min="0" max="100"/>						
+										<label class="float-right text-muted">Gr.</label>
+									</li>
+								<% } %>
 							</ul>
 						</div>					
 					</div>
@@ -403,34 +369,14 @@
 						<div class="container">
 							<input type="text" class="form-control" id="otrosSearch" onkeyup="filtrarOtros()" placeholder="Buscar..." title="Alimentos">
 							<ul id="otrosMenu" class="list-group list-group-flush">
-								<li class="list-group-item">
-									<a class="colored-title">Nutella</a>
-									<small class="text-danger">No está en tu plan  </small>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>						
-									<label class="float-right text-muted">Cucharadas</label>
-								</li>
-								<li class="list-group-item">
-									<a class="colored-title">Chocolatada</a>
-									<small class="text-danger">No está en tu plan  </small>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>						
-									<label class="float-right text-muted">Vasos</label>
-								</li>
-								<li class="list-group-item">
-									<a class="colored-title">Milanesas</a>
-									<small class="text-danger">No está en tu plan  </small>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>						
-									<label class="float-right text-muted">Unidades</label>
-								</li>
-								<li class="list-group-item">
-									<a class="colored-title">Arroz</a>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>						
-									<label class="float-right text-muted">Gramos</label>
-								</li>
-								<li class="list-group-item">
-									<a class="colored-title">Lechuga</a>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>						
-									<label class="float-right text-muted">Gramos</label>
-								</li>
+								<% for (Alimento a : alimentos) { %>
+									<li class="list-group-item">
+										<a class="colored-title"><%= a.getNombre() %></a>
+											<!-- <small class="text-danger">No está en tu plan  </small> -->
+										<input class="float-right" type="number" value="0" min="0" max="100"/>						
+										<label class="float-right text-muted">Gr.</label>
+									</li>
+								<% } %>
 							</ul>
 						</div>					
 					</div>
@@ -496,7 +442,7 @@
 	<div id="actualizarPeso" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form>
+				<form action="ActualizarPeso" method="post">
 					<div class="modal-header">						
 						<h4 class="modal-title">Actualizar peso</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -504,8 +450,8 @@
 					
 					<div class="modal-body">
 						<div class="container">
-							<label for="pesoHoy">Peso hoy (kg.)</label>
-							<input class="form-control" id="pesoHoy" type="number" value="65" min="0" max="500"/>						
+							<label for="peso-paciente">Peso hoy (kg.)</label>
+							<input class="form-control" id="peso-paciente" name="peso-paciente" type="number" value="65" min="0" max="500"/>						
 						</div>					
 					</div>
 					<div class="modal-footer">

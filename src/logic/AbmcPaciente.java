@@ -2,6 +2,7 @@ package logic;
 
 import data.DataPaciente;
 import entidades.Alimento;
+import entidades.Ejercicio;
 import entidades.Ingesta;
 import entidades.Nutricionista;
 import entidades.Paciente;
@@ -82,14 +83,14 @@ public class AbmcPaciente {
 		return (float) (calorias / 7);
 	}
 	
-	public Float calcularKcalEjercicioSemana(Paciente p) throws SQLException{
-		// <TODO: Terminar
-		/*LinkedList<Ejercicio> ejercicios = dp.getEjercicioSemana(p);
-		int acum = 0;
+	public Float calcularKcalEjercicioSemana(Paciente p) throws SQLException{		
+		LinkedList<Ejercicio> ejercicios = dp.getEjercicioSemana(p);
+		float acum = 0;
 		for (Ejercicio e : ejercicios) {
-			
-		}*/
-		return (float)0;
+			acum += e.getGastoEfectivo();
+		}
+		return acum;
+		
 	}
 
 	public Paciente getByDni(String dni) throws SQLException{
