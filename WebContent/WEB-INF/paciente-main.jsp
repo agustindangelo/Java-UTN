@@ -9,6 +9,8 @@
 <%@ page import="entidades.Alimento"%>
 <%@ page import="logic.AlimentoLogic"%>
 <%@ page import="java.sql.SQLException"%>
+<%@ page import="java.util.Map"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,22 +63,30 @@
 	
 	<% 
 	Paciente p = (Paciente) session.getAttribute("paciente");
+	ArrayList<Ingesta> ingestas = p.getIngestas();
 	AbmcPaciente ctrl = new AbmcPaciente();
 	AlimentoLogic aLogic = new AlimentoLogic();
+	Map<String, Integer> consumos = p.getConsumosHoy();
 	ArrayList<Alimento> alimentos = aLogic.getAll();
-	ArrayList<Ingesta> ingestas = new ArrayList<>();
-	try {
-		ingestas = ctrl.getIngestasHoy(p);
-	} catch(SQLException e){
-		request.setAttribute("error", "Error al recuperar las ingestas del día.");
-		request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
-	}
+	
+	int porcentaje_grasas =  Math.round(consumos.get("grasas") / p.getPlan().getGrasasDiarias()) * 100;
+	int porcentaje_carbohidratos = Math.round(consumos.get("carbohidratos") / p.getPlan().getCarbohidratosDiarios()) * 100;
+	int porcentaje_calorias = Math.round(consumos.get("calorias") / p.getPlan().getKcalDiarias()) * 100;
+	int porcentaje_proteinas =  consumos.get("proteinas") * 100 / p.getPlan().getProteinasDiarias();
 	%>
 	
 	<div class="container-fluid">
 		<div class="row justify-content-between">
 			<h2>Mis resultados de hoy</h2>
 			<h3>Martes, 17 de Agosto</h3>
+			<div>
+ 				<%= porcentaje_grasas %>
+				<%= porcentaje_calorias %>
+				<%= porcentaje_carbohidratos%>
+				<%= porcentaje_proteinas%>
+				<%= consumos.get("proteinas")%>
+				<%= p.getPlan().getProteinasDiarias() %>
+			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-3">
@@ -84,31 +94,31 @@
 					<div class="card-body">
 						<div class="row">
 							<div class="col">Calorías</div>
-							<p>800 / 1879 kcal.</p>
+							<p><%= consumos.get("calorias") %> / <%= p.getPlan().getKcalDiarias() %> kcal.</p>
 						</div>
 						<div class="progress">
-							<div class="progress-bar w-25" role="progressbar" aria-valuenow="650" aria-valuemin="0" aria-valuemax="2100"></div>
+							<div class="progress-bar" style="width: <%= consumos.get("calorias") * 100 / p.getPlan().getKcalDiarias() %>%" role="progressbar"></div>
 						</div>
 						<div class="row">
 							<div class="col">Carbohidratos</div>
-							<p>20 / 120 g.</p>
+							<p><%= consumos.get("carbohidratos") %>  / <%= p.getPlan().getCarbohidratosDiarios() %> g.</p>
 						</div>
 						<div class="progress" style="height: 0.5rem;">
-							<div class="progress-bar w-25" role="progressbar" stylearia-valuenow="400" aria-valuemin="0" aria-valuemax="650"></div>
+							<div class="progress-bar" style="width: <%= consumos.get("carbohidratos") * 100 / p.getPlan().getCarbohidratosDiarios() %>%" role="progressbar"></div>
 						</div>
 						<div class="row">
 							<div class="col">Proteínas</div>
-							<p>20 / 120 g.</p>
+							<p><%= consumos.get("proteinas") %>  / <%= p.getPlan().getProteinasDiarias() %> g.</p>
 						</div>
 						<div class="progress" style="height: 0.5rem;">
-							<div class="progress-bar w-75" role="progressbar" aria-valuenow="130" aria-valuemin="0" aria-valuemax="150"></div>
+							<div class="progress-bar" style="width: <%= consumos.get("proteinas") * 100/ p.getPlan().getProteinasDiarias()%>%" role="progressbar"></div>
 						</div>
 						<div class="row">
 							<div class="col">Grasas</div>
-							<p>20 / 120 g.</p>
+							<p><%= consumos.get("grasas") %>  / <%= consumos.get("grasas") * 100 / p.getPlan().getGrasasDiarias() %> g.</p>
 						</div>
 						<div class="progress" style="height: 0.5rem;">
-							<div class="progress-bar w-50" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="350"></div>
+							<div class="progress-bar" style="width: 10%" role="progressbar"></div>
 						</div>
 					</div>
 				</div>

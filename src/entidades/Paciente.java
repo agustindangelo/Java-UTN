@@ -1,5 +1,9 @@
 package entidades;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
 public class Paciente extends Usuario{
 	public enum TipoGenero{
@@ -17,7 +21,56 @@ public class Paciente extends Usuario{
 	String objetivo;
 	int kcalEjercicioSemana; // kcal quemadas con ejercicios hechos en los ultimos 7 dias
 	int kcalEjercicioObjetivo; // kcal quemadas por semana, sugeridas por el nutricionista
-	
+	private PlanDeAlimentacion plan;
+	private ArrayList<Ingesta> ingestas;
+
+	public Map<String, Integer> getConsumosHoy() {
+		Map<String, Integer> valores = new HashMap<String, Integer>();
+		ArrayList<Ingesta> ingestas = this.ingestas;
+		int calorias = 0;
+		int carbohidratos = 0;
+		int grasas = 0;
+		int proteinas = 0;
+		
+		int caloriasAlimento;
+		int carbohidratosAlimento;
+		int grasasAlimento;
+		int proteinasAlimento;
+		int gramosConsumidos;
+		
+		Alimento alimento;
+		for (Ingesta i : ingestas) {
+			alimento = i.getAlimento();
+			gramosConsumidos = i.getCantidad();
+			
+			caloriasAlimento = (int) alimento.getCalorias();
+			carbohidratosAlimento = (int) alimento.getCarbohidratos();
+			grasasAlimento = (int) alimento.getGrasas();
+			proteinasAlimento = (int) alimento.getProteinas();
+			
+			float factor = gramosConsumidos / 100;
+			
+			calorias = (int) (calorias + caloriasAlimento * factor);
+			carbohidratos = (int) (carbohidratos + carbohidratosAlimento * factor);
+			grasas = (int) (grasas + grasasAlimento * factor);
+			proteinas = (int) (proteinas + proteinasAlimento * factor);
+		}
+		valores.put("calorias", calorias);
+		valores.put("carbohidratos", carbohidratos);
+		valores.put("grasas", grasas);
+		valores.put("proteinas", proteinas);
+		return valores;
+	}
+
+	public ArrayList<Ingesta> getIngestas() {
+		return ingestas;
+	}
+
+	public void setIngestas(ArrayList<Ingesta> ingestas) {
+		this.ingestas = ingestas;
+	}
+
+
 	public int getKcalEjercicioSemana() {
 		return kcalEjercicioSemana;
 	}
@@ -117,6 +170,14 @@ public class Paciente extends Usuario{
 		this.rol = Rol.Paciente;
 	}
 	
+	public PlanDeAlimentacion getPlan() {
+		return plan;
+	}
+
+	public void setPlan(PlanDeAlimentacion plan) {
+		this.plan = plan;
+	}
+
 	@Override
 	public String toString() {
 		return "\nPaciente [id=" + "documento=" + dni + ", nombre=" + nombre + ", apellido=" + apellido

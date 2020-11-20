@@ -34,5 +34,6 @@
           * Modificar (M: paciente)
         * Actual (C: paciente)
       * Ejercicios de esta semana (C: ejercicio)
+   * Enviar mail al cargar el plan
 * Completar perfil paciente (MC: paciente)
 * Mi perfil (ABMC: nutricionista, ABMC: horario, AMC: direccion)

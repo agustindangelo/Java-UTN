@@ -296,7 +296,7 @@
 	<div id="modificarRequerimientos" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form>
+				<form action="AsignarPlan" method="post">
 					<div class="modal-header">						
 						<h4 class="modal-title">Requerimientos alimenticios</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -305,22 +305,22 @@
 						<div class="form-row">
 							<div class="col-6">
 							  <label for="calorias">Ingesta (kcal)</label>
-							  <input type="number" class="form-control" id="calorias" required>
+							  <input type="number" class="form-control" id="calorias" name="calorias" required>
 							</div>
 							<div class="col-6">
 							  <label for="carbohidratos">Carbohidratos (g)</label>
-							  <input type="number" class="form-control" id="carbohidratos" required>
+							  <input type="number" class="form-control" id="carbohidratos" name="carbohidratos" required>
 							</div>
 						</div>
 						<br>
 						<div class="form-row">
 							<div class="col-6">
 								<label for="proteinas">Proteinas (g)</label>
-								<input type="number" class="form-control" id="proteinas" required>
+								<input type="number" class="form-control" id="proteinas" name="proteinas" required>
 							  </div>
 							<div class="col-6">
 								<label for="grasas">Grasas (g)</label>
-								<input type="number" class="form-control" id="grasas" required>
+								<input type="number" class="form-control" id="grasas" name="grasas" required>
 							</div>
 						</div>
 					</div>

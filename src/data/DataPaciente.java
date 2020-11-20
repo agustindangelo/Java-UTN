@@ -9,12 +9,14 @@ import entidades.Ingesta;
 import entidades.Nutricionista;
 import entidades.Paciente;
 import entidades.Paciente.TipoGenero;
+import entidades.PlanDeAlimentacion;
 import entidades.Solicitud;
 import entidades.Usuario;
 import entidades.Ejercicio;
 
 public class DataPaciente {
 	DataAlimento da = new DataAlimento();
+	private PlanDeAlimentacion plan;
 	
 	public void registrarPaciente(Paciente p) throws SQLException {
 		PreparedStatement stmt = null;
@@ -359,5 +361,69 @@ public class DataPaciente {
 		}
 		return ejercicios;
 	}	
+	public void asignarPlan(Paciente p, Nutricionista n) throws SQLException {
+		PreparedStatement stmt = null;
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(""
+					+ "insert into plan (fecha_desde, dni_paciente, dni_nutricionista, kcal_diarias, proteinas_diarias, carbohidratos_diarios, grasas_diarias)\n"
+					+ "values (current_date, ?, ?, ?, ?, ?, ?)"
+					);
+			stmt.setString(1, p.getDni());
+			stmt.setString(2, n.getDni());
+			stmt.setInt(3, p.getPlan().getKcalDiarias());
+			stmt.setInt(4, p.getPlan().getProteinasDiarias());
+			stmt.setInt(5, p.getPlan().getCarbohidratosDiarios());
+			stmt.setInt(6, p.getPlan().getGrasasDiarias());
+			stmt.execute();
+		} catch(SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if (stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e){
+				throw e;
+			}
+		}
+	}
+	public PlanDeAlimentacion getPlan(Paciente p) throws SQLException {
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		PlanDeAlimentacion plan = new PlanDeAlimentacion();
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"select id_plan, fecha_desde, dni_paciente, kcal_diarias, proteinas_diarias, carbohidratos_diarios, grasas_diarias\n"
+					+ "from plan \n"
+					+ "where dni_paciente = ? \n"
+					+ "and fecha_desde = (\n"
+					+ "	select max(pl.fecha_desde)\n"
+					+ "	from plan pl\n"
+					+ "	where pl.dni_paciente = ? \n"
+					+ ");"
+				);	
+			stmt.setString(1, p.getDni());
+			stmt.setString(2, p.getDni());
+			rs = stmt.executeQuery();
+			if (rs != null && rs.next()) {
+				plan.setCodigo(rs.getInt("id_plan"));
+				plan.setFechaDesde(rs.getDate("fecha_desde"));
+				plan.setKcalDiarias(rs.getInt("kcal_diarias"));
+				plan.setProteinasDiarias(rs.getInt("proteinas_diarias"));
+				plan.setCarbohidratosDiarios(rs.getInt("carbohidratos_diarios"));
+				plan.setGrasasDiarias(rs.getInt("grasas_diarias"));
+				
+			}
+		} catch (SQLException e){
+			throw e;
+		} finally {
+			try {
+				if(stmt != null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}				
+		}
+		return plan;
+	} 
 
 }

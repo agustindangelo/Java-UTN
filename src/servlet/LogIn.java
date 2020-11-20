@@ -2,6 +2,7 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entidades.Ingesta;
 import entidades.Nutricionista;
 import entidades.Paciente;
 import entidades.Solicitud;
@@ -59,6 +61,15 @@ public class LogIn extends HttpServlet {
 					if (s.getEstado().equalsIgnoreCase("pendiente")) {
 						request.getRequestDispatcher("WEB-INF/solicitud-enviada.html").forward(request, response);
 					} else {
+						p.setPlan(ctrlPaciente.getPlan(p));
+						ArrayList<Ingesta> ingestas = new ArrayList<>();
+						try {
+							ingestas = ctrlPaciente.getIngestasHoy(p);
+							p.setIngestas(ingestas);
+						} catch(SQLException e){
+							request.setAttribute("error", "Error al recuperar las ingestas del día.");
+							request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+						}
 						session.setAttribute("paciente", p);
 						request.getRequestDispatcher("WEB-INF/paciente-main.jsp").forward(request, response);
 					}
