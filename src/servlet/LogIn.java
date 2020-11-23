@@ -53,6 +53,8 @@ public class LogIn extends HttpServlet {
 					n.setDni(u.getDni());
 					n.setApellido(u.getApellido());
 					n.setNombre(u.getNombre());
+					n.setEmail(u.getEmail());
+					n.setTelefono(u.getTelefono());
 					n.setRol();
 					n = ctrlNutricionista.setDireccion(n);
 					session.setAttribute("usuario", n);
