@@ -15,6 +15,10 @@ function getPacienteInfo(dni){
 		success: function(paciente){
 			if(paciente){
 				document.getElementById("panel").style.display = "block";
+				alert(paciente.consumosHoy.grasas);
+				console.log(paciente.consumosHoy);
+				console.log(paciente.consumosHoy.proteinas);
+				console.log(paciente.nombre);
 				$('#nombre-apellido').text(paciente.nombre + ' ' + paciente.apellido);
 				$('#email').text(paciente.email);
 				$('#telefono').text(paciente.telefono);
