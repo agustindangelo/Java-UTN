@@ -130,31 +130,31 @@
 								<h3 class="colored-title text-center">Hoy</h3>
 								<div class="row">
 									<div class="col">Calorias</div>
-									<p>800 / 1879 kcal.</p>
+									<p id="kcal">800 / 1879 kcal.</p>
 								</div>
 								<div class="progress">
-									<div class="progress-bar w-25" role="progressbar" aria-valuenow="650" aria-valuemin="0" aria-valuemax="2100"></div>
+									<div class="progress-bar"  id="kcal-progress" role="progressbar"></div>
 								</div>
 								<div class="row">
 									<div class="col">Carbohidratos</div>
-									<p>20 / 120 g.</p>
+									<p id="carbohidratos">20 / 120 g.</p>
 								</div>
 								<div class="progress" style="height: 0.5rem;">
-									<div class="progress-bar w-25" role="progressbar" stylearia-valuenow="400" aria-valuemin="0" aria-valuemax="650"></div>
+									<div class="progress-bar" id="carbohidratos-progress" role="progressbar"></div>
 								</div>
 								<div class="row">
 									<div class="col">Proteinas</div>
-									<p>20 / 120 g.</p>
+									<p id="proteinas">20 / 120 g.</p>
 								</div>
 								<div class="progress" style="height: 0.5rem;">
-									<div class="progress-bar w-75" role="progressbar" aria-valuenow="130" aria-valuemin="0" aria-valuemax="150"></div>
+									<div class="progress-bar" id="proteinas-progress" role="progressbar"></div>
 								</div>
 								<div class="row">
 									<div class="col">Grasas</div>
-									<p>20 / 120 g.</p>
+									<p id="grasas">20 / 120 g.</p>
 								</div>
 								<div class="progress" style="height: 0.5rem;">
-									<div class="progress-bar w-50" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="350"></div>
+									<div class="progress-bar" id="grasas-progress" role="progressbar"></div>
 								</div>
 							</div>
 							<div class="pull-right">

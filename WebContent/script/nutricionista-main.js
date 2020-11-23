@@ -15,7 +15,7 @@ function getPacienteInfo(dni){
 		success: function(paciente){
 			if(paciente){
 				document.getElementById("panel").style.display = "block";
-				
+				alert(paciente);
 				$('#nombre-apellido').append(paciente.nombre + ' ' + paciente.apellido);
 				$('#email').append(paciente.email);
 				$('#telefono').append(paciente.telefono);
@@ -26,6 +26,11 @@ function getPacienteInfo(dni){
 				$('#peso-objetivo').append(paciente.pesoObjetivo + ' kg.');
 				$('#ejercicio-semana').append(paciente.kcalEjercicioSemana + ' kcal.');
 				$('#ejercicio-objetivo').append(paciente.kcalEjercicioObjetivo + ' kcal.');
+				
+				$("#kcal-progress").css("width", paciente.consumosHoy["calorias"] * 100 / paciente.plan.kcalDiarias );
+				$("#carbohidratos-progress").css("width", paciente.consumosHoy["carbohidratos"] * 100 / paciente.plan.carbohidratosDiarios );
+				$("#proteinas-progress").css("width", paciente.consumosHoy["proteinas"] * 100 / paciente.plan.proteinasDiarias );
+				$("#grasas-progress").css("width", paciente.consumosHoy["grasas"] * 100 / paciente.plan.grasasDiarias );
 			}
 		},
 		error:function(){

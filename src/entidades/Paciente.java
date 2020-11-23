@@ -22,6 +22,8 @@ public class Paciente extends Usuario {
 	private int kcalEjercicioObjetivo; // kcal quemadas por semana, sugeridas por el nutricionista
 	private PlanDeAlimentacion plan;
 	private ArrayList<Ingesta> ingestas;
+	private Map<String, Integer> consumosHoy;
+
 
 	public Map<String, Integer> getConsumosHoy() {
 		Map<String, Integer> valores = new HashMap<String, Integer>();
@@ -58,6 +60,7 @@ public class Paciente extends Usuario {
 		valores.put("carbohidratos", carbohidratos);
 		valores.put("grasas", grasas);
 		valores.put("proteinas", proteinas);
+		this.consumosHoy = valores;
 		return valores;
 	}
 

@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +14,11 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import entidades.Alimento;
+import entidades.Ingesta;
 import entidades.Paciente;
 import logic.AbmcPaciente;
+import logic.AlimentoLogic;
 
 /**
  * Servlet implementation class PacienteInfo
@@ -40,6 +45,8 @@ public class PacienteInfo extends HttpServlet {
         p.setDni(request.getParameter("dni"));
         try {
         	p = ctrl.getByDni(p);
+        	p.getConsumosHoy();
+        	p.setPlan(ctrl.getPlan(p));
         } catch (SQLException e) {
 			request.setAttribute("error", e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);

@@ -68,25 +68,12 @@
 	AlimentoLogic aLogic = new AlimentoLogic();
 	Map<String, Integer> consumos = p.getConsumosHoy();
 	ArrayList<Alimento> alimentos = aLogic.getAll();
-	
-	int porcentaje_grasas =  Math.round(consumos.get("grasas") / p.getPlan().getGrasasDiarias()) * 100;
-	int porcentaje_carbohidratos = Math.round(consumos.get("carbohidratos") / p.getPlan().getCarbohidratosDiarios()) * 100;
-	int porcentaje_calorias = Math.round(consumos.get("calorias") / p.getPlan().getKcalDiarias()) * 100;
-	int porcentaje_proteinas =  consumos.get("proteinas") * 100 / p.getPlan().getProteinasDiarias();
 	%>
 	
 	<div class="container-fluid">
 		<div class="row justify-content-between">
 			<h2>Mis resultados de hoy</h2>
 			<h3>Martes, 17 de Agosto</h3>
-			<div>
- 				<%= porcentaje_grasas %>
-				<%= porcentaje_calorias %>
-				<%= porcentaje_carbohidratos%>
-				<%= porcentaje_proteinas%>
-				<%= consumos.get("proteinas")%>
-				<%= p.getPlan().getProteinasDiarias() %>
-			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-3">
