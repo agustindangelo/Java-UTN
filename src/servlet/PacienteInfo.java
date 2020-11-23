@@ -39,7 +39,7 @@ public class PacienteInfo extends HttpServlet {
         HttpSession session = request.getSession();
         p.setDni(request.getParameter("dni"));
         try {
-        	p = ctrl.getByDni(p.getDni());
+        	p = ctrl.getByDni(p);
         } catch (SQLException e) {
 			request.setAttribute("error", e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);

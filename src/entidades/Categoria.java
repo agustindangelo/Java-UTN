@@ -1,8 +1,8 @@
 package entidades;
 
 public class Categoria {
-	int codigo;
-	String nombre;
+	private int codigo;
+	private String nombre;
 	public int getCodigo() {
 		return codigo;
 	}

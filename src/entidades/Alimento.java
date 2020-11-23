@@ -1,13 +1,13 @@
 package entidades;
 
 public class Alimento {
-	int id;
-	String nombre;
-	float calorias;
-	float proteinas;
-	float grasas;
-	float carbohidratos;
-	String unidadMedida;
+	private int id;
+	private String nombre;
+	private float calorias;
+	private float proteinas;
+	private float grasas;
+	private float carbohidratos;
+	private String unidadMedida;
 	public int getId() {
 		return id;
 	}

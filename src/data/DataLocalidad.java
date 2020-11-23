@@ -8,30 +8,7 @@ import java.sql.Statement;
 import entidades.*;
 import java.util.LinkedList;
 public class DataLocalidad {
-	public void setLocalidad(Localidad loc) throws SQLException{
-		PreparedStatement stmt = null;
-		ResultSet rs = null;	
-		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select denominacion from localidad where cod_postal = ?"
-					);
-			stmt.setInt(1, loc.getCodPostal());
-			rs = stmt.executeQuery();
-			if(rs != null && rs.next()) {
-				loc.setDenominacion(rs.getString("denominacion"));
-			}
-		} catch (SQLException e) {
-			throw e;
-		} finally {
-			try {
-				if(rs!=null) {rs.close();}
-				if(stmt!=null) {stmt.close();}
-				DbConnector.getInstancia().releaseConn();
-			} catch (SQLException e) {
-				throw e;
-			}
-		}
-	}
+	
 	public LinkedList<Localidad> getAll() throws SQLException{
 		Statement stmt = null;
 		ResultSet rs = null;

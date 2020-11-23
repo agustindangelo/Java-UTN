@@ -3,13 +3,13 @@ package entidades;
 import java.util.Date;
 
 public class Ejercicio {
-	int codigo;
-	String nombre;
-	int duracion; // duración en minutos del ejercicio realizado
-	float gastoEnergetico; // es el gasto en kcal de una hora de realizar el ejercicio a intensidad moderada. (gasto_energetico en la bd)
-	float gastoEfectivo; // atributo calculado a partir de la duracion y el gastoEnergético del ejercicio.
-	Intensidad intensidad;
-	Date fecha;
+	private int codigo;
+	private String nombre;
+	private int duracion; // duración en minutos del ejercicio realizado
+	private float gastoEnergetico; // es el gasto en kcal de una hora de realizar el ejercicio a intensidad moderada. (gasto_energetico en la bd)
+	private float gastoEfectivo; // atributo calculado a partir de la duracion y el gastoEnergético del ejercicio.
+	private Intensidad intensidad;
+	private Date fecha;
 	
 	public Date getFecha() {
 		return fecha;
@@ -82,7 +82,7 @@ public class Ejercicio {
 				multiplicador = 1;
 				break;
 		}
-		float gastoEfectivo = this.gastoEnergetico * ((float)duracion / 60) * multiplicador;
+		this.gastoEfectivo = this.gastoEnergetico * ((float)duracion / 60) * multiplicador;
 		return gastoEfectivo;
 	}
 	

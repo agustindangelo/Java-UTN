@@ -1,9 +1,9 @@
 package entidades;
 
 public class Solicitud {
-	String dniPaciente;
-	String dniNutricionista;
-	String estado;
+	private String dniPaciente;
+	private String dniNutricionista;
+	private String estado;
 	public String getDniPaciente() {
 		return dniPaciente;
 	}

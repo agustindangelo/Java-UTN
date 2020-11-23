@@ -9,21 +9,19 @@ import entidades.*;
 public class DataDireccion {
 	
 	public Nutricionista setDireccion(Nutricionista nut) throws SQLException{
-		
-		// recibe por parametro un nutricionista y le asigna la dirección que le corresponde, almacenada en bd
-		
 		PreparedStatement stmt=null;
 		ResultSet rs=null;	
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					  "select cod_postal, calle, altura, piso, depto\n"
-					+ "from direccion\n"
-					+ "where dni = ?"
+					  "select d.cod_postal, d.calle, d.altura, d.piso, d.depto, l.denominacion\n"
+					+ "from direccion d\n"
+					+ "inner join localidad l\n"
+					+ "on l.cod_postal = d.cod_postal\n"
+					+ "where d.dni = ?"
 					);
 			stmt.setString(1, nut.getDni());
 			rs = stmt.executeQuery();
 			if(rs != null && rs.next()) {
-				DataLocalidad dl = new DataLocalidad();
 				Direccion dir = new Direccion();
 				Localidad loc = new Localidad();
 				dir.setCalle(rs.getString("calle"));
@@ -31,8 +29,8 @@ public class DataDireccion {
 				dir.setPiso(rs.getInt("piso"));
 				dir.setAltura(rs.getInt("altura"));
 				loc.setCodPostal(rs.getInt("cod_postal"));
+				loc.setDenominacion(rs.getString("denominacion"));
 				dir.setLocalidad(loc);
-				dl.setLocalidad(loc);
 				nut.setDireccion(dir);
 			}
 		} catch (SQLException e) {

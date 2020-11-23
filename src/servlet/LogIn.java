@@ -17,6 +17,7 @@ import entidades.Paciente;
 import entidades.Solicitud;
 import entidades.Usuario;
 import entidades.Usuario.Rol;
+import logic.AbmcNutricionista;
 import logic.AbmcPaciente;
 import logic.Login;
 
@@ -36,6 +37,7 @@ public class LogIn extends HttpServlet {
         Usuario usuario = new Usuario();
 		Usuario u;
 		Login ctrl = new Login();
+		AbmcNutricionista ctrlNutricionista = new AbmcNutricionista();
 		
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -52,11 +54,12 @@ public class LogIn extends HttpServlet {
 					n.setApellido(u.getApellido());
 					n.setNombre(u.getNombre());
 					n.setRol();
+					n = ctrlNutricionista.setDireccion(n);
 					session.setAttribute("usuario", n);
 					request.getRequestDispatcher("WEB-INF/nutricionista-main.jsp").forward(request, response);
 				} else {
 					AbmcPaciente ctrlPaciente = new AbmcPaciente();
-					Paciente p = ctrlPaciente.getByDni(u.getDni());
+					Paciente p = ctrlPaciente.getByDni((Paciente) u);
 					Solicitud s = ctrlPaciente.getSolicitud(p);
 					if (s.getEstado().equalsIgnoreCase("pendiente")) {
 						request.getRequestDispatcher("WEB-INF/solicitud-enviada.html").forward(request, response);

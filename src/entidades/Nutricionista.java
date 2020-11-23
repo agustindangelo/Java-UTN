@@ -2,20 +2,10 @@ package entidades;
 import java.util.ArrayList;
 
 public class Nutricionista extends Usuario {
-	ArrayList<Horario> horarios;
-	Direccion direccion;
+	private ArrayList<Horario> horarios;
+	private Direccion direccion;
 	
 	public Nutricionista() {
-		
-	}
-	
-	public Nutricionista(Usuario u) {
-		this.dni = u.getDni();
-		this.apellido = u.getApellido();
-		this.nombre = u.getNombre();
-		this.email = u.getEmail();
-		this.telefono = u.getTelefono();
-		this.password = u.getPassword();
 	}
 
 	public Direccion getDireccion() {
@@ -32,16 +22,7 @@ public class Nutricionista extends Usuario {
 	public ArrayList<Horario> getHorarios() {
 		return horarios;
 	}
-	@Override
-	public String toString() {
-		String s = "\nNutricionista [dni="+ dni + ", nombre=" + nombre + ", apellido=" + apellido
-				+ ", email=" + email + ", tel=" + telefono + "]";
-		s = s + "\n ----Direccion= " + direccion;
-		s = s + "\n ----Horarios= " + horarios;
-		return s;
-	}
-	public void setRol()
-	{
+	public void setRol(){
 		this.rol = Rol.Nutricionista;
 	}
 }

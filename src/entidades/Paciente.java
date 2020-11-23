@@ -1,26 +1,25 @@
 package entidades;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
-public class Paciente extends Usuario{
-	public enum TipoGenero{
-		Masculino,
-		Femenino
+public class Paciente extends Usuario {
+	public enum TipoGenero {
+		Masculino, Femenino
 	}
-	
-	TipoGenero genero;
-	Date fechaNacimiento;
-	int altura;
-	float peso;
-	float imc;
-	int metabolismoBasal;
-	float pesoObjetivo;
-	String objetivo;
-	int kcalEjercicioSemana; // kcal quemadas con ejercicios hechos en los ultimos 7 dias
-	int kcalEjercicioObjetivo; // kcal quemadas por semana, sugeridas por el nutricionista
+
+	private TipoGenero genero;
+	private Date fechaNacimiento;
+	private int altura;
+	private float peso;
+	private float imc;
+	private int metabolismoBasal;
+	private float pesoObjetivo;
+	private String objetivo;
+	private int kcalEjercicioSemana; // kcal quemadas con ejercicios hechos en los ultimos 7 dias
+	private int kcalEjercicioObjetivo; // kcal quemadas por semana, sugeridas por el nutricionista
 	private PlanDeAlimentacion plan;
 	private ArrayList<Ingesta> ingestas;
 
@@ -31,25 +30,25 @@ public class Paciente extends Usuario{
 		int carbohidratos = 0;
 		int grasas = 0;
 		int proteinas = 0;
-		
+
 		int caloriasAlimento;
 		int carbohidratosAlimento;
 		int grasasAlimento;
 		int proteinasAlimento;
 		int gramosConsumidos;
-		
+
 		Alimento alimento;
 		for (Ingesta i : ingestas) {
 			alimento = i.getAlimento();
 			gramosConsumidos = i.getCantidad();
-			
+
 			caloriasAlimento = (int) alimento.getCalorias();
 			carbohidratosAlimento = (int) alimento.getCarbohidratos();
 			grasasAlimento = (int) alimento.getGrasas();
 			proteinasAlimento = (int) alimento.getProteinas();
-			
+
 			float factor = gramosConsumidos / 100;
-			
+
 			calorias = (int) (calorias + caloriasAlimento * factor);
 			carbohidratos = (int) (carbohidratos + carbohidratosAlimento * factor);
 			grasas = (int) (grasas + grasasAlimento * factor);
@@ -70,7 +69,6 @@ public class Paciente extends Usuario{
 		this.ingestas = ingestas;
 	}
 
-
 	public int getKcalEjercicioSemana() {
 		return kcalEjercicioSemana;
 	}
@@ -89,19 +87,20 @@ public class Paciente extends Usuario{
 
 	public Paciente() {
 	}
-	
-	public Paciente(Usuario u) {
-		this.dni = u.getDni();
-		this.apellido = u.getApellido();
-		this.nombre = u.getNombre();
+  
+	public Paciente(Usuario u) { 
+		this.dni = u.getDni(); 
+		this.apellido = u.getApellido(); 
+		this.nombre = u.getNombre(); 
 		this.email = u.getEmail();
-		this.telefono = u.getTelefono();
-		this.password = u.getPassword();
+		this.telefono = u.getTelefono(); 
+		this.password = u.getPassword(); 
 	}
 	
 	public TipoGenero getGenero() {
 		return genero;
 	}
+
 	public String getGeneroStr() {
 		if (this.genero == TipoGenero.Masculino) {
 			return "Masculino";
@@ -109,67 +108,79 @@ public class Paciente extends Usuario{
 			return "Femenino";
 		}
 	}
-	
+
 	public void setGenero(TipoGenero genero) {
 		this.genero = genero;
 	}
-	
-	public void setGenero(String g)
-	{
-		if (g == "Masculino")
-		{
+
+	public void setGenero(String g) {
+		if (g == "Masculino") {
 			this.genero = TipoGenero.Masculino;
 		} else {
 			this.genero = TipoGenero.Femenino;
 		}
 	}
+
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
+
 	public void setFechaNacimiento(Date fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
+
 	public int getAltura() {
 		return altura;
 	}
+
 	public void setAltura(int altura) {
 		this.altura = altura;
 	}
+
 	public float getPeso() {
 		return peso;
 	}
+
 	public void setPeso(float peso) {
 		this.peso = peso;
 	}
+
 	public float getImc() {
 		return imc;
 	}
+
 	public void setImc(float imc) {
 		this.imc = imc;
 	}
+
 	public int getMetabolismoBasal() {
 		return metabolismoBasal;
 	}
+
 	public void setMetabolismoBasal(int metabolismoBasal) {
 		this.metabolismoBasal = metabolismoBasal;
 	}
+
 	public float getPesoObjetivo() {
 		return pesoObjetivo;
 	}
+
 	public void setPesoObjetivo(float pesoObjetivo) {
 		this.pesoObjetivo = pesoObjetivo;
 	}
+
 	public String getObjetivo() {
 		return objetivo;
 	}
+
 	public void setObjetivo(String objetivo) {
 		this.objetivo = objetivo;
 	}
-	public void setRol()
-	{
+
+	public void setRol() {
 		this.rol = Rol.Paciente;
 	}
-	
+
 	public PlanDeAlimentacion getPlan() {
 		return plan;
 	}
@@ -178,10 +189,4 @@ public class Paciente extends Usuario{
 		this.plan = plan;
 	}
 
-	@Override
-	public String toString() {
-		return "\nPaciente [id=" + "documento=" + dni + ", nombre=" + nombre + ", apellido=" + apellido
-				+ ", email=" + email + ", tel=" + telefono + "]";
-	}
-	
 }

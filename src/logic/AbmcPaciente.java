@@ -53,8 +53,8 @@ public class AbmcPaciente {
 		return acum;
 	}
 
-	public Paciente getByDni(String dni) throws SQLException{
-		return dp.getByDni(dni);
+	public Paciente getByDni(Paciente p) throws SQLException{
+		return dp.getByDni(p);
 	}
 	public void guardarSolicitud(Paciente p, Nutricionista n) throws SQLException {
 		dp.guardarSolicitud(p, n);

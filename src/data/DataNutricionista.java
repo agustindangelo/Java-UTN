@@ -113,7 +113,7 @@ public class DataNutricionista {
 		Usuario n = new Usuario();
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-					"select dni,nombre,apellido,email from nutricionista where email = ? and password = ?;"
+					"select dni,nombre,apellido,telefono from nutricionista where email = ? and password = ?;"
 					);
 			stmt.setString(1, u.getEmail());
 			stmt.setString(2, u.getPassword());
@@ -122,7 +122,8 @@ public class DataNutricionista {
 				n.setDni(rs.getString("dni"));
 				n.setApellido(rs.getString("apellido"));
 				n.setNombre(rs.getString("nombre"));
-				n.setEmail(rs.getString("email"));
+				n.setEmail(u.getEmail());
+				n.setTelefono(rs.getString("telefono"));
 				n.setRol("Nutricionista");
 			}
 		} catch (SQLException e) {

@@ -2,10 +2,10 @@ package entidades;
 import java.util.Date;
 
 public class Ingesta {
-	Alimento alimento;
-	int cantidad;
-	Date fecha;
-	String tipo;
+	private Alimento alimento;
+	private int cantidad;
+	private Date fecha;
+	private String tipo;
 	
 	public Alimento getAlimento() {
 		return alimento;

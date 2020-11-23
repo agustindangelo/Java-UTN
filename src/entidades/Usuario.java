@@ -2,13 +2,13 @@ package entidades;
 
 public class Usuario {
 	public enum Rol {Nutricionista, Paciente}
-	String dni;
-	String nombre;
-	String apellido;
-	String email;
-	String password;
-	String telefono;
-	Rol rol;
+	protected String dni;
+	protected String nombre;
+	protected String apellido;
+	protected String email;
+	protected String password;
+	protected String telefono;
+	public Rol rol;
 	public String getDni() {
 		return dni;
 	}
