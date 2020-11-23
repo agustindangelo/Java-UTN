@@ -76,7 +76,7 @@ public class DataPaciente {
 		}
 	}
 	
-	public Paciente getByDni(Paciente pac) throws SQLException {
+	public Paciente getByDni(Usuario u) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Paciente p = new Paciente();
@@ -87,10 +87,10 @@ public class DataPaciente {
 					"from paciente\n" + 
 					"where dni = ?"
 					);
-			stmt.setString(1, pac.getDni());
+			stmt.setString(1, u.getDni());
 			rs = stmt.executeQuery();
 			if(rs != null && rs.next()) {
-				p.setDni(pac.getDni());
+				p.setDni(u.getDni());
 				p.setNombre(rs.getString("nombre"));
 				p.setApellido(rs.getString("apellido"));
 				p.setEmail(rs.getString("email"));

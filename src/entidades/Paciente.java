@@ -24,7 +24,6 @@ public class Paciente extends Usuario {
 	private ArrayList<Ingesta> ingestas;
 	private Map<String, Integer> consumosHoy;
 
-
 	public Map<String, Integer> getConsumosHoy() {
 		Map<String, Integer> valores = new HashMap<String, Integer>();
 		ArrayList<Ingesta> ingestas = this.ingestas;
@@ -90,16 +89,12 @@ public class Paciente extends Usuario {
 
 	public Paciente() {
 	}
-  
-	public Paciente(Usuario u) { 
-		this.dni = u.getDni(); 
-		this.apellido = u.getApellido(); 
-		this.nombre = u.getNombre(); 
-		this.email = u.getEmail();
-		this.telefono = u.getTelefono(); 
-		this.password = u.getPassword(); 
-	}
-	
+
+	/*
+	 * public Paciente(Usuario u) { this.dni = u.getDni(); this.apellido =
+	 * u.getApellido(); this.nombre = u.getNombre(); this.email = u.getEmail();
+	 * this.telefono = u.getTelefono(); this.password = u.getPassword(); }
+	 */
 	public TipoGenero getGenero() {
 		return genero;
 	}

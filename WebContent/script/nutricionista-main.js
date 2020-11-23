@@ -15,22 +15,21 @@ function getPacienteInfo(dni){
 		success: function(paciente){
 			if(paciente){
 				document.getElementById("panel").style.display = "block";
-				alert(paciente);
-				$('#nombre-apellido').append(paciente.nombre + ' ' + paciente.apellido);
-				$('#email').append(paciente.email);
-				$('#telefono').append(paciente.telefono);
-				$('#imc').append(paciente.imc);
-				$('#metabolismo-basal').append(paciente.metabolismoBasal + '   kcal/dia');
+				$('#nombre-apellido').text(paciente.nombre + ' ' + paciente.apellido);
+				$('#email').text(paciente.email);
+				$('#telefono').text(paciente.telefono);
+				$('#imc').text(paciente.imc);
+				$('#metabolismo-basal').text(paciente.metabolismoBasal + '   kcal/dia');
 				
-				$('#peso-actual').append(paciente.peso + ' kg.');
-				$('#peso-objetivo').append(paciente.pesoObjetivo + ' kg.');
-				$('#ejercicio-semana').append(paciente.kcalEjercicioSemana + ' kcal.');
-				$('#ejercicio-objetivo').append(paciente.kcalEjercicioObjetivo + ' kcal.');
+				$('#peso-actual').empty().append(paciente.peso + ' kg.');
+				$('#peso-objetivo').empty().append(paciente.pesoObjetivo + ' kg.');
+				$('#ejercicio-semana').empty().append(paciente.kcalEjercicioSemana + ' kcal.');
+				$('#ejercicio-objetivo').empty().append(paciente.kcalEjercicioObjetivo + ' kcal.');
 				
-				$("#kcal-progress").css("width", paciente.consumosHoy["calorias"] * 100 / paciente.plan.kcalDiarias );
-				$("#carbohidratos-progress").css("width", paciente.consumosHoy["carbohidratos"] * 100 / paciente.plan.carbohidratosDiarios );
-				$("#proteinas-progress").css("width", paciente.consumosHoy["proteinas"] * 100 / paciente.plan.proteinasDiarias );
-				$("#grasas-progress").css("width", paciente.consumosHoy["grasas"] * 100 / paciente.plan.grasasDiarias );
+				$("#kcal-progress").css("width", paciente.consumosHoy.calorias * 100 / paciente.plan.kcalDiarias );
+				$("#carbohidratos-progress").css("width", paciente.consumosHoy.carbohidratos * 100 / paciente.plan.carbohidratosDiarios );
+				$("#proteinas-progress").css("width", paciente.consumosHoy.proteinas * 100 / paciente.plan.proteinasDiarias );
+				$("#grasas-progress").css("width", paciente.consumosHoy.grasas * 100 / paciente.plan.grasasDiarias );
 			}
 		},
 		error:function(){

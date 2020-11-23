@@ -8,6 +8,7 @@ import entidades.Nutricionista;
 import entidades.Paciente;
 import entidades.PlanDeAlimentacion;
 import entidades.Solicitud;
+import entidades.Usuario;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -53,8 +54,8 @@ public class AbmcPaciente {
 		return acum;
 	}
 
-	public Paciente getByDni(Paciente p) throws SQLException{
-		return dp.getByDni(p);
+	public Paciente getByDni(Usuario u) throws SQLException{
+		return dp.getByDni(u);
 	}
 	public void guardarSolicitud(Paciente p, Nutricionista n) throws SQLException {
 		dp.guardarSolicitud(p, n);
@@ -78,4 +79,6 @@ public class AbmcPaciente {
 	public PlanDeAlimentacion getPlan(Paciente p) throws SQLException {
 		return dp.getPlan(p);
 	}
+
+
 }
