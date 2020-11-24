@@ -1,11 +1,15 @@
-$(function() {	       
-   $("#pacienteMenu li").not('.emptyMessage').click(function() {
-	   document.getElementById("seleccionePacienteMsj").style.display = "none";
-	   var dni = this.id;
-	   getPacienteInfo(dni);
-   });
+$(document).ready(function() {
+	$(function() {	       
+	   $("#pacienteMenu li").not('.emptyMessage').click(function() {
+		   document.getElementById("seleccionePacienteMsj").style.display = "none";
+		   var previousDni = $('#dni').text();
+		   var dni = this.id;
+		   if (previousDni != dni) {
+		   		getPacienteInfo(dni);
+		   }
+	   });
+	});
 });
-
 function getPacienteInfo(dni){
 	$.ajax({
 		type: "GET",
@@ -15,25 +19,43 @@ function getPacienteInfo(dni){
 		success: function(paciente){
 			if(paciente){
 				document.getElementById("panel").style.display = "block";
-				alert(paciente.consumosHoy.grasas);
-				console.log(paciente.consumosHoy);
-				console.log(paciente.consumosHoy.proteinas);
-				console.log(paciente.nombre);
 				$('#nombre-apellido').text(paciente.nombre + ' ' + paciente.apellido);
+				$('#dni').text(paciente.dni);
 				$('#email').text(paciente.email);
 				$('#telefono').text(paciente.telefono);
-				$('#imc').text(paciente.imc);
-				$('#metabolismo-basal').text(paciente.metabolismoBasal + '   kcal/dia');
+				$('#imc').text(paciente.imc.toString());
+				$('#metabolismo-basal').text(paciente.metabolismoBasal.toString() + ' kcal.');
 				
-				$('#peso-actual').empty().append(paciente.peso + ' kg.');
-				$('#peso-objetivo').empty().append(paciente.pesoObjetivo + ' kg.');
-				$('#ejercicio-semana').empty().append(paciente.kcalEjercicioSemana + ' kcal.');
-				$('#ejercicio-objetivo').empty().append(paciente.kcalEjercicioObjetivo + ' kcal.');
+				if (paciente.pesoObjetivo == 0){
+					$('#peso-objetivo').text('---');
+				} else {
+					$('#peso-objetivo').text(paciente.pesoObjetivo.toString() + ' kg.');
+				}
+				if (paciente.peso == 0){
+					$('#peso-actual').text('---');
+				} else {
+					$('#peso-actual').text(paciente.peso.toString() + ' kg.');
+				}
+
+				$('#ejercicio-semana').text(paciente.kcalEjercicioSemana.toString() + ' kcal.');
+				$('#ejercicio-objetivo').text(paciente.kcalEjercicioObjetivo.toString() + ' kcal.');
 				
-				$("#kcal-progress").css("width", paciente.consumosHoy.calorias * 100 / paciente.plan.kcalDiarias );
-				$("#carbohidratos-progress").css("width", paciente.consumosHoy.carbohidratos * 100 / paciente.plan.carbohidratosDiarios );
-				$("#proteinas-progress").css("width", paciente.consumosHoy.proteinas * 100 / paciente.plan.proteinasDiarias );
-				$("#grasas-progress").css("width", paciente.consumosHoy.grasas * 100 / paciente.plan.grasasDiarias );
+				$('#kcal').text(paciente.consumosHoy.calorias.toString() + '  /  ' + paciente.plan.kcalDiarias.toString() + ' kcal.');
+				$('#proteinas').text(paciente.consumosHoy.proteinas.toString() + '  /  ' + paciente.plan.proteinasDiarias.toString() + ' g.');
+				$('#carbohidratos').text(paciente.consumosHoy.carbohidratos.toString() + '  /  ' + paciente.plan.carbohidratosDiarios.toString() + ' g.');
+				$('#grasas').text(paciente.consumosHoy.grasas.toString() + '  /  ' + paciente.plan.grasasDiarias.toString() + ' g.');
+				
+				if (paciente.consumosHoy.calorias == 0){
+					$('#kcal-progress').css('width', '0%');
+					$('#carbohidratos-progress').css('width',  '0%');
+					$('#proteinas-progress').css('width', '0%' );
+					$('#grasas-progress').css('width', '0%');
+				} else {
+					$('#kcal-progress').css('width', (paciente.consumosHoy.calorias * 100 / paciente.plan.kcalDiarias).toString() + '%' );
+					$('#carbohidratos-progress').css('width', (paciente.consumosHoy.carbohidratos * 100 / paciente.plan.carbohidratosDiarios).toString() + '%');
+					$('#proteinas-progress').css('width', (paciente.consumosHoy.proteinas * 100 / paciente.plan.proteinasDiarias).toString() + '%' );
+					$('#grasas-progress').css('width', (paciente.consumosHoy.grasas * 100 / paciente.plan.grasasDiarias).toString() + '%');
+				}
 			}
 		},
 		error:function(){
@@ -46,11 +68,11 @@ $(function() {
 	   var dni = this.id.slice(1);
 	   if (this.id[0] == 'a'){
 		   	aceptarSolicitud(dni);
-			console.log(this.id)
+		   	insertarPaciente(dni);
 		} else {
 			rechazarSolicitud(dni);
-			console.log(this.id)
 		}
+		$('#s' + dni).remove();
    });
 });
 function aceptarSolicitud(dni){
@@ -59,8 +81,18 @@ function aceptarSolicitud(dni){
 		url: "AceptarSolicitud",                
 		dataType: "json",
 		data: {"dni" : dni},
-		success: function(){
-			$("#solicitudesMenu").remove("#s"+dni);
+	})
+}
+function insertarPaciente(dni){
+	$.ajax({
+		type: "GET",
+		url: "PacienteInfo",                
+		dataType: "json",
+		data: {"dni" : dni},
+		success: function(paciente){
+			$('#pacienteMenu').append(
+				'<li class="list-group-item" id=' + paciente.dni + '><a href="#">' + paciente.apellido + ' ' + paciente.nombre + '</a></li>'
+			);
 		},
 	})
 }
@@ -69,10 +101,7 @@ function rechazarSolicitud(dni){
 		type: "POST",
 		url: "RechazarSolicitud",                
 		dataType: "json",
-		data: {"dni" : dni},
-		success: function(){
-			$("#solicitudesMenu").remove("#s"+dni);
-		},
+		data: {"dni" : dni}
 	}) 
 }
 $(function(){

@@ -9,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
 
 import entidades.Nutricionista;
 import entidades.Paciente;
@@ -39,7 +42,8 @@ public class AceptarSolicitud extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AbmcNutricionista ctrl = new AbmcNutricionista();
 		AbmcPaciente ctrlPaciente = new AbmcPaciente();
-		Nutricionista n = (Nutricionista) request.getSession().getAttribute("usuario");
+		HttpSession session = request.getSession();
+		Nutricionista n = (Nutricionista) session.getAttribute("usuario");
 		Paciente p = new Paciente();
 		p.setDni(request.getParameter("dni"));
 		try {
@@ -48,6 +52,7 @@ public class AceptarSolicitud extends HttpServlet {
 			request.setAttribute("error", "Error al recuperar los datos del paciente.");
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
+		
 		try {
 			ctrl.aceptarSolicitud(n, p);
 		} catch (SQLException e) {
@@ -57,5 +62,18 @@ public class AceptarSolicitud extends HttpServlet {
 			request.setAttribute("error", "Error al enviar mail de confirmación.");
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
+
+		if (p != null) {
+            try {
+                String json = new Gson().toJson(p);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                session.setAttribute("paciente", p);
+    			response.getWriter().write(json);
+            } catch (Exception e){
+				request.setAttribute("error", "Error al parsear los datos del paciente");
+				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+            }
+        }
 	}
 }

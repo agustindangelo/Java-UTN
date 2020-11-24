@@ -16,7 +16,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<script src="script/scripts.js"></script>
 	<script src="script/nutricionista-main.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
@@ -102,9 +101,12 @@
 				<div class="row">
 					<div class="col-md-6">
 						<div class="card">
-							<div class="card-body">
+							<div class="card-body" id="paciente-info-general">
 								<h3 class="colored-title text-center" id="nombre-apellido"></h3>
 								<ul class="list-group list-group-flush">
+									<li class="list-group-item">
+										<span class="text-muted">DNI: </span><p id="dni"></p>
+									</li>
 									<li class="list-group-item">
 										<span class="text-muted">Correo electronico: </span><p id="email"></p>
 									</li>
@@ -115,7 +117,7 @@
 										<span class="text-muted">Indice de masa corporal: </span><p id="imc"></p>
 									</li>
 									<li class="list-group-item">
-										<span class="text-muted">Metabolismo basal: </span><p id="metabolismoBasal"></p>
+										<span class="text-muted">Metabolismo basal: </span><p id="metabolismo-basal"></p>
 									</li>
 								</ul>
 								<div class="pull-right">
@@ -130,28 +132,28 @@
 								<h3 class="colored-title text-center">Hoy</h3>
 								<div class="row">
 									<div class="col">Calorias</div>
-									<p id="kcal">800 / 1879 kcal.</p>
+									<p id="kcal"></p>
 								</div>
 								<div class="progress">
 									<div class="progress-bar"  id="kcal-progress" role="progressbar"></div>
 								</div>
 								<div class="row">
 									<div class="col">Carbohidratos</div>
-									<p id="carbohidratos">20 / 120 g.</p>
+									<p id="carbohidratos"></p>
 								</div>
 								<div class="progress" style="height: 0.5rem;">
 									<div class="progress-bar" id="carbohidratos-progress" role="progressbar"></div>
 								</div>
 								<div class="row">
 									<div class="col">Proteinas</div>
-									<p id="proteinas">20 / 120 g.</p>
+									<p id="proteinas"></p>
 								</div>
 								<div class="progress" style="height: 0.5rem;">
 									<div class="progress-bar" id="proteinas-progress" role="progressbar"></div>
 								</div>
 								<div class="row">
 									<div class="col">Grasas</div>
-									<p id="grasas">20 / 120 g.</p>
+									<p id="grasas"><p>
 								</div>
 								<div class="progress" style="height: 0.5rem;">
 									<div class="progress-bar" id="grasas-progress" role="progressbar"></div>
@@ -173,11 +175,11 @@
 								<div class="row">
 									<div class="col">
 										<p class="card-text text-center text-muted">Ultimo Ingresado</p>
-										<h3 class="card-text text-center" id="peso" id="pesoActual"></h3>
+										<h3 class="card-text text-center" id="peso-actual"></h3>
 									</div>
 									<div class="col">
 										<p class="card-text text-center text-muted">Objetivo</p>
-										<h3 class="card-text text-center" id="pesoObjetivo"></h3>
+										<h3 class="card-text text-center" id="peso-objetivo"></h3>
 									</div>
 								</div>
 								<div class="pull-right">
@@ -193,11 +195,11 @@
 								<div class="row">
 									<div class="col">
 										<p class="card-text text-center text-muted">Total en 7 dias</p>
-										<h3 class="card-text text-center" id="ejercicioSemana"></h3>
+										<h3 class="card-text text-center" id="ejercicio-semana"></h3>
 									</div>
 									<div class="col">
 										<p class="card-text text-center text-muted">Objetivo</p>
-										<h3 class="card-text text-center" id="ejercicioObjetivo"></h3>
+										<h3 class="card-text text-center" id="ejercicio-objetivo"></h3>
 									</div>
 								</div>
 								<div class="pull-right">
@@ -216,49 +218,44 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form>
-
-					
-					
 					<div class="input-group mb-2">
 				        <div class="input-group-prepend">
 				          <div class="input-group-text">Altura</div>
 				        </div>
-				        <input type="text" class="form-control" id="altura" placeholder="cm.">
+				        <input type="text" class="form-control" id="input-altura" placeholder="cm.">
 				    </div>
 				    <div class="input-group mb-2">
 				        <div class="input-group-prepend">
 				          <div class="input-group-text">Peso Actual</div>
 				        </div>
-				        <input type="text" class="form-control" id="peso-actual" placeholder="kg.">
+				        <input type="text" class="form-control" id="input-peso-actual" placeholder="kg.">
 				    </div>
 				    <div class="input-group mb-2">
 				        <div class="input-group-prepend">
 				          <div class="input-group-text">Peso Objetivo</div>
 				        </div>
-				        <input type="text" class="form-control" id="peso-objetivo" placeholder="kg.">
+				        <input type="text" class="form-control" id="input-peso-objetivo" placeholder="kg.">
 				    </div>
 				     <div class="input-group mb-2">
 				        <div class="input-group-prepend">
 				          <div class="input-group-text">Metabolismo Basal</div>
 				        </div>
-				        <input type="text" class="form-control" id="metabolismo-basal" placeholder="kcal.">
+				        <input type="text" class="form-control" id="input-metabolismo-basal" placeholder="kcal.">
 				    </div>
 				    
 				    <div class="input-group mb-2">
 				        <div class="input-group-prepend">
 				          <div class="input-group-text">Indice de Masa Corporal</div>
 				        </div>
-				        <input type="text" class="form-control" id="imc" placeholder="bmi">
+				        <input type="text" class="form-control" id="input-imc" placeholder="bmi">
 				    </div>
 				   
 				    <div class="input-group mb-2">
 				        <div class="input-group-prepend">
 				          <div class="input-group-text">Objetivo</div>
 				        </div>
-				        <input type="text" class="form-control" id="objetivo" placeholder="Perder peso, ganar peso ...">
+				        <input type="text" class="form-control" id="input-objetivo" placeholder="Perder peso, ganar peso ...">
 				    </div>
-                        
-                      
                      <input type="submit" class="btn btn-primary float-right" value="Continuar">
 				</form>
 			</div>

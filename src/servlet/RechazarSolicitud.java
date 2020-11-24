@@ -42,7 +42,7 @@ public class RechazarSolicitud extends HttpServlet {
 		Paciente p = new Paciente();
 		p.setDni(request.getParameter("dni"));
 		try {
-			ctrl.rechazarSolicitud(n,p);
+			ctrl.rechazarSolicitud(n, p);
 		} catch (SQLException e) {
 			// manejar esta excepcion
 		}
