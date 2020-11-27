@@ -84,7 +84,7 @@
 								<i class="fas fa-user-circle"></i> Mi Perfil
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="nutricionista-config.html">Configuracion</a>
+								<a class="dropdown-item" href="RedirectNutricionistaConfig">Configuracion</a>
 							<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="LogOut">Cerrar sesion</a>
 							</div>

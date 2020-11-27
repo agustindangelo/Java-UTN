@@ -1,10 +1,20 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.LinkedList"%>
+<%@ page import="entidades.Paciente"%>
+<%@ page import="entidades.Nutricionista"%>
+<%@ page import="entidades.Direccion"%>
+<%@ page import="entidades.Localidad"%>
+<%@ page import="entidades.Horario"%>
+<%@ page import="logic.AbmcLocalidad"%>
+<%@ page import="logic.AbmcHorario"%>
+<%@ page import="logic.AbmcNutricionista"%>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Trabajo practico de Java</title>
+	<title>Configuración de perfil</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="style/styles.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://kit.fontawesome.com/d00e7b9ed2.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -17,7 +27,7 @@
 		<div class="collapse navbar-collapse" id="">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item">
-					<a class="colored-title" href="WEB-INF/nutricionista-main.html">Inicio</a> 
+					<a class="colored-title" href="RedirectNutricionistaMain">Inicio</a> 
 				</li>
 			</ul>
 			<ul class="navbar-nav ml-auto">
@@ -26,15 +36,24 @@
 						<i class="fas fa-user-circle"></i> Mi Perfil
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="WEB-INF/nutricionista-config.html">Configuración</a>
+						<a class="dropdown-item" href="#">Configuración</a>
 					<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Cerrar sesión</a>
+						<a class="dropdown-item" href="LogOut">Cerrar sesión</a>
 					</div>
 				</li>			
 			</ul>
 		</div>
 	</nav>
 	<br>
+	
+	<%
+	Nutricionista n = (Nutricionista) session.getAttribute("usuario");
+	AbmcHorario ctrlHorario = new AbmcHorario();
+	AbmcLocalidad ctrlLocalidad = new AbmcLocalidad();
+	LinkedList<Localidad> localidades = ctrlLocalidad.getAll();
+	n = ctrlHorario.setHorario();
+	%>
+	
 	<div class="container">
 		<div id="accordion">
 			<!-- sección de datos personales -->
@@ -50,52 +69,52 @@
 			  	<div id="collapseOne" class="collapse show" aria-labelledby="datos-personales" data-parent="#accordion">
 					<div class="card-body">
 						<div class="col">
-							<form class="row">
+							<form class="row" action="ActualizarDatosNutricionista" method="post">
 								<div class="col-6">
 									<div class="form-group">
 										<label for="nombre">Nombre</label>
-										<input class="form-control" type="text" id="account-fn" value="Daniel">
+										<input class="form-control" type="text" id="nombre" value= <%= n.getNombre() %>>
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="form-group">
 										<label for="apellido">Apellido</label>
-										<input class="form-control" type="text" id="account-ln" value="Adams">
+										<input class="form-control" type="text" id="apellido" value= <%= n.getApellido() %>>
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="form-group">
 										<label for="email">Correo Electrónico</label>
-										<input class="form-control" type="email" id="account-email" value="daniel.adams@example.com">
+										<input class="form-control" type="email" id="email" value=<%= n.getEmail() %>>
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="form-group">
 										<label for="dni">Número DNI</label>
-										<input class="form-control" type="text" id="dni" value="41637968" disabled>
+										<input class="form-control" type="text" id="dni" value=<%= n.getDni() %> disabled>
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="form-group">
 										<label for="telefono">Teléfono</label>
-										<input class="form-control" type="text" id="account-phone" value="+7 (805) 348 95 72">
+										<input class="form-control" type="text" id="telefono" value=<%= n.getTelefono() %>>
 									</div>
 								</div>
 								<div class="col-6"></div>
 								<div class="col-6">
 									<div class="form-group">
-										<label for="password">Contraseña</label>
-										<input class="form-control" type="password" id="account-pass" value="daniel">
+										<label for="password">Reemplazar Contraseña</label>
+										<input class="form-control" type="password" id="password">
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="form-group">
 										<label for="confirm-password">Confirmar Contraseña</label>
-										<input class="form-control" type="password" id="account-confirm-pass">
+										<input class="form-control" type="password" id="confirmacion-password">
 									</div>
 								</div>
 								<div class="col-12">
-									<button type="submit" class="btn btn-success float-right">Guardar</button>
+									<button type="submit" class="btn btn-primary float-right">Guardar Cambios</button>
 								</div>
 							</form>
 						</div>
@@ -113,16 +132,16 @@
 			  	</div>
 			  	<div id="collapseTwo" class="collapse" aria-labelledby="direccion" data-parent="#accordion">
 					<div class="card-body">  
-						<form>
+						<form action="ActualizarDireccionAtencion" method="post">
 							<div class="row">
 								<div class="col-6">
 									<div class="form-group">
 										<label for="" class="form-control-label">Localidad</label>
 										<select class="form-control" id="select-country" data-live-search="true">
-											<option value="" selected disabled>Seleccionar...</option>		            
-											<option data-tokens="rosario">Rosario</option>
-											<option data-tokens="peyrano">Peyrano</option>
-											<option data-tokens="pilar">Pilar</option>
+											<option value=<%= n.getDireccion().getLocalidad() %> selected disabled><%= n.getDireccion().getLocalidad() %></option>		            
+											<% for (Localidad l : localidades) { %>
+											<option data-tokens=<%= l.getDenominacion() %>><%= l.getDenominacion() %></option>
+											<% } %>
 										</select>
 										
 									</div>
@@ -131,19 +150,19 @@
 									<div class="form-row">
 										<div class="form-group col-md-5">
 										  <label for="calle">Calle</label>
-										  <input type="text" class="form-control" id="inputCalle">
+										  <input type="text" class="form-control" id="calle" value=<%= n.getDireccion().getCalle() %>>
 										</div>
 										<div class="form-group col-md-2">
-										  <label for="numero">Número</label>
-										  <input type="text" class="form-control" id="inputNumero">
+										  <label for="numero">Altura</label>
+										  <input type="text" class="form-control" id="altura" value=<%= n.getDireccion().getAltura() %>>
 										</div>
 										<div class="form-group col-md-2">
 										  <label for="piso">Piso</label>
-										  <input type="text" class="form-control" id="inputPiso">
+										  <input type="text" class="form-control" id="piso" value=<%= n.getDireccion().getPiso() %>>
 										</div>
 										<div class="form-group col-md-2">
 											<label for="depto">Depto</label>
-											<input type="text" class="form-control" id="inputDepto">
+											<input type="text" class="form-control" id="depto" value=<%= n.getDireccion().getDepto() %>>
 										</div>
 										
 									</div>
@@ -157,11 +176,11 @@
 
 									<div id="collapse-localidad" class="collapse">			
 										<div class="container">
-											<form>
+											<form action="RegistrarLocalidad" method="post">
 												<br>
 												<div class="row">
 													<div class="col-auto">
-														<input class="form-control" type="text" id="codPostal" placeholder="Código Postal">
+														<input class="form-control" type="text" id="codigo-postal" placeholder="Código Postal">
 													</div>
 					
 													<div class="col-auto">
@@ -169,7 +188,7 @@
 													</div>
 												</div>
 												<br>
-												<button type="submit" class="btn btn-success float-right">Añadir Localidad</button>
+												<button type="submit" class="btn btn-primary float-right">Añadir Localidad</button>
 											</form>		
 										</div>
 									</div>	
@@ -213,6 +232,7 @@
 											</tr>
 										</thead>
 										<tbody>
+											<% for (Horario h : horarios) { %>
 											<tr>
 												<td>
 													<span class="custom-checkbox">
@@ -220,68 +240,14 @@
 														<label for="checkbox1"></label>
 													</span>
 												</td>
-												<td>Lunes</td>
-												<td>9:00</td>
-												<td>9:30</td>
+												<td><%= h.getDia() %></td>
+												<td><%= h.getHoraDesde() %></td>
+												<td><%= h.getHoraHasta() %></td>
 												<td>
 													<a href="#borrarHorario" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
 												</td>
 											</tr>
-											<tr>
-												<td>
-													<span class="custom-checkbox">
-														<input type="checkbox" id="checkbox2" name="options[]" value="1">
-														<label for="checkbox2"></label>
-													</span>
-												</td>
-												<td>Lunes</td>
-												<td>9:30</td>
-												<td>10:00</td>
-												<td>
-													<a href="#borrarHorario" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<span class="custom-checkbox">
-														<input type="checkbox" id="checkbox3" name="options[]" value="1">
-														<label for="checkbox3"></label>
-													</span>
-												</td>
-												<td>Lunes</td>
-												<td>10:30</td>
-												<td>11:00</td>
-												<td>
-													<a href="#borrarHorario" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<span class="custom-checkbox">
-														<input type="checkbox" id="checkbox4" name="options[]" value="1">
-														<label for="checkbox4"></label>
-													</span>
-												</td>
-												<td>Lunes</td>
-												<td>14:00</td>
-												<td>14:30</td>											<td>
-													<a href="#borrarHorario" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-												</td>
-											</tr>					
-											<tr>
-												<td>
-													<span class="custom-checkbox">
-														<input type="checkbox" id="checkbox5" name="options[]" value="1">
-														<label for="checkbox5"></label>
-													</span>
-												</td>
-												<td>Martes</td>
-												<td>15:00</td>
-												<td>15:30</td>
-												<td>
-													<a href="#borrarHorario" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-												</td>
-											</tr> 
+											<% } %>
 										</tbody>
 									</table>
 								</div>
@@ -354,6 +320,5 @@
 		</div>
 	</div>		
 	
-	<script src="scripts.js"></script>
 </body>
 </html>

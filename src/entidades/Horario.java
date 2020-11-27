@@ -23,10 +23,4 @@ public class Horario {
 	public void setDia(String dia) {
 		this.dia = dia;
 	}
-	
-	@Override
-	public String toString() {
-		return "[dia=" + dia + ", desde=" + horaDesde + ", hasta=" + horaHasta + "]";
-	}
-	
 }
