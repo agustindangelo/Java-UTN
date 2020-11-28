@@ -48,6 +48,10 @@ public class AbmcNutricionista {
 		dn.update(nut);
 	}
 	
+	public void updateDireccion(Nutricionista nut) throws SQLException {
+		dd.update(nut);
+	}
+	
 	public void remove(Nutricionista nut) throws SQLException{
 		dn.remove(nut);
 	}

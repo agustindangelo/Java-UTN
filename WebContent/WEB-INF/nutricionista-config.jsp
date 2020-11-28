@@ -51,7 +51,7 @@
 	AbmcHorario ctrlHorario = new AbmcHorario();
 	AbmcLocalidad ctrlLocalidad = new AbmcLocalidad();
 	LinkedList<Localidad> localidades = ctrlLocalidad.getAll();
-	n = ctrlHorario.setHorario();
+	n = ctrlHorario.setHorarios(n);
 	%>
 	
 	<div class="container">
@@ -73,44 +73,44 @@
 								<div class="col-6">
 									<div class="form-group">
 										<label for="nombre">Nombre</label>
-										<input class="form-control" type="text" id="nombre" value= <%= n.getNombre() %>>
+										<input class="form-control" type="text" id="nombre" name="nombre" value= <%= n.getNombre() %>>
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="form-group">
 										<label for="apellido">Apellido</label>
-										<input class="form-control" type="text" id="apellido" value= <%= n.getApellido() %>>
+										<input class="form-control" type="text" id="apellido" name="apellido" value= <%= n.getApellido() %>>
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="form-group">
 										<label for="email">Correo Electrónico</label>
-										<input class="form-control" type="email" id="email" value=<%= n.getEmail() %>>
+										<input class="form-control" type="email" id="email" name="email" value=<%= n.getEmail() %> disabled>
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="form-group">
 										<label for="dni">Número DNI</label>
-										<input class="form-control" type="text" id="dni" value=<%= n.getDni() %> disabled>
+										<input class="form-control" type="text" id="dni" name="dni" value=<%= n.getDni() %> disabled>
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="form-group">
 										<label for="telefono">Teléfono</label>
-										<input class="form-control" type="text" id="telefono" value=<%= n.getTelefono() %>>
+										<input class="form-control" type="text" id="telefono" name="telefono" value=<%= n.getTelefono() %>>
 									</div>
 								</div>
 								<div class="col-6"></div>
 								<div class="col-6">
 									<div class="form-group">
 										<label for="password">Reemplazar Contraseña</label>
-										<input class="form-control" type="password" id="password">
+										<input class="form-control" type="password" id="password" name="password">
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="form-group">
 										<label for="confirm-password">Confirmar Contraseña</label>
-										<input class="form-control" type="password" id="confirmacion-password">
+										<input class="form-control" type="password" id="confirmacion-password" name="confirmacion-password">
 									</div>
 								</div>
 								<div class="col-12">
@@ -137,10 +137,10 @@
 								<div class="col-6">
 									<div class="form-group">
 										<label for="" class="form-control-label">Localidad</label>
-										<select class="form-control" id="select-country" data-live-search="true">
-											<option value=<%= n.getDireccion().getLocalidad() %> selected disabled><%= n.getDireccion().getLocalidad() %></option>		            
+										<select class="form-control" id="localidad" name="localidad" data-live-search="true">
+											<option value=<%= n.getDireccion().getLocalidad().getDenominacion() %> selected disabled><%= n.getDireccion().getLocalidad().getDenominacion() %></option>		            
 											<% for (Localidad l : localidades) { %>
-											<option data-tokens=<%= l.getDenominacion() %>><%= l.getDenominacion() %></option>
+												<option data-tokens=<%= l.getDenominacion() %>><%= l.getDenominacion() %></option>
 											<% } %>
 										</select>
 										
@@ -150,21 +150,24 @@
 									<div class="form-row">
 										<div class="form-group col-md-5">
 										  <label for="calle">Calle</label>
-										  <input type="text" class="form-control" id="calle" value=<%= n.getDireccion().getCalle() %>>
+										  <input type="text" class="form-control" id="calle" name="calle" value=<%= n.getDireccion().getCalle() %>>
 										</div>
 										<div class="form-group col-md-2">
 										  <label for="numero">Altura</label>
-										  <input type="text" class="form-control" id="altura" value=<%= n.getDireccion().getAltura() %>>
+										  <input type="text" class="form-control" id="altura" name="altura" value=<%= n.getDireccion().getAltura() %>>
 										</div>
 										<div class="form-group col-md-2">
 										  <label for="piso">Piso</label>
-										  <input type="text" class="form-control" id="piso" value=<%= n.getDireccion().getPiso() %>>
+										  <input type="text" class="form-control" id="piso" name="piso" value=<%= n.getDireccion().getPiso() %>>
 										</div>
 										<div class="form-group col-md-2">
 											<label for="depto">Depto</label>
-											<input type="text" class="form-control" id="depto" value=<%= n.getDireccion().getDepto() %>>
+											<% 
+											String depto = n.getDireccion().getDepto();
+											if (depto == null) { depto = "-"; } 
+											%>
+											<input type="text" class="form-control" id="depto" value=<%= depto %>>
 										</div>
-										
 									</div>
 								</div>
 							</div>
@@ -195,7 +198,7 @@
 								</div>
 							</div>
 							<div class="col-12">
-								<button type="submit" class="btn btn-success float-right">Guardar</button>
+								<button type="submit" class="btn btn-primary float-right">Guardar Cambios</button>
 							</div>
 							<br><br>
 						</form>
@@ -219,12 +222,6 @@
 									<table class="table table-striped table-hover">
 										<thead>
 											<tr>
-												<th>
-													<span class="custom-checkbox">
-														<input type="checkbox" id="selectAll">
-														<label for="selectAll"></label>
-													</span>
-												</th>
 												<th>Día</th>
 												<th>Desde</th>
 												<th>Hasta</th>
@@ -232,7 +229,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											<% for (Horario h : horarios) { %>
+											<% for (Horario h : n.getHorarios()) { %>
 											<tr>
 												<td>
 													<span class="custom-checkbox">
