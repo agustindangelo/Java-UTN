@@ -73,6 +73,30 @@ public class DataHorario {
 		}
 	}
 	
+	public void addOne(Horario h, Nutricionista nut) throws SQLException{
+		PreparedStatement stmt = null;
+		try {
+			stmt = DbConnector.getInstancia().getConn().
+					prepareStatement(
+							"insert into horario (dni, dia, hora_desde, hora_hasta) values (?,?,?,?)"
+							);
+			stmt.setString(1, nut.getDni());
+			stmt.setString(2, h.getDia());
+			stmt.setTime(3, Time.valueOf(h.getHoraDesde()));
+			stmt.setTime(4, Time.valueOf(h.getHoraHasta()));
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if(stmt!=null)stmt.close();
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+	}
+
 	public void update(Nutricionista nut, Horario updatedHor) throws SQLException{
 		PreparedStatement stmt= null;
 		Horario hor = nut.getHorarios().get(0);

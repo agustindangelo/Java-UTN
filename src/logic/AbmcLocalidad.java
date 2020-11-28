@@ -15,7 +15,7 @@ public class AbmcLocalidad {
 		return dl.getAll();
 	}
 	
-	public void agregarLocalidad(Localidad loc) throws SQLException{
+	public void registrarLocalidad(Localidad loc) throws SQLException{
 		dl.add(loc);
 	}
 	

@@ -19,6 +19,10 @@ public class AbmcHorario {
 	public void agregarHorarios(Nutricionista nut) throws SQLException{
 		dh.add(nut);
 	}
+
+	public void agregarHorario(Horario h, Nutricionista nut) throws SQLException{
+		dh.addOne(h, nut);
+	}
 	
 	public void updateHorarios(Nutricionista nut, Horario updatedHor) throws SQLException{
 		dh.update(nut, updatedHor);

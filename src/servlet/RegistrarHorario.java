@@ -2,28 +2,29 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalTime;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import entidades.Localidad;
-import logic.AbmcLocalidad;
+import entidades.Horario;
+import entidades.Nutricionista;
+import logic.AbmcHorario;
 
 /**
- * Servlet implementation class RegistrarLocalidad
+ * Servlet implementation class RegistrarHorario
  */
-@WebServlet("/RegistrarLocalidad")
-public class RegistrarLocalidad extends HttpServlet {
+@WebServlet("/RegistrarHorario")
+public class RegistrarHorario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegistrarLocalidad() {
+    public RegistrarHorario() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,17 +41,18 @@ public class RegistrarLocalidad extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		AbmcLocalidad ctrl = new AbmcLocalidad();
-		Localidad l = new Localidad();
-		l.setCodPostal(Integer.parseInt(request.getParameter("codigo-postal")));
-		l.setDenominacion(request.getParameter("denominacion"));
+		AbmcHorario ctrl = new AbmcHorario();
+		Nutricionista n = (Nutricionista) request.getSession().getAttribute("usuario");
+		Horario h = new Horario();
+		h.setDia(request.getParameter("dia"));
+		h.setHoraDesde(LocalTime.parse(request.getParameter("hora-desde")));
+		h.setHoraHasta(LocalTime.parse(request.getParameter("hora-hasta")));
 		try {
-			ctrl.registrarLocalidad(l);
+			ctrl.agregarHorario(h, n);
 		} catch (SQLException e) {
 			request.setAttribute("error", e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
+		request.getRequestDispatcher("WEB-INF/nutricionista-config.jsp").forward(request, response);
 	}
-
 }

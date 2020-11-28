@@ -20,6 +20,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="script/nutricionista-config.js"></script>
 </head>
 <body class="nutricionista">
 
@@ -136,7 +137,7 @@
 							<div class="row">
 								<div class="col-6">
 									<div class="form-group">
-										<label for="" class="form-control-label">Localidad</label>
+										<label for="localidad" class="form-control-label">Localidad</label>
 										<select class="form-control" id="localidad" name="localidad" data-live-search="true">
 											<option value=<%= n.getDireccion().getLocalidad().getDenominacion() %> selected disabled><%= n.getDireccion().getLocalidad().getDenominacion() %></option>		            
 											<% for (Localidad l : localidades) { %>
@@ -170,40 +171,15 @@
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="row">
-								<div class="col-6">
-									<button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#collapse-localidad" aria-expanded="false" aria-controls="collapseExample">
-										<i class="fas fa-plus"></i>   Añadir Localidad
-									</button>
-
-									<div id="collapse-localidad" class="collapse">			
-										<div class="container">
-											<form action="RegistrarLocalidad" method="post">
-												<br>
-												<div class="row">
-													<div class="col-auto">
-														<input class="form-control" type="text" id="codigo-postal" placeholder="Código Postal">
-													</div>
-					
-													<div class="col-auto">
-														<input class="form-control" type="text" id="denominacion" placeholder="Denominacion">
-													</div>
-												</div>
-												<br>
-												<button type="submit" class="btn btn-primary float-right">Añadir Localidad</button>
-											</form>		
-										</div>
-									</div>	
+								<div class="col-12">
+									<a class="btn btn-secondary" href="#modal-localidad" data-toggle="modal"><span>Añadir Localidad</span></a>
+									<button type="submit" class="btn btn-primary float-right">Guardar Cambios</button>
 								</div>
 							</div>
-							<div class="col-12">
-								<button type="submit" class="btn btn-primary float-right">Guardar Cambios</button>
-							</div>
-							<br><br>
 						</form>
 					</div>
 				</div>
+			</div>
 
 			<!-- Seccion de horarios	 -->
 			<div class="card">
@@ -219,13 +195,13 @@
 						<div class="container">
 							<div class="table-responsive">
 								<div class="table-wrapper">						
-									<table class="table table-striped table-hover">
+									<table class="table table-striped table-hover" id="tabla-horarios">
 										<thead>
 											<tr>
-												<th>Día</th>
-												<th>Desde</th>
-												<th>Hasta</th>
 												<th></th>
+												<th>Día</th>
+												<th>Hora desde</th>
+												<th>Hora hasta</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -240,9 +216,6 @@
 												<td><%= h.getDia() %></td>
 												<td><%= h.getHoraDesde() %></td>
 												<td><%= h.getHoraHasta() %></td>
-												<td>
-													<a href="#borrarHorario" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-												</td>
 											</tr>
 											<% } %>
 										</tbody>
@@ -250,8 +223,8 @@
 								</div>
 							</div>       
 							<div class="col-xs-6 float-right">
-								<a href="#agregarHorario" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Agregar Horario</span></a>
-								<a href="#borrarHorario" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Borrar</span></a>						
+								<a href="#modal-agregar-horario" class="btn btn-success" data-toggle="modal"><span>Agregar Horario</span></a>
+								<a href="#modal-borrar-horario" class="btn btn-danger" data-toggle="modal"><span>Borrar</span></a>						
 							</div> 
 						</div>
 					</div>
@@ -260,32 +233,37 @@
 		</div>
 	</div>
   
-	</div>
 	<!-- Modal agregar horario -->
-	<div id="agregarHorario" class="modal fade">
+	<div id="modal-agregar-horario" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form>
+				<form action="RegistrarHorario" method="post">
 					<div class="modal-header">						
 						<h4 class="modal-title">Agregar Nuevo Horario</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">					
 						<div class="form-group">
-							<label>Día</label>
-							<input type="text" class="form-control" required>
+							<label for="dia">Día</label>
+							<select class="form-control" id="dia" name="dia" data-live-search="true">
+									<option value="Lunes">Lunes</option>		            
+									<option value="Martes">Martes</option>
+									<option value="Miercoles">Miércoles</option>
+									<option value="Jueves">Jueves</option>
+									<option value="Viernes">Viernes</option>
+									<option value="Sabado">Sábado</option>
+							</select>
 						</div>
 						<div class="row">
 							<div class="col">
-								<label>Hora hasta</label>
-								<input type="time" class="form-control" required></input>
+								<label for="hora-desde">Hora Desde</label>
+								<input id="hora-desde" name="hora-desde" type="time" class="form-control" required></input>
 							</div>
 							<div class="col">
-								<label>Hora hasta</label>
-								<input type="time" class="form-control" required></input>
+								<label for="hora-hasta">Hora Hasta</label>
+								<input id="hora-hasta" name="hora-hasta" type="time" class="form-control" required></input>
 							</div>
 						</div>
-						
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
@@ -297,7 +275,7 @@
 	</div>
 
 	<!-- Modal Borrar horario -->
-	<div id="borrarHorario" class="modal fade">
+	<div id="modal-borrar-horario" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form>
@@ -315,7 +293,58 @@
 				</form>
 			</div>
 		</div>
+	</div>
+
+	<div id="modal-localidad" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal content">
+				<form>
+					<div class="modal-header">
+						<h4 class="modal-title">Registrar localidad</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-row">
+							<div class="col-3">
+								<label for="codigo-postal">Código Postal</label>
+								<input class="form-control" type="text" id="codigo-postal" name="codigo-postal" placeholder="Código Postal">
+							</div>
+							<div class="col-9">
+								<label for="denominacion">Denominación</label>
+								<input class="form-control" type="text" id="denominacion" name="denominacion" placeholder="Denominacion">
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+						<button class="btn btn-primary float-right" id="registrar-localidad">Registrar Localidad</button>
+					</div>
+				</form>
+			</div>
+		</div>		
 	</div>		
-	
+
+	<div id="modal-mensaje" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<form>
+						<div class="modal-header">						
+							<h4 class="modal-title" id="modal-mensaje-titulo">Localidad registrada</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						</div>
+						<div class="modal-body">					
+							<p id="modal-mensaje-cuerpo"></p>
+						</div>
+						<div class="modal-footer">
+							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+							<input type="submit" class="btn btn-danger" value="Borrar">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>		
+
 </body>
 </html>
