@@ -172,7 +172,7 @@
 									</div>
 								</div>
 								<div class="col-12">
-									<a class="btn btn-secondary" href="#modal-localidad" data-toggle="modal"><span>Añadir Localidad</span></a>
+									<a class="btn btn-secondary" href="#modal-agregar-localidad" data-toggle="modal"><span>Añadir Localidad</span></a>
 									<button type="submit" class="btn btn-primary float-right">Guardar Cambios</button>
 								</div>
 							</div>
@@ -237,12 +237,13 @@
 	<div id="modal-agregar-horario" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form action="RegistrarHorario" method="post">
+				<form>
 					<div class="modal-header">						
 						<h4 class="modal-title">Agregar Nuevo Horario</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">					
+						<p style="color: red" id="error-rango-horario">El rango horario ingresado es inválido</p>
 						<div class="form-group">
 							<label for="dia">Día</label>
 							<select class="form-control" id="dia" name="dia" data-live-search="true">
@@ -267,7 +268,7 @@
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-						<input type="submit" class="btn btn-success" value="Agregar">
+						<input id="registrar-horario" class="btn btn-success" value="Agregar">
 					</div>
 				</form>
 			</div>
@@ -284,7 +285,7 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">					
-						<p>¿Está seguro de que quiere eliminar dichos horarios?</p>
+						<p>¿Está seguro de que quiere eliminar estos horarios?</p>
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
@@ -295,7 +296,7 @@
 		</div>
 	</div>
 
-	<div id="modal-localidad" class="modal fade">
+	<div id="modal-agregar-localidad" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal content">
 				<form>
@@ -304,7 +305,7 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
-						<div class="form-row">
+						<div class="form-group">
 							<div class="col-3">
 								<label for="codigo-postal">Código Postal</label>
 								<input class="form-control" type="text" id="codigo-postal" name="codigo-postal" placeholder="Código Postal">
@@ -317,7 +318,7 @@
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-						<button class="btn btn-primary float-right" id="registrar-localidad">Registrar Localidad</button>
+						<input class="btn btn-success" type="submit" id="registrar-localidad" value="Registrar">
 					</div>
 				</form>
 			</div>
@@ -330,15 +331,14 @@
 				<div class="modal-body">
 					<form>
 						<div class="modal-header">						
-							<h4 class="modal-title" id="modal-mensaje-titulo">Localidad registrada</h4>
+							<h4 class="modal-title" id="modal-mensaje-titulo"></h4>
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						</div>
 						<div class="modal-body">					
 							<p id="modal-mensaje-cuerpo"></p>
 						</div>
 						<div class="modal-footer">
-							<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-							<input type="submit" class="btn btn-danger" value="Borrar">
+							<input type="button" class="btn btn-default" data-dismiss="modal" value="Aceptar">
 						</div>
 					</form>
 				</div>

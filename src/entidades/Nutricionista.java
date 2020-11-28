@@ -22,6 +22,9 @@ public class Nutricionista extends Usuario {
 	public ArrayList<Horario> getHorarios() {
 		return horarios;
 	}
+	public void addHorario(Horario h) {
+		this.horarios.add(h);
+	}
 	public void setRol(){
 		this.rol = Rol.Nutricionista;
 	}
