@@ -1,5 +1,6 @@
 package logic;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import data.DataHorario;
 import entidades.*;
@@ -40,8 +41,9 @@ public class AbmcHorario {
 		dh.update(nut, updatedHor);
 	}
 	
-	public void removeHorarios(Nutricionista nut) throws SQLException{
-		dh.remove(nut);
+	public Nutricionista removeHorarios(Nutricionista nut, ArrayList<Horario> horariosAEliminar) throws SQLException{
+		dh.remove(nut, horariosAEliminar);
+		return dh.setHorarios(nut); 
 	}
 	
 }

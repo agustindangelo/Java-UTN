@@ -141,7 +141,7 @@
 										<select class="form-control" id="localidad" name="localidad" data-live-search="true">
 											<option value=<%= n.getDireccion().getLocalidad().getDenominacion() %> selected disabled><%= n.getDireccion().getLocalidad().getDenominacion() %></option>		            
 											<% for (Localidad l : localidades) { %>
-												<option data-tokens=<%= l.getDenominacion() %>><%= l.getDenominacion() %></option>
+												<option id=<%= l.getCodPostal() %> data-tokens=<%= l.getDenominacion() %>><%= l.getDenominacion() %></option>
 											<% } %>
 										</select>
 										
@@ -172,7 +172,7 @@
 									</div>
 								</div>
 								<div class="col-12">
-									<a class="btn btn-secondary" href="#modal-agregar-localidad" data-toggle="modal"><span>Añadir Localidad</span></a>
+									<a href="#modal-agregar-localidad" class="btn btn-secondary" data-toggle="modal"><span>Añadir Localidad</span></a>
 									<button type="submit" class="btn btn-primary float-right">Guardar Cambios</button>
 								</div>
 							</div>
@@ -205,26 +205,28 @@
 											</tr>
 										</thead>
 										<tbody>
-											<% for (Horario h : n.getHorarios()) { %>
-											<tr>
+											<%
+											int indice = 0;
+											for (Horario h : n.getHorarios()) { %>
+											<tr id=<%= indice %>>
 												<td>
 													<span class="custom-checkbox">
-														<input type="checkbox" id="checkbox1" name="options[]" value="1">
-														<label for="checkbox1"></label>
+														<input type="checkbox" value=<%= indice %>>
 													</span>
 												</td>
 												<td><%= h.getDia() %></td>
 												<td><%= h.getHoraDesde() %></td>
 												<td><%= h.getHoraHasta() %></td>
 											</tr>
-											<% } %>
+											<% indice++; 
+											} %>
 										</tbody>
 									</table>
 								</div>
 							</div>       
 							<div class="col-xs-6 float-right">
 								<a href="#modal-agregar-horario" class="btn btn-success" data-toggle="modal"><span>Agregar Horario</span></a>
-								<a href="#modal-borrar-horario" class="btn btn-danger" data-toggle="modal"><span>Borrar</span></a>						
+								<a id="borrar-horarios" class="btn btn-danger" data-toggle="modal"><span>Borrar</span></a>						
 							</div> 
 						</div>
 					</div>
@@ -276,7 +278,7 @@
 	</div>
 
 	<!-- Modal Borrar horario -->
-	<div id="modal-borrar-horario" class="modal fade">
+	<div id="modal-borrar-horarios" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form>
@@ -285,11 +287,11 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">					
-						<p>¿Está seguro de que quiere eliminar estos horarios?</p>
+						<p>¿Está seguro de que quiere eliminar los horarios seleccionados?</p>
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-						<input type="submit" class="btn btn-danger" value="Borrar">
+						<input id="confirmacion-borrar-horarios" class="btn btn-danger" value="Borrar">
 					</div>
 				</form>
 			</div>
@@ -298,32 +300,35 @@
 
 	<div id="modal-agregar-localidad" class="modal fade">
 		<div class="modal-dialog">
-			<div class="modal content">
+			<div class="modal-content">
 				<form>
-					<div class="modal-header">
-						<h4 class="modal-title">Registrar localidad</h4>
+					<div class="modal-header">						
+						<h4 class="modal-title">Registrar Localidad</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
+
 					<div class="modal-body">
-						<div class="form-group">
+						<div class="form-row">
 							<div class="col-3">
 								<label for="codigo-postal">Código Postal</label>
-								<input class="form-control" type="text" id="codigo-postal" name="codigo-postal" placeholder="Código Postal">
+								<input class="form-control" id="codigo-postal" name="codigo-postal" type="number" min="1" max="100000"/>				
 							</div>
 							<div class="col-9">
 								<label for="denominacion">Denominación</label>
-								<input class="form-control" type="text" id="denominacion" name="denominacion" placeholder="Denominacion">
+								<input class="form-control" id="denominacion" name="denominacion" type="text"/>				
 							</div>
 						</div>
 					</div>
+
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-						<input class="btn btn-success" type="submit" id="registrar-localidad" value="Registrar">
+						<input id="registrar-localidad" class="btn btn-primary" value="Registrar">
 					</div>
 				</form>
 			</div>
-		</div>		
-	</div>		
+		</div>
+	</div>
+
 
 	<div id="modal-mensaje" class="modal fade">
 		<div class="modal-dialog">

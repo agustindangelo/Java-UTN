@@ -124,12 +124,12 @@ public class DataHorario {
 		}
 	}
 	
-	public void remove(Nutricionista nut) throws SQLException{
+	public void remove(Nutricionista nut, ArrayList<Horario> horariosAEliminar) throws SQLException{
 		PreparedStatement stmt = null;
-		for(Horario hor : nut.getHorarios()) {
+		for(Horario hor : horariosAEliminar) {
 			try {
 				stmt = DbConnector.getInstancia().getConn().prepareStatement(
-						"delete from horario where id_nutricionista = ? and dia = ? and hora_desde = ?"
+						"delete from horario where dni = ? and dia = ? and hora_desde = ?"
 						);
 				stmt.setString(1, nut.getDni());
 				stmt.setString(2, hor.getDia());
