@@ -108,8 +108,9 @@ a:hover{
 }
 
 .btn-primary.btn-group-btn{
-    background-color: var(--primary-color);
+    background-color: #f5f5f5;
     border: none;
+    box-shadow: .1rem .1rem .1rem rgba(0,0,0,0.23);
 }
 
 .btn-group-btn{
@@ -128,6 +129,16 @@ a:hover{
 }
 .btn-secondary.btn-group-btn:hover{
     background-color: var(--primary-light);
+}
+
+.input-group-text {
+	background-color: white;
+	border-right: none;
+}
+
+.input-group > .form-control {
+	border-left: none;
+	text-align: right;
 }
 
 .navbar-custom { 

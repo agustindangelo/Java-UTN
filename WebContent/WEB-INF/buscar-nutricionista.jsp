@@ -30,7 +30,7 @@
 						<tr>
 							<th>Nombre</th>
 							<th>Teléfono</th>
-							<th>Direcci�n</th>
+							<th>Dirección</th>
 							<th>Ciudad<th>
 						</tr>
 							<% for (Nutricionista n : nutricionistas) { %>

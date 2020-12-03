@@ -35,23 +35,8 @@
                             <div class="btn-group w-100" role="group">
                                 <a class="btn btn-primary btn-group-btn">Quiero un nutricionista</a>
                                 <a href="formulario-registro-nutricionista.jsp" class="btn btn-secondary btn-group-btn">Soy un nutricionista</a>
-
                             </div>
-                            <div class="form-group">
-                                <label for="nombre">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="apellido">Apellido</label>
-                                <input type="text" class="form-control" id="apellido" name="apellido" required>
-                            </div>
-			 				<div class="input-group mb-2">
-								<div class="input-group-prepend">
-									<div class="input-group-text">Fecha de Nacimiento</div>
-								</div>
-								<input type="date" class="form-control" id="fecha" placeholder="" name="fecha">
-							</div> 
-							<div class="d-flex bd-highlight mb-3">							
+                            <div class="d-flex bd-highlight mb-3">							
 							  <div class="mr-auto p-2 bd-highlight">Soy</div>
 							  <div class="p-2 bd-highlight">
 								  <input class="form-check-input" type="radio" name="sexo" id="sexo-hombre" value="Masculino">
@@ -62,22 +47,48 @@
 								 <label class="form-check-label" for="sexo-mujer">Mujer</label>          
 							  </div>
 							 </div>
-                            <div class="form-group">
-                                <label for="email">Correo electrónico</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="telefono">Teléfono</label>
-                                <input type="tel" class="form-control" id="telefono" name="telefono" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Contraseña</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="dni">DNI</label>
-                                <input type="text" class="form-control" id="dni" name="dni" required>
-                            </div>
+                            <div class="input-group mb-2">
+								<div class="input-group-prepend">
+								  <div class="input-group-text">Nombre</div>
+								</div>
+								<input type="text" class="form-control" id="nombre" name="nombre" required>
+							</div>
+							<div class="input-group mb-2">
+								<div class="input-group-prepend">
+								  <div class="input-group-text">Apellido</div>
+								</div>
+								<input type="text" class="form-control" id="apellido" name="apellido" required>
+							</div>
+			 				<div class="input-group mb-2">
+								<div class="input-group-prepend">
+									<div class="input-group-text">Fecha de Nacimiento</div>
+								</div>
+								<input type="date" class="form-control" id="fecha" placeholder="" name="fecha">
+							</div> 
+							<div class="input-group mb-2">
+								<div class="input-group-prepend">
+								  <div class="input-group-text">Correo electrónico</div>
+								</div>
+								<input type="email" class="form-control" id="email" name="email" placeholder="email@ejemplo.com" required>
+							</div>
+							<div class="input-group mb-2">
+								<div class="input-group-prepend">
+								  <div class="input-group-text">Teléfono</div>
+								</div>
+								<input type="tel" class="form-control" id="telefono" name="telefono" required>
+							</div>
+                            <div class="input-group mb-2">
+								<div class="input-group-prepend">
+								  <div class="input-group-text">Contraseña</div>
+								</div>
+								<input type="password" class="form-control" id="password" name="password" placeholder="al menos 8 caracteres" required>
+							</div>
+							<div class="input-group mb-2">
+								<div class="input-group-prepend">
+								  <div class="input-group-text">DNI</div>
+								</div>
+								<input type="text" class="form-control" id="dni" name="dni" required>
+							</div>
                             <input type="submit" class="btn btn-primary float-right" value="Continuar">
                         </form>
                     </div>

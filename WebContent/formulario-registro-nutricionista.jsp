@@ -36,30 +36,42 @@
                                 <a href="formulario-registro-paciente.jsp" class="btn btn-secondary btn-group-btn">Quiero un nutricionista</a>
                                 <a class="btn btn-primary btn-group-btn">Soy un nutricionista</a>
                             </div>
-                            <div class="form-group">
-                                <label for="nombre">Nombre</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre">
-                            </div>
-                            <div class="form-group">
-                                <label for="apellido">Apellido</label>
-                                <input type="text" class="form-control" id="apellido" name="apellido">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Correo electrónico</label>
-                                <input type="email" class="form-control" id="email" name="email">
-                            </div>
-                            <div class="form-group">
-                                <label for="telefono">Teléfono</label>
-                                <input type="tel" class="form-control" id="telefono" name="telefono">
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Contraseña</label>
-                                <input type="password" class="form-control" id="password" name="password">
-                            </div>
-                            <div class="form-group">
-                                <label for="dni">DNI</label>
-                                <input type="text" class="form-control" id="dni" name="dni">
-                            </div>
+                            <div class="input-group mb-2">
+								<div class="input-group-prepend">
+								  <div class="input-group-text">Nombre</div>
+								</div>
+								<input type="text" class="form-control" id="nombre" name="nombre" required>
+							</div>
+							<div class="input-group mb-2">
+								<div class="input-group-prepend">
+								  <div class="input-group-text">Apellido</div>
+								</div>
+								<input type="text" class="form-control" id="apellido" name="apellido" required>
+							</div>
+							<div class="input-group mb-2">
+								<div class="input-group-prepend">
+								  <div class="input-group-text">Correo electrónico</div>
+								</div>
+								<input type="email" class="form-control" id="email" name="email" placeholder="email@ejemplo.com" required>
+							</div>
+							<div class="input-group mb-2">
+								<div class="input-group-prepend">
+								  <div class="input-group-text">Teléfono</div>
+								</div>
+								<input type="tel" class="form-control" id="telefono" name="telefono" required>
+							</div>
+							<div class="input-group mb-2">
+								<div class="input-group-prepend">
+								  <div class="input-group-text">Contraseña</div>
+								</div>
+								<input type="password" class="form-control" id="password" name="password" placeholder="al menos 8 caracteres" required>
+							</div>
+							<div class="input-group mb-2">
+								<div class="input-group-prepend">
+								  <div class="input-group-text">DNI</div>
+								</div>
+								<input type="text" class="form-control" id="dni" name="dni" required>
+							</div>
                             <input type="submit" class="btn btn-primary float-right" value="Continuar">
                         </form>
                     </div>
