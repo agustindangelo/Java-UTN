@@ -1,5 +1,6 @@
 package data;
 import java.sql.*;
+import java.time.LocalDate;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -31,8 +32,7 @@ public class DataPaciente {
 			stmt.setString(5, p.getPassword());
 			stmt.setString(6, p.getTelefono());
 			stmt.setString(7, p.getGeneroStr());
-			SimpleDateFormat fecha = new SimpleDateFormat("yyyy-MM-dd");
-			stmt.setDate(8,  java.sql.Date.valueOf(fecha.format(p.getFechaNacimiento())));
+			stmt.setDate(8,  Date.valueOf((p.getFechaNacimiento())));
 			stmt.execute();
 		} catch (SQLException e) {
 			throw e;
@@ -55,7 +55,7 @@ public class DataPaciente {
 					+ "where dni=?;"
 					);
 			stmt.setString(1, p.getGeneroStr());
-			stmt.setDate(2, (Date) p.getFechaNacimiento());
+			stmt.setDate(2, Date.valueOf(p.getFechaNacimiento()));
 			stmt.setInt(3, p.getAltura());
 			stmt.setFloat(4, p.getPeso());
 			stmt.setFloat(5, p.getImc());
@@ -95,7 +95,7 @@ public class DataPaciente {
 				p.setApellido(rs.getString("apellido"));
 				p.setEmail(rs.getString("email"));
 				p.setTelefono(rs.getString("telefono"));
-				p.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
+				p.setFechaNacimiento(rs.getDate("fecha_nacimiento").toLocalDate());
 				p.setAltura(rs.getInt("altura"));
 				p.setPeso(rs.getInt("peso"));
 				p.setPesoObjetivo(rs.getInt("peso_objetivo"));
@@ -138,7 +138,7 @@ public class DataPaciente {
 					else {
 						p.setGenero(TipoGenero.Femenino);
 					}
-					p.setFechaNacimiento(rs.getDate("fecha_nacimiento"));
+					p.setFechaNacimiento(rs.getDate("fecha_nacimiento").toLocalDate());
 					p.setAltura(rs.getInt("altura"));
 					p.setPeso(rs.getFloat("peso"));
 					p.setImc(rs.getFloat("imc"));
@@ -301,6 +301,31 @@ public class DataPaciente {
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
 					"update paciente\n"
+					+ "set nombre= ?, apellido= ?, telefono = ?, password = ?\n"
+					+ "where dni = ?"
+					);
+			stmt.setString(1, p.getNombre());
+			stmt.setString(2, p.getApellido());
+			stmt.setString(3, p.getTelefono());
+			stmt.setString(4, p.getPassword());
+			stmt.setString(5, p.getDni());
+			stmt.execute();
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+	}
+	public void actualizarDatosSalud(Paciente p) throws SQLException{
+		PreparedStatement stmt = null;
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement(
+					"update paciente\n"
 					+ "set peso = ?, imc = ?, metabolismo_basal = ?, peso_objetivo = ?, objetivo = ?\n"
 					+ "where dni = ?"
 					);
@@ -322,7 +347,6 @@ public class DataPaciente {
 			}
 		}
 	}
-
 	public LinkedList<Ejercicio> getEjercicioSemana(Paciente p) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;

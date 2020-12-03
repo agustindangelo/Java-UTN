@@ -114,6 +114,9 @@
 										<span class="text-muted">Telefono: </span><p id="telefono"></p>
 									</li>
 									<li class="list-group-item">
+										<span class="text-muted">Altura: </span><p id="altura"></p>
+									</li>
+									<li class="list-group-item">
 										<span class="text-muted">Indice de masa corporal: </span><p id="imc"></p>
 									</li>
 									<li class="list-group-item">
@@ -121,7 +124,7 @@
 									</li>
 								</ul>
 								<div class="pull-right">
-									<button class="btn btn-link float-right" style="font-size:17px" href="#modificarParametrosPaciente" data-toggle="modal">Modificar</button>
+									<button class="btn btn-link float-right" style="font-size:17px" href="#ModificarDatosPaciente" data-toggle="modal">Modificar</button>
 								</div>
 							</div>
 						</div>
@@ -197,13 +200,6 @@
 										<p class="card-text text-center text-muted">Total en 7 dias</p>
 										<h3 class="card-text text-center" id="ejercicio-semana"></h3>
 									</div>
-									<div class="col">
-										<p class="card-text text-center text-muted">Objetivo</p>
-										<h3 class="card-text text-center" id="ejercicio-objetivo"></h3>
-									</div>
-								</div>
-								<div class="pull-right">
-									<button class="btn btn-link float-right" style="font-size:17px" href="#modificarObjetivoEjercicio" data-toggle="modal">Modificar</button>
 								</div>
 							</div>
 						</div>
@@ -218,45 +214,41 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form>
-					<div class="input-group mb-2">
-				        <div class="input-group-prepend">
-				          <div class="input-group-text">Altura</div>
-				        </div>
-				        <input type="text" class="form-control" id="input-altura" placeholder="cm.">
-				    </div>
-				    <div class="input-group mb-2">
-				        <div class="input-group-prepend">
-				          <div class="input-group-text">Peso Actual</div>
-				        </div>
-				        <input type="text" class="form-control" id="input-peso-actual" placeholder="kg.">
-				    </div>
-				    <div class="input-group mb-2">
-				        <div class="input-group-prepend">
-				          <div class="input-group-text">Peso Objetivo</div>
-				        </div>
-				        <input type="text" class="form-control" id="input-peso-objetivo" placeholder="kg.">
-				    </div>
-				     <div class="input-group mb-2">
-				        <div class="input-group-prepend">
-				          <div class="input-group-text">Metabolismo Basal</div>
-				        </div>
-				        <input type="text" class="form-control" id="input-metabolismo-basal" placeholder="kcal.">
-				    </div>
-				    
-				    <div class="input-group mb-2">
-				        <div class="input-group-prepend">
-				          <div class="input-group-text">Indice de Masa Corporal</div>
-				        </div>
-				        <input type="text" class="form-control" id="input-imc" placeholder="bmi">
-				    </div>
+					<div class="modal-header">
+						<h4 class="modal-title">Modificar Datos del Paciente</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="input-group mb-2">
+							<div class="input-group-prepend">
+							  <div class="input-group-text">Altura</div>
+							</div>
+							<input type="text" class="form-control" id="modificar-altura" placeholder="cm.">
+						</div>
+						 <div class="input-group mb-2">
+							<div class="input-group-prepend">
+							  <div class="input-group-text">Metabolismo Basal</div>
+							</div>
+							<input type="text" class="form-control" id="modificar-metabolismo-basal" placeholder="kcal.">
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-prepend">
+							  <div class="input-group-text">Indice de Masa Corporal</div>
+							</div>
+							<input type="text" class="form-control" id="modificar-imc" placeholder="bmi">
+						</div>
+					   
+						<div class="input-group mb-2">
+							<div class="input-group-prepend">
+							  <div class="input-group-text">Objetivo</div>
+							</div>
+							<input type="text" class="form-control" id="modificar-objetivo" placeholder="Perder peso, ganar peso ...">
+						</div> 
+					</div>
 				   
-				    <div class="input-group mb-2">
-				        <div class="input-group-prepend">
-				          <div class="input-group-text">Objetivo</div>
-				        </div>
-				        <input type="text" class="form-control" id="input-objetivo" placeholder="Perder peso, ganar peso ...">
+				    <div class="modal-footer">
+						 <input type="submit" class="btn btn-primary float-right" value="Continuar">
 				    </div>
-                     <input type="submit" class="btn btn-primary float-right" value="Continuar">
 				</form>
 			</div>
 		</div>
@@ -266,14 +258,14 @@
 	<div id="modificarPesoObjetivo" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form action="ActualizarDatosPersonales" method="post">
+				<form action="ActualizarDatosSaludPaciente" method="post">
 					<div class="modal-header">						
 						<h4 class="modal-title">Nuevo peso</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
 						<label for="peso">Peso actual(kg.)</label>
-						<input class="form-control" id="peso" name="peso" type="number" min="5" max="150"/>				
+						<input class="form-control" id="peso" name="peso" type="number" min="5" max="150" />				
 					</div>
 					<div class="modal-body">
 						<label for="peso-objetivo">Peso objetivo (kg.)</label>
@@ -302,22 +294,22 @@
 						<div class="form-row">
 							<div class="col-6">
 							  <label for="calorias">Ingesta (kcal)</label>
-							  <input type="number" class="form-control" id="calorias" name="calorias" required>
+							  <input type="number" class="form-control" id="modificar-calorias" name="modificar-calorias" required>
 							</div>
 							<div class="col-6">
 							  <label for="carbohidratos">Carbohidratos (g)</label>
-							  <input type="number" class="form-control" id="carbohidratos" name="carbohidratos" required>
+							  <input type="number" class="form-control" id="modificar-carbohidratos" name="modificar-carbohidratos" required>
 							</div>
 						</div>
 						<br>
 						<div class="form-row">
 							<div class="col-6">
 								<label for="proteinas">Proteinas (g)</label>
-								<input type="number" class="form-control" id="proteinas" name="proteinas" required>
+								<input type="number" class="form-control" id="modificar-proteinas" name="modificar-proteinas" required>
 							  </div>
 							<div class="col-6">
 								<label for="grasas">Grasas (g)</label>
-								<input type="number" class="form-control" id="grasas" name="grasas" required>
+								<input type="number" class="form-control" id="modificar-grasas" name="modificar-grasas" required>
 							</div>
 						</div>
 					</div>
@@ -329,27 +321,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- modal modificar objetivo ejercicio-->
-	<div id="modificarObjetivoEjercicio" class="modal fade">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<form>
-					<div class="modal-header">						
-						<h4 class="modal-title">Objetivo Diario de Ejercicio</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					</div>
-					<div class="modal-body">
-						<label for="objEjercicio">Gasto energetico (kcal/dia)</label>
-						<input class="form-control" id="objEjercicio" type="number" value="500" min="0" max="1500"/>
-					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-						<input type="submit" class="btn btn-primary" value="Actualizar">
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+
 
 </body>
 </html>

@@ -1,13 +1,29 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ page import="entidades.Usuario"%>  
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Trabajo Pr√°ctico de Java</title>
+    <title>Trabajo Pr·ctico de Java</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="style/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
 </head>
 <body class="nutricionista">
+	<% 
+	Usuario u = (Usuario) session.getAttribute("usuario");
+	if (u != null){
+		RequestDispatcher dispatcher=getServletContext().getRequestDispatcher( "/WEB-INF/nutricionista-main.jsp" );
+		dispatcher.forward( request, response );
+	} else {
+		u = (Usuario) session.getAttribute("paciente");
+		if (u != null){
+			RequestDispatcher dispatcher=getServletContext().getRequestDispatcher( "/WEB-INF/paciente-main.jsp" );
+			dispatcher.forward( request, response );
+		}
+	} 
+	%>
     <div class="container-fluid">
         <div class="row">
             <div class="col"></div>
@@ -17,7 +33,7 @@
                     <div class="card-body">
                         <form action="RegistrarNutricionista" method="post">
                             <div class="btn-group w-100" role="group">
-                                <a href="formulario-registro-paciente.html" class="btn btn-secondary btn-group-btn">Quiero un nutricionista</a>
+                                <a href="formulario-registro-paciente.jsp" class="btn btn-secondary btn-group-btn">Quiero un nutricionista</a>
                                 <a class="btn btn-primary btn-group-btn">Soy un nutricionista</a>
                             </div>
                             <div class="form-group">
@@ -29,15 +45,15 @@
                                 <input type="text" class="form-control" id="apellido" name="apellido">
                             </div>
                             <div class="form-group">
-                                <label for="email">Correo electr√≥nico</label>
+                                <label for="email">Correo electrÛnico</label>
                                 <input type="email" class="form-control" id="email" name="email">
                             </div>
                             <div class="form-group">
-                                <label for="telefono">Tel√©fono</label>
+                                <label for="telefono">TelÈfono</label>
                                 <input type="tel" class="form-control" id="telefono" name="telefono">
                             </div>
                             <div class="form-group">
-                                <label for="password">Contrase√±a</label>
+                                <label for="password">ContraseÒa</label>
                                 <input type="password" class="form-control" id="password" name="password">
                             </div>
                             <div class="form-group">

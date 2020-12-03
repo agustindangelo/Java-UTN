@@ -81,7 +81,7 @@ public class LogIn extends HttpServlet {
 					
 				}
 			} else {
-				request.getRequestDispatcher("index.html").forward(request, response);
+				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 		} catch (SQLException e){
 			request.setAttribute("error", e.getMessage());

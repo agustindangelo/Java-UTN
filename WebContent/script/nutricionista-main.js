@@ -23,8 +23,19 @@ function getPacienteInfo(dni){
 				$('#dni').text(paciente.dni);
 				$('#email').text(paciente.email);
 				$('#telefono').text(paciente.telefono);
+				$('#altura').text(paciente.altura);
 				$('#imc').text(paciente.imc.toString());
-				$('#metabolismo-basal').text(paciente.metabolismoBasal.toString() + ' kcal.');
+				$('#modificar-altura').val(paciente.altura);
+				$('#modificar-metabolismo-basal').val(paciente.metabolismoBasal);
+				$('#modificar-imc').val(paciente.imc);
+				$('#modificar-objetivo').val(paciente.objetivo);
+				$('#metabolismo-basal').text(paciente.metabolismoBasal);
+				$('#nuevo-peso-objetivo').val(paciente.pesoObjetivo);
+				$('#peso').val(paciente.peso);
+				$('#modificar-calorias').val(paciente.plan.kcalDiarias);
+				$('#modificar-carbohidratos').val(paciente.plan.carbohidratosDiarios);
+				$('#modificar-proteinas').val(paciente.plan.proteinasDiarias);
+				$('#modificar-grasas').val(paciente.plan.grasasDiarias);
 				
 				if (paciente.pesoObjetivo == 0){
 					$('#peso-objetivo').text('---');

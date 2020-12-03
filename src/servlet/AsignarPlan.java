@@ -47,10 +47,10 @@ public class AsignarPlan extends HttpServlet {
 		Nutricionista n = (Nutricionista) session.getAttribute("usuario");
 		PlanDeAlimentacion plan = new PlanDeAlimentacion();
 		AbmcPaciente ctrl = new AbmcPaciente();
-		plan.setCarbohidratosDiarios(Integer.parseInt(request.getParameter("carbohidratos")));
-		plan.setKcalDiarias(Integer.parseInt(request.getParameter("calorias")));
-		plan.setProteinasDiarias(Integer.parseInt(request.getParameter("proteinas")));
-		plan.setGrasasDiarias(Integer.parseInt(request.getParameter("grasas")));
+		plan.setCarbohidratosDiarios(Integer.parseInt(request.getParameter("modificar-carbohidratos")));
+		plan.setKcalDiarias(Integer.parseInt(request.getParameter("modifica-calorias")));
+		plan.setProteinasDiarias(Integer.parseInt(request.getParameter("modificar-proteinas")));
+		plan.setGrasasDiarias(Integer.parseInt(request.getParameter("modificar-grasas")));
 		p.setPlan(plan);
 		try {
 			ctrl.asignarPlan(p, n);

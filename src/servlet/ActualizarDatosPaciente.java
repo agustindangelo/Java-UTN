@@ -16,7 +16,7 @@ import logic.AbmcPaciente;
 /**
  * Servlet implementation class ActualizarPeso
  */
-@WebServlet("/ActualizarPeso")
+@WebServlet("/ActualizarDatosPaciente")
 public class ActualizarDatosPaciente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,10 +42,20 @@ public class ActualizarDatosPaciente extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Paciente p = (Paciente) session.getAttribute("paciente");
-		
-		p.setPeso(Float.parseFloat(request.getParameter("peso-paciente")));
-		
 		AbmcPaciente ctrl = new AbmcPaciente();
+
+		p.setNombre(request.getParameter("nombre"));
+		p.setApellido(request.getParameter("apellido"));
+		
+		String pass1 = request.getParameter("password");
+		String pass2 = request.getParameter("confirmacion-password");
+		if (pass1 != null && pass1.contentEquals(pass2)) {
+			p.setPassword(pass1);
+		} else {
+			request.setAttribute("error", "Las contraseñas ingresadas no coinciden.");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		}
+
 		try {
 			ctrl.actualizarDatosPersonales(p);
 		} catch (SQLException e) {

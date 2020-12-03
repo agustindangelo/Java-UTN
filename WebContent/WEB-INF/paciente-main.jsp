@@ -52,9 +52,9 @@
 					<i class="fas fa-user-circle"></i> Mi Perfil
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="paciente-config.html">Configuración</a>
+					<a class="dropdown-item" href="RedirectPacienteConfig">Configuración</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="login.html">Cerrar sesión</a>
+					<a class="dropdown-item" href="LogOut">Cerrar sesión</a>
 				</div>
 			</li>
 	    </ul>

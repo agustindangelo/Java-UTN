@@ -66,6 +66,9 @@ public class AbmcPaciente {
 	public void actualizarDatosPersonales(Paciente p) throws SQLException {
 		dp.actualizarDatosPersonales(p);
 	}
+	public void actualizarDatosSalud(Paciente p) throws SQLException {
+		dp.actualizarDatosSalud(p);
+	}
 	public ArrayList<Ingesta> getIngestasHoy(Paciente p) throws SQLException {
 		return dp.getIngestasHoy(p);
 	}

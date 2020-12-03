@@ -1,5 +1,6 @@
 package entidades;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -11,7 +12,7 @@ public class Paciente extends Usuario {
 	}
 
 	private TipoGenero genero;
-	private Date fechaNacimiento;
+	private LocalDate fechaNacimiento;
 	private int altura;
 	private float peso;
 	private float imc;
@@ -119,12 +120,12 @@ public class Paciente extends Usuario {
 		}
 	}
 
-	public Date getFechaNacimiento() {
+	public LocalDate getFechaNacimiento() {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(Date fechaNacimiento) {
-		this.fechaNacimiento = fechaNacimiento;
+	public void setFechaNacimiento(LocalDate localDate) {
+		this.fechaNacimiento = localDate;
 	}
 
 	public int getAltura() {
