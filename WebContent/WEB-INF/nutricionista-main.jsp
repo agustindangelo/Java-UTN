@@ -27,7 +27,7 @@
 					<i class="fas fa-user-plus"></i>   Solicitudes
 				</div>
 			
-				<input class="form-control"  type="text" id="solicitudesSearch" onkeyup="filtrarSolicitudes()" placeholder="Buscar..." title="Mis solicitudes">
+				<input class="form-control searchbar"  type="text" id="solicitudesSearch" onkeyup="filtrarSolicitudes()" placeholder="Buscar..." title="Mis solicitudes">
 				<ul class="list-group list-group-flush sidenav-menu" id="solicitudesMenu">
 					<%
 						ArrayList<Paciente> solicitudes = new ArrayList<Paciente>();
@@ -50,7 +50,7 @@
 				<div class="colored-title text-center">
 					<i class="fas fa-address-book"></i>	    Pacientes
 				</div>
-				<input class="form-control" type="text" id="pacienteSearch" onkeyup="filtrarPacientes()" placeholder="Buscar..." title="Mis pacientes">
+				<input class="form-control searchbar" type="text" id="pacienteSearch" onkeyup="filtrarPacientes()" placeholder="Buscar..." title="Mis pacientes">
 				<ul class="list-group list-group-flush sidenav-menu" id="pacienteMenu">
 					<%
 						ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
@@ -81,12 +81,12 @@
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item dropdown">
 							<a class="dropdown-toggle colored-title" href="#" id="navbarDropdown" role="button" data-toggle="dropdown">
-								<i class="fas fa-user-circle"></i> Mi Perfil
+								<i class="fas fa-user-circle"></i> Mi perfil
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="RedirectNutricionistaConfig">Configuracion</a>
+								<a class="dropdown-item" href="RedirectNutricionistaConfig">Configuración</a>
 							<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="LogOut">Cerrar sesion</a>
+								<a class="dropdown-item" href="LogOut">Cerrar sesión</a>
 							</div>
 						</li>			
 					</ul>
@@ -108,10 +108,10 @@
 										<span class="text-muted">DNI: </span><p id="dni"></p>
 									</li>
 									<li class="list-group-item">
-										<span class="text-muted">Correo electronico: </span><p id="email"></p>
+										<span class="text-muted">Correo electrónico: </span><p id="email"></p>
 									</li>
 									<li class="list-group-item">
-										<span class="text-muted">Telefono: </span><p id="telefono"></p>
+										<span class="text-muted">Teléfono: </span><p id="telefono"></p>
 									</li>
 									<li class="list-group-item">
 										<span class="text-muted">Altura: </span><p id="altura"></p>
@@ -134,7 +134,7 @@
 							<div class="card-body">
 								<h3 class="colored-title text-center">Hoy</h3>
 								<div class="row">
-									<div class="col">Calorias</div>
+									<div class="col">Calorías</div>
 									<p id="kcal"></p>
 								</div>
 								<div class="progress">

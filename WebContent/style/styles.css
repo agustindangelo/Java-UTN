@@ -95,6 +95,14 @@ a:hover{
     padding: 10px;
 }
 
+.searchbar {
+	background-color: #f5f5f5;
+	border: none;
+	margin: 1rem;
+	padding: 1rem;
+	max-width: 89%;
+}
+
 .btn.btn-primary{
     background-color: var(--secondary-color);
     border: none;
@@ -143,6 +151,7 @@ a:hover{
 
 .navbar-custom { 
     background-color: var(--navbar-bg-color);
+    margin: -1.5rem;
 } 
 .navbar-text {
     font-weight: bold;
@@ -249,6 +258,10 @@ a:hover{
     margin-left: 0px;
 }
 
+#seleccionePacienteMsj {
+	margin-top: 3rem;
+}
+
 
 /* Sidebar Styles */
 .sidebar-nav {
@@ -256,7 +269,7 @@ a:hover{
     top: 0;
     width: 350px;
     margin: 0;
-    padding: 0;
+    padding: 1rem 0 0 0;
     list-style: none;
 }
 
@@ -276,6 +289,7 @@ a:hover{
     #page-content-wrapper {
         padding: 20px;
         position: relative;
+        height: 100%;
     }
     #wrapper.toggled #page-content-wrapper {
         position: relative;
