@@ -56,6 +56,14 @@
 	%>
 	
 	<div class="container">
+		<%
+		try {
+			if ((boolean) session.getAttribute("actualizacionExitosa")) { %>
+				<div class="alert alert-success" role="alert">
+				  Datos guardados con éxito.
+				</div>
+			<% }
+		} catch (Exception e) {} %>
 		<div id="accordion">
 			<!-- sección de datos personales -->
 			<div class="card">
@@ -112,10 +120,11 @@
 									<div class="form-group">
 										<label for="confirm-password">Confirmar Contraseña</label>
 										<input class="form-control" type="password" id="confirmacion-password" name="confirmacion-password">
+										<p class="text-danger" id="error-password" style="display: none;">Las contraseñas no coinciden.<p>
 									</div>
 								</div>
 								<div class="col-12">
-									<button type="submit" class="btn btn-primary float-right">Guardar Cambios</button>
+									<button type="submit" class="btn btn-primary float-right" id="guardarDatos">Guardar Cambios</button>
 								</div>
 							</form>
 						</div>

@@ -48,7 +48,7 @@ public class AsignarPlan extends HttpServlet {
 		PlanDeAlimentacion plan = new PlanDeAlimentacion();
 		AbmcPaciente ctrl = new AbmcPaciente();
 		plan.setCarbohidratosDiarios(Integer.parseInt(request.getParameter("modificar-carbohidratos")));
-		plan.setKcalDiarias(Integer.parseInt(request.getParameter("modifica-calorias")));
+		plan.setKcalDiarias(Integer.parseInt(request.getParameter("modificar-calorias")));
 		plan.setProteinasDiarias(Integer.parseInt(request.getParameter("modificar-proteinas")));
 		plan.setGrasasDiarias(Integer.parseInt(request.getParameter("modificar-grasas")));
 		p.setPlan(plan);
@@ -58,6 +58,6 @@ public class AsignarPlan extends HttpServlet {
 			request.setAttribute("error", e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
-		response.sendRedirect("WEB-INF/nutricionista-main.jsp");
+		response.sendRedirect("index.jsp");
 	}
 }

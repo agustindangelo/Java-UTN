@@ -50,6 +50,17 @@
                   <label for="inputPass">Contraseña</label>
                   <input placeholder="Contraseña" type="password" class="form-control" id="inputPass" name="password">
                 </div>
+                <div class="row justify-content-center align-items-center">
+                <%
+        		try {
+        			if ((boolean) session.getAttribute("loginFallido")) { %>
+        				<div class="alert alert-danger " role="alert">
+        					Usuario o contraseña incorrectos.
+        				</div>
+        			<% }
+        		} catch (Exception e) {} %>
+                	
+                </div>
                 <div class="row">
                   <div class="col">
                     <a href="formulario-registro-paciente.jsp">Registrarse</a>

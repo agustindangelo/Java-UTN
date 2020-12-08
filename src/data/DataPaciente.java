@@ -326,7 +326,7 @@ public class DataPaciente {
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
 					"update paciente\n"
-					+ "set peso = ?, imc = ?, metabolismo_basal = ?, peso_objetivo = ?, objetivo = ?\n"
+					+ "set peso = ?, imc = ?, metabolismo_basal = ?, peso_objetivo = ?, objetivo = ?, altura = ?\n"
 					+ "where dni = ?"
 					);
 			stmt.setFloat(1, p.getPeso());
@@ -334,7 +334,9 @@ public class DataPaciente {
 			stmt.setFloat(3, p.getMetabolismoBasal());
 			stmt.setFloat(4, p.getPesoObjetivo());
 			stmt.setString(5, p.getObjetivo());
-			stmt.setString(6, p.getDni());
+			stmt.setInt(6, p.getAltura());
+			stmt.setString(7, p.getDni());
+			
 			stmt.execute();
 		} catch (SQLException e) {
 			throw e;
@@ -389,16 +391,40 @@ public class DataPaciente {
 		PreparedStatement stmt = null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(""
-					+ "insert into plan (fecha_desde, dni_paciente, dni_nutricionista, kcal_diarias, proteinas_diarias, carbohidratos_diarios, grasas_diarias)\n"
-					+ "values (current_date, ?, ?, ?, ?, ?, ?)"
-					);
-			stmt.setString(1, p.getDni());
-			stmt.setString(2, n.getDni());
-			stmt.setInt(3, p.getPlan().getKcalDiarias());
-			stmt.setInt(4, p.getPlan().getProteinasDiarias());
-			stmt.setInt(5, p.getPlan().getCarbohidratosDiarios());
-			stmt.setInt(6, p.getPlan().getGrasasDiarias());
-			stmt.execute();
+					+ "update plan set "
+						+ "fecha_desde = current_date, "
+						+ "kcal_diarias = ?, "
+						+ "proteinas_diarias = ?, "
+						+ "carbohidratos_diarios = ?, "
+						+ "grasas_diarias = ? "
+					+ "where dni_paciente = ? and dni_nutricionista = ?;"
+					);			
+			stmt.setInt(1, p.getPlan().getKcalDiarias());
+			stmt.setInt(2, p.getPlan().getProteinasDiarias());
+			stmt.setInt(3, p.getPlan().getCarbohidratosDiarios());
+			stmt.setInt(4, p.getPlan().getGrasasDiarias());
+			stmt.setString(5, p.getDni());
+			stmt.setString(6, n.getDni());
+			if (stmt.executeUpdate() == 0)
+			{
+				try {
+					if (stmt!=null) {stmt.close();}
+				} catch (SQLException e){
+					throw e;
+				}
+				stmt = DbConnector.getInstancia().getConn().prepareStatement(""
+						+ "insert into plan (fecha_desde, dni_paciente, dni_nutricionista, kcal_diarias, proteinas_diarias, carbohidratos_diarios, grasas_diarias)\n"
+						+ "values (current_date, ?, ?, ?, ?, ?, ?)"
+						);
+				stmt.setString(1, p.getDni());
+				stmt.setString(2, n.getDni());
+				stmt.setInt(3, p.getPlan().getKcalDiarias());
+				stmt.setInt(4, p.getPlan().getProteinasDiarias());
+				stmt.setInt(5, p.getPlan().getCarbohidratosDiarios());
+				stmt.setInt(6, p.getPlan().getGrasasDiarias());
+;				stmt.execute();
+			}
+			
 		} catch(SQLException e) {
 			throw e;
 		} finally {

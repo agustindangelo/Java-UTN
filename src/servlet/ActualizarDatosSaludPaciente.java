@@ -41,8 +41,16 @@ public class ActualizarDatosSaludPaciente extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Paciente p = (Paciente) request.getSession().getAttribute("paciente");
 		AbmcPaciente ctrl = new AbmcPaciente();
-		p.setPeso(Float.parseFloat(request.getParameter("peso")));
-		p.setPesoObjetivo(Float.parseFloat(request.getParameter("nuevo-peso-objetivo")));
+		try {
+			p.setAltura(Integer.parseInt(request.getParameter("modificar-altura")));
+			p.setMetabolismoBasal(Integer.parseInt(request.getParameter("modificar-metabolismo-basal")));
+			p.setImc(Float.parseFloat(request.getParameter("modificar-imc")));
+			p.setObjetivo(request.getParameter("modificar-objetivo"));
+		} catch (Exception e) {}
+		try {
+			p.setPeso(Float.parseFloat(request.getParameter("peso")));
+			p.setPesoObjetivo(Float.parseFloat(request.getParameter("nuevo-peso-objetivo")));
+		} catch (Exception e) {}
 		try {
 			ctrl.actualizarDatosSalud(p);
 		} catch (SQLException e) {

@@ -1,4 +1,10 @@
  $(document).ready(function() {
+	$('#password').focusout(function() {
+		validarPassword();
+	})
+	$('#confirmacion-password').focusout(function() {
+		validarPassword();
+	})	
 	$('#modal-mensaje').modal({show: false});
 	$('#error-rango-horario').hide();
 	$(function() {	       
@@ -101,6 +107,9 @@ function registrarHorario(dia, horaDesde, horaHasta){
 		},
 	})
 }
+
+
+
 function borrarHorarios(horariosSeleccionados){
 	$.ajax({
 		type: 'POST',
@@ -108,4 +117,16 @@ function borrarHorarios(horariosSeleccionados){
 		dataType: 'json',
 		data: {"horarios": JSON.stringify(horariosSeleccionados)}
 	})
+}
+
+function validarPassword() {
+	var password = $('#password').val();
+	var confirmacionPassword = $('#confirmacion-password').val();
+	if (password == confirmacionPassword) {
+		$('#guardarDatos').prop('disabled', false);
+		$('#error-password').css('display', 'none');		
+	} else {
+		$('#guardarDatos').prop('disabled', true);
+		$('#error-password').css('display', 'block');
+	}
 }

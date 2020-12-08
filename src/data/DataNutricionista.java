@@ -215,17 +215,30 @@ public class DataNutricionista {
 	public void update(Nutricionista nut) throws SQLException{
 		PreparedStatement stmt = null;
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement(
-					"update nutricionista "
-					+ "set nombre=?, apellido=?, email=?, telefono=?, password=? "
-					+ "where dni = ?" 
-					);
-			stmt.setString(1, nut.getNombre());
-			stmt.setString(2, nut.getApellido());
-			stmt.setString(3, nut.getEmail());
-			stmt.setString(4, nut.getTelefono());
-			stmt.setString(5, nut.getPassword());
-			stmt.setString(6, nut.getDni());
+			if (nut.getPassword() == null) {
+				stmt = DbConnector.getInstancia().getConn().prepareStatement(
+						"update nutricionista "
+						+ "set nombre=?, apellido=?, email=?, telefono=? "
+						+ "where dni = ?" 
+						);
+				stmt.setString(1, nut.getNombre());
+				stmt.setString(2, nut.getApellido());
+				stmt.setString(3, nut.getEmail());
+				stmt.setString(4, nut.getTelefono());
+				stmt.setString(5, nut.getDni());
+			} else {
+				stmt = DbConnector.getInstancia().getConn().prepareStatement(
+						"update nutricionista "
+						+ "set nombre=?, apellido=?, email=?, telefono=?, password=? "
+						+ "where dni = ?" 
+						);
+				stmt.setString(1, nut.getNombre());
+				stmt.setString(2, nut.getApellido());
+				stmt.setString(3, nut.getEmail());
+				stmt.setString(4, nut.getTelefono());
+				stmt.setString(5, nut.getPassword());
+				stmt.setString(6, nut.getDni());
+			}		
 			stmt.execute();
 		} catch (SQLException e) {
 			throw e;

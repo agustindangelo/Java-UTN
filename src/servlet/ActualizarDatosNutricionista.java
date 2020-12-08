@@ -47,14 +47,12 @@ public class ActualizarDatosNutricionista extends HttpServlet {
 		n.setTelefono(request.getParameter("telefono"));
 		session.setAttribute("usuario", n);
 		String pass = request.getParameter("password");
-		String passConfirmation = request.getParameter("confirmacion-password");
-		if (pass.equals(passConfirmation)) {
+		if (!pass.isBlank()) {
 			n.setPassword(pass);
-		} else {
-			// no coinciden los pass, mostrarlo en el campo
 		}
 		try {
 			ctrl.update(n);
+			session.setAttribute("actualizacionExitosa", true);
 		} catch (SQLException e) {
 			request.setAttribute("error", e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);

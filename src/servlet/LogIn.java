@@ -47,41 +47,43 @@ public class LogIn extends HttpServlet {
 
 		try {
 			u = ctrl.validate(usuario);
-			if (u != null) {
-				if (u.getRol() == Rol.Nutricionista) {
-					Nutricionista n = new Nutricionista();
-					n.setDni(u.getDni());
-					n.setApellido(u.getApellido());
-					n.setNombre(u.getNombre());
-					n.setEmail(u.getEmail());
-					n.setTelefono(u.getTelefono());
-					n.setRol();
-					n = ctrlNutricionista.setDireccion(n);
-					session.setAttribute("usuario", n);
-					request.getRequestDispatcher("WEB-INF/nutricionista-main.jsp").forward(request, response);
-				} else {
-					AbmcPaciente ctrlPaciente = new AbmcPaciente();
-					Paciente p = ctrlPaciente.getByDni(u);
-					Solicitud s = ctrlPaciente.getSolicitud(p);
-					if (s.getEstado().equalsIgnoreCase("pendiente")) {
-						request.getRequestDispatcher("WEB-INF/solicitud-enviada.html").forward(request, response);
-					} else {
-						p.setPlan(ctrlPaciente.getPlan(p));
-						ArrayList<Ingesta> ingestas = new ArrayList<>();
-						try {
-							ingestas = ctrlPaciente.getIngestasHoy(p);
-							p.setIngestas(ingestas);
-						} catch(SQLException e){
-							request.setAttribute("error", "Error al recuperar las ingestas del día.");
-							request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
-						}
-						session.setAttribute("paciente", p);
-						request.getRequestDispatcher("WEB-INF/paciente-main.jsp").forward(request, response);
-					}
-					
-				}
-			} else {
+			if (u.getDni() == null) {
+				session.setAttribute("loginFallido", true);
 				request.getRequestDispatcher("index.jsp").forward(request, response);
+			} else { 
+				if (u != null) {
+					if (u.getRol() == Rol.Nutricionista) {
+						Nutricionista n = new Nutricionista();
+						n.setDni(u.getDni());
+						n.setApellido(u.getApellido());
+						n.setNombre(u.getNombre());
+						n.setEmail(u.getEmail());
+						n.setTelefono(u.getTelefono());
+						n.setRol();
+						n = ctrlNutricionista.setDireccion(n);
+						session.setAttribute("usuario", n);
+						request.getRequestDispatcher("WEB-INF/nutricionista-main.jsp").forward(request, response);
+					} else {
+						AbmcPaciente ctrlPaciente = new AbmcPaciente();
+						Paciente p = ctrlPaciente.getByDni(u);
+						Solicitud s = ctrlPaciente.getSolicitud(p);
+						if (s.getEstado().equalsIgnoreCase("pendiente")) {
+							request.getRequestDispatcher("WEB-INF/solicitud-enviada.html").forward(request, response);
+						} else {
+							p.setPlan(ctrlPaciente.getPlan(p));
+							ArrayList<Ingesta> ingestas = new ArrayList<>();
+							try {
+								ingestas = ctrlPaciente.getIngestasHoy(p);
+								p.setIngestas(ingestas);
+							} catch(SQLException e){
+								request.setAttribute("error", "Error al recuperar las ingestas del día.");
+								request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+							}
+							session.setAttribute("paciente", p);
+							request.getRequestDispatcher("WEB-INF/paciente-main.jsp").forward(request, response);
+						}
+					}
+				}
 			}
 		} catch (SQLException e){
 			request.setAttribute("error", e.getMessage());

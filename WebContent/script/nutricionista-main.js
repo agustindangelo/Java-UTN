@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$(function() {	       
+	$(function() {       
 	   $("#pacienteMenu li").not('.emptyMessage').click(function() {
 		   document.getElementById("seleccionePacienteMsj").style.display = "none";
 		   var previousDni = $('#dni').text();
@@ -10,6 +10,7 @@ $(document).ready(function() {
 	   });
 	});
 });
+
 function getPacienteInfo(dni){
 	$.ajax({
 		type: "GET",
