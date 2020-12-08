@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <%@ page import="entidades.Paciente"%>  
 <%@ page import="entidades.Ejercicio"%>  
 <%@ page import="logic.AbmcPaciente"%>  
@@ -27,7 +27,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="style/styles.css">
     <meta charset="utf-8">
-	<title>Trabajo Pr·ctico de Java</title>
+	<title>Trabajo Pr√°ctico de Java</title>
 	<script src="script/paciente-main.js"></script>
 	<script src="script/scripts.js"></script>
     <script src="https://kit.fontawesome.com/d00e7b9ed2.js" crossorigin="anonymous"></script>
@@ -53,9 +53,9 @@
 					<i class="fas fa-user-circle"></i> Mi Perfil
 				</a>
 				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="RedirectPacienteConfig">ConfiguraciÛn</a>
+					<a class="dropdown-item" href="RedirectPacienteConfig">Configuraci√≥n</a>
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="LogOut">Cerrar sesiÛn</a>
+					<a class="dropdown-item" href="LogOut">Cerrar sesi√≥n</a>
 				</div>
 			</li>
 	    </ul>
@@ -81,7 +81,7 @@
 				<div class="card">	
 					<div class="card-body">
 						<div class="row">
-							<div class="col">CalorÌas</div>
+							<div class="col">Calor√≠as</div>
 							<p><%= consumos.get("calorias") %> / <%= p.getPlan().getKcalDiarias() %> kcal.</p>
 						</div>
 						<div class="progress">
@@ -95,7 +95,7 @@
 							<div class="progress-bar" style="width: <%= consumos.get("carbohidratos") * 100 / p.getPlan().getCarbohidratosDiarios() %>%" role="progressbar"></div>
 						</div>
 						<div class="row">
-							<div class="col">ProteÌnas</div>
+							<div class="col">Prote√≠nas</div>
 							<p><%= consumos.get("proteinas") %>  / <%= p.getPlan().getProteinasDiarias() %> g.</p>
 						</div>
 						<div class="progress" style="height: 0.5rem;">
@@ -276,7 +276,7 @@
 								<% for (Alimento a : alimentos) { %>
 									<li class="list-group-item">
 										<a class="colored-title"><%= a.getNombre() %></a>
-											<!-- <small class="text-danger">No est· en tu plan  </small> -->
+											<!-- <small class="text-danger">No est√° en tu plan  </small> -->
 										<input class="float-right" type="number" value="0" min="0" max="100"/>						
 										<label class="float-right text-muted">Gr.</label>
 									</li>
@@ -310,7 +310,7 @@
 								<% for (Alimento a : alimentos) { %>
 									<li class="list-group-item">
 										<a class="colored-title"><%= a.getNombre() %></a>
-											<!-- <small class="text-danger">No est· en tu plan  </small> -->
+											<!-- <small class="text-danger">No est√° en tu plan  </small> -->
 										<input class="float-right" type="number" value="0" min="0" max="100"/>						
 										<label class="float-right text-muted">Gr.</label>
 									</li>
@@ -344,7 +344,7 @@
 								<% for (Alimento a : alimentos) { %>
 									<li class="list-group-item">
 										<a class="colored-title"><%= a.getNombre() %></a>
-											<!-- <small class="text-danger">No est· en tu plan  </small> -->
+											<!-- <small class="text-danger">No est√° en tu plan  </small> -->
 										<input class="float-right" type="number" value="0" min="0" max="100"/>						
 										<label class="float-right text-muted">Gr.</label>
 									</li>
@@ -378,7 +378,7 @@
 								<% for (Alimento a : alimentos) { %>
 									<li class="list-group-item">
 										<a class="colored-title"><%= a.getNombre() %></a>
-											<!-- <small class="text-danger">No est· en tu plan  </small> -->
+											<!-- <small class="text-danger">No est√° en tu plan  </small> -->
 										<input class="float-right" type="number" value="0" min="0" max="100"/>						
 										<label class="float-right text-muted">Gr.</label>
 									</li>
