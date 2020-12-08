@@ -61,7 +61,7 @@
         		} catch (Exception e) {} %>
                 	
                 </div>
-                <div class="row">
+                <div class="row botones">
                   <div class="col">
                     <a href="formulario-registro-paciente.jsp">Registrarse</a>
                   </div>

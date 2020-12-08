@@ -217,7 +217,15 @@ a:hover{
     margin: 0px;
     padding: 0px;
 }
+
+.botones {
+	margin-top: 2rem;
+}
   
+a {
+	color: var(--secondary-color);
+}
+
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;

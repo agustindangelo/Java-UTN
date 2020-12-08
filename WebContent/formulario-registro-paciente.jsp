@@ -87,9 +87,17 @@
 								<div class="input-group-prepend">
 								  <div class="input-group-text">DNI</div>
 								</div>
+								
 								<input type="text" class="form-control" id="dni" name="dni" required>
 							</div>
-                            <input type="submit" class="btn btn-primary float-right" value="Continuar">
+							<div class="row botones">
+				                  <div class="col">
+				                    <a href="index.jsp">Cancelar</a>
+				                  </div>
+				                  <div class="col">
+				                    <button type="submit" class="btn btn-primary float-right">Continuar</button>
+				                  </div>
+			                </div>
                         </form>
                     </div>
                 </div>
