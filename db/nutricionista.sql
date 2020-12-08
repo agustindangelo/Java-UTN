@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `nutricionista` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `nutricionista`;
 -- MariaDB dump 10.18  Distrib 10.5.8-MariaDB, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: nutricionista
@@ -489,4 +491,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-08 15:19:05
+-- Dump completed on 2020-12-08 15:27:03
