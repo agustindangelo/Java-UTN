@@ -29,7 +29,7 @@
           <div class="col"></div>
           <div class="card form-sheet col-6">
             <div class="card-body">
-            	<h2>Buscar nutricionista</h2>
+            	<h2>Buscar un nutricionista</h2>
 				<form action="RegistrarSolicitud" method="post">
 					<table class="table">
 						<%

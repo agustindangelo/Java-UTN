@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <%@ page import="entidades.Usuario"%>  
 <!DOCTYPE html>
 
@@ -18,7 +18,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="style/styles.css">
     <meta charset="utf-8">
-	<title>Trabajo Práctico de Java</title>
+	<title>Trabajo PrÃ¡ctico de Java</title>
         
 </head>
 <body class="login">
@@ -36,7 +36,7 @@
 		}
 	} 
 	%>
-    <div class="container-fluid h-100">
+    <div class="container-fluid h-100"> 
         <div class="row h-100 justify-content-center align-items-center">
           <div class="col"></div>
           <div class="card form-sheet col">
@@ -44,19 +44,19 @@
               <h2>Ingresar</h2>
               <form action="LogIn" method="post">
                 <div class="form-group">
-                  <label for="inputEmail">Correo electrónico</label>
-                  <input placeholder="Correo electrónico" type="email" class="form-control" id="inputEmail" name="email">
+                  <label for="inputEmail">Correo electrÃ³nico</label>
+                  <input placeholder="Correo electrÃ³nico" type="email" class="form-control" id="inputEmail" name="email">
                 </div>
                 <div class="form-group">
-                  <label for="inputPass">Contraseña</label>
-                  <input placeholder="Contraseña" type="password" class="form-control" id="inputPass" name="password">
+                  <label for="inputPass">ContraseÃ±a</label>
+                  <input placeholder="ContraseÃ±a" type="password" class="form-control" id="inputPass" name="password">
                 </div>
                 <div class="row justify-content-center align-items-center">
                 <%
         		try {
         			if ((boolean) session.getAttribute("loginFallido")) { %>
         				<div class="alert alert-danger " role="alert">
-        					Usuario o contraseña incorrectos.
+        					Usuario o contraseÃ±a incorrectos.
         				</div>
         			<% }
         		} catch (Exception e) {} %>
