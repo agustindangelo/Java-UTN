@@ -1,15 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ page import="entidades.Paciente"%>  
-<%@ page import="entidades.Ejercicio"%>  
 <%@ page import="logic.AbmcPaciente"%>  
+
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.LinkedList"%>
+
 <%@ page import="entidades.Ingesta"%>
 <%@ page import="entidades.Alimento"%>
-<%@ page import="logic.AlimentoLogic"%>
+<%@ page import="entidades.Actividad"%>
+<%@ page import="entidades.Paciente"%>  
+<%@ page import="entidades.Ejercicio"%>  
+
 <%@ page import="java.sql.SQLException"%>
 <%@ page import="java.util.Map"%>
+<%@ page import="java.time.LocalDate" %>
 
 <!DOCTYPE html>
 <html>
@@ -40,10 +44,7 @@
 	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	  	<ul class="navbar-nav mr-auto">
 			<li class="nav-item">
-				<a class="colored-title" href="#">Hoy</a> 
-			</li>
-			<li class="nav-item">
-				<a class="colored-title" href="paciente-semana.html">Semana</a> 
+				<a class="colored-title" href="#">Inicio</a> 
 			</li>
 	  	</ul>
 	  
@@ -62,19 +63,20 @@
 	  </div>
 	</nav>
 	
-	<% 
-	Paciente p = (Paciente) session.getAttribute("paciente");
-	ArrayList<Ingesta> ingestas = p.getIngestas();
-	AbmcPaciente ctrl = new AbmcPaciente();
-	AlimentoLogic aLogic = new AlimentoLogic();
-	Map<String, Integer> consumos = p.getConsumosHoy();
-	ArrayList<Alimento> alimentos = aLogic.getAll();
+	<%
+		Paciente p = (Paciente) session.getAttribute("paciente");
+		LinkedList<Ingesta> ingestas = p.getIngestas();
+		LinkedList<Actividad> actividades = p.getActividades();
+		LinkedList<Ejercicio> ejercicios = (LinkedList<Ejercicio>) session.getAttribute("ejercicios"); 
+		LinkedList<Alimento> alimentos = (LinkedList<Alimento>) session.getAttribute("alimentos"); 
+		AbmcPaciente ctrl = new AbmcPaciente();
+		Map<String, Integer> consumos = p.getConsumosHoy();
 	%>
 	
 	<div class="container-fluid">
 		<div class="row justify-content-between">
 			<h2>Mis resultados de hoy</h2>
-			<h3>Martes, 17 de Agosto</h3>
+			<h3><%= LocalDate.now() %></h3>
 		</div>
 		<div class="row">
 			<div class="col-md-3">
@@ -106,7 +108,7 @@
 							<p><%= consumos.get("grasas") %>  / <%= consumos.get("grasas") * 100 / p.getPlan().getGrasasDiarias() %> g.</p>
 						</div>
 						<div class="progress" style="height: 0.5rem;">
-							<div class="progress-bar" style="width: 10%" role="progressbar"></div>
+							<div class="progress-bar" style="width:<%= consumos.get("grasas") * 100 / p.getPlan().getGrasasDiarias() %>%" role="progressbar"></div>
 						</div>
 					</div>
 				</div>
@@ -162,12 +164,11 @@
 					</div>
 					<ul class="list-group list-group-flush">
 						<%
-						LinkedList<Ejercicio> ejercicios = ctrl.getEjerciciosSemana(p);
-						for (Ejercicio e : ejercicios) {
+						for (Actividad a : actividades) {
 						%>
 							<li class="list-group-item">
-								<a><%= e.getNombre() %></a>
-								<div class="float-right text-muted"><%= e.getFecha() %></div>
+								<a><%= a.getEjercicio().getDescripcion() %></a>
+								<div class="float-right text-muted"><%= a.getFecha() %></div>
 							</li>
 						<%}%>
 					</ul>
@@ -408,31 +409,13 @@
 						<div class="container">
 							<input type="text" class="form-control" id="ejerciciosSearch" onkeyup="filtrarEjercicios()" placeholder="Buscar..." title="Ejercicios">
 							<ul id="ejerciciosMenu" class="list-group list-group-flush">
-								<li class="list-group-item">
-									<a class="colored-title">Caminata</a>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>
-									<label class="float-right text-muted">Minutos</label>						
-								</li> 
-								<li class="list-group-item">
-									<a class="colored-title">Natacion</a>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>	
-									<label class="float-right text-muted">Minutos</label>											
-								</li>
-								<li class="list-group-item">
-									<a class="colored-title">Pesas</a>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>	
-									<label class="float-right text-muted">Minutos</label>											
-								</li>
-								<li class="list-group-item">
-									<a class="colored-title">Running</a>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>
-									<label class="float-right text-muted">Minutos</label>											
-								</li>
-								<li class="list-group-item">
-									<a class="colored-title">Tennis</a>
-									<input class="float-right" type="number" value="0" min="0" max="100"/>
-									<label class="float-right text-muted">Minutos</label>												
-								</li>
+								<% for(Ejercicio e : ejercicios){ %>
+									<li class="list-group-item">
+										<a class="colored-title"><%= e.getDescripcion() %></a>
+										<input class="float-right" type="number" id="<%= e.getId() %>" value="0" min="0" max="500"/>
+										<label class="float-right text-muted">Minutos</label>						
+									</li> 
+								<% } %>
 							</ul>
 						</div>					
 					</div>
@@ -448,7 +431,7 @@
 	<div id="actualizarPeso" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form action="ActualizarPeso" method="post">
+				<form action="ActualizarDatosSaludPaciente" method="post">
 					<div class="modal-header">						
 						<h4 class="modal-title">Actualizar peso</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -457,7 +440,7 @@
 					<div class="modal-body">
 						<div class="container">
 							<label for="peso-paciente">Peso hoy (kg.)</label>
-							<input class="form-control" id="peso-paciente" name="peso-paciente" type="number" value="65" min="0" max="500"/>						
+							<input class="form-control" id="peso" name="peso" type="number" value=<%= p.getPeso() %> min="1" max="500"/>						
 						</div>					
 					</div>
 					<div class="modal-footer">

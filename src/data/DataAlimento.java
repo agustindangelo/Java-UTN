@@ -1,15 +1,14 @@
 package data;
 
 import entidades.Alimento;
-
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.sql.*;
 
 public class DataAlimento {
-	public ArrayList<Alimento> getAll() throws SQLException{
+	public LinkedList<Alimento> getAll() throws SQLException{
 		Statement stmt = null;
 		ResultSet rs = null;
-		ArrayList<Alimento> alimentos = new ArrayList<Alimento>();
+		LinkedList<Alimento> alimentos = new LinkedList<Alimento>();
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
 			rs = stmt.executeQuery("SELECT * FROM alimento");

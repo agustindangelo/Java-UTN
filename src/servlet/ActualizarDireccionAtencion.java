@@ -51,6 +51,11 @@ public class ActualizarDireccionAtencion extends HttpServlet {
 		l.setCodPostal(Integer.parseInt(request.getParameter("localidad")));
 		d.setCalle(request.getParameter("calle"));
 		d.setAltura(Integer.parseInt(request.getParameter("altura")));
+		d.setPiso(Integer.parseInt(request.getParameter("piso")));
+		String depto = request.getParameter("depto");
+		if(!depto.contentEquals("-")) {
+			d.setDepto(request.getParameter("depto"));
+		}
 		n.setDireccion(d);
 		session.setAttribute("usuario", n);
 		try {

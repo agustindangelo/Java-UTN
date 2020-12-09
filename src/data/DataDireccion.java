@@ -53,7 +53,7 @@ public class DataDireccion {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement(
 					"update direccion "
 					+ "set cod_postal = ?, calle = ?, altura = ?, piso = ?, depto = ? "
-					+ "where id_nutricionista = ?" 
+					+ "where dni = ?" 
 					);
 			stmt.setInt(1, nut.getDireccion().getLocalidad().getCodPostal());
 			stmt.setString(2, nut.getDireccion().getCalle());

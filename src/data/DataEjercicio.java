@@ -2,11 +2,11 @@ package data;
 
 import java.util.LinkedList;
 import java.sql.*;
-import entidades.*;
+import entidades.Ejercicio;
 
 public class DataEjercicio {
 
-	public void add(Ejercicio eje) {
+	public void add(Ejercicio eje) throws SQLException {
 		PreparedStatement stmt= null;
 		ResultSet rs=null;
 		
@@ -14,15 +14,13 @@ public class DataEjercicio {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
 					"insert into ejercicio(id_ejercicio, nombre, gasto_energetico) values(?,?,?)"
 					);
-			stmt.setInt(1, eje.getCodigo());
-			stmt.setString(2, eje.getNombre());
+			stmt.setInt(1, eje.getId());
+			stmt.setString(2, eje.getDescripcion());
 			stmt.setFloat(3, eje.getGastoEnergetico());
-
 			stmt.executeUpdate();
-			
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 		finally {
 			try {
@@ -30,58 +28,48 @@ public class DataEjercicio {
 				if (stmt != null) { stmt.close(); }
 			}
 			catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
-		
 	}
 	
-	public void remove(Ejercicio eje) {
+	public void remove(Ejercicio eje) throws SQLException  {
 		PreparedStatement stmt= null;
 		ResultSet rs=null;
-			
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
 					"delete from ejercicio where id_ejercicio = ?"
 					);
-		
-			stmt.setInt(1, eje.getCodigo());
+			stmt.setInt(1, eje.getId());
 			stmt.executeUpdate();
-				
-	
 		}  catch (SQLException e) {
-        e.printStackTrace();
-
-			} finally {
-        try {
-            if(rs!=null)rs.close();
-            if(stmt!=null)stmt.close();
-            DbConnector.getInstancia().releaseConn();
-	        	
-        } catch (SQLException e) {
-        	e.printStackTrace();
-        	}	
+			throw e;
+		} finally {
+			try {
+				if(rs!=null)rs.close();
+				if(stmt!=null)stmt.close();
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}	
 		}
-
 	}
 
-	public void update(Ejercicio eje) {
+	public void update(Ejercicio eje) throws SQLException {
 		PreparedStatement stmt= null;
 		ResultSet rs=null;
 		
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
 					"update ejercicio set nombre=?, gasto_energetico=? where id_ejercicio = ?"
-					);
-			
-			stmt.setString(1, eje.getNombre());
+				);
+			stmt.setString(1, eje.getDescripcion());
 			stmt.setFloat(2, eje.getGastoEnergetico());
-			stmt.setInt(3, eje.getCodigo());
+			stmt.setInt(3, eje.getId());
 			stmt.executeUpdate();
-			
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 		finally {
 			try {
@@ -89,18 +77,16 @@ public class DataEjercicio {
 				if (stmt != null) { stmt.close(); }
 			}
 			catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
-		
 	}		
 	
-	public LinkedList<Ejercicio> getAll() {
+	public LinkedList<Ejercicio> getAllEjercicios() throws SQLException  {
 		Statement stmt = null;
 		ResultSet rs = null;
 		LinkedList<Ejercicio> ejs = new LinkedList<>();
 		Ejercicio eje;
-		
 		try {
 			stmt = DbConnector.getInstancia().getConn().createStatement();
 			rs = stmt.executeQuery("select id_ejercicio, nombre, gasto_energetico " + 
@@ -110,15 +96,15 @@ public class DataEjercicio {
 			if(rs != null) {
 				while(rs.next()) {
 					eje = new Ejercicio();
-					eje.setCodigo(rs.getInt("id_ejercicio"));
-					eje.setNombre(rs.getString("nombre"));
+					eje.setId(rs.getInt("id_ejercicio"));
+					eje.setDescripcion(rs.getString("nombre"));
 					eje.setGastoEnergetico(rs.getInt("gasto_energetico"));
 					ejs.add(eje);
 				}
 			}
 		
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw e;
 		}
 		finally {
 			try {
@@ -126,12 +112,9 @@ public class DataEjercicio {
 				if (stmt != null) { stmt.close(); }
 			}
 			catch (SQLException e) {
-				e.printStackTrace();
+				throw e;
 			}
 		}
-		
 		return ejs;
-		
 	}
-	
 }

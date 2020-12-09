@@ -225,6 +225,10 @@ a:hover{
 a {
 	color: var(--secondary-color);
 }
+.btn-danger{
+	color: white;
+	font-weight: bold;
+}
 
 #wrapper {
     padding-left: 0;

@@ -2,7 +2,7 @@ package logic;
 
 import data.DataPaciente;
 import entidades.Alimento;
-import entidades.Ejercicio;
+import entidades.Actividad;
 import entidades.Ingesta;
 import entidades.Nutricionista;
 import entidades.Paciente;
@@ -12,9 +12,8 @@ import entidades.Usuario;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
+
 public class AbmcPaciente {
 	private DataPaciente dp;
 	public AbmcPaciente() {
@@ -29,7 +28,7 @@ public class AbmcPaciente {
 	}
 	
 	public Float calcularPromedioCalSemanal(Paciente p) throws SQLException{
-		ArrayList<Ingesta> ingestas = dp.getIngestasHoy(p);
+		LinkedList<Ingesta> ingestas = dp.getIngestasHoy(p);
 		int calorias = 0;
 		int caloriasAlimento;
 		int gramosConsumidos;
@@ -46,10 +45,10 @@ public class AbmcPaciente {
 	}
 	
 	public Float calcularKcalEjercicioSemana(Paciente p) throws SQLException{		
-		LinkedList<Ejercicio> ejercicios = dp.getEjercicioSemana(p);
+		LinkedList<Actividad> actividades = dp.getActividadesSemana(p);
 		float acum = 0;
-		for (Ejercicio e : ejercicios) {
-			acum += e.getGastoEfectivo();
+		for (Actividad a : actividades) {
+			acum += a.getGastoEfectivo();
 		}
 		return acum;
 	}
@@ -69,12 +68,11 @@ public class AbmcPaciente {
 	public void actualizarDatosSalud(Paciente p) throws SQLException {
 		dp.actualizarDatosSalud(p);
 	}
-	public ArrayList<Ingesta> getIngestasHoy(Paciente p) throws SQLException {
+	public LinkedList<Ingesta> getIngestasHoy(Paciente p) throws SQLException {
 		return dp.getIngestasHoy(p);
 	}
-	
-	public LinkedList<Ejercicio> getEjerciciosSemana(Paciente p) throws SQLException {
-		return dp.getEjercicioSemana(p);
+	public LinkedList<Actividad> getActividadesSemana(Paciente p) throws SQLException {
+		return dp.getActividadesSemana(p);
 	}
 	public void asignarPlan(Paciente p, Nutricionista n) throws SQLException{
 		dp.asignarPlan(p, n);
@@ -82,6 +80,7 @@ public class AbmcPaciente {
 	public PlanDeAlimentacion getPlan(Paciente p) throws SQLException {
 		return dp.getPlan(p);
 	}
-
-
+	public void update(Paciente p) throws SQLException {
+		dp.update(p);
+	}
 }

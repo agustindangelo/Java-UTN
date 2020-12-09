@@ -1,11 +1,9 @@
 package data;
 import java.sql.*;
-import java.time.LocalDate;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import entidades.Alimento;
+import entidades.Ejercicio;
 import entidades.Ingesta;
 import entidades.Nutricionista;
 import entidades.Paciente;
@@ -13,11 +11,10 @@ import entidades.Paciente.TipoGenero;
 import entidades.PlanDeAlimentacion;
 import entidades.Solicitud;
 import entidades.Usuario;
-import entidades.Ejercicio;
+import entidades.Actividad;
 
 public class DataPaciente {
 	DataAlimento da = new DataAlimento();
-	private PlanDeAlimentacion plan;
 	
 	public void registrarPaciente(Paciente p) throws SQLException {
 		PreparedStatement stmt = null;
@@ -204,8 +201,8 @@ public class DataPaciente {
 		}
 		return p;
 	}
-	public ArrayList<Ingesta> getIngestasHoy(Paciente p) throws SQLException{
-		ArrayList<Ingesta> ingestas = new ArrayList<>();
+	public LinkedList<Ingesta> getIngestasHoy(Paciente p) throws SQLException{
+		LinkedList<Ingesta> ingestas = new LinkedList<>();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Ingesta i;
@@ -349,10 +346,10 @@ public class DataPaciente {
 			}
 		}
 	}
-	public LinkedList<Ejercicio> getEjercicioSemana(Paciente p) throws SQLException {
+	public LinkedList<Actividad> getActividadesSemana(Paciente p) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		LinkedList<Ejercicio> ejercicios = new LinkedList<>();
+		LinkedList<Actividad> actividades = new LinkedList<>();
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
 					  "SELECT * "
@@ -364,14 +361,17 @@ public class DataPaciente {
 			rs = stmt.executeQuery();
 			if (rs != null) {
 				while (rs.next()) {
+					Actividad a = new Actividad();
 					Ejercicio e = new Ejercicio();
-					e.setCodigo(rs.getInt("id_ejercicio"));
-					e.setDuracion(rs.getInt("duracion"));
-					e.setIntensidad(rs.getString("intensidad"));
-					e.setFecha(rs.getDate("fecha"));
-					e.setNombre(rs.getString("nombre"));
+					e.setId(rs.getInt("id_ejercicio"));
 					e.setGastoEnergetico(rs.getInt("gasto_energetico"));
-					ejercicios.add(e);
+					e.setDescripcion(rs.getString("nombre"));
+
+					a.setDuracion(rs.getInt("duracion"));
+					a.setIntensidad(rs.getString("intensidad"));
+					a.setFecha(rs.getDate("fecha"));
+					a.setEjercicio(e);
+					actividades.add(a);
 				}
 			}
 		} catch (SQLException e) {
@@ -385,8 +385,9 @@ public class DataPaciente {
 				throw e;
 			}
 		}
-		return ejercicios;
+		return actividades;
 	}	
+
 	public void asignarPlan(Paciente p, Nutricionista n) throws SQLException {
 		PreparedStatement stmt = null;
 		try {
@@ -475,5 +476,44 @@ public class DataPaciente {
 		}
 		return plan;
 	} 
-
+	
+	public void update(Paciente p) throws SQLException {
+		PreparedStatement stmt = null;
+		try {
+			if (p.getPassword() == null) {
+				stmt = DbConnector.getInstancia().getConn().prepareStatement(
+						"update paciente "
+						+ "set nombre=?, apellido=?, email=?, telefono=? "
+						+ "where dni = ?" 
+						);
+				stmt.setString(1, p.getNombre());
+				stmt.setString(2, p.getApellido());
+				stmt.setString(3, p.getEmail());
+				stmt.setString(4, p.getTelefono());
+				stmt.setString(5, p.getDni());
+			} else {
+				stmt = DbConnector.getInstancia().getConn().prepareStatement(
+						"update paciente "
+						+ "set nombre=?, apellido=?, email=?, telefono=?, password=? "
+						+ "where dni = ?" 
+						);
+				stmt.setString(1, p.getNombre());
+				stmt.setString(2, p.getApellido());
+				stmt.setString(3, p.getEmail());
+				stmt.setString(4, p.getTelefono());
+				stmt.setString(5, p.getPassword());
+				stmt.setString(6, p.getDni());
+			}		
+			stmt.execute();
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if(stmt!=null) stmt.close();
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+	}
 }

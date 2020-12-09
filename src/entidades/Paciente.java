@@ -2,6 +2,7 @@ package entidades;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -22,12 +23,21 @@ public class Paciente extends Usuario {
 	private int kcalEjercicioSemana; // kcal quemadas con ejercicios hechos en los ultimos 7 dias
 	private int kcalEjercicioObjetivo; // kcal quemadas por semana, sugeridas por el nutricionista
 	private PlanDeAlimentacion plan;
-	private ArrayList<Ingesta> ingestas;
+	private LinkedList<Ingesta> ingestas;
+	private LinkedList<Actividad> actividades;
 	private Map<String, Integer> consumosHoy;
+
+	public LinkedList<Actividad> getActividades() {
+		return actividades;
+	}
+
+	public void setActividades(LinkedList<Actividad> actividades) {
+		this.actividades = actividades;
+	}
 
 	public Map<String, Integer> getConsumosHoy() {
 		Map<String, Integer> valores = new HashMap<String, Integer>();
-		ArrayList<Ingesta> ingestas = this.ingestas;
+		LinkedList<Ingesta> ingestas = this.ingestas;
 		int calorias = 0;
 		int carbohidratos = 0;
 		int grasas = 0;
@@ -64,11 +74,11 @@ public class Paciente extends Usuario {
 		return valores;
 	}
 
-	public ArrayList<Ingesta> getIngestas() {
+	public LinkedList<Ingesta> getIngestas() {
 		return ingestas;
 	}
 
-	public void setIngestas(ArrayList<Ingesta> ingestas) {
+	public void setIngestas(LinkedList<Ingesta> ingestas) {
 		this.ingestas = ingestas;
 	}
 

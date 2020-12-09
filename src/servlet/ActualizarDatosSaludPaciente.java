@@ -49,8 +49,10 @@ public class ActualizarDatosSaludPaciente extends HttpServlet {
 		} catch (Exception e) {}
 		try {
 			p.setPeso(Float.parseFloat(request.getParameter("peso")));
-			p.setPesoObjetivo(Float.parseFloat(request.getParameter("nuevo-peso-objetivo")));
 		} catch (Exception e) {}
+		try {
+			p.setPesoObjetivo(Float.parseFloat(request.getParameter("nuevo-peso-objetivo")));
+		} catch(Exception e) {}
 		try {
 			ctrl.actualizarDatosSalud(p);
 		} catch (SQLException e) {

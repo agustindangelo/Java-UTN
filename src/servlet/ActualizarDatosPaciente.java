@@ -46,24 +46,20 @@ public class ActualizarDatosPaciente extends HttpServlet {
 
 		p.setNombre(request.getParameter("nombre"));
 		p.setApellido(request.getParameter("apellido"));
+		p.setTelefono(request.getParameter("telefono"));
 		
-		String pass1 = request.getParameter("password");
-		String pass2 = request.getParameter("confirmacion-password");
-		if (pass1 != null && pass1.contentEquals(pass2)) {
-			p.setPassword(pass1);
-		} else {
-			request.setAttribute("error", "Las contraseñas ingresadas no coinciden.");
-			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		String pass = request.getParameter("password");
+		if (!pass.isBlank()) {
+			p.setPassword(pass);
 		}
-
 		try {
-			ctrl.actualizarDatosPersonales(p);
+			ctrl.update(p);
+			session.setAttribute("actualizacionExitosa", true);
 		} catch (SQLException e) {
 			request.setAttribute("error", e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
-		
-		request.getRequestDispatcher("WEB-INF/paciente-main.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/paciente-config.jsp").forward(request, response);
 	}
 
 }

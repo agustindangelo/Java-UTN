@@ -153,7 +153,7 @@ public class DataNutricionista {
 					"select n.dni, n.nombre, n.apellido, l.cod_postal, l.denominacion, d.calle, d.altura " +
 					"from localidad l " + 
 					"inner join direccion d on d.cod_postal = l.cod_postal " + 
-					"inner join nutricionista n on n.dni = d.id_nutricionista " + 
+					"inner join nutricionista n on n.dni = d.dni" + 
 					"where l.denominacion = ?"
 					);
 			stmt.setString(1, loc.getDenominacion());

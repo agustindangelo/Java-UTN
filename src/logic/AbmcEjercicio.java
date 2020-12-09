@@ -2,7 +2,8 @@ package logic;
 
 import java.util.LinkedList;
 import data.DataEjercicio;
-import entidades.*;
+import entidades.Ejercicio;
+import java.sql.SQLException;
 
 public class AbmcEjercicio {
 	private DataEjercicio de;
@@ -11,21 +12,20 @@ public class AbmcEjercicio {
 		de = new DataEjercicio();
 	}
 	
-	public void agregarEjercicio(Ejercicio ej) {
+	public void agregarEjercicio(Ejercicio ej) throws SQLException {
 		de.add(ej);	
-		
 	}	
 	
-	public void removeEjercicio(Ejercicio ej) {
+	public void removeEjercicio(Ejercicio ej) throws SQLException {
 		de.remove(ej);
 	}
 	
-	public void updateEjercicio(Ejercicio ej) {
+	public void updateEjercicio(Ejercicio ej) throws SQLException {
 		de.update(ej);
 	}
 	
-	public LinkedList<Ejercicio> getAll(){
-		return de.getAll();
+	public LinkedList<Ejercicio> getAllEjercicios() throws SQLException {
+		return de.getAllEjercicios();
 	}
 
 }

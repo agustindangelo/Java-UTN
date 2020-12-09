@@ -1,14 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.LinkedList"%>
 <%@ page import="entidades.Paciente"%>
-<%@ page import="entidades.Nutricionista"%>
-<%@ page import="entidades.Direccion"%>
-<%@ page import="entidades.Localidad"%>
-<%@ page import="entidades.Horario"%>
-<%@ page import="logic.AbmcLocalidad"%>
-<%@ page import="logic.AbmcHorario"%>
-<%@ page import="logic.AbmcNutricionista"%>
 <html>
 <head>
 	<link rel="apple-touch-icon" sizes="76x76" href="resources/favicon/apple-touch-icon.png">
@@ -24,13 +16,13 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="style/styles.css">
     <meta charset="utf-8">
-	<title>Configuración de perfil</title>
+	<title>TP de Java</title>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://kit.fontawesome.com/d00e7b9ed2.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	<script src="script/nutricionista-config.js"></script>
+	<script src="script/paciente-config.js"></script>
 </head>
 <body class="paciente">
 	<nav class="navbar sticky-top navbar-expand navbar-light bg-light"> 
@@ -61,6 +53,15 @@
 	%>
 	
 	<div class="container">
+		<%
+		try {
+			if ((boolean) session.getAttribute("actualizacionExitosa")) { %>
+				<div class="alert alert-success" role="alert">
+				  Datos guardados con éxito.
+				</div>
+			<% }
+		} catch (Exception e) {} %>
+		
 		<div id="accordion">
 			<!-- sección de datos personales -->
 			<div class="card">
@@ -117,10 +118,11 @@
 									<div class="form-group">
 										<label for="confirm-password">Confirmar Contraseña</label>
 										<input class="form-control" type="password" id="confirmacion-password" name="confirmacion-password">
+										<p class="text-danger" id="error-password" style="display: none;">Las contraseñas no coinciden.<p>
 									</div>
 								</div>
 								<div class="col-12">
-									<button type="submit" class="btn btn-primary float-right">Guardar Cambios</button>
+									<button type="submit" class="btn btn-primary float-right" id="guardarDatos">Guardar Cambios</button>
 								</div>
 							</form>
 						</div>

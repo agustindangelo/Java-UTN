@@ -158,9 +158,9 @@
 									<div class="form-group">
 										<label for="localidad" class="form-control-label">Localidad</label>
 										<select class="form-control" id="localidad" name="localidad" data-live-search="true">
-											<option value=<%= n.getDireccion().getLocalidad().getDenominacion() %> selected disabled><%= n.getDireccion().getLocalidad().getDenominacion() %></option>		            
+											<option value=<%= n.getDireccion().getLocalidad().getCodPostal() %> selected disabled><%= n.getDireccion().getLocalidad().getDenominacion() %></option>		            
 											<% for (Localidad l : localidades) { %>
-												<option id=<%= l.getCodPostal() %> data-tokens=<%= l.getDenominacion() %>><%= l.getDenominacion() %></option>
+												<option value=<%= l.getCodPostal() %> id=<%= l.getCodPostal() %> data-tokens=<%= l.getDenominacion() %>><%= l.getDenominacion() %></option>
 											<% } %>
 										</select>
 										
@@ -174,11 +174,11 @@
 										</div>
 										<div class="form-group col-md-2">
 										  <label for="numero">Altura</label>
-										  <input type="text" class="form-control" id="altura" name="altura" value=<%= n.getDireccion().getAltura() %>>
+										  <input type="number" class="form-control" id="altura" name="altura" min=0 value=<%= n.getDireccion().getAltura() %>>
 										</div>
 										<div class="form-group col-md-2">
 										  <label for="piso">Piso</label>
-										  <input type="text" class="form-control" id="piso" name="piso" value=<%= n.getDireccion().getPiso() %>>
+										  <input type="number" class="form-control" id="piso" name="piso" value=<%= n.getDireccion().getPiso() %>>
 										</div>
 										<div class="form-group col-md-2">
 											<label for="depto">Depto</label>
@@ -186,7 +186,7 @@
 											String depto = n.getDireccion().getDepto();
 											if (depto == null) { depto = "-"; } 
 											%>
-											<input type="text" class="form-control" id="depto" value=<%= depto %>>
+											<input type="text" class="form-control" id="depto" name="depto" value=<%= depto %>>
 										</div>
 									</div>
 								</div>
@@ -244,7 +244,7 @@
 								</div>
 							</div>       
 							<div class="col-xs-6 float-right">
-								<a href="#modal-agregar-horario" class="btn btn-success" data-toggle="modal"><span>Agregar Horario</span></a>
+								<a href="#modal-agregar-horario" class="btn btn-primary" data-toggle="modal"><span>Agregar Horario</span></a>
 								<a id="borrar-horarios" class="btn btn-danger" data-toggle="modal"><span>Borrar</span></a>						
 							</div> 
 						</div>

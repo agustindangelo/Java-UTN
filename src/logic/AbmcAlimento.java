@@ -2,17 +2,19 @@ package logic;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+
 import data.DataAlimento;
 import entidades.Alimento;
 
-public class AlimentoLogic {
+public class AbmcAlimento {
 	private DataAlimento da;
 	
-	public AlimentoLogic(){
+	public AbmcAlimento(){
 		da = new DataAlimento();
 	}
 	
-	public ArrayList<Alimento> getAll() throws SQLException{
+	public LinkedList<Alimento> getAll() throws SQLException{
 		return da.getAll();
 	}
 	
