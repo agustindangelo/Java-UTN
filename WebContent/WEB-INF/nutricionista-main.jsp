@@ -21,7 +21,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="style/styles.css">
     <meta charset="utf-8">
-	<title>Panel del Nutricionista</title>
+	<title>Trabajo Práctico de Java</title>
     <script src="https://kit.fontawesome.com/d00e7b9ed2.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -145,28 +145,28 @@
 								<h3 class="colored-title text-center">Hoy</h3>
 								<div class="row">
 									<div class="col">Calorías</div>
-									<p id="kcal"></p>
+									<p class="pbar-left-value" id="kcal"></p>
 								</div>
 								<div class="progress">
 									<div class="progress-bar"  id="kcal-progress" role="progressbar"></div>
 								</div>
 								<div class="row">
 									<div class="col">Carbohidratos</div>
-									<p id="carbohidratos"></p>
+									<p class="pbar-left-value" id="carbohidratos"></p>
 								</div>
 								<div class="progress" style="height: 0.5rem;">
 									<div class="progress-bar" id="carbohidratos-progress" role="progressbar"></div>
 								</div>
 								<div class="row">
-									<div class="col">Proteinas</div>
-									<p id="proteinas"></p>
+									<div class="col">Proteínas</div>
+									<p class="pbar-left-value" id="proteinas"></p>
 								</div>
 								<div class="progress" style="height: 0.5rem;">
 									<div class="progress-bar" id="proteinas-progress" role="progressbar"></div>
 								</div>
 								<div class="row">
 									<div class="col">Grasas</div>
-									<p id="grasas"><p>
+									<p class="pbar-left-value" id="grasas"><p>
 								</div>
 								<div class="progress" style="height: 0.5rem;">
 									<div class="progress-bar" id="grasas-progress" role="progressbar"></div>

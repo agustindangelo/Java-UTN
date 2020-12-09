@@ -83,4 +83,12 @@ public class AbmcPaciente {
 	public void update(Paciente p) throws SQLException {
 		dp.update(p);
 	}
+
+	public void registrarHumor(String dniPaciente, int estado) throws SQLException {
+		try {
+			dp.registrarHumor(dniPaciente, estado);
+		} catch (SQLException e) {
+			throw e;
+		}
+	}
 }

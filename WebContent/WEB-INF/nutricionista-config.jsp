@@ -24,7 +24,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="style/styles.css">
     <meta charset="utf-8">
-	<title>Configuración de perfil</title>
+	<title>Trabajo Práctico de Java</title>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://kit.fontawesome.com/d00e7b9ed2.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -80,7 +80,7 @@
 			  	<div class="card-header" id="datos-personales">
 					<h5 class="mb-0">
 					<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-						Datos Personales
+						Datos personales
 					</button>
 					</h5>
 			  	</div>
@@ -103,13 +103,13 @@
 								</div>
 								<div class="col-6">
 									<div class="form-group">
-										<label for="email">Correo Electrónico</label>
+										<label for="email">Correo electrónico</label>
 										<input class="form-control" type="email" id="email" name="email" value=<%= n.getEmail() %> disabled>
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="form-group">
-										<label for="dni">Número DNI</label>
+										<label for="dni">DNI</label>
 										<input class="form-control" type="text" id="dni" name="dni" value=<%= n.getDni() %> disabled>
 									</div>
 								</div>
@@ -122,13 +122,13 @@
 								<div class="col-6"></div>
 								<div class="col-6">
 									<div class="form-group">
-										<label for="password">Reemplazar Contraseña</label>
+										<label for="password">Reemplazar contraseña</label>
 										<input class="form-control" type="password" id="password" name="password">
 									</div>
 								</div>
 								<div class="col-6">
 									<div class="form-group">
-										<label for="confirm-password">Confirmar Contraseña</label>
+										<label for="confirm-password">Confirmar contraseña</label>
 										<input class="form-control" type="password" id="confirmacion-password" name="confirmacion-password">
 										<p class="text-danger" id="error-password" style="display: none;">Las contraseñas no coinciden.<p>
 									</div>
@@ -146,7 +146,7 @@
 			  	<div class="card-header" id="direccion">
 					<h5 class="mb-0">
 						<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-								Dirección de Atención
+								Dirección de atención
 						</button>
 					</h5>
 			  	</div>
@@ -181,7 +181,7 @@
 										  <input type="number" class="form-control" id="piso" name="piso" value=<%= n.getDireccion().getPiso() %>>
 										</div>
 										<div class="form-group col-md-2">
-											<label for="depto">Depto</label>
+											<label for="depto">Depto.</label>
 											<% 
 											String depto = n.getDireccion().getDepto();
 											if (depto == null) { depto = "-"; } 
@@ -192,7 +192,7 @@
 								</div>
 								<div class="col-12">
 									<a href="#modal-agregar-localidad" class="btn btn-secondary" data-toggle="modal"><span>Añadir Localidad</span></a>
-									<button type="submit" class="btn btn-primary float-right">Guardar Cambios</button>
+									<button type="submit" class="btn btn-primary float-right">Guardar cambios</button>
 								</div>
 							</div>
 						</form>
@@ -219,8 +219,8 @@
 											<tr>
 												<th></th>
 												<th>Día</th>
-												<th>Hora desde</th>
-												<th>Hora hasta</th>
+												<th>Desde</th>
+												<th>Hasta</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -260,7 +260,7 @@
 			<div class="modal-content">
 				<form>
 					<div class="modal-header">						
-						<h4 class="modal-title">Agregar Nuevo Horario</h4>
+						<h4 class="modal-title">Agregar nuevo horario</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">					
@@ -278,11 +278,11 @@
 						</div>
 						<div class="row">
 							<div class="col">
-								<label for="hora-desde">Hora Desde</label>
+								<label for="hora-desde">Desde</label>
 								<input id="hora-desde" name="hora-desde" type="time" class="form-control" required></input>
 							</div>
 							<div class="col">
-								<label for="hora-hasta">Hora Hasta</label>
+								<label for="hora-hasta">Hasta</label>
 								<input id="hora-hasta" name="hora-hasta" type="time" class="form-control" required></input>
 							</div>
 						</div>
@@ -302,7 +302,7 @@
 			<div class="modal-content">
 				<form>
 					<div class="modal-header">						
-						<h4 class="modal-title">Borrar Horario</h4>
+						<h4 class="modal-title">Borrar horario</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">					
@@ -322,14 +322,14 @@
 			<div class="modal-content">
 				<form>
 					<div class="modal-header">						
-						<h4 class="modal-title">Registrar Localidad</h4>
+						<h4 class="modal-title">Registrar localidad</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 
 					<div class="modal-body">
 						<div class="form-row">
 							<div class="col-3">
-								<label for="codigo-postal">Código Postal</label>
+								<label for="codigo-postal">Código postal</label>
 								<input class="form-control" id="codigo-postal" name="codigo-postal" type="number" min="1" max="100000"/>				
 							</div>
 							<div class="col-9">

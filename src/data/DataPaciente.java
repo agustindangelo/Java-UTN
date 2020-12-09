@@ -516,4 +516,25 @@ public class DataPaciente {
 			}
 		}
 	}
+
+	public void registrarHumor(String dniPaciente, int estado) throws SQLException {
+		PreparedStatement stmt = null;
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					  "UPDATE paciente_estado_animo "
+					+ "SET dni = ?, id_estado_animo = ?, fecha = curdate();");
+			stmt.setString(1, dniPaciente);
+			stmt.setInt(2, estado);
+			stmt.execute();
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if (stmt != null) stmt.close();
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+	}
 }

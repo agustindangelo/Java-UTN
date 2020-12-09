@@ -85,6 +85,7 @@ a:hover{
 .btn.btn-link:hover{
     color: var(--primary-color);
     font-weight: bold;
+    text-decoration: none;
 }
 .colored-title{
     color: var(--navbar-txt-color);
@@ -153,10 +154,18 @@ a:hover{
     background-color: var(--navbar-bg-color);
     margin: -1.5rem;
 } 
+
+.paciente .navbar {
+	margin: 0;
+}
 .navbar-text {
     font-weight: bold;
     font-size: 25;
     color: var(--primary-dark);
+}
+
+.large-date {
+	margin-right: 1rem;
 }
 
 .main {
@@ -190,6 +199,7 @@ a:hover{
 }   
 .card{
     box-shadow: .2rem .2rem 1rem rgba(0,0,0,0.23);
+    margin-bottom: 1rem;
 }
 .card-title{
     font-size: 19px;
@@ -226,8 +236,16 @@ a {
 	color: var(--secondary-color);
 }
 .btn-danger{
-	color: white;
+	color: white !important;
 	font-weight: bold;
+}
+
+.modal-header {
+	height: 4rem;
+}
+
+.category-header {
+	margin-left: 1rem;
 }
 
 #wrapper {
@@ -254,6 +272,10 @@ a {
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
+}
+
+.pbar-left-value {
+	margin-right: 1rem !important;
 }
 
 #wrapper.toggled #sidebar-wrapper {

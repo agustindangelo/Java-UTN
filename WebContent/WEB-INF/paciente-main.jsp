@@ -75,8 +75,8 @@
 	
 	<div class="container-fluid">
 		<div class="row justify-content-between">
-			<h2>Mis resultados de hoy</h2>
-			<h3><%= LocalDate.now() %></h3>
+			<h2 class="category-header">Mis resultados de hoy</h2>
+			<h3 class="large-date"><%= LocalDate.now() %></h3>
 		</div>
 		<div class="row">
 			<div class="col-md-3">
@@ -84,28 +84,28 @@
 					<div class="card-body">
 						<div class="row">
 							<div class="col">Calorías</div>
-							<p><%= consumos.get("calorias") %> / <%= p.getPlan().getKcalDiarias() %> kcal.</p>
+							<p class="pbar-left-value" ><%= consumos.get("calorias") %> / <%= p.getPlan().getKcalDiarias() %> kcal.</p>
 						</div>
 						<div class="progress">
 							<div class="progress-bar" style="width: <%= consumos.get("calorias") * 100 / p.getPlan().getKcalDiarias() %>%" role="progressbar"></div>
 						</div>
 						<div class="row">
 							<div class="col">Carbohidratos</div>
-							<p><%= consumos.get("carbohidratos") %>  / <%= p.getPlan().getCarbohidratosDiarios() %> g.</p>
+							<p class="pbar-left-value"><%= consumos.get("carbohidratos") %>  / <%= p.getPlan().getCarbohidratosDiarios() %> g.</p>
 						</div>
 						<div class="progress" style="height: 0.5rem;">
 							<div class="progress-bar" style="width: <%= consumos.get("carbohidratos") * 100 / p.getPlan().getCarbohidratosDiarios() %>%" role="progressbar"></div>
 						</div>
 						<div class="row">
 							<div class="col">Proteínas</div>
-							<p><%= consumos.get("proteinas") %>  / <%= p.getPlan().getProteinasDiarias() %> g.</p>
+							<p class="pbar-left-value"><%= consumos.get("proteinas") %>  / <%= p.getPlan().getProteinasDiarias() %> g.</p>
 						</div>
 						<div class="progress" style="height: 0.5rem;">
 							<div class="progress-bar" style="width: <%= consumos.get("proteinas") * 100/ p.getPlan().getProteinasDiarias()%>%" role="progressbar"></div>
 						</div>
 						<div class="row">
 							<div class="col">Grasas</div>
-							<p><%= consumos.get("grasas") %>  / <%= consumos.get("grasas") * 100 / p.getPlan().getGrasasDiarias() %> g.</p>
+							<p class="pbar-left-value"><%= consumos.get("grasas") %>  / <%= consumos.get("grasas") * 100 / p.getPlan().getGrasasDiarias() %> g.</p>
 						</div>
 						<div class="progress" style="height: 0.5rem;">
 							<div class="progress-bar" style="width:<%= consumos.get("grasas") * 100 / p.getPlan().getGrasasDiarias() %>%" role="progressbar"></div>
@@ -137,11 +137,11 @@
 						</div>
 						<div class="card-body">
 							<div class="d-flex justify-content-around">
-								<a href="#"><i class="far fa-angry fa-2x"></i> </a>
-								<a href="#"><i class="far fa-frown fa-2x"></i> </a>
-								<a href="#"><i class="far fa-meh fa-2x"></i> </a>
-								<a href="#"><i class="far fa-smile fa-2x"></i> </a>
-								<a href="#"><i class="far fa-grin fa-2x"></i> </a>
+								<a onclick="actualizarHumor(0)"><i class="far fa-angry fa-2x"></i> </a>
+								<a onclick="actualizarHumor(1)"><i class="far fa-frown fa-2x"></i> </a>
+								<a onclick="actualizarHumor(2)"><i class="far fa-meh fa-2x"></i> </a>
+								<a onclick="actualizarHumor(3)"><i class="far fa-smile fa-2x"></i> </a>
+								<a onclick="actualizarHumor(4)"><i class="far fa-grin fa-2x"></i> </a>
 							</div>
 						</div>
 					</div>
@@ -153,7 +153,7 @@
 					<div class="card-header">
 						<div class="row">
 							<h3 class="card-title my-auto">Ejercicio</h3>
-							<button class="btn btn-link ml-auto" style="font-size:17px"  href="#registrarActividad" data-toggle="modal">Registrar Actividad</button>
+							<button class="btn btn-link ml-auto" style="font-size:17px"  href="#registrarActividad" data-toggle="modal">Registrar actividad</button>
 						</div>
 					</div>
 					<div class="card-body">
@@ -178,7 +178,7 @@
 		</div>
 		<br>
 		<div class="row">
-			<h2>Mis consumos de hoy</h2>
+			<h2 class="category-header">Mis consumos de hoy</h2>
 		</div>
 		<div class="row">
 			<div class="col-md-3">
@@ -186,7 +186,7 @@
 					<div class="card-header">
 						<div class="row">
 							<h3 class="card-title my-auto">Desayuno</h3>
-							<button class="btn btn-link ml-auto" style="font-size:17px" href="#registrarDesayuno" data-toggle="modal">Registrar Ingesta</button>
+							<button class="btn btn-link ml-auto" style="font-size:17px" href="#registrarDesayuno" data-toggle="modal">Registrar ingesta</button>
 						</div>
 					</div>
 					<ul class="list-group list-group-flush">
@@ -204,7 +204,7 @@
 					<div class="card-header">
 						<div class="row">
 							<h3 class="card-title my-auto">Almuerzo</h3>
-							<button class="btn btn-link ml-auto" style="font-size:17px" href="#registrarAlmuerzo" data-toggle="modal">Registrar Ingesta</button>
+							<button class="btn btn-link ml-auto" style="font-size:17px" href="#registrarAlmuerzo" data-toggle="modal">Registrar ingesta</button>
 						</div>
 					</div>
 					<ul class="list-group list-group-flush">
@@ -222,7 +222,7 @@
 					<div class="card-header">
 						<div class="row">
 							<h3 class="card-title my-auto">Cena</h3>
-							<button class="btn btn-link ml-auto" style="font-size:17px" href="#registrarCena" data-toggle="modal">Registrar Ingesta</button>
+							<button class="btn btn-link ml-auto" style="font-size:17px" href="#registrarCena" data-toggle="modal">Registrar ingesta</button>
 						</div>
 					</div>
 					<ul class="list-group list-group-flush">
@@ -240,7 +240,7 @@
 					<div class="card-header">
 						<div class="row">
 							<h3 class="card-title my-auto">Otros</h3>
-							<button class="btn btn-link ml-auto" style="font-size:17px"  href="#registrarOtros" data-toggle="modal">Registrar Ingesta</button>
+							<button class="btn btn-link ml-auto" style="font-size:17px"  href="#registrarOtros" data-toggle="modal">Registrar ingesta</button>
 						</div>
 					</div>
 					<ul class="list-group list-group-flush">
@@ -265,9 +265,10 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form>
-					<div class="modal-header">						
-						<h4 class="modal-title">Registrar Desayuno</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<div class="modal-header">	
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">					
+						<h5 class="modal-title">Registrar desayuno</h5>
+						<input type="submit" class="btn btn-primary" value="Agregar">
 					</div>
 					
 					<div class="modal-body">
@@ -285,10 +286,6 @@
 							</ul>
 						</div>					
 					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-						<input type="submit" class="btn btn-primary" value="Agregar">
-					</div>
 				</form>
 			</div>
 		</div>
@@ -299,11 +296,11 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form>
-					<div class="modal-header">						
-						<h4 class="modal-title">Registrar Almuerzo</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<div class="modal-header">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">						
+						<h5 class="modal-title">Registrar almuerzo</h5>
+						<input type="submit" class="btn btn-primary" value="Agregar">
 					</div>
-					
 					<div class="modal-body">
 						<div class="container">
 							<input type="text" class="form-control" id="almuerzoSearch" onkeyup="filtrarAlmuerzo()" placeholder="Buscar..." title="Alimentos">
@@ -319,10 +316,6 @@
 							</ul>
 						</div>					
 					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-						<input type="submit" class="btn btn-primary" value="Agregar">
-					</div>
 				</form>
 			</div>
 		</div>
@@ -333,11 +326,11 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form>
-					<div class="modal-header">						
-						<h4 class="modal-title">Registrar Cena</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<div class="modal-header">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">						
+						<h5 class="modal-title">Registrar cena</h5>
+						<input type="submit" class="btn btn-primary" value="Agregar">
 					</div>
-					
 					<div class="modal-body">
 						<div class="container">
 							<input type="text" class="form-control" id="cenaSearch" onkeyup="filtrarCena()" placeholder="Buscar..." title="Alimentos">
@@ -353,10 +346,6 @@
 							</ul>
 						</div>					
 					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-						<input type="submit" class="btn btn-primary" value="Agregar">
-					</div>
 				</form>
 			</div>
 		</div>
@@ -367,8 +356,10 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form>
-					<div class="modal-header">						
-						<h4 class="modal-title">Registrar Otras Ingestas</h4>
+					<div class="modal-header">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">						
+						<h5 class="modal-title">Registrar otras comidas</h5>
+						<input type="submit" class="btn btn-primary" value="Agregar">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					
@@ -387,10 +378,6 @@
 							</ul>
 						</div>					
 					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-						<input type="submit" class="btn btn-primary" value="Agregar">
-					</div>
 				</form>
 			</div>
 		</div>
@@ -401,9 +388,10 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form>
-					<div class="modal-header">						
-						<h4 class="modal-title">Registrar Otras Ingestas</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<div class="modal-header">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">		
+						<h4 class="modal-title">Editar actividades</h4>
+						<input type="submit" class="btn btn-primary" value="Agregar">
 					</div>
 					<div class="modal-body">
 						<div class="container">
@@ -418,10 +406,6 @@
 								<% } %>
 							</ul>
 						</div>					
-					</div>
-					<div class="modal-footer">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
-						<input type="submit" class="btn btn-primary" value="Agregar">
 					</div>
 				</form>
 			</div>
