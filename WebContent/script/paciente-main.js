@@ -1,3 +1,30 @@
+$(document).ready(function(){
+	$('#registrarDesayuno').click(function(){
+		selector = '#registrarDesayuno input[type="number"]'
+	})
+	$('#registrarAlmuerzo').click(function(){
+		selector = '#registrarAlmuerzo input[type="number"]'
+	})
+	$('#registrarCena').click(function(){
+		selector = '#registrarCena input[type="number"]'
+	})
+	$('#registrarOtro').click(function(){
+		selector = '#registrarOtros input[type="number"]'
+	})
+	registrarIngesta(selector);
+})
+
+function registrarIngesta(selector){
+	$(selector).each(function() {
+		alimentosIngresados = []
+		if ($(this).val() != 0) {
+			idAlimento = this.id.slice(1)
+			alimentosIngresados.push(idAlimento)	
+			alert(idAlimento)
+		}
+	})
+}
+
 function filtrarEjercicios() {
 	var input, filter, ul, li, i;
 	input = document.getElementById("ejerciciosSearch");

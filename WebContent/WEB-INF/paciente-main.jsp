@@ -265,10 +265,9 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form>
-					<div class="modal-header">	
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">					
+					<div class="modal-header justify-content-between">	
 						<h5 class="modal-title">Registrar desayuno</h5>
-						<input type="submit" class="btn btn-primary" value="Agregar">
+						<button class="btn btn-primary" id="registrarDesayuno">Agregar</button> 
 					</div>
 					
 					<div class="modal-body">
@@ -279,7 +278,7 @@
 									<li class="list-group-item">
 										<a class="colored-title"><%= a.getNombre() %></a>
 											<!-- <small class="text-danger">No está en tu plan  </small> -->
-										<input class="float-right" type="number" value="0" min="0" max="100"/>						
+										<input class="float-right" type="number" value="0" min="0" max="5000"/>						
 										<label class="float-right text-muted">Gr.</label>
 									</li>
 								<% } %>
@@ -296,10 +295,9 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form>
-					<div class="modal-header">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">						
+					<div class="modal-header justify-content-between">
 						<h5 class="modal-title">Registrar almuerzo</h5>
-						<input type="submit" class="btn btn-primary" value="Agregar">
+						<button type="submit" class="btn btn-primary float-right" id="registrarAlmuerzo">Agregar</button> 
 					</div>
 					<div class="modal-body">
 						<div class="container">
@@ -309,7 +307,7 @@
 									<li class="list-group-item">
 										<a class="colored-title"><%= a.getNombre() %></a>
 											<!-- <small class="text-danger">No está en tu plan  </small> -->
-										<input class="float-right" type="number" value="0" min="0" max="100"/>						
+										<input class="float-right" type="number" value="0" min="0" max="5000"/>						
 										<label class="float-right text-muted">Gr.</label>
 									</li>
 								<% } %>
@@ -326,10 +324,9 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form>
-					<div class="modal-header">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">						
+					<div class="modal-header justify-content-between">
 						<h5 class="modal-title">Registrar cena</h5>
-						<input type="submit" class="btn btn-primary" value="Agregar">
+						<button class="btn btn-primary" id="registrarCena">Agregar</button>
 					</div>
 					<div class="modal-body">
 						<div class="container">
@@ -338,8 +335,7 @@
 								<% for (Alimento a : alimentos) { %>
 									<li class="list-group-item">
 										<a class="colored-title"><%= a.getNombre() %></a>
-											<!-- <small class="text-danger">No está en tu plan  </small> -->
-										<input class="float-right" type="number" value="0" min="0" max="100"/>						
+										<input class="float-right" id=<%= "c" + a.getId() %> type="number" value="0" min="0" max="100"/>						
 										<label class="float-right text-muted">Gr.</label>
 									</li>
 								<% } %>
@@ -356,11 +352,9 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form>
-					<div class="modal-header">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">						
+					<div class="modal-header justify-content-between">
 						<h5 class="modal-title">Registrar otras comidas</h5>
-						<input type="submit" class="btn btn-primary" value="Agregar">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<button class="btn btn-primary" id="registrarOtros">Agregar</button> 
 					</div>
 					
 					<div class="modal-body">
@@ -388,10 +382,9 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form>
-					<div class="modal-header">
-						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">		
-						<h4 class="modal-title">Editar actividades</h4>
-						<input type="submit" class="btn btn-primary" value="Agregar">
+					<div class="modal-header justify-content-between">
+						<h4 class="modal-title">Registrar Actividad</h4>
+						<button class="btn btn-primary">Agregar</button>
 					</div>
 					<div class="modal-body">
 						<div class="container">
@@ -418,7 +411,7 @@
 				<form action="ActualizarDatosSaludPaciente" method="post">
 					<div class="modal-header">						
 						<h4 class="modal-title">Actualizar peso</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<button class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					
 					<div class="modal-body">
@@ -435,6 +428,5 @@
 			</div>
 		</div>
 	</div>
-	<script src="scripts.js"></script>
 </body>
 </html>
