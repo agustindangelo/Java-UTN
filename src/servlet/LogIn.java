@@ -17,6 +17,7 @@ import entidades.Nutricionista;
 import entidades.Ejercicio;
 import entidades.Actividad;
 import entidades.Alimento;
+import entidades.Categoria;
 import entidades.Paciente;
 import entidades.Solicitud;
 import entidades.Usuario;
@@ -86,6 +87,7 @@ public class LogIn extends HttpServlet {
 							LinkedList<Actividad> actividades = new LinkedList<>(); 
 							LinkedList<Alimento> alimentos = new LinkedList<>();
 							LinkedList<Ingesta> ingestas = new LinkedList<>();
+							LinkedList<Categoria> categoriasAlimentos = new LinkedList<>();
 							
 							try {
 								ingestas = ctrlPaciente.getIngestasHoy(p);
@@ -117,7 +119,14 @@ public class LogIn extends HttpServlet {
 								request.setAttribute("error", "Error al recuperar los alimentos.");
 								request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 							}
+							try {
+								categoriasAlimentos = ctrlAlimento.getCategorias();
+							} catch(SQLException e) {
+								request.setAttribute("error", "Error al recuperar las categorías.");
+								request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+							}
 							session.setAttribute("alimentos", alimentos);
+							session.setAttribute("categorias", categoriasAlimentos);
 							
 							session.setAttribute("paciente", p);
 							request.getRequestDispatcher("WEB-INF/paciente-main.jsp").forward(request, response);

@@ -1,6 +1,8 @@
 package data;
 
 import entidades.Alimento;
+import entidades.Categoria;
+
 import java.util.LinkedList;
 import java.sql.*;
 
@@ -60,8 +62,7 @@ public class DataAlimento {
 		}
 		catch (SQLException e) {
 			throw e;
-		}
-		finally {
+		} finally {
 			try {
 				if (rs != null) { rs.close(); }
 				if (stmt != null) { stmt.close(); }
@@ -73,5 +74,35 @@ public class DataAlimento {
 		}
 		
 		return a;
+	}
+	
+	public LinkedList<Categoria> getCategorias() throws SQLException {
+		LinkedList<Categoria> categorias = new LinkedList<>();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"SELECT * FROM categoria");
+			rs = stmt.executeQuery();
+			if (rs != null) {
+				while (rs.next()) {
+					Categoria c = new Categoria();
+					c.setCodigo(rs.getInt("id_categoria"));
+					c.setNombre(rs.getString("nombre"));
+					categorias.add(c);
+				}
+			}
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if (rs != null) { rs.close(); }
+				if (stmt != null) { stmt.close(); }
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+		return categorias;
 	}
 }

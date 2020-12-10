@@ -10,6 +10,7 @@
 <%@ page import="entidades.Actividad"%>
 <%@ page import="entidades.Paciente"%>  
 <%@ page import="entidades.Ejercicio"%>  
+<%@ page import="entidades.Categoria"%>  
 
 <%@ page import="java.sql.SQLException"%>
 <%@ page import="java.util.Map"%>
@@ -68,7 +69,8 @@
 		LinkedList<Ingesta> ingestas = p.getIngestas();
 		LinkedList<Actividad> actividades = p.getActividades();
 		LinkedList<Ejercicio> ejercicios = (LinkedList<Ejercicio>) session.getAttribute("ejercicios"); 
-		LinkedList<Alimento> alimentos = (LinkedList<Alimento>) session.getAttribute("alimentos"); 
+		LinkedList<Alimento> alimentos = (LinkedList<Alimento>) session.getAttribute("alimentos");
+		LinkedList<Categoria> categorias = (LinkedList<Categoria>) session.getAttribute("categorias");
 		AbmcPaciente ctrl = new AbmcPaciente();
 		Map<String, Integer> consumos = p.getConsumosHoy();
 	%>
@@ -413,9 +415,9 @@
 							<input type="number" class="form-control" id="modificar-proteinas-alimento" name="modificar-proteinas-alimento">
 						</div>
 						<select class="form-control" id="categoria" name="categoria">
-							<option value="COMPLETAR" selected disabled>COMPLETAR</option>		            
-							<%/* for (COMPLETAR)*/ { %>
-								<option value="COMPLETAR" id="COMPLETAR" data-tokens="COMPLETAR">COMPLETAR</option>
+							<option value="COMPLETAR" selected disabled>Categorías</option>		            
+							<% for (Categoria c : categorias) { %>
+								<option value=<%= c.getCodigo() %> id=<%= c.getCodigo() %> data-tokens=<%= c.getNombre() %>><%= c.getNombre() %></option>
 							<% } %>
 						</select>
 					</div>
@@ -434,7 +436,7 @@
 			<div class="modal-content">
 				<form>
 					<div class="modal-header justify-content-between">
-						<h4 class="modal-title">Registrar Actividad</h4>
+						<h4 class="modal-title">Registrar actividad</h4>
 						<button class="btn btn-primary">Agregar</button>
 					</div>
 					<div class="modal-body">

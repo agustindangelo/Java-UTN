@@ -6,6 +6,7 @@ import java.util.LinkedList;
 
 import data.DataAlimento;
 import entidades.Alimento;
+import entidades.Categoria;
 
 public class AbmcAlimento {
 	private DataAlimento da;
@@ -20,5 +21,9 @@ public class AbmcAlimento {
 	
 	public Alimento getOne(int id) throws SQLException{
 		return da.getOne(id);
+	}
+	
+	public LinkedList<Categoria> getCategorias() throws SQLException {
+		return da.getCategorias();
 	}
 }
