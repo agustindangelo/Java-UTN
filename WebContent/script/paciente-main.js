@@ -105,13 +105,3 @@ function filtrarOtros() {
 		}
 	}
 }
-
-function actualizarHumor(estado) {
-	alert(estado);
-	$.ajax({
-		type: "POST",
-		url: "RegistrarHumorPaciente",                
-		dataType: "json",
-		data: {"estado" : estado}
-	})
-}

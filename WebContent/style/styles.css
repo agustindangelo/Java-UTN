@@ -243,6 +243,12 @@ a {
 .modal-header {
 	height: 4rem;
 }
+.modal-content {
+	box-shadow: .2rem .2rem 1rem rgba(0,0,0,0.23);
+}
+.modal.fade.show {
+	backdrop-filter: blur(.75rem);
+}
 
 .category-header {
 	margin-left: 1rem;

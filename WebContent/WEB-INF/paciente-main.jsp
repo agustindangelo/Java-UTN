@@ -129,22 +129,6 @@
 							</h3>
 						</div>
 					</div>
-					<div class="card">
-						<div class="card-header">
-							<div class="row">
-								<h3 class="card-title my-auto">Humor</h3>
-							</div>
-						</div>
-						<div class="card-body">
-							<div class="d-flex justify-content-around">
-								<a onclick="actualizarHumor(0)"><i class="far fa-angry fa-2x"></i> </a>
-								<a onclick="actualizarHumor(1)"><i class="far fa-frown fa-2x"></i> </a>
-								<a onclick="actualizarHumor(2)"><i class="far fa-meh fa-2x"></i> </a>
-								<a onclick="actualizarHumor(3)"><i class="far fa-smile fa-2x"></i> </a>
-								<a onclick="actualizarHumor(4)"><i class="far fa-grin fa-2x"></i> </a>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 
@@ -267,13 +251,16 @@
 				<form>
 					<div class="modal-header justify-content-between">	
 						<h5 class="modal-title">Registrar desayuno</h5>
-						<button class="btn btn-primary" id="registrarDesayuno">Agregar</button> 
+						<button class="btn btn-primary" id="registrarDesayuno">Confirmar</button> 
 					</div>
 					
 					<div class="modal-body">
 						<div class="container">
 							<input type="text" class="form-control" id="desayunoSearch" onkeyup="filtrarDesayuno()" placeholder="Buscar..." title="Alimentos">
 							<ul id="desayunoMenu" class="list-group list-group-flush">
+								<li class="list-group-item btn btn-link">
+									<a class="float-right" href="#agregarAlimento" data-toggle="modal">+ Agregar alimento</a>
+								</li>
 								<% for (Alimento a : alimentos) { %>
 									<li class="list-group-item">
 										<a class="colored-title"><%= a.getNombre() %></a>
@@ -297,12 +284,15 @@
 				<form>
 					<div class="modal-header justify-content-between">
 						<h5 class="modal-title">Registrar almuerzo</h5>
-						<button type="submit" class="btn btn-primary float-right" id="registrarAlmuerzo">Agregar</button> 
+						<button type="submit" class="btn btn-primary float-right" id="registrarAlmuerzo">Confirmar</button> 
 					</div>
 					<div class="modal-body">
 						<div class="container">
 							<input type="text" class="form-control" id="almuerzoSearch" onkeyup="filtrarAlmuerzo()" placeholder="Buscar..." title="Alimentos">
 							<ul id="almuerzoMenu" class="list-group list-group-flush">
+								<li class="list-group-item btn btn-link">
+									<a class="float-right" href="#agregarAlimento" data-toggle="modal">+ Agregar alimento</a>
+								</li>
 								<% for (Alimento a : alimentos) { %>
 									<li class="list-group-item">
 										<a class="colored-title"><%= a.getNombre() %></a>
@@ -326,12 +316,15 @@
 				<form>
 					<div class="modal-header justify-content-between">
 						<h5 class="modal-title">Registrar cena</h5>
-						<button class="btn btn-primary" id="registrarCena">Agregar</button>
+						<button class="btn btn-primary" id="registrarCena">Confirmar</button>
 					</div>
 					<div class="modal-body">
 						<div class="container">
 							<input type="text" class="form-control" id="cenaSearch" onkeyup="filtrarCena()" placeholder="Buscar..." title="Alimentos">
 							<ul id="cenaMenu" class="list-group list-group-flush">
+								<li class="list-group-item btn btn-link">
+									<a class="float-right" href="#agregarAlimento" data-toggle="modal">+ Agregar alimento</a>
+								</li>
 								<% for (Alimento a : alimentos) { %>
 									<li class="list-group-item">
 										<a class="colored-title"><%= a.getNombre() %></a>
@@ -354,13 +347,16 @@
 				<form>
 					<div class="modal-header justify-content-between">
 						<h5 class="modal-title">Registrar otras comidas</h5>
-						<button class="btn btn-primary" id="registrarOtros">Agregar</button> 
+						<button class="btn btn-primary" id="registrarCena">Confirmar</button> 
 					</div>
 					
 					<div class="modal-body">
 						<div class="container">
 							<input type="text" class="form-control" id="otrosSearch" onkeyup="filtrarOtros()" placeholder="Buscar..." title="Alimentos">
 							<ul id="otrosMenu" class="list-group list-group-flush">
+								<li class="list-group-item btn btn-link">
+									<a class="float-right" href="#agregarAlimento" data-toggle="modal">+ Agregar alimento</a>
+								</li>
 								<% for (Alimento a : alimentos) { %>
 									<li class="list-group-item">
 										<a class="colored-title"><%= a.getNombre() %></a>
@@ -372,6 +368,61 @@
 							</ul>
 						</div>					
 					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<div id="agregarAlimento" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form action="AgregarAlimento" method="post">
+					<div class="modal-header">
+						<h4 class="modal-title">Agregar alimento</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div class="modal-body">
+						<div class="input-group mb-2">
+							<div class="input-group-prepend">
+							  <div class="input-group-text">Nombre</div>
+							</div>
+							<input type="text" class="form-control" id="modificar-nombre-alimento" name="modificar-nombre-alimento">
+						</div>
+						 <div class="input-group mb-2">
+							<div class="input-group-prepend">
+							  <div class="input-group-text">Calorías</div>
+							</div>
+							<input type="number" class="form-control" id="modificar-calorias-alimento" name="modificar-calorias-alimento" placeholder="g" min="100" max="5000">
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-prepend">
+							  <div class="input-group-text">Grasas</div>
+							</div>
+							<input type="number" class="form-control" id="modificar-grasas-alimento" name="modificar-grasas-alimento" placeholder="g" min="0" max="100">
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-prepend">
+							  <div class="input-group-text">Carbohidratos</div>
+							</div>
+							<input type="number" class="form-control" id="modificar-carbohidratos-alimento" name="modificar-carbohidratos-alimento">
+						</div>
+						<div class="input-group mb-2">
+							<div class="input-group-prepend">
+							  <div class="input-group-text">Proteínas</div>
+							</div>
+							<input type="number" class="form-control" id="modificar-proteinas-alimento" name="modificar-proteinas-alimento">
+						</div>
+						<select class="form-control" id="categoria" name="categoria">
+							<option value="COMPLETAR" selected disabled>COMPLETAR</option>		            
+							<%/* for (COMPLETAR)*/ { %>
+								<option value="COMPLETAR" id="COMPLETAR" data-tokens="COMPLETAR">COMPLETAR</option>
+							<% } %>
+						</select>
+					</div>
+				   
+				    <div class="modal-footer">
+						 <input id="btnAgregarAlimento" class="btn btn-primary float-right" value="Continuar">
+				    </div>
 				</form>
 			</div>
 		</div>
