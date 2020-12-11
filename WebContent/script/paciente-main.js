@@ -90,15 +90,23 @@ $(document).ready(function(){
 function registrarIngesta(selector, tipoIngesta){
 	$(selector).each(function() {
 		var cantidad;
-		alimentosIngresados = [];
+		var ingesta;
 		cantidad = $(this).val();
 		if (cantidad != '0') {
 			idAlimento = $(this).attr('id').slice(1);
-			alert(idAlimento)
-			alimentosIngresados.push(idAlimento);
-			alert(idAlimento)
+			$.ajax({
+				type: 'POST',
+				url: 'RegistrarIngesta',
+				dataType: 'json',
+				data: {
+					'idAlimento': idAlimento,
+					'cantidad': cantidad,
+					'tipo': tipoIngesta
+				} 
+			})
+			$('#')
 		}
-	})
+	});
 }
 
 function filtrarEjercicios() {

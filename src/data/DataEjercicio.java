@@ -2,7 +2,12 @@ package data;
 
 import java.util.LinkedList;
 import java.sql.*;
+import java.sql.Date;
+import java.time.LocalDate;
+
+import entidades.Actividad;
 import entidades.Ejercicio;
+import entidades.Paciente;
 
 public class DataEjercicio {
 
@@ -116,5 +121,29 @@ public class DataEjercicio {
 			}
 		}
 		return ejs;
+	}
+	public void registrarActividad(Actividad a, Paciente p) throws SQLException {
+		PreparedStatement stmt = null;
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"insert into paciente_ejercicio (dni_paciente, id_ejercicio, fecha, duracion, intensidad) "
+					+ "values (?,?,?,?,?)"
+					);
+			stmt.setString(1, p.getDni());
+			stmt.setFloat(2, a.getEjercicio().getId());
+			stmt.setDate(3, Date.valueOf(a.getFecha()));
+			stmt.setFloat(4, a.getDuracion());
+			stmt.setString(5, a.getIntensidad().name());
+			stmt.execute();
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if(stmt!=null) stmt.close();
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
 	}
 }

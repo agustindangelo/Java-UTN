@@ -2,6 +2,8 @@ package data;
 
 import entidades.Alimento;
 import entidades.Categoria;
+import entidades.Ingesta;
+import entidades.Paciente;
 
 import java.util.LinkedList;
 import java.sql.*;
@@ -119,6 +121,28 @@ public class DataAlimento {
 			stmt.setFloat(4, a.getProteinas());
 			stmt.setFloat(5, a.getCarbohidratos());
 			stmt.setInt(6, a.getCategoria().getCodigo());
+			stmt.execute();
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if(stmt!=null) stmt.close();
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+	}
+	public void registrarIngesta(Ingesta i, Paciente p) throws SQLException {
+		PreparedStatement stmt = null;
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"insert into consumo_paciente (dni, id_alimento, fecha, tipo, cantidad) values (?,?,current_date,?,?)"
+					);
+			stmt.setString(1, p.getDni());
+			stmt.setInt(2, i.getAlimento().getId());
+			stmt.setString(3, i.getTipo());
+			stmt.setInt(4, i.getCantidad());
 			stmt.execute();
 		} catch (SQLException e) {
 			throw e;

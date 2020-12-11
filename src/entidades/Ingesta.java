@@ -1,10 +1,9 @@
 package entidades;
-import java.util.Date;
-
+import java.time.LocalDate;
 public class Ingesta {
 	private Alimento alimento;
 	private int cantidad;
-	private Date fecha;
+	private LocalDate fecha;
 	private String tipo;
 	
 	public Alimento getAlimento() {
@@ -19,10 +18,10 @@ public class Ingesta {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 	public String getTipo() {

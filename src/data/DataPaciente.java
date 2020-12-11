@@ -222,7 +222,7 @@ public class DataPaciente {
 					id_alimento = rs.getInt("id_alimento");
 					alimento = da.getOne(id_alimento);
 					i.setAlimento(alimento);
-					i.setFecha(rs.getDate("fecha"));
+					i.setFecha(rs.getDate("fecha").toLocalDate());
 					i.setTipo(rs.getString("tipo"));		
 					i.setCantidad(rs.getInt("cantidad"));
 					ingestas.add(i);
@@ -369,7 +369,7 @@ public class DataPaciente {
 
 					a.setDuracion(rs.getInt("duracion"));
 					a.setIntensidad(rs.getString("intensidad"));
-					a.setFecha(rs.getDate("fecha"));
+					a.setFecha(Date.valueOf("fecha").toLocalDate());
 					a.setEjercicio(e);
 					actividades.add(a);
 				}

@@ -23,7 +23,7 @@ public class Paciente extends Usuario {
 	private PlanDeAlimentacion plan;
 	private LinkedList<Ingesta> ingestas;
 	private LinkedList<Actividad> actividades;
-	private Map<String, Integer> consumosHoy;
+	// private Map<String, Integer> consumosHoy;
 
 	public LinkedList<Actividad> getActividades() {
 		return actividades;
@@ -68,7 +68,7 @@ public class Paciente extends Usuario {
 		valores.put("carbohidratos", carbohidratos);
 		valores.put("grasas", grasas);
 		valores.put("proteinas", proteinas);
-		this.consumosHoy = valores;
+		// this.consumosHoy = valores;
 		return valores;
 	}
 
@@ -99,11 +99,6 @@ public class Paciente extends Usuario {
 	public Paciente() {
 	}
 
-	/*
-	 * public Paciente(Usuario u) { this.dni = u.getDni(); this.apellido =
-	 * u.getApellido(); this.nombre = u.getNombre(); this.email = u.getEmail();
-	 * this.telefono = u.getTelefono(); this.password = u.getPassword(); }
-	 */
 	public TipoGenero getGenero() {
 		return genero;
 	}

@@ -1,19 +1,19 @@
 package entidades;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Actividad {
 	private int duracion; // duración en minutos del ejercicio realizado
 	private Ejercicio ejercicio;
 	private float gastoEfectivo; // atributo calculado a partir de la duracion y el gastoEnergético del ejercicio.
 	private Intensidad intensidad;
-	private Date fecha;
+	private LocalDate fecha;
 	
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
+	public void setFecha(LocalDate localDate) {
+		this.fecha = localDate;
 	}
 	public Intensidad getIntensidad() {
 		return intensidad;

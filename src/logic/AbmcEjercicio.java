@@ -2,7 +2,10 @@ package logic;
 
 import java.util.LinkedList;
 import data.DataEjercicio;
+import entidades.Actividad;
 import entidades.Ejercicio;
+import entidades.Paciente;
+
 import java.sql.SQLException;
 
 public class AbmcEjercicio {
@@ -27,5 +30,9 @@ public class AbmcEjercicio {
 	public LinkedList<Ejercicio> getAllEjercicios() throws SQLException {
 		return de.getAllEjercicios();
 	}
-
+	
+	public void registrarActividad(Actividad a, Paciente p) throws SQLException {
+		de.registrarActividad(a, p);
+		p.getActividades().add(a);
+	}
 }
