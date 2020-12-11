@@ -369,7 +369,7 @@ public class DataPaciente {
 
 					a.setDuracion(rs.getInt("duracion"));
 					a.setIntensidad(rs.getString("intensidad"));
-					a.setFecha(Date.valueOf("fecha").toLocalDate());
+					a.setFecha(rs.getDate("fecha").toLocalDate());
 					a.setEjercicio(e);
 					actividades.add(a);
 				}

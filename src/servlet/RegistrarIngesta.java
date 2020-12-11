@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.Session;
+
 import com.google.gson.Gson;
 
 import entidades.Alimento;
@@ -50,9 +52,10 @@ public class RegistrarIngesta extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		AbmcAlimento ctrl = new AbmcAlimento();
+		HttpSession session = request.getSession();
 		Ingesta i = new Ingesta();
 		Alimento a = new Alimento();
-		Paciente p = (Paciente) request.getSession().getAttribute("paciente");
+		Paciente p = (Paciente) session.getAttribute("paciente");
 		a.setId(Integer.parseInt(request.getParameter("idAlimento")));
 		i.setCantidad(Integer.parseInt(request.getParameter("cantidad")));
 		i.setTipo(request.getParameter("tipo"));
@@ -64,7 +67,9 @@ public class RegistrarIngesta extends HttpServlet {
 			request.setAttribute("error", e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
-		
+		LinkedList<Ingesta> ingestas = p.getIngestas();
+		ingestas.add(i);
+		p.setIngestas(ingestas);
+		session.setAttribute("paciente", p);
 	}
-
 }

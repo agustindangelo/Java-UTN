@@ -5,27 +5,46 @@ $(document).ready(function(){
 			tipoIngesta='desayuno';
 			selector = '#registrarDesayuno input[type="number"]';
 			registrarIngesta(selector, tipoIngesta);
-			$()
+			$('#exito-registrar-desayuno').show();
 		});
 		$('#btnRegistrarAlmuerzo').click(function(){
 			tipoIngesta='almuerzo'
 			selector = '#registrarAlmuerzo input[type="number"]'
 			registrarIngesta(selector, tipoIngesta);
+			$('#exito-registrar-almuerzo').show();
 		});
 		$('#btnRegistrarCena').click(function(){
 			tipoIngesta='cena'
 			selector = '#registrarCena input[type="number"]'
 			registrarIngesta(selector, tipoIngesta);
+			$('#exito-registrar-cena').show();
 		});
 		$('#btnRegistrarOtro').click(function(){
 			tipoIngesta='otro'
 			selector = '#registrarOtros input[type="number"]'
 			registrarIngesta(selector, tipoIngesta);
+			$('#exito-registrar-otro').show();
 		});
 		
-		$('#btnRegistrarActividad').click(function(){
-			
-		})
+		$('#btnAgregarActividad').click(function(){
+			$('#exito-registrar-ejercicio').hide();
+			var duracion = $('#duracion').val(); 
+			var intensidad = $('#intensidad').val();
+			var ejercicio = $('#ejercicio').val();
+			alert(duracion + intensidad + ejercicio)
+			$.ajax({
+				type: 'POST',
+				url: 'RegistrarEjercicio',
+				dataType: 'json',
+				data: {
+					'duracion': duracion,
+					'intensidad': intensidad,
+					'ejercicio': ejercicio
+				}
+			});
+			$('#lista-actividades').append('<a>'+ejercicio+'</a>')
+			$('#exito-registrar-ejercicio').show();
+		});
 		
 		$('#btnAgregarAlimento').click(function() {
 			var categoria = $('#nuevo-categoria-alimento').val();
@@ -108,7 +127,6 @@ function registrarIngesta(selector, tipoIngesta){
 					'tipo': tipoIngesta
 				} 
 			})
-			$('#')
 		}
 	});
 }

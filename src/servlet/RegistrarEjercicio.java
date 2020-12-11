@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -48,7 +49,7 @@ public class RegistrarEjercicio extends HttpServlet {
 		AbmcEjercicio ctrl = new AbmcEjercicio();
 		HttpSession session = request.getSession();
 		Paciente p = (Paciente) session.getAttribute("paciente");
-		ej.setId(Integer.parseInt(request.getParameter("id")));
+		ej.setId(Integer.parseInt(request.getParameter("ejercicio")));
 
 		a.setDuracion(Integer.parseInt(request.getParameter("duracion")));
 		a.setIntensidad(request.getParameter("intensidad"));
@@ -61,5 +62,9 @@ public class RegistrarEjercicio extends HttpServlet {
 			request.setAttribute("error", e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
+		LinkedList<Actividad> actividades = p.getActividades();
+		actividades.add(a);
+		p.setActividades(actividades);
+		session.setAttribute("paciente", p);
 	}
 }

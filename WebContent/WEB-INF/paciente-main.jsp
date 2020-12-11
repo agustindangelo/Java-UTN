@@ -146,17 +146,17 @@
 							<%= (int) Math.round(ctrl.calcularKcalEjercicioSemana(p)) %>
 							<small><span style="font-weight: normal;">cal. quemadas</span></small>
 						</h3>		
-					</div>
-					<ul class="list-group list-group-flush">
+						<ul id="lista-actividades" class="list-group list-group-flush">
 						<%
 						for (Actividad a : actividades) {
 						%>
 							<li class="list-group-item">
 								<a><%= a.getEjercicio().getDescripcion() %></a>
-								<div class="float-right text-muted"><%= a.getFecha() %></div>
 							</li>
 						<%}%>
 					</ul>
+					</div>
+					
 				</div>
 			</div>
 
@@ -174,7 +174,7 @@
 							<button class="btn btn-link ml-auto" style="font-size:17px" href="#registrarDesayuno" data-toggle="modal">Registrar ingesta</button>
 						</div>
 					</div>
-					<ul class="list-group list-group-flush">
+					<ul id="lista-ingestas-desayuno" class="list-group list-group-flush">
 						<% for (Ingesta i : ingestas){
 								if (i.getTipo().equalsIgnoreCase("desayuno")){
 						%>
@@ -192,7 +192,7 @@
 							<button class="btn btn-link ml-auto" style="font-size:17px" href="#registrarAlmuerzo" data-toggle="modal">Registrar ingesta</button>
 						</div>
 					</div>
-					<ul class="list-group list-group-flush">
+					<ul id="lista-ingesta-almuerzo" class="list-group list-group-flush">
 						<% for (Ingesta i : ingestas){
 								if (i.getTipo().equalsIgnoreCase("almuerzo")){
 						%>
@@ -210,7 +210,7 @@
 							<button class="btn btn-link ml-auto" style="font-size:17px" href="#registrarCena" data-toggle="modal">Registrar ingesta</button>
 						</div>
 					</div>
-					<ul class="list-group list-group-flush">
+					<ul id="lista-ingesta-cena" class="list-group list-group-flush">
 						<% for (Ingesta i : ingestas){
 								if (i.getTipo().equalsIgnoreCase("cena")){
 						%>
@@ -228,7 +228,7 @@
 							<button class="btn btn-link ml-auto" style="font-size:17px"  href="#registrarOtros" data-toggle="modal">Registrar ingesta</button>
 						</div>
 					</div>
-					<ul class="list-group list-group-flush">
+					<ul id="lista-ingesta-otros" class="list-group list-group-flush">
 						<% for (Ingesta i : ingestas){
 								if (i.getTipo().equalsIgnoreCase("otro")){
 						%>
@@ -255,6 +255,9 @@
 					
 					<div class="modal-body">
 						<div class="container">
+							<div id="exito-registrar-desayuno" class="alert alert-success" role="alert" style="display: none">
+        						Ingestas registradas con éxito.	
+        					</div>
 							<input type="text" class="form-control" id="desayunoSearch" onkeyup="filtrarDesayuno()" placeholder="Buscar..." title="Alimentos">
 							<ul id="desayunoMenu" class="list-group list-group-flush">
 								<li class="list-group-item btn btn-link">
@@ -286,6 +289,9 @@
 					</div>
 					<div class="modal-body">
 						<div class="container">
+							<div id="exito-registrar-almuerzo" class="alert alert-success" role="alert" style="display: none">
+        						Ingestas registradas con éxito.	
+        					</div>
 							<input type="text" class="form-control" id="almuerzoSearch" onkeyup="filtrarAlmuerzo()" placeholder="Buscar..." title="Alimentos">
 							<ul id="almuerzoMenu" class="list-group list-group-flush">
 								<li class="list-group-item btn btn-link">
@@ -317,6 +323,9 @@
 					</div>
 					<div class="modal-body">
 						<div class="container">
+							<div id="exito-registrar-cena" class="alert alert-success" role="alert" style="display: none">
+        						Ingestas registradas con éxito.	
+        					</div>
 							<input type="text" class="form-control" id="cenaSearch" onkeyup="filtrarCena()" placeholder="Buscar..." title="Alimentos">
 							<ul id="cenaMenu" class="list-group list-group-flush">
 								<li class="list-group-item btn btn-link">
@@ -349,6 +358,9 @@
 					
 					<div class="modal-body">
 						<div class="container">
+							<div id="exito-registrar-otros" class="alert alert-success" role="alert" style="display: none">
+        						Ingestas registradas con éxito.	
+        					</div>
 							<input type="text" class="form-control" id="otrosSearch" onkeyup="filtrarOtros()" placeholder="Buscar..." title="Alimentos">
 							<ul id="otrosMenu" class="list-group list-group-flush">
 								<li class="list-group-item btn btn-link">
@@ -357,7 +369,7 @@
 								<% for (Alimento a : alimentos) { %>
 									<li id="lista-otros" class="list-group-item">
 										<a class="colored-title"><%= a.getNombre() %></a>
-										<input class="float-right" id=<%= "o" + a.getId() %> type="number" value="0" min="0" max="100"/>						
+										<input class="float-right" id=<%= "o" + a.getId() %> type="number" value="0" min="0" max="5000"/>						
 										<label class="float-right text-muted">Gr.</label>
 									</li>
 								<% } %>
@@ -464,27 +476,49 @@
 			<div class="modal-content">
 				<form>
 					<div class="modal-header justify-content-between">
-						<h4 class="modal-title">Registrar actividad</h4>
-						<button class="btn btn-primary">Agregar</button>
+						<p id="error-modal-agregar-alimento" class="text-danger" style="display: none"></p>
+						<h4 class="modal-title">Registrar Actividad</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+					<div id="exito-registrar-actividad" class="alert alert-success" role="alert" style="display: none">
+						Actividad registrada con éxito
 					</div>
 					<div class="modal-body">
-						<div class="container">
-							<input type="text" class="form-control" id="ejerciciosSearch" onkeyup="filtrarEjercicios()" placeholder="Buscar..." title="Ejercicios">
-							<ul id="ejerciciosMenu" class="list-group list-group-flush">
-								<% for(Ejercicio e : ejercicios){ %>
-									<li class="list-group-item">
-										<a class="colored-title"><%= e.getDescripcion() %></a>
-										<input class="float-right" type="number" id="<%= e.getId() %>" value="0" min="0" max="500"/>
-										<label class="float-right text-muted">Minutos</label>						
-									</li> 
+						<div class="form-row">
+							<label for="ejercicio">Ejercicio realizado</label>
+							<select class="form-control" id="ejercicio" name="ejercicio">
+								<% for (Ejercicio e : ejercicios) { %>
+									<option value=<%= e.getId() %> id=<%= e.getDescripcion() %> data-tokens=<%= e.getDescripcion() %>><%= e.getDescripcion() %></option>
 								<% } %>
+							</select>
 							</ul>
 						</div>					
+						<div class="form-row">
+							<div class="col-6">
+								<label for="duracion">Duración (minutos)</label>
+								<input class="form-control" type="number" id="duracion" name="duracion"> 
+							</div>
+							<div class="col-6">
+								<label for="intensidad">Intensidad</label>
+								<select class="form-control" id="intensidad" name="intensidad">
+									<option value="Moderada" id="intensidad-moderada" data-tokens="Moderada">Moderada</option>
+									<option value="Alta" id="intensidad-alta" data-tokens="Alta">Alta</option>
+									<option value="Baja" id="intensidad-baja" data-tokens="Baja">Baja</option>
+								</select>
+							</div>
+						</div> 
 					</div>
+					<div class="modal-footer">
+				    	<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+						<input type="button" id="btnAgregarActividad" name="btnAgregarActividad" class="btn btn-primary" value="Registrar">
+				    </div>
 				</form>
 			</div>
 		</div>
 	</div>
+	
+			
+	
 	<!-- modal actualizar peso -->
 	<div id="actualizarPeso" class="modal fade">
 		<div class="modal-dialog">
