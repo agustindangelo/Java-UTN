@@ -1,17 +1,32 @@
 $(document).ready(function(){
+	var selector;
 	$('#registrarDesayuno').click(function(){
 		selector = '#registrarDesayuno input[type="number"]'
+		registrarIngesta(selector);
 	})
 	$('#registrarAlmuerzo').click(function(){
 		selector = '#registrarAlmuerzo input[type="number"]'
+		registrarIngesta(selector);
 	})
 	$('#registrarCena').click(function(){
 		selector = '#registrarCena input[type="number"]'
+		registrarIngesta(selector);
 	})
 	$('#registrarOtro').click(function(){
 		selector = '#registrarOtros input[type="number"]'
+		registrarIngesta(selector);
 	})
-	registrarIngesta(selector);
+
+	$('#btnAgregarAlimento').click(function() {
+		alert($('#nuevo-categoria-alimento').val())
+		var categoria = $('#nuevo-categoria-alimento').val();
+		var nombre = $('#nuevo-nombre-alimento').val();
+		var calorias = $('#nuevo-calorias-alimento').val();
+		var grasas = $('#nuevo-grasas-alimento').val();
+		var proteinas = $('#nuevo-proteinas-alimento').val();
+		var carbohidratos = $('#nuevo-carbohidratos-alimento').val();
+		alert(calorias === null);
+	})
 })
 
 function registrarIngesta(selector){

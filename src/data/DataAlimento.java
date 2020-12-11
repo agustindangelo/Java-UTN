@@ -105,4 +105,30 @@ public class DataAlimento {
 		}
 		return categorias;
 	}
+	
+	public void registrarAlimento(Alimento a) throws SQLException {
+		PreparedStatement stmt = null;
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement(
+					"insert into alimento (nombre, calorias, grasas, proteinas, carbohidratos, id_categoria) "
+					+ " values (?,?,?,?,?,?)"
+					);
+			stmt.setString(1, a.getNombre());
+			stmt.setFloat(2, a.getCalorias());
+			stmt.setFloat(3, a.getGrasas());
+			stmt.setFloat(4, a.getProteinas());
+			stmt.setFloat(5, a.getCarbohidratos());
+			stmt.setInt(6, a.getCategoria().getCodigo());
+			stmt.execute();
+		} catch (SQLException e) {
+			throw e;
+		} finally {
+			try {
+				if(stmt!=null) stmt.close();
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw e;
+			}
+		}
+	}
 }

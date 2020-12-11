@@ -1,7 +1,6 @@
 package logic;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import data.DataAlimento;
@@ -25,5 +24,9 @@ public class AbmcAlimento {
 	
 	public LinkedList<Categoria> getCategorias() throws SQLException {
 		return da.getCategorias();
+	}
+
+	public void registrarAlimento(Alimento c) throws SQLException {
+		da.registrarAlimento(c);
 	}
 }

@@ -3,11 +3,12 @@ package entidades;
 public class Alimento {
 	private int id;
 	private String nombre;
-	private float calorias;
+	private int calorias;
 	private float proteinas;
 	private float grasas;
 	private float carbohidratos;
-	private String unidadMedida;
+	private Categoria categoria;
+
 	public int getId() {
 		return id;
 	}
@@ -23,39 +24,32 @@ public class Alimento {
 	public float getCalorias() {
 		return calorias;
 	}
-	public void setCalorias(float calorias) {
+	public void setCalorias(int calorias) {
 		this.calorias = calorias;
 	}
 	public float getProteinas() {
 		return proteinas;
 	}
-	public void setProteinas(float proteinas) {
+	public void setProteinas(Float proteinas) {
 		this.proteinas = proteinas;
 	}
 	public float getGrasas() {
 		return grasas;
 	}
-	public void setGrasas(float grasas) {
+	public void setGrasas(Float grasas) {
 		this.grasas = grasas;
 	}
 	public float getCarbohidratos() {
 		return carbohidratos;
 	}
-	public void setCarbohidratos(float carbohidratos) {
+	public void setCarbohidratos(Float carbohidratos) {
 		this.carbohidratos = carbohidratos;
 	}
-	public String getUnidadMedida() {
-		return unidadMedida;
+	public Categoria getCategoria() {
+		return categoria;
 	}
-	public void setUnidadMedida(String unidadMedida) {
-		this.unidadMedida = unidadMedida;
-	}
-	
-	@Override
-	public String toString() {
-		String s = "\nAlimento [id="+ id + ", nombre=" + nombre + ", calorias=" + calorias
-				+ ", proteinas=" + proteinas + ", grasas=" + grasas + ", carbohidratos=" + carbohidratos +"]";
-		return s;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 	
 }

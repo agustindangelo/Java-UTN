@@ -378,52 +378,55 @@
 	<div id="agregarAlimento" class="modal fade">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form action="AgregarAlimento" method="post">
+				<form>
 					<div class="modal-header">
 						<h4 class="modal-title">Agregar alimento</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
+						<p id="error-modal-agregar-alimento" class="text-danger" style="display: none">Alguno de los campos está vacío</p>
 						<div class="input-group mb-2">
 							<div class="input-group-prepend">
 							  <div class="input-group-text">Nombre</div>
 							</div>
-							<input type="text" class="form-control" id="modificar-nombre-alimento" name="modificar-nombre-alimento">
+							<input type="text" class="form-control" id="nuevo-nombre-alimento" name="nuevo-nombre-alimento">
 						</div>
 						 <div class="input-group mb-2">
 							<div class="input-group-prepend">
 							  <div class="input-group-text">Calorías</div>
 							</div>
-							<input type="number" class="form-control" id="modificar-calorias-alimento" name="modificar-calorias-alimento" placeholder="g" min="100" max="5000">
+							<input type="number" class="form-control" id="nuevo-calorias-alimento" name="nuevo-calorias-alimento" placeholder="g" min="100" max="5000">
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-prepend">
 							  <div class="input-group-text">Grasas</div>
 							</div>
-							<input type="number" class="form-control" id="modificar-grasas-alimento" name="modificar-grasas-alimento" placeholder="g" min="0" max="100">
+							<input type="number" class="form-control" id="nuevo-grasas-alimento" name="nuevo-grasas-alimento" placeholder="g" min="0" max="100">
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-prepend">
 							  <div class="input-group-text">Carbohidratos</div>
 							</div>
-							<input type="number" class="form-control" id="modificar-carbohidratos-alimento" name="modificar-carbohidratos-alimento">
+							<input type="number" class="form-control" id="nuevo-carbohidratos-alimento" name="nuevo-carbohidratos-alimento">
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-prepend">
 							  <div class="input-group-text">Proteínas</div>
 							</div>
-							<input type="number" class="form-control" id="modificar-proteinas-alimento" name="modificar-proteinas-alimento">
+							<input type="number" class="form-control" id="nuevo-proteinas-alimento" name="nuevo-proteinas-alimento">
 						</div>
-						<select class="form-control" id="categoria" name="categoria">
-							<option value="COMPLETAR" selected disabled>Categorías</option>		            
-							<% for (Categoria c : categorias) { %>
-								<option value=<%= c.getCodigo() %> id=<%= c.getCodigo() %> data-tokens=<%= c.getNombre() %>><%= c.getNombre() %></option>
-							<% } %>
-						</select>
+						<div class="input-group mb-2">
+							<label for="nuevo-categoria-alimento">Categoría</label>
+							<select class="form-control" id="nuevo-categoria-alimento" name="nuevo-categoria-alimento">
+								<% for (Categoria c : categorias) { %>
+									<option value=<%= c.getCodigo() %> id=<%= c.getCodigo() %> data-tokens=<%= c.getNombre() %>><%= c.getNombre() %></option>
+								<% } %>
+							</select>
+						</div>
 					</div>
 				   
 				    <div class="modal-footer">
-						 <input id="btnAgregarAlimento" class="btn btn-primary float-right" value="Continuar">
+						 <button id="btnAgregarAlimento" class="btn btn-primary float-right">Continuar</button>
 				    </div>
 				</form>
 			</div>
