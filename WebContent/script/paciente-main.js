@@ -2,9 +2,10 @@ $(document).ready(function(){
 	$(function() {
 		var selector;
 		$('#btnRegistrarDesayuno').click(function(){
-			tipoIngesta='desayuno'
-			selector = '#registrarDesayuno input[type="number"]'
+			tipoIngesta='desayuno';
+			selector = '#registrarDesayuno input[type="number"]';
 			registrarIngesta(selector, tipoIngesta);
+			$()
 		});
 		$('#btnRegistrarAlmuerzo').click(function(){
 			tipoIngesta='almuerzo'
@@ -22,6 +23,9 @@ $(document).ready(function(){
 			registrarIngesta(selector, tipoIngesta);
 		});
 		
+		$('#btnRegistrarActividad').click(function(){
+			
+		})
 		
 		$('#btnAgregarAlimento').click(function() {
 			var categoria = $('#nuevo-categoria-alimento').val();
