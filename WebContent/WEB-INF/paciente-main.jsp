@@ -33,12 +33,11 @@
     <link rel="stylesheet" href="style/styles.css">
     <meta charset="utf-8">
 	<title>Trabajo Práctico de Java</title>
-	<script src="script/paciente-main.js"></script>
-	<script src="script/scripts.js"></script>
     <script src="https://kit.fontawesome.com/d00e7b9ed2.js" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="script/paciente-main.js"></script>
 </head>
 <body class="paciente">
 	<nav class="navbar navbar-expand navbar-custom">
@@ -253,7 +252,7 @@
 				<form>
 					<div class="modal-header justify-content-between">	
 						<h5 class="modal-title">Registrar desayuno</h5>
-						<button class="btn btn-primary" id="registrarDesayuno">Confirmar</button> 
+						<input type='button' id="btnRegistrarDesayuno" class="btn btn-primary" value="Registrar">
 					</div>
 					
 					<div class="modal-body">
@@ -264,10 +263,9 @@
 									<a class="float-right" href="#agregarAlimento" data-toggle="modal">+ Agregar alimento</a>
 								</li>
 								<% for (Alimento a : alimentos) { %>
-									<li class="list-group-item">
+									<li id="lista-desayuno" class="list-group-item">
 										<a class="colored-title"><%= a.getNombre() %></a>
-											<!-- <small class="text-danger">No está en tu plan  </small> -->
-										<input class="float-right" type="number" value="0" min="0" max="5000"/>						
+										<input class="float-right"  id=<%= "d" + a.getId() %> type="number" value="0" min="0" max="5000"/>						
 										<label class="float-right text-muted">Gr.</label>
 									</li>
 								<% } %>
@@ -286,7 +284,7 @@
 				<form>
 					<div class="modal-header justify-content-between">
 						<h5 class="modal-title">Registrar almuerzo</h5>
-						<button type="submit" class="btn btn-primary float-right" id="registrarAlmuerzo">Confirmar</button> 
+						<input type='button' id="btnRegistrarAlmuerzo" class="btn btn-primary" value="Registrar">
 					</div>
 					<div class="modal-body">
 						<div class="container">
@@ -296,10 +294,9 @@
 									<a class="float-right" href="#agregarAlimento" data-toggle="modal">+ Agregar alimento</a>
 								</li>
 								<% for (Alimento a : alimentos) { %>
-									<li class="list-group-item">
+									<li id="lista-almuerzo" class="list-group-item">
 										<a class="colored-title"><%= a.getNombre() %></a>
-											<!-- <small class="text-danger">No está en tu plan  </small> -->
-										<input class="float-right" type="number" value="0" min="0" max="5000"/>						
+										<input class="float-right"  id=<%= "a" + a.getId() %> type="number" value="0" min="0" max="5000"/>						
 										<label class="float-right text-muted">Gr.</label>
 									</li>
 								<% } %>
@@ -318,7 +315,7 @@
 				<form>
 					<div class="modal-header justify-content-between">
 						<h5 class="modal-title">Registrar cena</h5>
-						<button class="btn btn-primary" id="registrarCena">Confirmar</button>
+						<input type='button' id="btnRegistrarCena" class="btn btn-primary" value="Registrar">
 					</div>
 					<div class="modal-body">
 						<div class="container">
@@ -328,9 +325,9 @@
 									<a class="float-right" href="#agregarAlimento" data-toggle="modal">+ Agregar alimento</a>
 								</li>
 								<% for (Alimento a : alimentos) { %>
-									<li class="list-group-item">
-										<a class="colored-title"><%= a.getNombre() %></a>
-										<input class="float-right" id=<%= "c" + a.getId() %> type="number" value="0" min="0" max="100"/>						
+									<li id="lista-cena" class="list-group-item">
+										<a class="colored-title" ><%= a.getNombre() %></a>
+										<input class="float-right" id=<%= "c" + a.getId() %>type="number" value="0" min="0" max="100"/>						
 										<label class="float-right text-muted">Gr.</label>
 									</li>
 								<% } %>
@@ -349,7 +346,7 @@
 				<form>
 					<div class="modal-header justify-content-between">
 						<h5 class="modal-title">Registrar otras comidas</h5>
-						<button class="btn btn-primary" id="registrarCena">Confirmar</button> 
+						<input type='button' id="btnRegistrarOtro" class="btn btn-primary" value="Registrar">
 					</div>
 					
 					<div class="modal-body">
@@ -360,15 +357,44 @@
 									<a class="float-right" href="#agregarAlimento" data-toggle="modal">+ Agregar alimento</a>
 								</li>
 								<% for (Alimento a : alimentos) { %>
-									<li class="list-group-item">
+									<li id="lista-otros" class="list-group-item">
 										<a class="colored-title"><%= a.getNombre() %></a>
-											<!-- <small class="text-danger">No está en tu plan  </small> -->
-										<input class="float-right" type="number" value="0" min="0" max="100"/>						
+										<input class="float-right" id=<%= "o" + a.getId() %> type="number" value="0" min="0" max="100"/>						
 										<label class="float-right text-muted">Gr.</label>
 									</li>
 								<% } %>
 							</ul>
 						</div>					
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="modal-agregar-localidad" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form>
+					<div class="modal-header">						
+						<h4 class="modal-title">Registrar localidad</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					</div>
+
+					<div class="modal-body">
+						<div class="form-row">
+							<div class="col-3">
+								<label for="codigo-postal">Código postal</label>
+								<input class="form-control" id="codigo-postal" name="codigo-postal" type="number" min="1" max="100000"/>				
+							</div>
+							<div class="col-9">
+								<label for="denominacion">Denominación</label>
+								<input class="form-control" id="denominacion" name="denominacion" type="text"/>				
+							</div>
+						</div>
+					</div>
+
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+						<input id="registrar-localidad" class="btn btn-primary" value="Registrar">
 					</div>
 				</form>
 			</div>
@@ -384,7 +410,7 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">
-						<p id="error-modal-agregar-alimento" class="text-danger" style="display: none">Alguno de los campos está vacío</p>
+						<p id="error-modal-agregar-alimento" class="text-danger" style="display: none"></p>
 						<div class="input-group mb-2">
 							<div class="input-group-prepend">
 							  <div class="input-group-text">Nombre</div>
@@ -395,25 +421,25 @@
 							<div class="input-group-prepend">
 							  <div class="input-group-text">Calorías</div>
 							</div>
-							<input type="number" class="form-control" id="nuevo-calorias-alimento" name="nuevo-calorias-alimento" placeholder="g" min="100" max="5000">
+							<input type="number" class="form-control" id="nuevo-calorias-alimento" name="nuevo-calorias-alimento" min="1" max="5000">
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-prepend">
 							  <div class="input-group-text">Grasas</div>
 							</div>
-							<input type="number" class="form-control" id="nuevo-grasas-alimento" name="nuevo-grasas-alimento" placeholder="g" min="0" max="100">
+							<input type="number" class="form-control" id="nuevo-grasas-alimento" name="nuevo-grasas-alimento" placeholder="g." min="0" max="100">
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-prepend">
 							  <div class="input-group-text">Carbohidratos</div>
 							</div>
-							<input type="number" class="form-control" id="nuevo-carbohidratos-alimento" name="nuevo-carbohidratos-alimento">
+							<input type="number" class="form-control" id="nuevo-carbohidratos-alimento" name="nuevo-carbohidratos-alimento" placeholder="g." >
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-prepend">
 							  <div class="input-group-text">Proteínas</div>
 							</div>
-							<input type="number" class="form-control" id="nuevo-proteinas-alimento" name="nuevo-proteinas-alimento">
+							<input type="number" class="form-control" id="nuevo-proteinas-alimento" name="nuevo-proteinas-alimento" placeholder="g." >
 						</div>
 						<div class="input-group mb-2">
 							<label for="nuevo-categoria-alimento">Categoría</label>
@@ -426,7 +452,8 @@
 					</div>
 				   
 				    <div class="modal-footer">
-						 <button id="btnAgregarAlimento" class="btn btn-primary float-right">Continuar</button>
+				    	<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancelar">
+						<input id="btnAgregarAlimento" class="btn btn-primary" value="Registrar">
 				    </div>
 				</form>
 			</div>

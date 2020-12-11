@@ -46,6 +46,7 @@ public class RegistrarAlimento extends HttpServlet {
 
 		a.setCalorias(Integer.parseInt(request.getParameter("calorias")));
 		a.setCarbohidratos(Float.parseFloat(request.getParameter("carbohidratos")));
+		a.setNombre(request.getParameter("nombre"));
 		a.setProteinas(Float.parseFloat(request.getParameter("proteinas")));
 		a.setGrasas(Float.parseFloat(request.getParameter("grasas")));
 		c.setCodigo(Integer.parseInt(request.getParameter("categoria")));

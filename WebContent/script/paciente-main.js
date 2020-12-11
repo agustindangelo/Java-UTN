@@ -1,40 +1,101 @@
 $(document).ready(function(){
-	var selector;
-	$('#registrarDesayuno').click(function(){
-		selector = '#registrarDesayuno input[type="number"]'
-		registrarIngesta(selector);
-	})
-	$('#registrarAlmuerzo').click(function(){
-		selector = '#registrarAlmuerzo input[type="number"]'
-		registrarIngesta(selector);
-	})
-	$('#registrarCena').click(function(){
-		selector = '#registrarCena input[type="number"]'
-		registrarIngesta(selector);
-	})
-	$('#registrarOtro').click(function(){
-		selector = '#registrarOtros input[type="number"]'
-		registrarIngesta(selector);
-	})
+	$(function() {
+		var selector;
+		$('#btnRegistrarDesayuno').click(function(){
+			tipoIngesta='desayuno'
+			selector = '#registrarDesayuno input[type="number"]'
+			registrarIngesta(selector, tipoIngesta);
+		});
+		$('#btnRegistrarAlmuerzo').click(function(){
+			tipoIngesta='almuerzo'
+			selector = '#registrarAlmuerzo input[type="number"]'
+			registrarIngesta(selector, tipoIngesta);
+		});
+		$('#btnRegistrarCena').click(function(){
+			tipoIngesta='cena'
+			selector = '#registrarCena input[type="number"]'
+			registrarIngesta(selector, tipoIngesta);
+		});
+		$('#btnRegistrarOtro').click(function(){
+			tipoIngesta='otro'
+			selector = '#registrarOtros input[type="number"]'
+			registrarIngesta(selector, tipoIngesta);
+		});
+		
+		
+		$('#btnAgregarAlimento').click(function() {
+			var categoria = $('#nuevo-categoria-alimento').val();
+			var nombre = $('#nuevo-nombre-alimento').val();
+			var calorias = $('#nuevo-calorias-alimento').val();
+			var grasas = $('#nuevo-grasas-alimento').val();
+			var proteinas = $('#nuevo-proteinas-alimento').val();
+			var carbohidratos = $('#nuevo-carbohidratos-alimento').val();
+			var yaRegistrada = false;
+			
+			$('#lista-cena a').each(function() {
+				if ($(this).text() == nombre) {
+					yaRegistrada = true;
+				}		
+			});
 
-	$('#btnAgregarAlimento').click(function() {
-		alert($('#nuevo-categoria-alimento').val())
-		var categoria = $('#nuevo-categoria-alimento').val();
-		var nombre = $('#nuevo-nombre-alimento').val();
-		var calorias = $('#nuevo-calorias-alimento').val();
-		var grasas = $('#nuevo-grasas-alimento').val();
-		var proteinas = $('#nuevo-proteinas-alimento').val();
-		var carbohidratos = $('#nuevo-carbohidratos-alimento').val();
-		alert(calorias === null);
+			if (yaRegistrada){
+				$('#error-modal-agregar-alimento').text('El alimento ya se encuentra registrado');
+				$('#error-modal-agregar-alimento').show();
+			} else {
+				if (
+					nombre === '' ||
+					calorias === '' ||
+					grasas === '' ||
+					proteinas === '' ||
+					carbohidratos === ''  
+				){
+					$('#error-modal-agregar-alimento').text('Ha dejado campos vacios!');
+					$('#error-modal-agregar-alimento').show();
+				} else {
+					$.ajax({
+						type: 'POST',
+						url: 'RegistrarAlimento',
+						dataType: 'JSON',
+						data: {
+							'categoria': categoria,
+							'nombre': nombre,
+							'calorias': calorias,
+							'grasas': grasas,
+							'proteinas': proteinas,
+							'carbohidratos': carbohidratos		
+						}
+					});
+					$('#error-modal-agregar-alimento').hide();
+					$('#agregarAlimento').modal('hide');
+					
+					var nuevaFila = '<li class="list-group-item"><a class="colored-title">'+nombre+'</a><input class="float-right" type="number" value="0" min="0" max="5000"/><label class="float-right text-muted">Gr.</label></li>'
+					$('#otrosMenu').append(nuevaFila)
+					$('#cenaMenu').append(nuevaFila)
+					$('#almuerzoMenu').append(nuevaFila)
+					$('#desayunoMenu').append(nuevaFila)
+
+					$('#nuevo-categoria-alimento').val('');
+				    $('#nuevo-nombre-alimento').val('');
+					$('#nuevo-calorias-alimento').val('');
+					$('#nuevo-grasas-alimento').val('');
+					$('#nuevo-proteinas-alimento').val('');
+					$('#nuevo-carbohidratos-alimento').val('');
+				}
+			} 	
+		});
+		
 	})
 })
 
-function registrarIngesta(selector){
+function registrarIngesta(selector, tipoIngesta){
 	$(selector).each(function() {
-		alimentosIngresados = []
-		if ($(this).val() != 0) {
-			idAlimento = this.id.slice(1)
-			alimentosIngresados.push(idAlimento)	
+		var cantidad;
+		alimentosIngresados = [];
+		cantidad = $(this).val();
+		if (cantidad != '0') {
+			idAlimento = $(this).attr('id').slice(1);
+			alert(idAlimento)
+			alimentosIngresados.push(idAlimento);
 			alert(idAlimento)
 		}
 	})
