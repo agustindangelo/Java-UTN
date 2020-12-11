@@ -30,14 +30,390 @@ use nutricionista;
 --
 
 CREATE TABLE `alimento` (
-  `id_alimento` int(10) UNSIGNED NOT NULL,
+  `id_alimento` int UNSIGNED NOT NULL,
   `nombre` varchar(45) NOT NULL,
-  `calorias` int(10) UNSIGNED NOT NULL,
+  `calorias` int UNSIGNED NOT NULL,
   `grasas` float UNSIGNED NOT NULL,
   `proteinas` float UNSIGNED NOT NULL,
   `carbohidratos` float UNSIGNED NOT NULL,
-  `id_categoria` int(10) UNSIGNED NOT NULL
+  `id_categoria` int UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE `categoria` (
+  `id_categoria` int UNSIGNED NOT NULL,
+  `nombre` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+CREATE TABLE `consumo_paciente` (
+  `dni` varchar(45) NOT NULL,
+  `id_alimento` int UNSIGNED NOT NULL,
+  `fecha` date NOT NULL,
+  `tipo` varchar(45) NOT NULL,
+  `cantidad` int UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `direccion`
+--
+
+CREATE TABLE `direccion` (
+  `dni` varchar(45) NOT NULL,
+  `cod_postal` int UNSIGNED NOT NULL,
+  `calle` varchar(45) NOT NULL,
+  `altura` int UNSIGNED NOT NULL,
+  `piso` varchar(45) DEFAULT NULL,
+  `depto` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+--
+-- Estructura de tabla para la tabla `ejercicio`
+--
+
+CREATE TABLE `ejercicio` (
+  `id_ejercicio` int UNSIGNED NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `gasto_energetico` int UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `horario`
+--
+
+CREATE TABLE `horario` (
+  `dni` varchar(45) NOT NULL,
+  `dia` varchar(45) NOT NULL,
+  `hora_desde` time NOT NULL,
+  `hora_hasta` time DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `localidad`
+--
+
+CREATE TABLE `localidad` (
+  `cod_postal` int UNSIGNED NOT NULL,
+  `denominacion` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `localidad`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `nutricionista`
+--
+
+CREATE TABLE `nutricionista` (
+  `dni` varchar(45) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `apellido` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `telefono` varchar(45) DEFAULT NULL,
+  `email` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `nutricionista_paciente`
+--
+
+CREATE TABLE `nutricionista_paciente` (
+  `dni_nutricionista` varchar(45) NOT NULL,
+  `dni_paciente` varchar(45) NOT NULL,
+  `fecha` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `paciente`
+--
+
+CREATE TABLE `paciente` (
+  `dni` varchar(45) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `apellido` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `telefono` varchar(45) DEFAULT NULL,
+  `genero` varchar(45) NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `altura` int UNSIGNED DEFAULT NULL,
+  `peso` float UNSIGNED DEFAULT NULL,
+  `imc` float UNSIGNED DEFAULT NULL,
+  `metabolismo_basal` float UNSIGNED DEFAULT NULL,
+  `peso_objetivo` float UNSIGNED DEFAULT NULL,
+  `objetivo` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `paciente_ejercicio`
+--
+
+CREATE TABLE `paciente_ejercicio` (
+  `dni_paciente` varchar(45) NOT NULL,
+  `id_ejercicio` int UNSIGNED NOT NULL,
+  `fecha` date NOT NULL,
+  `duracion` int NOT NULL,
+  `intensidad` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `plan`
+--
+
+CREATE TABLE `plan` (
+  `id_plan` int UNSIGNED NOT NULL,
+  `fecha_desde` date NOT NULL,
+  `dni_paciente` varchar(45) NOT NULL,
+  `dni_nutricionista` varchar(45) NOT NULL,
+  `kcal_diarias` int UNSIGNED NOT NULL,
+  `proteinas_diarias` int UNSIGNED NOT NULL,
+  `carbohidratos_diarios` int UNSIGNED NOT NULL,
+  `grasas_diarias` int UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `solicitud`
+--
+
+CREATE TABLE `solicitud` (
+  `dni_paciente` varchar(45) NOT NULL,
+  `dni_nutricionista` varchar(45) NOT NULL,
+  `estado` varchar(45) DEFAULT 'Pendiente'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `alimento`
+--
+ALTER TABLE `alimento`
+  ADD PRIMARY KEY (`id_alimento`),
+  ADD UNIQUE KEY `id_alimento_UNIQUE` (`id_alimento`),
+  ADD KEY `fk_alimento_categoria_idx` (`id_categoria`);
+
+--
+-- Indices de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`id_categoria`),
+  ADD UNIQUE KEY `id_categoria_UNIQUE` (`id_categoria`);
+
+--
+-- Indices de la tabla `consumo_paciente`
+--
+ALTER TABLE `consumo_paciente`
+  ADD PRIMARY KEY (`dni`,`id_alimento`,`fecha`,`tipo`),
+  ADD KEY `fk_consumo_alimento_idx` (`id_alimento`);
+
+--
+-- Indices de la tabla `direccion`
+--
+ALTER TABLE `direccion`
+  ADD PRIMARY KEY (`dni`,`cod_postal`),
+  ADD KEY `fk_direccion_localidad_idx` (`cod_postal`);
+
+--
+-- Indices de la tabla `ejercicio`
+--
+ALTER TABLE `ejercicio`
+  ADD PRIMARY KEY (`id_ejercicio`),
+  ADD UNIQUE KEY `id_ejercicio_UNIQUE` (`id_ejercicio`);
+
+--
+-- Indices de la tabla `horario`
+--
+ALTER TABLE `horario`
+  ADD PRIMARY KEY (`dni`,`dia`,`hora_desde`);
+
+--
+-- Indices de la tabla `localidad`
+--
+ALTER TABLE `localidad`
+  ADD PRIMARY KEY (`cod_postal`),
+  ADD UNIQUE KEY `cod_postal_UNIQUE` (`cod_postal`);
+
+--
+-- Indices de la tabla `nutricionista`
+--
+ALTER TABLE `nutricionista`
+  ADD PRIMARY KEY (`dni`),
+  ADD UNIQUE KEY `matricula_UNIQUE` (`dni`);
+
+--
+-- Indices de la tabla `nutricionista_paciente`
+--
+ALTER TABLE `nutricionista_paciente`
+  ADD PRIMARY KEY (`fecha`,`dni_paciente`,`dni_nutricionista`),
+  ADD KEY `fk_nutricionista_paciente_2_idx` (`dni_paciente`),
+  ADD KEY `fk_nutricionista_paciente_1_idx` (`dni_nutricionista`);
+
+--
+-- Indices de la tabla `paciente`
+--
+ALTER TABLE `paciente`
+  ADD PRIMARY KEY (`dni`),
+  ADD UNIQUE KEY `dni_UNIQUE` (`dni`);
+
+--
+-- Indices de la tabla `paciente_ejercicio`
+--
+ALTER TABLE `paciente_ejercicio`
+  ADD PRIMARY KEY (`dni_paciente`,`id_ejercicio`,`fecha`),
+  ADD KEY `fk_paciente_ejercicio_2_idx` (`id_ejercicio`);
+
+--
+-- Indices de la tabla `plan`
+--
+ALTER TABLE `plan`
+  ADD PRIMARY KEY (`id_plan`),
+  ADD UNIQUE KEY `id_plan_UNIQUE` (`id_plan`),
+  ADD KEY `fk_plan_paciente_idx` (`dni_paciente`),
+  ADD KEY `fk_plan_nutricionista_idx` (`dni_nutricionista`);
+
+--
+-- Indices de la tabla `solicitud`
+--
+ALTER TABLE `solicitud`
+  ADD PRIMARY KEY (`dni_paciente`,`dni_nutricionista`),
+  ADD KEY `fk_solicitud_nutricionista_idx` (`dni_nutricionista`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `alimento`
+--
+ALTER TABLE `alimento`
+  MODIFY `id_alimento` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=357;
+
+--
+-- AUTO_INCREMENT de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `id_categoria` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT de la tabla `ejercicio`
+--
+ALTER TABLE `ejercicio`
+  MODIFY `id_ejercicio` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT de la tabla `plan`
+--
+ALTER TABLE `plan`
+  MODIFY `id_plan` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `alimento`
+--
+ALTER TABLE `alimento`
+  ADD CONSTRAINT `fk_alimento_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `consumo_paciente`
+--
+ALTER TABLE `consumo_paciente`
+  ADD CONSTRAINT `fk_consumo_alimento` FOREIGN KEY (`id_alimento`) REFERENCES `alimento` (`id_alimento`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_consumo_paciente` FOREIGN KEY (`dni`) REFERENCES `paciente` (`dni`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `direccion`
+--
+ALTER TABLE `direccion`
+  ADD CONSTRAINT `fk_direccion_localidad` FOREIGN KEY (`cod_postal`) REFERENCES `localidad` (`cod_postal`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_direccion_nutricionista` FOREIGN KEY (`dni`) REFERENCES `nutricionista` (`dni`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `horario`
+--
+ALTER TABLE `horario`
+  ADD CONSTRAINT `fk_horario_nutricionista` FOREIGN KEY (`dni`) REFERENCES `nutricionista` (`dni`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `nutricionista_paciente`
+--
+ALTER TABLE `nutricionista_paciente`
+  ADD CONSTRAINT `fk_nutricionista_paciente_1` FOREIGN KEY (`dni_nutricionista`) REFERENCES `nutricionista` (`dni`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_nutricionista_paciente_2` FOREIGN KEY (`dni_paciente`) REFERENCES `paciente` (`dni`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `paciente_ejercicio`
+--
+ALTER TABLE `paciente_ejercicio`
+  ADD CONSTRAINT `fk_paciente_ejercicio_1` FOREIGN KEY (`dni_paciente`) REFERENCES `paciente` (`dni`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_paciente_ejercicio_2` FOREIGN KEY (`id_ejercicio`) REFERENCES `ejercicio` (`id_ejercicio`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `plan`
+--
+ALTER TABLE `plan`
+  ADD CONSTRAINT `fk_plan_nutricionista` FOREIGN KEY (`dni_nutricionista`) REFERENCES `nutricionista` (`dni`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_plan_paciente` FOREIGN KEY (`dni_paciente`) REFERENCES `paciente` (`dni`) ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `solicitud`
+--
+ALTER TABLE `solicitud`
+  ADD CONSTRAINT `fk_solicitud_nutricionista` FOREIGN KEY (`dni_nutricionista`) REFERENCES `nutricionista` (`dni`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_solicitud_paciente` FOREIGN KEY (`dni_paciente`) REFERENCES `paciente` (`dni`) ON UPDATE CASCADE;
+COMMIT;
+
+
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`id_categoria`, `nombre`) VALUES
+(1, 'Vegetal'),
+(2, 'Carne'),
+(4, 'Lacteo'),
+(5, 'Fruta'),
+(7, 'Cereal'),
+(8, 'Azucarado'),
+(9, 'Huevo');
+
 
 --
 -- Volcado de datos para la tabla `alimento`
@@ -398,80 +774,22 @@ INSERT INTO `alimento` (`id_alimento`, `nombre`, `calorias`, `grasas`, `proteina
 (355, 'Zapallo, pulpa, fresco, crudo', 27, 0.2, 0.5, 5.8, 1),
 (356, 'Zapallo, pulpa, hervido', 20, 0, 0.4, 4.6, 1);
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `categoria`
+-- Volcado de datos para la tabla `nutricionista`
 --
 
-CREATE TABLE `categoria` (
-  `id_categoria` int(10) UNSIGNED NOT NULL,
-  `nombre` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO `nutricionista` (`dni`, `nombre`, `apellido`, `password`, `telefono`, `email`) VALUES
+('22222221', 'Laura', 'Merlo', 'laura', '341 3142424', 'laura@gmail.com'),
+('22222222', 'Martina', 'Moron', 'martina', '341 4134243', 'martina@gmail.com'),
+('22222223', 'Juan', 'Mendez', 'juan', '341 5543445', 'juan@gmail.com'),
+('22222224', 'Paola', 'Martinez', 'paola', '341 5543445', 'paola@gmail.com');
 
---
--- Volcado de datos para la tabla `categoria`
---
+INSERT INTO `localidad` (`cod_postal`, `denominacion`) VALUES
+(1200, 'Juarez'),
+(1500, 'Buenos Aires'),
+(2000, 'Rosario'),
+(2113, 'Peyrano');
 
-INSERT INTO `categoria` (`id_categoria`, `nombre`) VALUES
-(1, 'Vegetal'),
-(2, 'Carne'),
-(4, 'Lacteo'),
-(5, 'Fruta'),
-(7, 'Cereal'),
-(8, 'Azucarado'),
-(9, 'Huevo');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `consumo_paciente`
---
-
-CREATE TABLE `consumo_paciente` (
-  `dni` varchar(45) NOT NULL,
-  `id_alimento` int(10) UNSIGNED NOT NULL,
-  `fecha` date NOT NULL,
-  `tipo` varchar(45) NOT NULL,
-  `cantidad` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `consumo_paciente`
---
-
-INSERT INTO `consumo_paciente` (`dni`, `id_alimento`, `fecha`, `tipo`, `cantidad`) VALUES
-('11111111', 1, '2020-09-12', 'merienda', 3),
-('11111111', 2, '2020-09-12', 'almuerzo', 200),
-('11111111', 2, '2020-09-12', 'desayuno', 500),
-('11111111', 12, '2020-11-23', 'cena', 300),
-('11111111', 12, '2020-11-24', 'cena', 300),
-('11111111', 20, '2020-11-23', 'cena', 300),
-('11111111', 20, '2020-11-24', 'cena', 300),
-('11111111', 25, '2020-11-23', 'cena', 500),
-('11111111', 25, '2020-11-24', 'cena', 500),
-('11111111', 30, '2020-11-20', 'cena', 300),
-('11111111', 30, '2020-11-23', 'cena', 200),
-('11111111', 30, '2020-11-24', 'cena', 200),
-('11111112', 1, '2020-09-12', 'cena', 2),
-('11111112', 3, '2020-09-12', 'almuerzo', 50),
-('11111113', 1, '2020-09-12', 'almuerzo', 5),
-('11111113', 1, '2020-09-12', 'otro', 5);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `direccion`
---
-
-CREATE TABLE `direccion` (
-  `dni` varchar(45) NOT NULL,
-  `cod_postal` int(10) UNSIGNED NOT NULL,
-  `calle` varchar(45) NOT NULL,
-  `altura` int(10) UNSIGNED NOT NULL,
-  `piso` varchar(45) DEFAULT NULL,
-  `depto` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `direccion`
@@ -482,18 +800,6 @@ INSERT INTO `direccion` (`dni`, `cod_postal`, `calle`, `altura`, `piso`, `depto`
 ('22222222', 2113, 'Av. San Martin', 200, NULL, NULL),
 ('22222223', 2000, 'Corrientes', 2213, NULL, NULL),
 ('22222224', 2000, 'Dorrego', 3950, NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `ejercicio`
---
-
-CREATE TABLE `ejercicio` (
-  `id_ejercicio` int(10) UNSIGNED NOT NULL,
-  `nombre` varchar(45) NOT NULL,
-  `gasto_energetico` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `ejercicio`
@@ -506,19 +812,6 @@ INSERT INTO `ejercicio` (`id_ejercicio`, `nombre`, `gasto_energetico`) VALUES
 (10, 'PESAS', 600),
 (11, 'CICLISMO', 400),
 (12, 'TENIS', 1000);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `horario`
---
-
-CREATE TABLE `horario` (
-  `dni` varchar(45) NOT NULL,
-  `dia` varchar(45) NOT NULL,
-  `hora_desde` time NOT NULL,
-  `hora_hasta` time DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `horario`
@@ -548,97 +841,7 @@ INSERT INTO `horario` (`dni`, `dia`, `hora_desde`, `hora_hasta`) VALUES
 
 -- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `localidad`
---
 
-CREATE TABLE `localidad` (
-  `cod_postal` int(10) UNSIGNED NOT NULL,
-  `denominacion` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `localidad`
---
-
-INSERT INTO `localidad` (`cod_postal`, `denominacion`) VALUES
-(1200, 'Juarez'),
-(1500, 'Buenos Aires'),
-(2000, 'Rosario'),
-(2113, 'Peyrano');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `nutricionista`
---
-
-CREATE TABLE `nutricionista` (
-  `dni` varchar(45) NOT NULL,
-  `nombre` varchar(45) NOT NULL,
-  `apellido` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `telefono` varchar(45) DEFAULT NULL,
-  `email` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `nutricionista`
---
-
-INSERT INTO `nutricionista` (`dni`, `nombre`, `apellido`, `password`, `telefono`, `email`) VALUES
-('22222221', 'Laura', 'Merlo', 'laura', '341 3142424', 'laura@gmail.com'),
-('22222222', 'Martina', 'Moron', 'martina', '341 4134243', 'martina@gmail.com'),
-('22222223', 'Juan', 'Mendez', 'juan', '341 5543445', 'juan@gmail.com'),
-('22222224', 'Paola', 'Martinez', 'paola', '341 5543445', 'paola@gmail.com');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `nutricionista_paciente`
---
-
-CREATE TABLE `nutricionista_paciente` (
-  `dni_nutricionista` varchar(45) NOT NULL,
-  `dni_paciente` varchar(45) NOT NULL,
-  `fecha` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `nutricionista_paciente`
---
-
-INSERT INTO `nutricionista_paciente` (`dni_nutricionista`, `dni_paciente`, `fecha`) VALUES
-('22222221', '11111115', '2020-07-16'),
-('22222221', '11111114', '2020-08-15'),
-('22222221', '11111116', '2020-08-17'),
-('22222221', '11111117', '2020-09-18'),
-('22222222', '11111113', '2020-10-18'),
-('22222221', '11123123', '2020-11-23'),
-('22222221', '11111111', '2020-12-02');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `paciente`
---
-
-CREATE TABLE `paciente` (
-  `dni` varchar(45) NOT NULL,
-  `nombre` varchar(45) NOT NULL,
-  `apellido` varchar(45) NOT NULL,
-  `email` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `telefono` varchar(45) DEFAULT NULL,
-  `genero` varchar(45) NOT NULL,
-  `fecha_nacimiento` date NOT NULL,
-  `altura` int(10) UNSIGNED DEFAULT NULL,
-  `peso` float UNSIGNED DEFAULT NULL,
-  `imc` float UNSIGNED DEFAULT NULL,
-  `metabolismo_basal` float UNSIGNED DEFAULT NULL,
-  `peso_objetivo` float UNSIGNED DEFAULT NULL,
-  `objetivo` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `paciente`
@@ -667,51 +870,54 @@ INSERT INTO `paciente` (`dni`, `nombre`, `apellido`, `email`, `password`, `telef
 ('11111130', 'Joaquin', 'Draculini', 'jdraculini@gmail.com', 'joaquin', '6565596367', 'Masculino', '2015-03-06', 100, 60, 20, 1800, 50, 'prevenir diabetes'),
 ('11123123', 'Agustin', 'Dangelo', 'agustindsecundario@gmail.com', 'agustin', '3460123', 'Femenino', '2000-02-24', NULL, 50, 0, 0, 60, NULL);
 
--- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `paciente_ejercicio`
+-- Volcado de datos para la tabla `nutricionista_paciente`
 --
 
-CREATE TABLE `paciente_ejercicio` (
-  `dni_paciente` varchar(45) NOT NULL,
-  `id_ejercicio` int(10) UNSIGNED NOT NULL,
-  `fecha` date NOT NULL,
-  `duracion` int(11) NOT NULL,
-  `intensidad` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `consumo_paciente`
+--
+
+INSERT INTO `consumo_paciente` (`dni`, `id_alimento`, `fecha`, `tipo`, `cantidad`) VALUES
+('11111111', 12, '2020-11-23', 'cena', 300),
+('11111111', 12, '2020-11-24', 'cena', 300),
+('11111111', 20, '2020-11-23', 'cena', 300),
+('11111111', 20, '2020-11-24', 'cena', 300),
+('11111111', 25, '2020-11-23', 'cena', 500),
+('11111111', 25, '2020-11-24', 'cena', 500),
+('11111111', 30, '2020-11-20', 'cena', 300),
+('11111111', 30, '2020-11-23', 'cena', 200),
+('11111111', 30, '2020-11-24', 'cena', 200),
+('11111112', 4, '2020-09-12', 'cena', 2),
+('11111112', 4, '2020-09-12', 'almuerzo', 50),
+('11111113', 4, '2020-09-12', 'almuerzo', 5),
+('11111113', 4, '2020-09-12', 'otro', 5);
+
+INSERT INTO `nutricionista_paciente` (`dni_nutricionista`, `dni_paciente`, `fecha`) VALUES
+('22222221', '11111115', '2020-07-16'),
+('22222221', '11111114', '2020-08-15'),
+('22222221', '11111116', '2020-08-17'),
+('22222221', '11111117', '2020-09-18'),
+('22222222', '11111113', '2020-10-18'),
+('22222221', '11123123', '2020-11-23'),
+('22222221', '11111111', '2020-12-02');
 
 --
 -- Volcado de datos para la tabla `paciente_ejercicio`
 --
 
 INSERT INTO `paciente_ejercicio` (`dni_paciente`, `id_ejercicio`, `fecha`, `duracion`, `intensidad`) VALUES
-('11111111', 3, '2020-09-12', 50, 'alta'),
-('11111111', 4, '2020-09-12', 10, 'baja'),
-('11111111', 5, '2020-09-12', 30, 'moderada'),
-('11111112', 1, '2020-09-12', 30, 'moderada'),
-('11111112', 2, '2020-09-12', 10, 'baja'),
-('11111112', 6, '2020-09-12', 10, 'baja'),
-('11111113', 1, '2020-09-12', 30, 'moderada'),
-('11111113', 3, '2020-09-12', 50, 'alta'),
-('11111113', 4, '2020-09-12', 10, 'baja');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `plan`
---
-
-CREATE TABLE `plan` (
-  `id_plan` int(10) UNSIGNED NOT NULL,
-  `fecha_desde` date NOT NULL,
-  `dni_paciente` varchar(45) NOT NULL,
-  `dni_nutricionista` varchar(45) NOT NULL,
-  `kcal_diarias` int(10) UNSIGNED NOT NULL,
-  `proteinas_diarias` int(10) UNSIGNED NOT NULL,
-  `carbohidratos_diarios` int(10) UNSIGNED NOT NULL,
-  `grasas_diarias` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+('11111111', 7, '2020-09-12', 50, 'alta'),
+('11111111', 8, '2020-09-12', 10, 'baja'),
+('11111111', 9, '2020-09-12', 30, 'moderada'),
+('11111112', 7, '2020-09-12', 30, 'moderada'),
+('11111112', 8, '2020-09-12', 10, 'baja'),
+('11111112', 9, '2020-09-12', 10, 'baja'),
+('11111113', 7, '2020-09-12', 30, 'moderada'),
+('11111113', 8, '2020-09-12', 50, 'alta'),
+('11111113', 9, '2020-09-12', 10, 'baja');
 
 --
 -- Volcado de datos para la tabla `plan`
@@ -722,18 +928,6 @@ INSERT INTO `plan` (`id_plan`, `fecha_desde`, `dni_paciente`, `dni_nutricionista
 (6, '2020-08-02', '11111113', '22222223', 0, 0, 0, 0),
 (7, '2020-11-20', '11111111', '22222221', 1000, 300, 500, 400),
 (8, '2020-11-20', '11111112', '22222222', 20, 50, 50, 20);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `solicitud`
---
-
-CREATE TABLE `solicitud` (
-  `dni_paciente` varchar(45) NOT NULL,
-  `dni_nutricionista` varchar(45) NOT NULL,
-  `estado` varchar(45) DEFAULT 'Pendiente'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `solicitud`
@@ -754,190 +948,8 @@ INSERT INTO `solicitud` (`dni_paciente`, `dni_nutricionista`, `estado`) VALUES
 ('11111121', '22222221', 'pendiente'),
 ('11123123', '22222221', 'confirmada');
 
---
--- Índices para tablas volcadas
---
 
---
--- Indices de la tabla `alimento`
---
-ALTER TABLE `alimento`
-  ADD PRIMARY KEY (`id_alimento`),
-  ADD UNIQUE KEY `id_alimento_UNIQUE` (`id_alimento`),
-  ADD KEY `fk_alimento_categoria_idx` (`id_categoria`);
 
---
--- Indices de la tabla `categoria`
---
-ALTER TABLE `categoria`
-  ADD PRIMARY KEY (`id_categoria`),
-  ADD UNIQUE KEY `id_categoria_UNIQUE` (`id_categoria`);
-
---
--- Indices de la tabla `consumo_paciente`
---
-ALTER TABLE `consumo_paciente`
-  ADD PRIMARY KEY (`dni`,`id_alimento`,`fecha`,`tipo`),
-  ADD KEY `fk_consumo_alimento_idx` (`id_alimento`);
-
---
--- Indices de la tabla `direccion`
---
-ALTER TABLE `direccion`
-  ADD PRIMARY KEY (`dni`,`cod_postal`),
-  ADD KEY `fk_direccion_localidad_idx` (`cod_postal`);
-
---
--- Indices de la tabla `ejercicio`
---
-ALTER TABLE `ejercicio`
-  ADD PRIMARY KEY (`id_ejercicio`),
-  ADD UNIQUE KEY `id_ejercicio_UNIQUE` (`id_ejercicio`);
-
---
--- Indices de la tabla `horario`
---
-ALTER TABLE `horario`
-  ADD PRIMARY KEY (`dni`,`dia`,`hora_desde`);
-
---
--- Indices de la tabla `localidad`
---
-ALTER TABLE `localidad`
-  ADD PRIMARY KEY (`cod_postal`),
-  ADD UNIQUE KEY `cod_postal_UNIQUE` (`cod_postal`);
-
---
--- Indices de la tabla `nutricionista`
---
-ALTER TABLE `nutricionista`
-  ADD PRIMARY KEY (`dni`),
-  ADD UNIQUE KEY `matricula_UNIQUE` (`dni`);
-
---
--- Indices de la tabla `nutricionista_paciente`
---
-ALTER TABLE `nutricionista_paciente`
-  ADD PRIMARY KEY (`fecha`,`dni_paciente`,`dni_nutricionista`),
-  ADD KEY `fk_nutricionista_paciente_2_idx` (`dni_paciente`),
-  ADD KEY `fk_nutricionista_paciente_1_idx` (`dni_nutricionista`);
-
---
--- Indices de la tabla `paciente`
---
-ALTER TABLE `paciente`
-  ADD PRIMARY KEY (`dni`),
-  ADD UNIQUE KEY `dni_UNIQUE` (`dni`);
-
---
--- Indices de la tabla `paciente_ejercicio`
---
-ALTER TABLE `paciente_ejercicio`
-  ADD PRIMARY KEY (`dni_paciente`,`id_ejercicio`,`fecha`),
-  ADD KEY `fk_paciente_ejercicio_2_idx` (`id_ejercicio`);
-
---
--- Indices de la tabla `plan`
---
-ALTER TABLE `plan`
-  ADD PRIMARY KEY (`id_plan`),
-  ADD UNIQUE KEY `id_plan_UNIQUE` (`id_plan`),
-  ADD KEY `fk_plan_paciente_idx` (`dni_paciente`),
-  ADD KEY `fk_plan_nutricionista_idx` (`dni_nutricionista`);
-
---
--- Indices de la tabla `solicitud`
---
-ALTER TABLE `solicitud`
-  ADD PRIMARY KEY (`dni_paciente`,`dni_nutricionista`),
-  ADD KEY `fk_solicitud_nutricionista_idx` (`dni_nutricionista`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `alimento`
---
-ALTER TABLE `alimento`
-  MODIFY `id_alimento` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=357;
-
---
--- AUTO_INCREMENT de la tabla `categoria`
---
-ALTER TABLE `categoria`
-  MODIFY `id_categoria` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
---
--- AUTO_INCREMENT de la tabla `ejercicio`
---
-ALTER TABLE `ejercicio`
-  MODIFY `id_ejercicio` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT de la tabla `plan`
---
-ALTER TABLE `plan`
-  MODIFY `id_plan` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `alimento`
---
-ALTER TABLE `alimento`
-  ADD CONSTRAINT `fk_alimento_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_categoria`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `consumo_paciente`
---
-ALTER TABLE `consumo_paciente`
-  ADD CONSTRAINT `fk_consumo_alimento` FOREIGN KEY (`id_alimento`) REFERENCES `alimento` (`id_alimento`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_consumo_paciente` FOREIGN KEY (`dni`) REFERENCES `paciente` (`dni`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `direccion`
---
-ALTER TABLE `direccion`
-  ADD CONSTRAINT `fk_direccion_localidad` FOREIGN KEY (`cod_postal`) REFERENCES `localidad` (`cod_postal`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_direccion_nutricionista` FOREIGN KEY (`dni`) REFERENCES `nutricionista` (`dni`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `horario`
---
-ALTER TABLE `horario`
-  ADD CONSTRAINT `fk_horario_nutricionista` FOREIGN KEY (`dni`) REFERENCES `nutricionista` (`dni`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `nutricionista_paciente`
---
-ALTER TABLE `nutricionista_paciente`
-  ADD CONSTRAINT `fk_nutricionista_paciente_1` FOREIGN KEY (`dni_nutricionista`) REFERENCES `nutricionista` (`dni`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_nutricionista_paciente_2` FOREIGN KEY (`dni_paciente`) REFERENCES `paciente` (`dni`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `paciente_ejercicio`
---
-ALTER TABLE `paciente_ejercicio`
-  ADD CONSTRAINT `fk_paciente_ejercicio_1` FOREIGN KEY (`dni_paciente`) REFERENCES `paciente` (`dni`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_paciente_ejercicio_2` FOREIGN KEY (`id_ejercicio`) REFERENCES `ejercicio` (`id_ejercicio`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `plan`
---
-ALTER TABLE `plan`
-  ADD CONSTRAINT `fk_plan_nutricionista` FOREIGN KEY (`dni_nutricionista`) REFERENCES `nutricionista` (`dni`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_plan_paciente` FOREIGN KEY (`dni_paciente`) REFERENCES `paciente` (`dni`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `solicitud`
---
-ALTER TABLE `solicitud`
-  ADD CONSTRAINT `fk_solicitud_nutricionista` FOREIGN KEY (`dni_nutricionista`) REFERENCES `nutricionista` (`dni`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_solicitud_paciente` FOREIGN KEY (`dni_paciente`) REFERENCES `paciente` (`dni`) ON UPDATE CASCADE;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
