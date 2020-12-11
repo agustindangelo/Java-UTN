@@ -100,13 +100,13 @@ public class AbmcNutricionista {
 			message.setContent(
 				 "<h1>Enhorabuena " + p.getNombre()+ "</h1><b>"
 				 + n.getNombre() + " " + n.getApellido() 
-				 + "</b> es tu nuevo nutricionista. Accediendo a la plataforma podrÃ¡s comenzar a registrar tus movimientos. Te recomendamos que te pongas en contacto para coordinar tu primera consulta."
+				 + "</b> es tu nuevo nutricionista. Accediendo a la plataforma podrás comenzar a registrar tus movimientos. Te recomendamos que te pongas en contacto para coordinar tu primera consulta."
 				 + "<br>"
 				 + "<h2>Datos de contacto del nutricionista: </h2>"
 				 + "<ul>"
-				 + "<li> TelÃ©fono: " + n.getTelefono() + "</li>"
+				 + "<li> Teléfono: " + n.getTelefono() + "</li>"
 				 + "<li> Email: " + n.getEmail() + "</li>"
-				 + "<li> Direccion: " + n.getDireccion().getCalle() + " " + n.getDireccion().getAltura() + ", " + n.getDireccion().getLocalidad().getDenominacion() + "</li>"
+				 + "<li> Dirección: " + n.getDireccion().getCalle() + " " + n.getDireccion().getAltura() + ", " + n.getDireccion().getLocalidad().getDenominacion() + "</li>"
 				 + "</ul>",
 				 "text/html"
 			 ); 
