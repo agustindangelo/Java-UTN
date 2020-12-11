@@ -104,7 +104,7 @@
 								<div class="col-6">
 									<div class="form-group">
 										<label for="telefono">Teléfono</label>
-										<input class="form-control" type="text" id="telefono" name="telefono" value=<%= p.getTelefono() %>>
+										<input class="form-control" type="tel" id="telefono" name="telefono" value=<%= p.getTelefono() %>>
 									</div>
 								</div>
 								<div class="col-6"></div>

@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entidades.Nutricionista;
 import logic.AbmcNutricionista;
@@ -40,6 +41,7 @@ public class RegistrarNutricionista extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
 		AbmcNutricionista ctrl = new AbmcNutricionista();
 		Nutricionista n = new Nutricionista();
 		n.setApellido(request.getParameter("apellido"));
@@ -48,11 +50,13 @@ public class RegistrarNutricionista extends HttpServlet {
 		n.setEmail(request.getParameter("email"));
 		n.setTelefono(request.getParameter("telefono"));
 		n.setPassword(request.getParameter("password"));
+		session.setAttribute("usuario", n);
 		try {
 			ctrl.registrarNutricionista(n);
 		} catch(SQLException e) {
 			request.setAttribute("error", e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		} 
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 	}
 }
