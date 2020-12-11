@@ -63,6 +63,9 @@
 	AbmcLocalidad ctrlLocalidad = new AbmcLocalidad();
 	LinkedList<Localidad> localidades = ctrlLocalidad.getAll();
 	n = ctrlHorario.setHorarios(n);
+	if (n.getDireccion() == null) {
+		n.setDireccion("", 0, 0, "");
+	}
 	%>
 	
 	<div class="container">
@@ -158,7 +161,9 @@
 									<div class="form-group">
 										<label for="localidad" class="form-control-label">Localidad</label>
 										<select class="form-control" id="localidad" name="localidad" data-live-search="true">
-											<option value=<%= n.getDireccion().getLocalidad().getCodPostal() %> selected disabled><%= n.getDireccion().getLocalidad().getDenominacion() %></option>		            
+											<% if (n.getDireccion().getLocalidad() != null) {%>
+												<option value=<%= n.getDireccion().getLocalidad().getCodPostal() %> selected disabled><%= n.getDireccion().getLocalidad().getDenominacion() %></option>
+											<% } %>		            
 											<% for (Localidad l : localidades) { %>
 												<option value=<%= l.getCodPostal() %> id=<%= l.getCodPostal() %> data-tokens=<%= l.getDenominacion() %>><%= l.getDenominacion() %></option>
 											<% } %>

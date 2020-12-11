@@ -6,6 +6,13 @@ public class Localidad {
 	public int getCodPostal() {
 		return codPostal;
 	}
+	
+	public Localidad() {}
+	public Localidad(int codPostal, String denominacion) {
+		super();
+		this.codPostal = codPostal;
+		this.denominacion = denominacion;
+	}
 	public void setCodPostal(int codPostal) {
 		this.codPostal = codPostal;
 	}

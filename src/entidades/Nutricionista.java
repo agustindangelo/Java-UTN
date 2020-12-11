@@ -16,6 +16,10 @@ public class Nutricionista extends Usuario {
 		this.direccion = direccion;
 	}
 	
+	public void setDireccion(String calle, int altura, int piso, String depto) {
+		this.direccion = new Direccion(calle, altura, piso, depto);
+	}
+	
 	public void setHorarios(ArrayList<Horario> horarios) {
 		this.horarios = horarios;
 	}

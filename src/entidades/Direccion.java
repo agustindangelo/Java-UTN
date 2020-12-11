@@ -7,6 +7,15 @@ public class Direccion {
 	private String depto;
 	private Localidad localidad;
 	
+	public Direccion() {}
+	
+	public Direccion(String calle, int altura, int piso, String depto) {
+		super();
+		this.calle = calle;
+		this.altura = altura;
+		this.piso = piso;
+		this.depto = depto;
+	}
 	public Localidad getLocalidad() {
 		return localidad;
 	}
