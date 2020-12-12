@@ -5,33 +5,27 @@ $(document).ready(function(){
 			tipoIngesta='desayuno';
 			selector = '#registrarDesayuno input[type="number"]';
 			registrarIngesta(selector, tipoIngesta);
-			$('#exito-registrar-desayuno').show();
 		});
 		$('#btnRegistrarAlmuerzo').click(function(){
 			tipoIngesta='almuerzo'
 			selector = '#registrarAlmuerzo input[type="number"]'
 			registrarIngesta(selector, tipoIngesta);
-			$('#exito-registrar-almuerzo').show();
 		});
 		$('#btnRegistrarCena').click(function(){
 			tipoIngesta='cena'
 			selector = '#registrarCena input[type="number"]'
 			registrarIngesta(selector, tipoIngesta);
-			$('#exito-registrar-cena').show();
 		});
 		$('#btnRegistrarOtro').click(function(){
 			tipoIngesta='otro'
 			selector = '#registrarOtros input[type="number"]'
 			registrarIngesta(selector, tipoIngesta);
-			$('#exito-registrar-otro').show();
 		});
 		
 		$('#btnAgregarActividad').click(function(){
-			$('#exito-registrar-ejercicio').hide();
 			var duracion = $('#duracion').val(); 
 			var intensidad = $('#intensidad').val();
 			var ejercicio = $('#ejercicio').val();
-			alert(duracion + intensidad + ejercicio)
 			$.ajax({
 				type: 'POST',
 				url: 'RegistrarEjercicio',
@@ -43,7 +37,7 @@ $(document).ready(function(){
 				}
 			});
 			$('#lista-actividades').append('<a>'+ejercicio+'</a>')
-			$('#exito-registrar-ejercicio').show();
+			window.location.reload(true);
 		});
 		
 		$('#btnAgregarAlimento').click(function() {
@@ -129,24 +123,9 @@ function registrarIngesta(selector, tipoIngesta){
 			})
 		}
 	});
+	window.location.reload(true);
 }
 
-function filtrarEjercicios() {
-	var input, filter, ul, li, i;
-	input = document.getElementById("ejerciciosSearch");
-	filter = input.value.toUpperCase();
-	ul = document.getElementById("ejerciciosMenu");
-	li = ul.getElementsByTagName("li");
-  
-	for (i = 0; i < li.length; i++) {
-		a = li[i].getElementsByTagName("a")[0];
-		if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-			li[i].style.display = "";
-		} else {
-			li[i].style.display = "none";
-		}
-	}
-}
 function filtrarDesayuno() {
 	var input, filter, ul, li, i;
 	input = document.getElementById("desayunoSearch");

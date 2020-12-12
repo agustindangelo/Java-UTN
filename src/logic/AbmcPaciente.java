@@ -11,7 +11,6 @@ import entidades.Solicitud;
 import entidades.Usuario;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class AbmcPaciente {
@@ -44,13 +43,13 @@ public class AbmcPaciente {
 		return (float) (calorias / 7);
 	}
 	
-	public Float calcularKcalEjercicioSemana(Paciente p) throws SQLException{		
+	public void calcularKcalEjercicioSemana(Paciente p) throws SQLException{		
 		LinkedList<Actividad> actividades = dp.getActividadesSemana(p);
-		float acum = 0;
+		int acum = 0;
 		for (Actividad a : actividades) {
 			acum += a.getGastoEfectivo();
 		}
-		return acum;
+		p.setKcalEjercicioSemana(acum);
 	}
 
 	public Paciente getByDni(Usuario u) throws SQLException{
@@ -84,11 +83,4 @@ public class AbmcPaciente {
 		dp.update(p);
 	}
 
-	public void registrarHumor(String dniPaciente, int estado) throws SQLException {
-		try {
-			dp.registrarHumor(dniPaciente, estado);
-		} catch (SQLException e) {
-			throw e;
-		}
-	}
 }

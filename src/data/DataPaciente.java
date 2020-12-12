@@ -212,7 +212,7 @@ public class DataPaciente {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
 					"select id_alimento, fecha, tipo, cantidad\n" + 
 					"from consumo_paciente\n" + 
-					"where dni = ? and fecha = curdate()"
+					"where dni = ? and fecha = current_date"
 					);
 			stmt.setString(1, p.getDni());
 			rs = stmt.executeQuery();

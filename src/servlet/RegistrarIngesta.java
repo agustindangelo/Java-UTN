@@ -67,9 +67,8 @@ public class RegistrarIngesta extends HttpServlet {
 			request.setAttribute("error", e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
-		LinkedList<Ingesta> ingestas = p.getIngestas();
-		ingestas.add(i);
-		p.setIngestas(ingestas);
+		p.getIngestas().add(i);
 		session.setAttribute("paciente", p);
+		request.getRequestDispatcher("WEB-INF/paciente-main.jsp").forward(request, response);
 	}
 }

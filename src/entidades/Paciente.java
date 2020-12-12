@@ -19,7 +19,6 @@ public class Paciente extends Usuario {
 	private float pesoObjetivo;
 	private String objetivo;
 	private int kcalEjercicioSemana; // kcal quemadas con ejercicios hechos en los ultimos 7 dias
-	private int kcalEjercicioObjetivo; // kcal quemadas por semana, sugeridas por el nutricionista
 	private PlanDeAlimentacion plan;
 	private LinkedList<Ingesta> ingestas;
 	private LinkedList<Actividad> actividades;
@@ -35,20 +34,19 @@ public class Paciente extends Usuario {
 
 	public Map<String, Integer> getConsumosHoy() {
 		Map<String, Integer> valores = new HashMap<String, Integer>();
-		LinkedList<Ingesta> ingestas = this.ingestas;
 		int calorias = 0;
 		int carbohidratos = 0;
 		int grasas = 0;
 		int proteinas = 0;
 
-		int caloriasAlimento;
-		int carbohidratosAlimento;
-		int grasasAlimento;
-		int proteinasAlimento;
-		int gramosConsumidos;
+		float caloriasAlimento;
+		float carbohidratosAlimento;
+		float grasasAlimento;
+		float proteinasAlimento;
+		float gramosConsumidos;
 
 		Alimento alimento;
-		for (Ingesta i : ingestas) {
+		for (Ingesta i : this.ingestas) {
 			alimento = i.getAlimento();
 			gramosConsumidos = i.getCantidad();
 
@@ -60,7 +58,7 @@ public class Paciente extends Usuario {
 			float factor = gramosConsumidos / 100;
 
 			calorias = (int) (calorias + caloriasAlimento * factor);
-			carbohidratos = (int) (carbohidratos + carbohidratosAlimento * factor);
+			carbohidratos =  (int) (carbohidratos + carbohidratosAlimento * factor);
 			grasas = (int) (grasas + grasasAlimento * factor);
 			proteinas = (int) (proteinas + proteinasAlimento * factor);
 		}
@@ -80,20 +78,12 @@ public class Paciente extends Usuario {
 		this.ingestas = ingestas;
 	}
 
-	public int getKcalEjercicioSemana() {
+	public float getKcalEjercicioSemana() {
 		return kcalEjercicioSemana;
 	}
 
 	public void setKcalEjercicioSemana(int kcalEjercicioSemana) {
 		this.kcalEjercicioSemana = kcalEjercicioSemana;
-	}
-
-	public int getKcalEjercicioObjetivo() {
-		return kcalEjercicioObjetivo;
-	}
-
-	public void setKcalEjercicioObjetivo(int kcalEjercicioObjetivo) {
-		this.kcalEjercicioObjetivo = kcalEjercicioObjetivo;
 	}
 
 	public Paciente() {

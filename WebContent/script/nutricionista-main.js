@@ -50,7 +50,6 @@ function getPacienteInfo(dni){
 				}
 
 				$('#ejercicio-semana').text(paciente.kcalEjercicioSemana.toString() + ' kcal.');
-				$('#ejercicio-objetivo').text(paciente.kcalEjercicioObjetivo.toString() + ' kcal.');
 				
 				$('#kcal').text(paciente.consumosHoy.calorias.toString() + '  /  ' + paciente.plan.kcalDiarias.toString() + ' kcal.');
 				$('#proteinas').text(paciente.consumosHoy.proteinas.toString() + '  /  ' + paciente.plan.proteinasDiarias.toString() + ' g.');
