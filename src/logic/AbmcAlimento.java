@@ -23,11 +23,10 @@ public class AbmcAlimento {
 	public Alimento getOne(int id) throws SQLException{
 		return da.getOne(id);
 	}
-	
 	public LinkedList<Categoria> getCategorias() throws SQLException {
 		return da.getCategorias();
 	}
-
+	
 	public void registrarAlimento(Alimento c) throws SQLException {
 		da.registrarAlimento(c);
 	}

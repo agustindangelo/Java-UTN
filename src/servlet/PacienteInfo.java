@@ -46,22 +46,22 @@ public class PacienteInfo extends HttpServlet {
         	p.setIngestas(ingestas);
         	p.getConsumosHoy();
         	p.setPlan(ctrl.getPlan(p));
+        	ctrl.calcularKcalEjercicioSemana(p);
         } catch (SQLException e) {
 			request.setAttribute("error", e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
         }
-		if (p != null) {
-            try {
-                String json = new Gson().toJson(p);
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                session.setAttribute("paciente", p);
-    			response.getWriter().write(json);
-            } catch (Exception e){
-				request.setAttribute("error", "Error al parsear los datos del paciente");
-				request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
-            }
-        }
+		try {
+			String json = new Gson().toJson(p);
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			session.setAttribute("paciente", p);
+			response.getWriter().write(json);
+		} catch (Exception e){
+			request.setAttribute("error", "Error al parsear los datos del paciente");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+		}
+        
 	}
 
 	/**

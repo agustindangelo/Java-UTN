@@ -127,7 +127,7 @@ public class LogIn extends HttpServlet {
 							}
 							session.setAttribute("alimentos", alimentos);
 							session.setAttribute("categorias", categoriasAlimentos);
-							
+							ctrlPaciente.calcularKcalEjercicioSemana(p);
 							session.setAttribute("paciente", p);
 							request.getRequestDispatcher("WEB-INF/paciente-main.jsp").forward(request, response);
 						}

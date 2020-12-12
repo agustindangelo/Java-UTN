@@ -143,7 +143,7 @@
 					</div>
 					<div class="card-body">
 						<h3 class="card-text text-center">
-							<%= (int) Math.round(ctrl.calcularKcalEjercicioSemana(p)) %>
+							<%= p.getKcalEjercicioSemana() %>
 							<small><span style="font-weight: normal;">cal. quemadas</span></small>
 						</h3>		
 						<ul id="lista-actividades" class="list-group list-group-flush">
@@ -255,9 +255,6 @@
 					
 					<div class="modal-body">
 						<div class="container">
-							<div id="exito-registrar-desayuno" class="alert alert-success" role="alert" style="display: none">
-        						Ingestas registradas con éxito.	
-        					</div>
 							<input type="text" class="form-control" id="desayunoSearch" onkeyup="filtrarDesayuno()" placeholder="Buscar..." title="Alimentos">
 							<ul id="desayunoMenu" class="list-group list-group-flush">
 								<li class="list-group-item btn btn-link">
@@ -289,9 +286,6 @@
 					</div>
 					<div class="modal-body">
 						<div class="container">
-							<div id="exito-registrar-almuerzo" class="alert alert-success" role="alert" style="display: none">
-        						Ingestas registradas con éxito.	
-        					</div>
 							<input type="text" class="form-control" id="almuerzoSearch" onkeyup="filtrarAlmuerzo()" placeholder="Buscar..." title="Alimentos">
 							<ul id="almuerzoMenu" class="list-group list-group-flush">
 								<li class="list-group-item btn btn-link">
@@ -323,9 +317,6 @@
 					</div>
 					<div class="modal-body">
 						<div class="container">
-							<div id="exito-registrar-cena" class="alert alert-success" role="alert" style="display: none">
-        						Ingestas registradas con éxito.	
-        					</div>
 							<input type="text" class="form-control" id="cenaSearch" onkeyup="filtrarCena()" placeholder="Buscar..." title="Alimentos">
 							<ul id="cenaMenu" class="list-group list-group-flush">
 								<li class="list-group-item btn btn-link">
@@ -334,7 +325,7 @@
 								<% for (Alimento a : alimentos) { %>
 									<li id="lista-cena" class="list-group-item">
 										<a class="colored-title" ><%= a.getNombre() %></a>
-										<input class="float-right" id=<%= "c" + a.getId() %>type="number" value="0" min="0" max="100"/>						
+										<input class="float-right" id=<%= "c" + a.getId() %> type="number" value="0" min="0" max="5000"/>						
 										<label class="float-right text-muted">Gr.</label>
 									</li>
 								<% } %>
@@ -358,9 +349,6 @@
 					
 					<div class="modal-body">
 						<div class="container">
-							<div id="exito-registrar-otros" class="alert alert-success" role="alert" style="display: none">
-        						Ingestas registradas con éxito.	
-        					</div>
 							<input type="text" class="form-control" id="otrosSearch" onkeyup="filtrarOtros()" placeholder="Buscar..." title="Alimentos">
 							<ul id="otrosMenu" class="list-group list-group-flush">
 								<li class="list-group-item btn btn-link">
@@ -479,9 +467,6 @@
 						<p id="error-modal-agregar-alimento" class="text-danger" style="display: none"></p>
 						<h4 class="modal-title">Registrar Actividad</h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					</div>
-					<div id="exito-registrar-actividad" class="alert alert-success" role="alert" style="display: none">
-						Actividad registrada con éxito
 					</div>
 					<div class="modal-body">
 						<div class="form-row">

@@ -4,11 +4,17 @@ public class Alimento {
 	private int id;
 	private String nombre;
 	private int calorias;
-	private float proteinas;
-	private float grasas;
-	private float carbohidratos;
+	private Float proteinas;
+	private Float grasas;
+	private Float carbohidratos;
 	private Categoria categoria;
 
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 	public int getId() {
 		return id;
 	}
@@ -44,12 +50,6 @@ public class Alimento {
 	}
 	public void setCarbohidratos(Float carbohidratos) {
 		this.carbohidratos = carbohidratos;
-	}
-	public Categoria getCategoria() {
-		return categoria;
-	}
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
 	}
 	
 }
