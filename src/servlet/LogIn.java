@@ -77,8 +77,11 @@ public class LogIn extends HttpServlet {
 						AbmcAlimento ctrlAlimento = new AbmcAlimento();
 						
 						Paciente p = ctrlPaciente.getByDni(u);
+						session.setAttribute("paciente", p);
 						Solicitud s = ctrlPaciente.getSolicitud(p);
-						if (s.getEstado().equalsIgnoreCase("pendiente")) {
+						if (s.getDniPaciente() == null) {
+							request.getRequestDispatcher("WEB-INF/buscar-nutricionista.jsp").forward(request, response);
+						} else if (s.getEstado().equalsIgnoreCase("pendiente")) {
 							request.getRequestDispatcher("WEB-INF/solicitud-enviada.html").forward(request, response);
 						} else {
 
@@ -92,8 +95,10 @@ public class LogIn extends HttpServlet {
 							try {
 								ingestas = ctrlPaciente.getIngestasHoy(p);
 							} catch(SQLException e){
-								request.setAttribute("error", "Error al recuperar las ingestas del dÃ­a.");
+								request.setAttribute("error", "Error al recuperar las ingestas del día.");
 								request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+							} catch(Exception e) {
+								ingestas = null;
 							}
 							p.setIngestas(ingestas);
 							
@@ -110,6 +115,8 @@ public class LogIn extends HttpServlet {
 							} catch(SQLException e) {
 								request.setAttribute("error", "Error al recuperar las actividades del paciente.");
 								request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+							} catch(Exception e) {
+								actividades = null;
 							}
 							p.setActividades(actividades);
 							
@@ -118,17 +125,18 @@ public class LogIn extends HttpServlet {
 							} catch(SQLException e) {
 								request.setAttribute("error", "Error al recuperar los alimentos.");
 								request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+							} catch (Exception e) {
+								alimentos = null;
 							}
 							try {
 								categoriasAlimentos = ctrlAlimento.getCategorias();
 							} catch(SQLException e) {
-								request.setAttribute("error", "Error al recuperar las categorÃ­as.");
+								request.setAttribute("error", "Error al recuperar las categorías.");
 								request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 							}
 							session.setAttribute("alimentos", alimentos);
 							session.setAttribute("categorias", categoriasAlimentos);
 							ctrlPaciente.calcularKcalEjercicioSemana(p);
-							session.setAttribute("paciente", p);
 							request.getRequestDispatcher("WEB-INF/paciente-main.jsp").forward(request, response);
 						}
 					}

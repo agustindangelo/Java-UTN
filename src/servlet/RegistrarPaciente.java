@@ -52,7 +52,6 @@ public class RegistrarPaciente extends HttpServlet {
 		p.setNombre(request.getParameter("nombre"));
 		p.setDni(request.getParameter("dni"));
 		p.setFechaNacimiento(LocalDate.parse(request.getParameter("fecha")));
-//			p.setFechaNacimiento(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fecha")));
 		p.setGenero(request.getParameter("sexo"));
 		p.setEmail(request.getParameter("email"));
 		p.setTelefono(request.getParameter("telefono"));
