@@ -256,10 +256,10 @@
 					<div class="modal-body">
 						<div class="container">
 							<input type="text" class="form-control" id="desayunoSearch" onkeyup="filtrarDesayuno()" placeholder="Buscar..." title="Alimentos">
+							<div class="btn btn-link">
+								<a class="float-right" href="#agregarAlimento" data-toggle="modal">+ Agregar alimento</a>
+							</div>
 							<ul id="desayunoMenu" class="list-group list-group-flush">
-								<li class="list-group-item btn btn-link">
-									<a class="float-right" href="#agregarAlimento" data-toggle="modal">+ Agregar alimento</a>
-								</li>
 								<% for (Alimento a : alimentos) { %>
 									<li id="lista-desayuno" class="list-group-item">
 										<a class="colored-title"><%= a.getNombre() %></a>
@@ -287,10 +287,10 @@
 					<div class="modal-body">
 						<div class="container">
 							<input type="text" class="form-control" id="almuerzoSearch" onkeyup="filtrarAlmuerzo()" placeholder="Buscar..." title="Alimentos">
-							<ul id="almuerzoMenu" class="list-group list-group-flush">
-								<li class="list-group-item btn btn-link">
-									<a class="float-right" href="#agregarAlimento" data-toggle="modal">+ Agregar alimento</a>
-								</li>
+							<div class="btn btn-link">
+								<a class="float-right" href="#agregarAlimento" data-toggle="modal">+ Agregar alimento</a>
+							</div>
+							<ul id="almuerzoMenu" class="list-group list-group-flush">								
 								<% for (Alimento a : alimentos) { %>
 									<li id="lista-almuerzo" class="list-group-item">
 										<a class="colored-title"><%= a.getNombre() %></a>
@@ -318,10 +318,10 @@
 					<div class="modal-body">
 						<div class="container">
 							<input type="text" class="form-control" id="cenaSearch" onkeyup="filtrarCena()" placeholder="Buscar..." title="Alimentos">
+							<div class="btn btn-link">
+								<a class="float-right" href="#agregarAlimento" data-toggle="modal">+ Agregar alimento</a>
+							</div>
 							<ul id="cenaMenu" class="list-group list-group-flush">
-								<li class="list-group-item btn btn-link">
-									<a class="float-right" href="#agregarAlimento" data-toggle="modal">+ Agregar alimento</a>
-								</li>
 								<% for (Alimento a : alimentos) { %>
 									<li id="lista-cena" class="list-group-item">
 										<a class="colored-title" ><%= a.getNombre() %></a>
@@ -350,10 +350,10 @@
 					<div class="modal-body">
 						<div class="container">
 							<input type="text" class="form-control" id="otrosSearch" onkeyup="filtrarOtros()" placeholder="Buscar..." title="Alimentos">
+							<div class="btn btn-link">
+								<a class="float-right" href="#agregarAlimento" data-toggle="modal">+ Agregar alimento</a>
+							</div>
 							<ul id="otrosMenu" class="list-group list-group-flush">
-								<li class="list-group-item btn btn-link">
-									<a class="float-right" href="#agregarAlimento" data-toggle="modal">+ Agregar alimento</a>
-								</li>
 								<% for (Alimento a : alimentos) { %>
 									<li id="lista-otros" class="list-group-item">
 										<a class="colored-title"><%= a.getNombre() %></a>
