@@ -175,46 +175,51 @@
 							<div class="pull-right">
 								<button class="btn btn-link float-right" style="font-size:17px" href="#modificarRequerimientos" data-toggle="modal">Modificar</button>
 							</div>
+							
 							<br>
+							
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="card">
+									<div class="card-body">
+										<h3 class="colored-title text-center">Peso</h3>
+										<div class="row">
+											<div class="col">
+												<p class="card-text text-center text-muted">Ultimo Ingresado</p>
+												<h3 class="card-text text-center" id="peso-actual"></h3>
+											</div>
+											<div class="col">
+												<p class="card-text text-center text-muted">Objetivo</p>
+												<h3 class="card-text text-center" id="peso-objetivo"></h3>
+											</div>
+										</div>
+										<div class="pull-right">
+											<button class="btn btn-link float-right" style="font-size:17px" href="#modificarPesoObjetivo" data-toggle="modal">Modificar</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<div class="card">
+									<div class="card-body">
+										<h3 class="colored-title text-center">Ejercicio</h3>
+										<div class="row">
+											<div class="col">
+												<p class="card-text text-center text-muted">Total en 7 dias</p>
+												<h3 class="card-text text-center" id="ejercicio-semana"></h3>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 				<br>
-				<div class="row">
-					<div class="col-md-6">
-						<div class="card">
-							<div class="card-body">
-								<h3 class="colored-title text-center">Peso</h3>
-								<div class="row">
-									<div class="col">
-										<p class="card-text text-center text-muted">Ultimo Ingresado</p>
-										<h3 class="card-text text-center" id="peso-actual"></h3>
-									</div>
-									<div class="col">
-										<p class="card-text text-center text-muted">Objetivo</p>
-										<h3 class="card-text text-center" id="peso-objetivo"></h3>
-									</div>
-								</div>
-								<div class="pull-right">
-									<button class="btn btn-link float-right" style="font-size:17px" href="#modificarPesoObjetivo" data-toggle="modal">Modificar</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="card">
-							<div class="card-body">
-								<h3 class="colored-title text-center">Ejercicio</h3>
-								<div class="row">
-									<div class="col">
-										<p class="card-text text-center text-muted">Total en 7 dias</p>
-										<h3 class="card-text text-center" id="ejercicio-semana"></h3>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				
 			</div>
 		</div> 
 	</div> 

@@ -46,10 +46,14 @@
 								<tr>
 									<td><%= n.getApellido() + ", " + n.getNombre() %></td>
 									<td><%= n.getTelefono() %></td>
-									<td><%= n.getDireccion().getCalle() + ", " + n.getDireccion().getAltura() %></td>
-									<td><%= n.getDireccion().getLocalidad().getDenominacion() + ", " +  n.getDireccion().getLocalidad().getCodPostal()%></td>
+									<% if (n.getDireccion() != null) { %>
+										<td><%= n.getDireccion().getCalle() + ", " + n.getDireccion().getAltura() %></td>
+										<td><%= n.getDireccion().getLocalidad().getDenominacion() + ", " +  n.getDireccion().getLocalidad().getCodPostal()%></td>
+									<% } else { %>
+										<td>Sin especificar</td>
+										<td>Sin especificar</td>
+									<% } %>
 									<td><input type="radio" name="nutricionista-seleccionado" value="<%=n.getDni()%>"></td>
-						
 								</tr>
 							<% } %>
 						</table>
