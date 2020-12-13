@@ -77,6 +77,24 @@
 		} catch (NullPointerException e) {
 			consumos = null;
 		}
+		
+		int barraCalorias = 0;
+		int barraCarbohidratos = 0 ;
+		int barraProteinas = 0;
+		int barraGrasas = 0;
+		
+		try {
+			barraCalorias = consumos.get("calorias") * 100 / p.getPlan().getKcalDiarias();
+		} catch(Exception e) {}
+		try {
+			barraCarbohidratos = consumos.get("carbohidratos") * 100 / p.getPlan().getCarbohidratosDiarios();
+		} catch(Exception e) {}
+		try {
+			barraProteinas = consumos.get("proteinas") * 100 / p.getPlan().getProteinasDiarias();	
+		} catch(Exception e) {}
+		try {
+			barraGrasas = consumos.get("grasas") * 100 / p.getPlan().getGrasasDiarias();
+		} catch(Exception e) {}
 	%>
 	
 	<div class="container-fluid">
@@ -93,48 +111,28 @@
 							<p class="pbar-left-value" ><%= consumos.get("calorias") %> / <%= p.getPlan().getKcalDiarias() %> kcal.</p>
 						</div>
 						<div class="progress">
-							<div class="progress-bar" style="width:
-								<% try { %>
-									<%= consumos.get("calorias") * 100 / p.getPlan().getKcalDiarias() %>
-								<% } catch (Exception e) { %>
-									<%= 0 %>
-								<% } %>%" role="progressbar"></div>
+							<div class="progress-bar" style="width: <%= barraCalorias %>%" role="progressbar"></div>
 						</div>
 						<div class="row">
 							<div class="col">Carbohidratos</div>
 							<p class="pbar-left-value"><%= consumos.get("carbohidratos") %>  / <%= p.getPlan().getCarbohidratosDiarios() %> g.</p>
 						</div>
 						<div class="progress" style="height: 0.5rem;">
-							<div class="progress-bar" style="width: 
-								<% try { %>
-									<%= consumos.get("carbohidratos") * 100 / p.getPlan().getCarbohidratosDiarios() %>
-								<% } catch (Exception e) { %>
-									<%= 0 %>
-								<% } %>%" role="progressbar"></div>
+							<div class="progress-bar" style="width: <%= barraCarbohidratos %>%" role="progressbar"></div>
 						</div>
 						<div class="row">
 							<div class="col">Proteínas</div>
 							<p class="pbar-left-value"><%= consumos.get("proteinas") %>  / <%= p.getPlan().getProteinasDiarias() %> g.</p>
 						</div>
 						<div class="progress" style="height: 0.5rem;">
-							<div class="progress-bar" style="width:
-							<% try { %>
-								<%= consumos.get("proteinas") * 100/ p.getPlan().getProteinasDiarias()%>
-							<% } catch (Exception e) { %>
-								<%= 0 %>
-							<% } %>%" role="progressbar"></div>
+							<div class="progress-bar" style="width: <%= barraProteinas %>%" role="progressbar"></div>
 						</div>
 						<div class="row">
 							<div class="col">Grasas</div>
 							<p class="pbar-left-value"><%= consumos.get("grasas") %>  / <%= p.getPlan().getGrasasDiarias() %> g.</p>
 						</div>
 						<div class="progress" style="height: 0.5rem;">
-							<div class="progress-bar" style="width:
-							<% try { %>
-								<%= consumos.get("grasas") * 100 / p.getPlan().getGrasasDiarias() %>
-							<% } catch (Exception e) { %>
-								<%= 0 %>
-							<% } %>%" role="progressbar"></div>
+							<div class="progress-bar" style="width: <%= barraGrasas %>%" role="progressbar"></div>
 						</div>
 					</div>
 				</div>

@@ -3,7 +3,6 @@ package data;
 import java.util.LinkedList;
 import java.sql.*;
 import java.sql.Date;
-import java.time.LocalDate;
 
 import entidades.Actividad;
 import entidades.Ejercicio;

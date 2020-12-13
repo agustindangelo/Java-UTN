@@ -69,6 +69,5 @@ public class RegistrarIngesta extends HttpServlet {
 		}
 		p.getIngestas().add(i);
 		session.setAttribute("paciente", p);
-		request.getRequestDispatcher("WEB-INF/paciente-main.jsp").forward(request, response);
 	}
 }

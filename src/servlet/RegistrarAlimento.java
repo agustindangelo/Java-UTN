@@ -2,12 +2,14 @@ package servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entidades.Alimento;
 import entidades.Categoria;
@@ -40,6 +42,7 @@ public class RegistrarAlimento extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		Alimento a = new Alimento();
 		Categoria c = new Categoria();
 		AbmcAlimento ctrl = new AbmcAlimento();
@@ -58,6 +61,10 @@ public class RegistrarAlimento extends HttpServlet {
 			request.setAttribute("error", e.getMessage());
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
+		LinkedList<Alimento> alimentos = (LinkedList<Alimento>) request.getAttribute("alimentos");
+		alimentos.add(a);
+		session.setAttribute("alimentos", alimentos);
+		request.getRequestDispatcher("WEB-INF/paciente-main.jsp").forward(request, response);
 	}
 
 }

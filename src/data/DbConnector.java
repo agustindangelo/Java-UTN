@@ -1,4 +1,3 @@
-
 package data;
 
 import java.sql.*;
@@ -8,10 +7,10 @@ public class DbConnector {
 	private static DbConnector instancia;
 	
 	private String driver="com.mysql.cj.jdbc.Driver";
-	private String host="localhost";
+	private String host="node59973-tpjavautn.jelastic.saveincloud.net";
 	private String port="3306";
-	private String user="java";
-	private String password="himitsu";
+	private String user="root";
+	private String password="HLRqdh77779";
 	private String db="nutricionista";
 	private int conectados=0;
 	private Connection conn=null;

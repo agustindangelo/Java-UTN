@@ -37,7 +37,7 @@ $(document).ready(function(){
 				}
 			});
 			$('#lista-actividades').append('<a>'+ejercicio+'</a>')
-			window.location.reload(true);
+			location.reload(true);
 		});
 		
 		$('#btnAgregarAlimento').click(function() {
@@ -85,18 +85,12 @@ $(document).ready(function(){
 					$('#error-modal-agregar-alimento').hide();
 					$('#agregarAlimento').modal('hide');
 					
-					var nuevaFila = '<li class="list-group-item"><a class="colored-title">'+nombre+'</a><input class="float-right" type="number" value="0" min="0" max="5000"/><label class="float-right text-muted">Gr.</label></li>'
-					$('#otrosMenu').append(nuevaFila)
-					$('#cenaMenu').append(nuevaFila)
-					$('#almuerzoMenu').append(nuevaFila)
-					$('#desayunoMenu').append(nuevaFila)
-
-					$('#nuevo-categoria-alimento').val('');
-				    $('#nuevo-nombre-alimento').val('');
-					$('#nuevo-calorias-alimento').val('');
-					$('#nuevo-grasas-alimento').val('');
-					$('#nuevo-proteinas-alimento').val('');
-					$('#nuevo-carbohidratos-alimento').val('');
+					var nuevaFila = '<li class="list-group-item"><a class="colored-title">'+nombre+'</a><input class="float-right" type="number" value="0" min="0" max="5000"/><label class="float-right text-muted">Gr.</label></li>';
+					$('#otrosMenu').append(nuevaFila);
+					$('#cenaMenu').append(nuevaFila);
+					$('#almuerzoMenu').append(nuevaFila);
+					$('#desayunoMenu').append(nuevaFila);
+					location.reload(true);
 				}
 			} 	
 		});
