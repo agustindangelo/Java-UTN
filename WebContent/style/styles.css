@@ -6,6 +6,14 @@ a:hover{
     text-decoration: none;
 }
 
+#sidebar-wrapper {
+  -ms-overflow-style: none;  /* IE */
+  scrollbar-width: none;  /* Firefox */
+}
+#sidebar-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
 h2{
     font-weight: bold;
 }
@@ -152,7 +160,7 @@ a:hover{
 
 .navbar-custom { 
     background-color: var(--navbar-bg-color);
-    margin: -1.5rem;
+    margin: -1.25rem;
 } 
 
 .paciente .navbar {
